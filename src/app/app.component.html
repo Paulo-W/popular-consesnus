@@ -1,5 +1,7 @@
-<button (click)="createTodo()">Add Todo</button>
+<div class="content" role="main">
+  <span>{{ title }} app is running!</span>
+</div>
 
-<ul>
-  <li *ngFor="let item of todos">{{item.name}} - {{item.description}}</li>
-</ul>
+output test
+
+<router-outlet></router-outlet>
