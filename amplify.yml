@@ -14,7 +14,7 @@ frontend:
       commands:
         - npm run build:ci
   artifacts:
-    baseDirectory: dist/myAmplifyProject
+    baseDirectory: dist/PopularConsensus
     files:
       - '**/*.js'
       - '**/*.html'
@@ -32,4 +32,8 @@ test:
     test:
       commands:
          - npm run test:ci
+  artifacts:
+    baseDirectory: dist/PopularConsensus
+      files:
+        - '**/*.js'
 
