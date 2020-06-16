@@ -16,7 +16,10 @@ frontend:
   artifacts:
     baseDirectory: dist/myAmplifyProject
     files:
-      - '**/*'
+      - '**/*.js'
+      - '**/*.html'
+      - '**/*.css'
+      - '**/*.ico'
   cache:
     paths:
       - node_modules/**/*
@@ -29,4 +32,4 @@ test:
     test:
       commands:
          - npm run test:ci
-    
+
