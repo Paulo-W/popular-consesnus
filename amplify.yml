@@ -31,9 +31,9 @@ test:
         - yum install -y ./google-chrome-stable_current_*.rpm
     test:
       commands:
-         - npm run test:ci
+        - npm run test:ci
   artifacts:
     baseDirectory: dist/PopularConsensus
-      files:
-        - '**/*.js'
+    files:
+      - '**/*.js'
 
