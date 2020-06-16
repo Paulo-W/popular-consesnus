@@ -1,0 +1,34 @@
+{
+    "paths": [
+        {
+            "name": "/test",
+            "lambdaFunction": "popularconsesnusfb111bf4",
+            "privacy": {
+                "open": true
+            }
+        }
+    ],
+    "resourceName": "test",
+    "apiName": "test",
+    "functionArns": [
+        {
+            "lambdaFunction": "popularconsesnusfb111bf4"
+        }
+    ],
+    "privacy": {
+        "auth": 0,
+        "unauth": 0,
+        "authRoleName": "amplify-popularconsesnus-prod-130418-authRole",
+        "unAuthRoleName": "amplify-popularconsesnus-prod-130418-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "popularconsesnusfb111bf4",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ]
+}
