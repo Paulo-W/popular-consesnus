@@ -20,6 +20,10 @@ frontend:
       - '**/*.html'
       - '**/*.css'
       - '**/*.ico'
+      - '**/*.ttf'
+      - '**/*.woff'
+      - '**/*.woff2'
+      - '**/*.eot'
   cache:
     paths:
       - node_modules/**/*

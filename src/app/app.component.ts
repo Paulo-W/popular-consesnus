@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { faHome } from '@fortawesome/free-solid-svg-icons';
+import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import { faBell } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +9,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.sass']
 })
 export class AppComponent {
-  title = 'PopularConsensus';
+  faHome = faHome;
+  faSignOut = faSignOutAlt;
+  faBell = faBell;
+  title = 'Popular Consensus';
 }
