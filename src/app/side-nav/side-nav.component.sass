@@ -13,30 +13,26 @@
 
 .user-badge
   flex: 1
-  max-height: 4vh
+  display: flex
+  justify-content: center
+  align-items: flex-end
 
 .profile-photo
   flex: 2
-  text-align: center
-  vertical-align: middle
+  @include flex(column, center)
+  align-items: center
 
-.container-1
-  height: 2vh
-
-.container-2
-  flex: 1 1 auto
+.profile-photo
+  div
+    display: flex
 
 mat-list-option
   border-bottom: 0.5px solid #cacaca
   margin-top: 1px
-  background-color: #f9f9f9
+  background-color: #fafafa
 
 mat-nav-list, mat-selection-list
   padding-top: 0
-
-#user-badge-container
-  @include flex(column, flex-start)
-  min-height: 100%
 
 .nav-icon
   padding-right: 10px

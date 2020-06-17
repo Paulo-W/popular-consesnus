@@ -16,6 +16,7 @@ import {PageComponent} from './page/page.component';
 import {MatButtonModule} from '@angular/material/button';
 import {MatListModule} from '@angular/material/list';
 import { UserBadgeComponent } from './user-badge/user-badge.component';
+import {MatCardModule} from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { UserBadgeComponent } from './user-badge/user-badge.component';
     FontAwesomeModule,
     MatSidenavModule,
     MatButtonModule,
-    MatListModule
+    MatListModule,
+    MatCardModule
   ],
   exports: [
     MatIconModule, MatToolbarModule, FontAwesomeModule

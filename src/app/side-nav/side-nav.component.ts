@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {faBookOpen} from '@fortawesome/free-solid-svg-icons';
+import {faBookOpen, faGraduationCap, faTrophy, faBook} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-side-nav',
@@ -8,6 +8,9 @@ import {faBookOpen} from '@fortawesome/free-solid-svg-icons';
 })
 export class SideNavComponent implements OnInit {
   faBookOpen = faBookOpen;
+  faGraduationCap = faGraduationCap;
+  faTrophy = faTrophy;
+  faBook = faBook;
 
   constructor() {
   }

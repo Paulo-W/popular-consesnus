@@ -1,12 +1,11 @@
 <div class="column-container">
   <div class="profile-photo">
-    profile-photo
+    <div>
+      profile-photo
+    </div>
   </div>
   <div class="user-badge" [class.mat-elevation-z4]="true">
-    <div class="column-container  ">
-      <div class="container-1"></div>
-      <div class="container-2"><app-user-badge></app-user-badge></div>
-    </div>
+    <app-user-badge></app-user-badge>
   </div>
   <div class="links">
     <mat-nav-list>
@@ -17,6 +16,25 @@
             <span class="plain-text">Start Debate</span>
           </a>
         </mat-list-option>
+        <mat-list-option>
+          <a class="text" matLine href="">
+            <span class="nav-icon"><fa-icon [icon]="faGraduationCap" [fixedWidth]="true"></fa-icon></span>
+            <span class="plain-text">My Debates</span>
+          </a>
+        </mat-list-option>
+        <mat-list-option>
+          <a class="text" matLine href="">
+            <span class="nav-icon"><fa-icon [icon]="faTrophy" [fixedWidth]="true"></fa-icon></span>
+            <span class="plain-text">My Achievements</span>
+          </a>
+        </mat-list-option>
+        <mat-list-option>
+          <a class="text" matLine href="">
+            <span class="nav-icon"><fa-icon [icon]="faBook" [fixedWidth]="true"></fa-icon></span>
+            <span class="plain-text">My Channels</span>
+          </a>
+        </mat-list-option>
+
       </mat-selection-list>
     </mat-nav-list>
   </div>

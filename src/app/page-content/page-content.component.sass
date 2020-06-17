@@ -1,26 +1,11 @@
 @import "../../styles"
 
 .flex-container
- @include flex(column-reverse, flex-end)
+  margin: 15px auto
+  max-width: 96%
 
-.header,
-.footer
-  flex: 1
-  background: #eee
-  padding: 2rem
-  text-align: center
-  border: 5px solid white
+button:focus
+  outline: 0
+  border: none
 
-.sidebar, .test
-  flex: 3 3 auto
-  background: #eee
-  padding: 2rem
-  text-align: center
-  border: 5px solid white
 
-.main
-  flex: 1
-  background: #eee
-  padding: 2rem
-  text-align: center
-  border: 5px solid white
