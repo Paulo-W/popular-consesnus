@@ -1,0 +1,14 @@
+<mat-sidenav-container class="set-container">
+  <mat-sidenav #sidenav mode="side" class="example-sidenav" opened [fixedInViewport]=false [class.mat-elevation-z6]="true">
+    <app-side-nav></app-side-nav>
+  </mat-sidenav>
+
+  <mat-sidenav-content class="column-container">
+    <header class="second-nav">
+      <app-second-nav></app-second-nav>
+    </header>
+    <main class="page-content">
+      <app-page-content></app-page-content>
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>

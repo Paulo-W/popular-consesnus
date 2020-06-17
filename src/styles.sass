@@ -2,13 +2,32 @@
 $primary-color: #31CB9F
 $secondary-color: #67E0BD
 
+$text-color: #6C757D
+
+@font-face
+  font-family: centuary-gothic
+  src: url("src/assets/fonts/century-gothic/century-gothic.ttf") format("opentype")
+
+
 @mixin transform($property)
   -webkit-transform: $property
   -ms-transform: $property
   transform: $property
+
+@mixin flex($flex-flow, $justify-content)
+  display: flex
+  flex-flow: $flex-flow
+  justify-content: $justify-content
+  padding: 0
+  margin: 0
+  list-style: none
 
 body
   font-family: Roboto, Arial, sans-serif
   margin: 0
   background-color: #F3F3F3
 
+.plain-text
+  font-family: centuary-gothic, sans-serif
+  font-size: 14px
+  color: $text-color

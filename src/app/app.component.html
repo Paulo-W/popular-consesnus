@@ -1,5 +1,5 @@
 <nav>
-  <mat-toolbar color="primary">
+  <mat-toolbar color="primary" [class.mat-elevation-z2]="true">
     <mat-toolbar-row id="top-nav">
       <div class="left-nav">
         <fa-icon [icon]="faHome" [fixedWidth]="true"></fa-icon>
@@ -17,6 +17,8 @@
     </mat-toolbar-row>
   </mat-toolbar>
 </nav>
-<app-page-content></app-page-content>
+<div class="page">
+  <app-page></app-page>
+</div>
 
 <router-outlet></router-outlet>

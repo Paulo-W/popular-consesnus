@@ -1,1 +1,24 @@
-<p>side-nav works!</p>
+<div class="column-container">
+  <div class="profile-photo">
+    profile-photo
+  </div>
+  <div class="user-badge" [class.mat-elevation-z4]="true">
+    <div class="column-container  ">
+      <div class="container-1"></div>
+      <div class="container-2"><app-user-badge></app-user-badge></div>
+    </div>
+  </div>
+  <div class="links">
+    <mat-nav-list>
+      <mat-selection-list [multiple]="false">
+        <mat-list-option>
+          <a class="text" matLine href="">
+            <span class="nav-icon"><fa-icon [icon]="faBookOpen" [fixedWidth]="true"></fa-icon></span>
+            <span class="plain-text">Start Debate</span>
+          </a>
+        </mat-list-option>
+      </mat-selection-list>
+    </mat-nav-list>
+  </div>
+</div>
+

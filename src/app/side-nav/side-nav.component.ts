@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {faBookOpen} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-side-nav',
@@ -6,8 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./side-nav.component.sass']
 })
 export class SideNavComponent implements OnInit {
+  faBookOpen = faBookOpen;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
