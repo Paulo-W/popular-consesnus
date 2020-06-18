@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {faPlusCircle} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-page-content',
@@ -7,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PageContentComponent implements OnInit {
 
-  constructor() { }
+  faPlusCircle = faPlusCircle;
+
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

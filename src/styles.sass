@@ -1,13 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 $primary-color: #31CB9F
 $secondary-color: #67E0BD
+$secondary-color-hover: #67E0BD40
 
-$text-color: #6C757D
 
-@font-face
-  font-family: centuary-gothic
-  src: url("src/assets/fonts/century-gothic/century-gothic.ttf") format("opentype")
+$hover-color: #f9f9f9
 
+$card-width: 96%
 
 @mixin transform($property)
   -webkit-transform: $property
@@ -27,7 +26,50 @@ body
   margin: 0
   background-color: #F3F3F3
 
-.plain-text
+
+//################################### Fonts Text and Icons ############################################
+
+$text-size-regular: 1.25em
+$text-size-large: 1.27em
+$text-size-small: 1em
+
+$text-color: #6C757D
+
+@font-face
+  font-family: centuary-gothic
+  src: url("src/assets/fonts/century-gothic/century-gothic.ttf") format("opentype")
+
+@mixin plain-text($font-size)
   font-family: centuary-gothic, sans-serif
-  font-size: 1.25em
+  font-size: $font-size
   color: $text-color
+
+@mixin fav-icon($font-size)
+  font-size: $font-size
+  color: $text-color
+
+.plain-text
+ @include plain-text($text-size-regular)
+
+.plain-text-x
+  @include plain-text($text-size-large)
+
+.plain-text-s
+  @include plain-text($text-size-small)
+
+.fav-icons
+  @include fav-icon($text-size-regular)
+
+.fav-icons-x
+  @include fav-icon($text-size-large)
+
+.fav-icons-s
+  @include fav-icon($text-size-small)
+
+.left-icon
+  padding-right: 10px
+
+.right-icon
+  padding-left: 10px
+
+//########################################################################################

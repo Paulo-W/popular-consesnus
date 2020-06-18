@@ -2,11 +2,15 @@
   <mat-toolbar color="primary" [class.mat-elevation-z2]="true">
     <mat-toolbar-row id="top-nav">
       <div class="left-nav">
-        <fa-icon [icon]="faHome" [fixedWidth]="true"></fa-icon>
+        <span class="left-icon">
+          <fa-icon [icon]="faHome" [fixedWidth]="true"></fa-icon>
+        </span>
+        <h1>{{title}}</h1>
       </div>
-      <div class="center-nav"><h1 class="text-center">{{title}}</h1></div>
-      <!-- This fills the remaining space of the current row -->
+      <div class="center-nav">
+      </div>
       <div class="right-nav">
+
         <span id="bell">
           <span  matBadge="4" matBadgePosition="above after" matBadgeColor="warn">
             <fa-icon [icon]="faBell" [fixedWidth]="true"></fa-icon>
