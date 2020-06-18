@@ -1,0 +1,90 @@
+@import "../../styles"
+
+#create-container
+  margin: 15px auto
+  max-width: $card-width
+
+#create-container:hover
+  cursor: pointer
+  max-width: $card-width + 0.5
+
+.create-card:hover
+  background-color: $secondary-color-hover
+  mat-card-content
+    span, fa-icon
+      opacity: 80%
+
+.debate-container
+  margin: 2px auto
+  max-width: $card-width
+  height: 240px
+
+.debate-card
+  @include flex(column, flex-start)
+  width: 100%
+  height: 100%
+  align-items: center
+
+mat-divider
+  width: 90%
+
+.alignment-container
+  width: 100%
+  height: 100%
+  background-color: #6C757D44
+  border: 1px solid white
+
+//#############################################  Begin card Heading ################################################################
+.debate-card-header
+  @include flex(row wrap, space-between)
+  flex: 1 // this flex value references the column value of the card
+
+.joined-blue, .joined-red
+  flex: 1 // this flex value represents the row of the card header
+
+.debate-card-heading
+  margin-top: 5px
+  flex: 5 // this flex value represents the row of the card header
+
+//#############################################   End card Heading  ################################################################
+//#############################################  Begin card Content ################################################################
+.debate-card-content
+  @include flex(row, flex-start)
+  flex: 3 // this flex value references the column value of the card
+
+.blue-team-votes, .red-team-votes
+  flex: 1
+
+.debate-description
+  flex: 9
+
+.number-container
+  text-align: center
+  margin-bottom: 10px
+  .number-of-votes
+    margin-top: 20px
+
+
+
+//#############################################   End card Content  ################################################################
+//#############################################  Begin card Results ################################################################
+.debate-card-results
+  @include flex(row, space-between)
+  flex: 2 // this flex value references the column value of the card
+
+.blue-team-bar, .red-team-bar
+  flex: 4
+
+.debate-days-remaining
+  flex: 1
+
+//#############################################   End card Results  ################################################################
+
+mat-card-content
+  text-align: center
+
+button:focus
+  outline: 0
+  border: none
+
+

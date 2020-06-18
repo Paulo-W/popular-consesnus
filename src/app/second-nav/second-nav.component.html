@@ -1,12 +1,19 @@
-<div class="row-container">
-  <button mat-icon-button (click)="clickMenu()">
-    <mat-icon>menu</mat-icon>
-  </button>
-  <div class="placement">
-
+<div class="second-nav-container">
+  <div class="side-nav-icon">
+    <button mat-icon-button (click)="clickMenu()">
+      <mat-icon>menu</mat-icon>
+    </button>
   </div>
-  <div class="search">
-
+  <div class="current-position">
+    <span class="plain-text"><a href="">Home </a> | <a href=""> Top Stories</a></span>
+  </div>
+  <div class="second-nav-search">
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="search">
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary" type="button"> <span><fa-icon [icon]="faSearch"></fa-icon></span></button>
+      </div>
+    </div>
   </div>
 </div>
 

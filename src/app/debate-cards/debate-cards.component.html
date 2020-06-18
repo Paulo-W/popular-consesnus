@@ -1,0 +1,48 @@
+<div id="create-container">
+  <mat-card class="create-card">
+    <mat-card-content>
+      <span class="plain-text-x">Create Debate</span>
+      <fa-icon [icon]="faPlusCircle" class="fav-icons right-icon"></fa-icon>
+    </mat-card-content>
+  </mat-card>
+</div>
+<div class="debate-container">
+  <mat-card class="debate-card">
+    <div class="debate-card-header full-container">
+      <div class="joined-blue full-container plain-text-blue flex-bottom-left">
+        <span>
+          <fa-icon [icon]="fabBookMark"></fa-icon>
+          Joined
+        </span>
+      </div>
+      <div class="debate-card-heading full-container flex-center text-header-cards">
+        <span>Debate Title</span>
+      </div>
+      <div class="joined-red full-container plain-text-red flex-bottom-right">
+        Joined
+        <fa-icon [icon]="fabBookMark" class="right-icon"></fa-icon>
+      </div>
+    </div>
+    <mat-divider [inset]="true" style="width: 98%"></mat-divider>
+    <div class="debate-card-content full-container">
+      <div class="blue-team-votes full-container flex-bottom-center">
+        <div class="number-container">
+          <div class="plain-text-xxx percentage">45%</div>
+          <div class="plain-text-xx number-of-votes">12</div>
+        </div>
+      </div>
+      <div class="debate-description alignment-container"></div>
+      <div class="red-team-votes full-container flex-bottom-center">
+        <div class="number-container">
+          <div class="plain-text-xxx percentage">45%</div>
+          <div class="plain-text-xx number-of-votes">12</div>
+        </div>
+      </div>
+    </div>
+    <div class="debate-card-results alignment-container">
+      <div class="blue-team-bar alignment-container"></div>
+      <div class="debate-days-remaining alignment-container"></div>
+      <div class="red-team-bar alignment-container"></div>
+    </div>
+  </mat-card>
+</div>

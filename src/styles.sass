@@ -2,7 +2,8 @@
 $primary-color: #31CB9F
 $secondary-color: #67E0BD
 $secondary-color-hover: #67E0BD40
-
+$blue-team-color: #BBD1FF
+$red-team-color: #FCAAAA
 
 $hover-color: #f9f9f9
 
@@ -26,36 +27,104 @@ body
   margin: 0
   background-color: #F3F3F3
 
+.full-container
+  width: 100%
+  height: 100%
+
+//################################### Positioning  ####################################################
+// flex -> verticle -> horizontal
+$padding-position-side: 8px
+$padding-position-verticle: 5px
+
+.flex-center
+  @include flex(row, center)
+  align-items: center
+
+.flex-center-left
+  @include flex(row, flex-start)
+  align-items: center
+  padding-left: $padding-position-side
+
+.flex-center-right
+  @include flex(row, flex-end)
+  align-items: center
+  padding-right: $padding-position-side
+
+.flex-bottom-center
+  @include flex(row, center)
+  align-items: flex-end
+
+.flex-bottom-left
+  @include flex(row, flex-start)
+  align-items: flex-end
+  padding-bottom: $padding-position-verticle
+  padding-left: $padding-position-side
+
+.flex-bottom-right
+  @include flex(row, flex-end)
+  align-items: flex-end
+  padding-bottom: $padding-position-verticle
+  padding-right: $padding-position-side
+
+.left-icon
+  padding-right: 10px
+
+.right-icon
+  padding-left: 10px
 
 //################################### Fonts Text and Icons ############################################
 
 $text-size-regular: 1.25em
-$text-size-large: 1.27em
+$text-size-large: 1.33em
+$text-size-gigantic: 2.7em
+$text-size-gigantic2: 3.6em
 $text-size-small: 1em
-
 $text-color: #6C757D
 
 @font-face
   font-family: centuary-gothic
   src: url("src/assets/fonts/century-gothic/century-gothic.ttf") format("opentype")
 
-@mixin plain-text($font-size)
+@mixin plain-text($font-size, $font-color)
   font-family: centuary-gothic, sans-serif
   font-size: $font-size
-  color: $text-color
+  color: $font-color
+
+@mixin header-text($font-size, $font-color)
+  font-family: "URW Bookman", serif
+  font-size: $font-size
+  color: $font-color
 
 @mixin fav-icon($font-size)
   font-size: $font-size
   color: $text-color
 
+.text-header-cards
+  @include header-text($text-size-large, $text-color)
+
+.text-header-primary
+  @include header-text($text-size-gigantic, white)
+
 .plain-text
- @include plain-text($text-size-regular)
+ @include plain-text($text-size-regular, $text-color)
+
+.plain-text-blue
+  @include plain-text($text-size-regular, $blue-team-color)
+
+.plain-text-red
+  @include plain-text($text-size-regular, $red-team-color)
+
+.plain-text-xx
+  @include plain-text($text-size-gigantic, $text-color)
+
+.plain-text-xxx
+  @include plain-text($text-size-gigantic2, $text-color)
 
 .plain-text-x
-  @include plain-text($text-size-large)
+  @include plain-text($text-size-large, $text-color)
 
 .plain-text-s
-  @include plain-text($text-size-small)
+  @include plain-text($text-size-small, $text-color)
 
 .fav-icons
   @include fav-icon($text-size-regular)
@@ -65,11 +134,5 @@ $text-color: #6C757D
 
 .fav-icons-s
   @include fav-icon($text-size-small)
-
-.left-icon
-  padding-right: 10px
-
-.right-icon
-  padding-left: 10px
 
 //########################################################################################
