@@ -7,7 +7,7 @@
   </mat-card>
 </div>
 <div class="debate-container">
-  <mat-card class="debate-card">
+  <mat-card class="debate-card full-container">
     <div class="debate-card-header full-container">
       <div class="joined-blue full-container plain-text-blue flex-bottom-left">
         <span>
@@ -23,7 +23,9 @@
         <fa-icon [icon]="fabBookMark" class="right-icon"></fa-icon>
       </div>
     </div>
+    <!---------------------------------------------------------->
     <mat-divider [inset]="true" style="width: 98%"></mat-divider>
+    <!-------------------------  Card Center Row   ------------>
     <div class="debate-card-content full-container">
       <div class="blue-team-votes full-container flex-bottom-center">
         <div class="number-container">
@@ -31,7 +33,24 @@
           <div class="plain-text-xx number-of-votes">12</div>
         </div>
       </div>
-      <div class="debate-description alignment-container"></div>
+      <div class="debate-description-container">
+        <div class="created-by">
+          <span class="plain-text-s">
+            created by: <span class="plain-text-s-accent">Username</span>
+            in channel: <span class="plain-text-s-accent">Channel</span>
+            on the: <span class="plain-text-s-accent">Date</span>
+          </span>
+        </div>
+        <div class="debate-text-container">
+          <div class="plain-text">
+            <div class="debate-description">
+              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+              standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled
+              it
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="red-team-votes full-container flex-bottom-center">
         <div class="number-container">
           <div class="plain-text-xxx percentage">45%</div>
@@ -39,10 +58,32 @@
         </div>
       </div>
     </div>
-    <div class="debate-card-results alignment-container">
-      <div class="blue-team-bar alignment-container"></div>
-      <div class="debate-days-remaining alignment-container"></div>
-      <div class="red-team-bar alignment-container"></div>
+    <div class="debate-card-results full-container">
+      <div class="blue-team-bar">
+          <div class="container"></div>
+          <div class="debate-team-name-left plain-text-s">
+            Team name 1
+          </div>
+          <div class="debate-bar flex-center-left">
+            <div class="blue-bar">
+            </div>
+        </div>
+      </div>
+      <div class="debate-days-remaining">
+        <div class="container"></div>
+        <div class="debate-days text-header-x">2<sub>Days</sub></div>
+        <div class="debate-remaining plain-text">remaining</div>
+      </div>
+      <div class="red-team-bar">
+        <div class="container"></div>
+        <div class="debate-team-name-right plain-text-s">
+          Team name 2
+        </div>
+        <div class="debate-bar flex-center-right">
+          <div class="red-bar">
+          </div>
+        </div>
+      </div>
     </div>
   </mat-card>
 </div>

@@ -7,7 +7,7 @@ $red-team-color: #FCAAAA
 
 $hover-color: #f9f9f9
 
-$card-width: 96%
+$card-width: 97%
 
 @mixin transform($property)
   -webkit-transform: $property
@@ -32,6 +32,10 @@ body
   height: 100%
 
 //################################### Positioning  ####################################################
+.container
+  flex: auto
+
+
 // flex -> verticle -> horizontal
 $padding-position-side: 8px
 $padding-position-verticle: 5px
@@ -102,6 +106,9 @@ $text-color: #6C757D
 .text-header-cards
   @include header-text($text-size-large, $text-color)
 
+.text-header-x
+  @include header-text($text-size-gigantic, $text-color)
+
 .text-header-primary
   @include header-text($text-size-gigantic, white)
 
@@ -125,6 +132,9 @@ $text-color: #6C757D
 
 .plain-text-s
   @include plain-text($text-size-small, $text-color)
+
+.plain-text-s-accent
+  @include plain-text($text-size-small, $secondary-color)
 
 .fav-icons
   @include fav-icon($text-size-regular)

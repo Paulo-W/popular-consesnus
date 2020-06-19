@@ -10,9 +10,6 @@
 
 .create-card:hover
   background-color: $secondary-color-hover
-  mat-card-content
-    span, fa-icon
-      opacity: 80%
 
 .debate-container
   margin: 2px auto
@@ -21,8 +18,6 @@
 
 .debate-card
   @include flex(column, flex-start)
-  width: 100%
-  height: 100%
   align-items: center
 
 mat-divider
@@ -37,46 +32,108 @@ mat-divider
 //#############################################  Begin card Heading ################################################################
 .debate-card-header
   @include flex(row wrap, space-between)
-  flex: 1 // this flex value references the column value of the card
+  flex: 1
+// this flex value references the column value of the card
 
 .joined-blue, .joined-red
-  flex: 1 // this flex value represents the row of the card header
+  flex: 1
+// this flex value represents the row of the card header
 
 .debate-card-heading
   margin-top: 5px
-  flex: 5 // this flex value represents the row of the card header
+  flex: 5
+// this flex value represents the row of the card header
 
 //#############################################   End card Heading  ################################################################
 //#############################################  Begin card Content ################################################################
 .debate-card-content
   @include flex(row, flex-start)
-  flex: 3 // this flex value references the column value of the card
+  align-content: center
+  flex: 3
+// this flex value references the column value of the card
 
 .blue-team-votes, .red-team-votes
   flex: 1
 
-.debate-description
+.debate-description-container
   flex: 9
+  @include flex(column, flex-start)
+  align-content: center
+  text-align: center
+
+.debate-description
+  width: 90%
+  margin: auto
 
 .number-container
   text-align: center
   margin-bottom: 10px
-  .number-of-votes
-    margin-top: 20px
 
+.number-of-votes
+  margin-top: 20px
 
+.debate-text-container
+  text-align: center
+  flex: 6
+  @include flex(column, center)
+
+.created-by
+  flex: 1
 
 //#############################################   End card Content  ################################################################
 //#############################################  Begin card Results ################################################################
 .debate-card-results
+  flex: 2
+  // this flex value references the column value of the card
   @include flex(row, space-between)
-  flex: 2 // this flex value references the column value of the card
+  align-content: center
 
 .blue-team-bar, .red-team-bar
+  @include flex(column, center)
   flex: 4
 
+.red-team-bar
+  text-align: right
+
+.blue-bar
+  border: 1px solid $blue-team-color
+  width: 80%
+  height: 60%
+
+.red-bar
+  border: 1px solid $red-team-color
+  width: 80%
+  height: 60%
+
+.debate-team-name-left
+  padding-top: 20px
+  padding-left: 10px
+  flex: 1
+
+.debate-team-name-right
+  padding-top: 20px
+  padding-right: 10px
+  flex: 1
+
+.debate-bar
+  flex: 1
+
+.debate-days-remaining
+  @include flex(column, flex-start)
+  align-content: center
+  text-align: center
+  flex: 1
+
+.debate-days
+  margin-top: 15px
+  flex: 3
 .debate-days-remaining
   flex: 1
+  margin-bottom: 10px
+
+sub
+  padding-bottom: 5px
+  font-size: 0.4em
 
 //#############################################   End card Results  ################################################################
 
