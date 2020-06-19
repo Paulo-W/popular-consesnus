@@ -1,0 +1,55 @@
+<mat-card class="top-card" id="create-card">
+  <section class="create-header">
+    <form>
+      <div class="form-group row">
+        <label for="interesting-title" class="col-md-2 col-form-label plain-text-x">
+          Interesting Title<span class="plain-text-s-accent">*</span>:
+        </label>
+        <div class="col-md-10">
+          <input type="text" class="form-control" id="interesting-title"
+                 placeholder="Does the world really need a Queen figure?">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="topic-description" class="col-md-2 col-form-label plain-text-x">
+          Topic description<span class="plain-text-s-accent">*</span>:
+        </label>
+        <div class="col-md-10">
+          <textarea class="form-control" id="topic-description" rows="3"
+                    placeholder="Lorem Ipsum... ... ..."></textarea>
+        </div>
+      </div>
+    </form>
+  </section>
+  <section>
+    <mat-divider [inset]="true"></mat-divider>
+    <div class="form-group row">
+      <label for="team-1-name" class="col-md-2 col-form-label plain-text-x">
+        Team 1 Name<span class="plain-text-s-accent">*</span>:
+      </label>
+      <div class="col-md-4">
+        <input type="text" class="form-control" id="team-1-name"
+               placeholder="Does the world really need a Queen figure?">
+      </div>
+      <label for="team-2-name" class="col-md-2 col-form-label plain-text-x team-2-label">
+        Team 2 Name<span class="plain-text-s-accent">*</span>:
+      </label>
+      <div class="col-md-4">
+        <input type="text" class="form-control" id="team-2-name"
+               placeholder="Does the world really need a Queen figure?">
+      </div>
+    </div>
+  </section>
+  <section>
+    <mat-divider [inset]="true"></mat-divider>
+  </section>
+</mat-card>
+
+<mat-card class="debate-container">
+
+</mat-card>
+
+<div class="submit-container flex-center button-text">
+  <button mat-raised-button class="mat-button success" color="primary">Create</button>
+  <button mat-raised-button class="mat-button cancel" color="warn">Cancel</button>
+</div>

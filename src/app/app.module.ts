@@ -19,7 +19,8 @@ import { UserBadgeComponent } from './user-badge/user-badge.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
-import { DebateCardsComponent } from './debate-cards/debate-cards.component';
+import { DebateCardsComponent } from './page-content/debate-cards/debate-cards.component';
+import {CreateDebateComponent} from './page-content/create-debate/create-debate.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { DebateCardsComponent } from './debate-cards/debate-cards.component';
     SecondNavComponent,
     PageComponent,
     UserBadgeComponent,
-    DebateCardsComponent
+    DebateCardsComponent,
+    CreateDebateComponent
   ],
   imports: [
     BrowserModule,

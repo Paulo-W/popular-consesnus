@@ -2,6 +2,7 @@
 $primary-color: #31CB9F
 $secondary-color: #67E0BD
 $secondary-color-hover: #67E0BD40
+$warning-color: #f44336
 $blue-team-color: #BBD1FF
 $red-team-color: #FCAAAA
 
@@ -32,9 +33,17 @@ body
   height: 100%
 
 //################################### Positioning  ####################################################
+.top-card
+  margin: 15px auto
+  max-width: $card-width
+
 .container
   flex: auto
 
+.debate-container
+  margin: 2px auto
+  max-width: $card-width
+  height: 240px
 
 // flex -> verticle -> horizontal
 $padding-position-side: 8px
@@ -103,6 +112,9 @@ $text-color: #6C757D
   font-size: $font-size
   color: $text-color
 
+.button-text
+  @include plain-text($text-size-large, white)
+
 .text-header-cards
   @include header-text($text-size-large, $text-color)
 
@@ -134,7 +146,7 @@ $text-color: #6C757D
   @include plain-text($text-size-small, $text-color)
 
 .plain-text-s-accent
-  @include plain-text($text-size-small, $secondary-color)
+  @include plain-text($text-size-small, darken($primary-color, 20%))
 
 .fav-icons
   @include fav-icon($text-size-regular)

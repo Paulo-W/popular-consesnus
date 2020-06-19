@@ -1,8 +1,4 @@
-@import "../../styles"
-
-#create-container
-  margin: 15px auto
-  max-width: $card-width
+@import "src/styles"
 
 #create-container:hover
   cursor: pointer
@@ -10,11 +6,6 @@
 
 .create-card:hover
   background-color: $secondary-color-hover
-
-.debate-container
-  margin: 2px auto
-  max-width: $card-width
-  height: 240px
 
 .debate-card
   @include flex(column, flex-start)
@@ -127,13 +118,14 @@ mat-divider
 .debate-days
   margin-top: 15px
   flex: 3
+  span
+    font-size: 0.4em
+
 .debate-days-remaining
   flex: 1
   margin-bottom: 10px
 
-sub
-  padding-bottom: 5px
-  font-size: 0.4em
+
 
 //#############################################   End card Results  ################################################################
 
