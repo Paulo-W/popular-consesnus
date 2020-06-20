@@ -21,6 +21,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import { DebateCardsComponent } from './page-content/debate-cards/debate-cards.component';
 import {CreateDebateComponent} from './page-content/create-debate/create-debate.component';
+import { CreateChannelComponent } from './page-content/create-channel/create-channel.component';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,8 @@ import {CreateDebateComponent} from './page-content/create-debate/create-debate.
     PageComponent,
     UserBadgeComponent,
     DebateCardsComponent,
-    CreateDebateComponent
+    CreateDebateComponent,
+    CreateChannelComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +49,8 @@ import {CreateDebateComponent} from './page-content/create-debate/create-debate.
     MatListModule,
     MatCardModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    FormsModule
   ],
   exports: [
     MatIconModule, MatToolbarModule, FontAwesomeModule

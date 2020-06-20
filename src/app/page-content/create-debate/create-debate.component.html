@@ -1,4 +1,4 @@
-<mat-card class="top-card" id="create-card">
+<mat-card class="top-card" id="create-debate-card">
   <section class="create-header">
     <form>
       <div class="form-group row">
@@ -11,37 +11,90 @@
         </div>
       </div>
       <div class="form-group row">
-        <label for="topic-description" class="col-md-2 col-form-label plain-text-x">
-          Topic description<span class="plain-text-s-accent">*</span>:
-        </label>
+        <div class="col-md-2">
+          <label for="topic-description" class="col-form-label plain-text-x" id="description-label">
+            Topic description<span class="plain-text-s-accent">*</span>:
+          </label>
+          <small id="topic-description-help-block" class="form-text text-muted plain-text-s">
+            This will be the main discussion in the debate
+          </small>
+        </div>
         <div class="col-md-10">
-          <textarea class="form-control" id="topic-description" rows="3"
-                    placeholder="Lorem Ipsum... ... ..."></textarea>
+          <textarea class="form-control" id="topic-description" rows="3" placeholder="Dogs bark and pee on the floor, Cats scratch you and find their own food. Team cats!">
+          </textarea>
         </div>
       </div>
     </form>
   </section>
-  <section>
+  <section class="teams">
     <mat-divider [inset]="true"></mat-divider>
     <div class="form-group row">
       <label for="team-1-name" class="col-md-2 col-form-label plain-text-x">
         Team 1 Name<span class="plain-text-s-accent">*</span>:
       </label>
       <div class="col-md-4">
-        <input type="text" class="form-control" id="team-1-name"
-               placeholder="Does the world really need a Queen figure?">
+        <input type="text" class="form-control" id="team-1-name" placeholder="Dogs">
       </div>
-      <label for="team-2-name" class="col-md-2 col-form-label plain-text-x team-2-label">
+      <label for="team-2-name" class="col-md-2 col-form-label plain-text-x middle-labels">
         Team 2 Name<span class="plain-text-s-accent">*</span>:
       </label>
       <div class="col-md-4">
-        <input type="text" class="form-control" id="team-2-name"
-               placeholder="Does the world really need a Queen figure?">
+        <input type="text" class="form-control" id="team-2-name" placeholder="Cats">
       </div>
     </div>
   </section>
-  <section>
+  <section class="mid-section">
     <mat-divider [inset]="true"></mat-divider>
+    <div class="form-group row">
+      <label for="selected-channel" class="col-md-2 col-form-label plain-text-x">
+        Selected Channel<span class="plain-text-s-accent">*</span>:
+      </label>
+      <div class="col-md-5">
+        <input type="text" class="form-control" id="selected-channel"
+               placeholder="General">
+      </div>
+      <label for="debate-labels" class="col-md-1 col-form-label plain-text-x middle-labels">
+        Labels:
+      </label>
+      <div class="col-md-4">
+        <input type="text" class="form-control" id="debate-labels"
+               placeholder="Animals Dogs Cats">
+        <small id="label-help-block" class="form-text text-muted plain-text-s">
+          Keywords that help make searching for the debate easier.
+        </small>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="talk-duration" class="col-md-2 col-form-label plain-text-x">
+        Duration of talk<span class="plain-text-s-accent">*</span>:
+      </label>
+      <div class="col-md-2">
+        <select id="talk-duration" class="form-control">
+          <option selected>1 Day</option>
+          <option>2 Days</option>
+          <option>3 Days</option>
+          <option>4 Days</option>
+          <option>5 Days</option>
+        </select>
+      </div>
+      <div class="col-md-1"></div>
+      <label for="just-for-fun-radio" class="col-md-1 col-form-label plain-text-x">
+        Tags<span class="plain-text-s-accent">*</span>:
+      </label>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="justForFun" id="just-for-fun-radio" value="JustForFun">
+        <label class="form-check-label plain-text-x" for="just-for-fun-radio">Just For Fun</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="justForFun" id="serious-radio" value="Serious">
+        <label class="form-check-label plain-text-x" for="serious-radio">Serious</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="justForFun" id="controversial-radio" value="Controversial">
+        <label class="form-check-label plain-text-x" for="controversial-radio">Controversial</label>
+      </div>
+    </div>
+
   </section>
 </mat-card>
 
@@ -50,6 +103,6 @@
 </mat-card>
 
 <div class="submit-container flex-center button-text">
-  <button mat-raised-button class="mat-button success" color="primary">Create</button>
   <button mat-raised-button class="mat-button cancel" color="warn">Cancel</button>
+  <button mat-raised-button class="mat-button success" color="primary">Create</button>
 </div>
