@@ -1,0 +1,24 @@
+@import "../../../styles"
+
+.chat-container
+  height: 200px
+  .chat-card-header
+    flex: 1
+    .chat-title-left-corner
+      flex: 2
+    .chat-title-center
+      flex: 4
+      text-align: center
+    .chat-title-right-corner
+      text-align: right
+      flex: 2
+  .chat-card-content
+    flex: 4
+
+::ng-deep .mat-tab-label
+  width: 40%
+  @include header-text($text-size-large, $text-color)
+
+::ng-deep .mat-tab-body-content
+  margin-top: 15px
+

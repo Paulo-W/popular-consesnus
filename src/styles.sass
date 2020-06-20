@@ -37,10 +37,14 @@ body
   height: 50%
 
 //################################### Positioning  ####################################################
+.top-chat
+  margin-bottom: 15px
+
 .top-card
   margin: 15px auto
   max-width: $card-width
 
+//used to auto fill space
 .container
   flex: auto
 
@@ -52,6 +56,9 @@ body
 // flex -> verticle -> horizontal
 $padding-position-side: 8px
 $padding-position-verticle: 5px
+
+.flex-column-center
+  @include flex(column, flex-start)
 
 .flex-center
   @include flex(row, center)

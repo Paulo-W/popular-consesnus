@@ -23,6 +23,9 @@ import { DebateCardsComponent } from './page-content/debate-cards/debate-cards.c
 import {CreateDebateComponent} from './page-content/create-debate/create-debate.component';
 import { CreateChannelComponent } from './page-content/create-channel/create-channel.component';
 import {FormsModule} from '@angular/forms';
+import { ChatPageComponent } from './page-content/chat-page/chat-page.component';
+import {MatTabsModule} from '@angular/material/tabs';
+import { ChatFooterComponent } from './page-content/chat-page/chat-footer/chat-footer.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +37,9 @@ import {FormsModule} from '@angular/forms';
     UserBadgeComponent,
     DebateCardsComponent,
     CreateDebateComponent,
-    CreateChannelComponent
+    CreateChannelComponent,
+    ChatPageComponent,
+    ChatFooterComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +55,8 @@ import {FormsModule} from '@angular/forms';
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
-    FormsModule
+    FormsModule,
+    MatTabsModule
   ],
   exports: [
     MatIconModule, MatToolbarModule, FontAwesomeModule
