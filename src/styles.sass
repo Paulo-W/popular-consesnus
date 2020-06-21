@@ -45,7 +45,7 @@ body
   max-width: $card-width
 
 //used to auto fill space
-.container
+.default-container
   flex: auto
 
 .debate-container
@@ -53,12 +53,9 @@ body
   max-width: $card-width
   height: 240px
 
-// flex -> verticle -> horizontal
-$padding-position-side: 8px
-$padding-position-verticle: 5px
-
 .flex-column-center
   @include flex(column, flex-start)
+  align-items: center
 
 .flex-center
   @include flex(row, center)
@@ -67,12 +64,10 @@ $padding-position-verticle: 5px
 .flex-center-left
   @include flex(row, flex-start)
   align-items: center
-  padding-left: $padding-position-side
 
 .flex-center-right
   @include flex(row, flex-end)
   align-items: center
-  padding-right: $padding-position-side
 
 .flex-bottom-center
   @include flex(row, center)
@@ -81,14 +76,10 @@ $padding-position-verticle: 5px
 .flex-bottom-left
   @include flex(row, flex-start)
   align-items: flex-end
-  padding-bottom: $padding-position-verticle
-  padding-left: $padding-position-side
 
 .flex-bottom-right
   @include flex(row, flex-end)
   align-items: flex-end
-  padding-bottom: $padding-position-verticle
-  padding-right: $padding-position-side
 
 .flex-top-left
   @include flex(row, flex-start)
@@ -155,7 +146,7 @@ $text-color: #6C757D
   @include plain-text($text-size-regular, $blue-team-color)
 
 .plain-text-red
-  @include plain-text($text-size-regular, $red-team-color)
+  @include plain-text($text-size-regular, darken($red-team-color, 10%))
 
 .plain-text-xx
   @include plain-text($text-size-gigantic, $text-color)
@@ -168,6 +159,9 @@ $text-color: #6C757D
 
 .plain-text-s
   @include plain-text($text-size-small, $text-color)
+
+.plain-text-accent
+  @include plain-text($text-size-large, $primary-color)
 
 .plain-text-s-accent
   @include plain-text($text-size-small, darken($primary-color, 20%))

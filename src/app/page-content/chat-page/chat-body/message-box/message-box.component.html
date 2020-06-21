@@ -1,0 +1,43 @@
+<div class="chat-box">
+  <section class="flex-top-left">
+    <div class="chat-box-image flex-center">
+      <div>
+        <div class="image-icon">
+        </div>
+        <div class="plain-text-s chat-username">username</div>
+      </div>
+    </div>
+    <mat-divider vertical style="height: 255px"></mat-divider>
+    <div class="chat-box-content flex-column-center">
+      <div class="message-content-container full-container flex-bottom-left plain-text">
+        <div class="message-image">
+          <div class="image-container flex-center">
+            Image or video file
+          </div>
+        </div>
+        <div class="message-content">
+          This is the message
+        </div>
+      </div>
+      <mat-divider [inset]="true"></mat-divider>
+      <div class="message-footer full-container flex-center">
+        <div class="full-container">
+          <section class="full-container flex-center-left">
+            <div class="challenge-message plain-text-red">
+              <fa-icon [fixedWidth]="true" [icon]="faComment"></fa-icon>
+              Challenge
+            </div>
+            <div class="message-footer-date plain-text-s">
+              date
+            </div>
+            <div class="message-footer-votes plain-text-s">
+              <span class="current-votes">Current Votes: 65</span>
+              <span class="left-icon"> <fa-icon [fixedWidth]="true" [icon]="faPlus" class="border-icon"></fa-icon></span>
+              <span class="right-icon"><fa-icon [fixedWidth]="true" [icon]="faMinus" class="border-icon"></fa-icon></span>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

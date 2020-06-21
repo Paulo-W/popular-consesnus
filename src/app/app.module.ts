@@ -26,6 +26,8 @@ import {FormsModule} from '@angular/forms';
 import { ChatPageComponent } from './page-content/chat-page/chat-page.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import { ChatFooterComponent } from './page-content/chat-page/chat-footer/chat-footer.component';
+import { ChatBodyComponent } from './page-content/chat-page/chat-body/chat-body.component';
+import { MessageBoxComponent } from './page-content/chat-page/chat-body/message-box/message-box.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,9 @@ import { ChatFooterComponent } from './page-content/chat-page/chat-footer/chat-f
     CreateDebateComponent,
     CreateChannelComponent,
     ChatPageComponent,
-    ChatFooterComponent
+    ChatFooterComponent,
+    ChatBodyComponent,
+    MessageBoxComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {faUpload} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-chat-footer',
@@ -7,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChatFooterComponent implements OnInit {
 
-  constructor() { }
+  faUpload = faUpload;
+
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

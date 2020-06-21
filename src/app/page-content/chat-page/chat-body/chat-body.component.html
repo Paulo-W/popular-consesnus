@@ -1,0 +1,34 @@
+<div class="join-container">
+  <div class="full-container flex-center-left">
+    <div class="join-left full-container flex-center-left">
+      <button type="button" class="btn plain-text-x">
+        <fa-icon [icon]="faPencil"></fa-icon>
+        Join Team <span></span>
+      </button>
+    </div>
+    <div class="join-switch full-container flex-center">
+      <button type="button" class="btn btn-outline-primary">Switch</button>
+    </div>
+    <div class="join-right full-container flex-center-right">
+      <button type="button" class="btn plain-text-red">
+        Join Team
+        <fa-icon [icon]="faPencil" class="right-icon"></fa-icon>
+      </button>
+    </div>
+  </div>
+</div>
+
+<mat-card>
+  <mat-tab-group mat-align-tabs="center" animationDuration="1200ms" dynamicHeight>
+    <mat-tab label="First Team">
+      <ng-template matTabContent>
+        <app-message-box></app-message-box>
+      </ng-template>
+    </mat-tab>
+    <mat-tab label="Second Team">
+      <ng-template matTabContent>
+        <app-message-box></app-message-box>
+      </ng-template>
+    </mat-tab>
+  </mat-tab-group>
+</mat-card>
