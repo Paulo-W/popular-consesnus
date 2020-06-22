@@ -6,84 +6,92 @@
     </mat-card-content>
   </mat-card>
 </div>
-<div class="debate-container">
-  <mat-card class="debate-card full-container">
+
+<mat-card class="debate-container">
+  <div class="debate-card flex-column-center full-container">
     <div class="debate-card-header full-container">
-      <div class="joined-blue full-container plain-text-blue flex-bottom-left">
-        <span>
+      <!--      header-row    -->
+      <section class="flex-center-left full-container">
+        <div class="debate-card-top-left-corner plain-text-blue">
           <fa-icon [icon]="fabBookMark"></fa-icon>
-          Joined
-        </span>
-      </div>
-      <div class="debate-card-heading full-container flex-center text-header-cards">
-        <span>Debate Title</span>
-      </div>
-      <div class="joined-red full-container plain-text-red flex-bottom-right">
-        Joined
-        <fa-icon [icon]="fabBookMark" class="right-icon"></fa-icon>
-      </div>
+          <span class="right-icon">Joined</span>
+        </div>
+        <div class="debate-card-top-center text-header-cards">
+          <span>Debate Title</span>
+        </div>
+        <div class="debate-card-top-right-corner plain-text-red">
+          <span class="left-icon">Joined</span>
+          <fa-icon [icon]="fabBookMark"></fa-icon>
+        </div>
+      </section>
     </div>
-    <!---------------------------------------------------------->
+
     <mat-divider [inset]="true" style="width: 98%"></mat-divider>
-    <!-------------------------  Card Center Row   ------------>
+
     <div class="debate-card-content full-container">
-      <div class="blue-team-votes full-container flex-bottom-center">
-        <div class="number-container">
-          <div class="plain-text-xxx percentage">45%</div>
-          <div class="plain-text-xx number-of-votes">12</div>
+      <section class="flex-center-left full-container">
+        <div class="debate-card-votes-block full-container flex-center">
+          <div class="number-container">
+            <div class="plain-text-xxx percentage">45%</div>
+            <div class="plain-text-xx number-of-votes">12</div>
+          </div>
         </div>
-      </div>
-      <div class="debate-description-container">
-        <div class="created-by">
-          <span class="plain-text-s">
-            created by: <span class="plain-text-s-accent">Username</span>
-            in channel: <span class="plain-text-s-accent">Channel</span>
-            on the: <span class="plain-text-s-accent">Date</span>
-          </span>
-        </div>
-        <div class="debate-text-container">
-          <div class="plain-text">
+        <div class="debate-content-container full-container flex-column-center">
+          <div class="debate-sub-header plain-text-s full-container flex-center">
+            <span class="plain-text-s">
+              created by: <span class="plain-text-s-accent">Username</span>
+              in channel: <span class="plain-text-s-accent">Channel</span>
+              on the: <span class="plain-text-s-accent">Date</span>
+            </span>
+          </div>
+          <div class="debate-content plain-text full-container flex-center">
             <div class="debate-description">
-              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+              industry's
               standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled
               it
             </div>
           </div>
         </div>
-      </div>
-      <div class="red-team-votes full-container flex-bottom-center">
-        <div class="number-container">
-          <div class="plain-text-xxx percentage">45%</div>
-          <div class="plain-text-xx number-of-votes">12</div>
+        <div class="debate-card-votes-block full-container flex-center">
+          <div class="number-container">
+            <div class="plain-text-xxx percentage">45%</div>
+            <div class="plain-text-xx number-of-votes">12</div>
+          </div>
         </div>
-      </div>
+      </section>
     </div>
-    <div class="debate-card-results full-container">
-      <div class="blue-team-bar">
-          <div class="default-container"></div>
+
+    <div class="debate-card-footer full-container">
+      <section class="flex-bottom-left full-container">
+        <div class="debate-card-bottom-left-corner plain-text-s full-container flex-column-left">
           <div class="debate-team-name-left plain-text-s">
             Team name 1
           </div>
-          <div class="debate-bar flex-center-left">
+          <div class="debate-bar full-container">
             <div class="blue-bar">
             </div>
-        </div>
-      </div>
-      <div class="debate-days-remaining">
-        <div class="default-container"></div>
-        <div class="debate-days text-header-x">2<span>Days</span></div>
-        <div class="debate-remaining plain-text">remaining</div>
-      </div>
-      <div class="red-team-bar">
-        <div class="default-container"></div>
-        <div class="debate-team-name-right plain-text-s">
-          Team name 2
-        </div>
-        <div class="debate-bar flex-center-right">
-          <div class="red-bar">
           </div>
         </div>
-      </div>
+        <div class="debate-card-center flex-center">
+          <div class="time-block full-container">
+            <span class="text-header-x"> 2 </span><span class="text-header-cards">Days</span>
+            <div class="text-header-cards">
+              Remaining
+            </div>
+          </div>
+        </div>
+        <div class="debate-card-bottom-right-corner plain-text-s full-container flex-column-right">
+          <div class="debate-team-name-right plain-text-s">
+            Team name 1
+          </div>
+          <div class="debate-bar full-container flex-center-right">
+            <div class="red-bar">
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
-  </mat-card>
-</div>
+  </div>
+</mat-card>
+
