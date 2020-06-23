@@ -145,6 +145,12 @@ $text-color: #6C757D
 .button-text
   @include plain-text($text-size-large, white)
 
+.text-header-plain
+  @include header-text($text-size-regular, $text-color)
+
+.text-header-plain-accent
+  color: darken($primary-color, 5%)
+
 .text-header-cards
   @include header-text($text-size-large, $text-color)
 
@@ -180,6 +186,9 @@ $text-color: #6C757D
 
 .plain-text-s-accent
   @include plain-text($text-size-small, darken($primary-color, 20%))
+
+.plain-text-white
+  @include plain-text($text-size-regular, white)
 
 .fav-icons
   @include fav-icon($text-size-regular)

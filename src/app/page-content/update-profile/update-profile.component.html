@@ -1,0 +1,92 @@
+<mat-card class="top-card">
+  <div class="create-channel-card flex-top-left">
+    <div class="left-panel">
+      <section class="flex-top-left">
+        <div class="create-form">
+          <form>
+            <div class="form-group row">
+              <label for="user-full-name" class="col-md-3 col-form-label plain-text-x">
+                Full Name<span class="plain-text-s-accent">*</span>:
+              </label>
+              <div class="col-md-9">
+                <input type="text" class="form-control" id="user-full-name"
+                       placeholder="Sally Smith">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="user-username" class="col-form-label plain-text-x col-md-3">
+                Username<span class="plain-text-s-accent">*</span>:
+              </label>
+              <div class="col-md-9">
+                <input type="text" class="form-control" id="user-username" placeholder="MyNameJeff">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="user-email" class="col-form-label plain-text-x col-md-3">
+                Email<span class="plain-text-s-accent">*</span>:
+              </label>
+              <div class="col-md-9">
+                <input type="email" class="form-control" id="user-email" placeholder="its.my.email@my.email.com">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="user-password" class="col-form-label plain-text-x col-md-3">
+                Username<span class="plain-text-s-accent">*</span>:
+              </label>
+              <div class="col-md-9">
+                <input type="password" class="form-control" id="user-password" placeholder="******************">
+              </div>
+            </div>
+
+          </form>
+          <section>
+            <div class="submit-container flex-center button-text">
+              <button mat-raised-button class="mat-button cancel" color="warn">Cancel</button>
+              <button mat-raised-button class="mat-button success" color="primary">Update</button>
+            </div>
+          </section>
+        </div>
+        <div class="divider">
+          <mat-divider vertical style="height: 280px"></mat-divider>
+        </div>
+      </section>
+    </div>
+    <div class="right-panel flex-column-center full-container">
+      <section class="image-block full-container">
+        <div class="image-panel flex-center full-container plain-text-x drop-image">
+          Drag And Drop Image Here
+        </div>
+      </section>
+      <section class="upload-image-block flex-center full-container">
+        <div class="form-group row">
+          <div>
+            <label for="upload-file-button" class="col-md-4 col-form-label plain-text-s" id="upload-label">Profile Picture</label>
+          </div>
+          <div class="col-md-8">
+            <input type="file" class="form-control-file plain-text-s" id="upload-file-button">
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</mat-card>
+
+<mat-card class="top-card user-comments-card">
+  <div class="user-comments-header flex-center text-header-cards">
+      My Comments
+  </div>
+  <mat-divider [inset]="true"></mat-divider>
+  <div class="user-comments-body">
+    <div class="user-comments-box flex-column-center">
+        <div class="user-comments-box-header full-container flex-center text-header-plain">
+          Posted in: <span class="text-header-plain-accent"> Debate Name</span>  number likes
+        </div>
+        <div class="user-comments-box-content full-container plain-text flex-center">
+          The comment goes here
+        </div>
+    </div>
+  </div>
+  <div class="user-comments-footer">
+
+  </div>
+</mat-card>

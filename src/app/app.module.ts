@@ -28,6 +28,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { ChatFooterComponent } from './page-content/chat-page/chat-footer/chat-footer.component';
 import { ChatBodyComponent } from './page-content/chat-page/chat-body/chat-body.component';
 import { MessageBoxComponent } from './page-content/chat-page/chat-body/message-box/message-box.component';
+import { UpdateProfileComponent } from './page-content/update-profile/update-profile.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { MessageBoxComponent } from './page-content/chat-page/chat-body/message-
     ChatPageComponent,
     ChatFooterComponent,
     ChatBodyComponent,
-    MessageBoxComponent
+    MessageBoxComponent,
+    UpdateProfileComponent
   ],
   imports: [
     BrowserModule,

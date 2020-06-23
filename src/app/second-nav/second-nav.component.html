@@ -1,13 +1,17 @@
-<div class="second-nav-container">
-  <div class="side-nav-icon">
-    <button mat-icon-button (click)="clickMenu()">
-      <mat-icon>menu</mat-icon>
-    </button>
+<div class="second-nav-container flex-center-left full-container">
+  <div class="menu-button">
+    <div class="plain-text">
+      <button mat-icon-button (click)="clickMenu()">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </div>
   </div>
   <div class="current-position">
-    <span class="plain-text"><a href="">Home </a> | <a href=""> Top Stories</a></span>
+    <div class="current-position">
+      <span class="plain-text-white"><a href="">Home </a> | <a href=""> Top Stories</a></span>
+    </div>
   </div>
-  <div class="second-nav-search">
+  <div class="search-block flex-center-right">
     <div class="input-group">
       <input type="text" class="form-control" placeholder="search">
       <div class="input-group-append">
@@ -16,4 +20,3 @@
     </div>
   </div>
 </div>
-
