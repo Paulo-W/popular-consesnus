@@ -5,7 +5,9 @@
     </div>
   </div>
   <div class="user-badge" [class.mat-elevation-z4]="true">
-    <app-user-badge></app-user-badge>
+    <div *ngIf="user">
+      <app-user-badge [user]="user"></app-user-badge>
+    </div>
   </div>
   <div class="links">
     <mat-nav-list>
@@ -34,7 +36,15 @@
             <span class="plain-text">My Channels</span>
           </a>
         </mat-list-option>
-
+      </mat-selection-list>
+      <mat-selection-list [multiple]="false">
+        <div  class="custom-channel-list" *ngFor="let channel of user.channels">
+          <mat-list-option>
+            <a class="text" matLine href="">
+              <span class="plain-text">{{channel}}</span>
+            </a>
+          </mat-list-option>
+        </div>
       </mat-selection-list>
     </mat-nav-list>
   </div>

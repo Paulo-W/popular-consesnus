@@ -29,6 +29,7 @@ import { ChatFooterComponent } from './page-content/chat-page/chat-footer/chat-f
 import { ChatBodyComponent } from './page-content/chat-page/chat-body/chat-body.component';
 import { MessageBoxComponent } from './page-content/chat-page/chat-body/message-box/message-box.component';
 import { UpdateProfileComponent } from './page-content/update-profile/update-profile.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { UpdateProfileComponent } from './page-content/update-profile/update-pro
     ChatFooterComponent,
     ChatBodyComponent,
     MessageBoxComponent,
-    UpdateProfileComponent
+    UpdateProfileComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

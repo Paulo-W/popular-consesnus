@@ -1,28 +1,2 @@
-<nav>
-  <mat-toolbar color="primary" [class.mat-elevation-z2]="true">
-    <mat-toolbar-row id="top-nav">
-      <div class="left-nav">
-        <span class="left-icon">
-          <fa-icon [icon]="faHome" [fixedWidth]="true"></fa-icon>
-        </span>
-        <h1>{{title}}</h1>
-      </div>
-      <div class="center-nav">
-      </div>
-      <div class="right-nav">
-
-        <span id="bell">
-          <span  matBadge="4" matBadgePosition="above after" matBadgeColor="warn">
-            <fa-icon [icon]="faBell" [fixedWidth]="true"></fa-icon>
-          </span>
-        </span>
-        <fa-icon [icon]="faSignOut" [fixedWidth]="true"></fa-icon>
-      </div>
-    </mat-toolbar-row>
-  </mat-toolbar>
-</nav>
-<div class="page">
-  <app-page></app-page>
-</div>
-
+<app-navbar></app-navbar>
 <router-outlet></router-outlet>
