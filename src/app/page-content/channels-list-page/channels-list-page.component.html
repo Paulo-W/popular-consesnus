@@ -1,0 +1,56 @@
+<mat-card class="top-card">
+  <div class="channels-list-header full-container">
+    <section class="flex-center-left">
+      <div class="filter-channel-list">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="filter channels">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button"><span><fa-icon [icon]="faSearch"></fa-icon></span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-header-cards">
+        <div class="channels-list-title">
+          Channels
+        </div>
+      </div>
+
+      <div class="create-new-channel">
+        <button mat-raised-button color="primary">Create New Channel
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+    </section>
+  </div>
+  <mat-divider inset></mat-divider>
+  <div class="list-body">
+    <mat-selection-list [multiple]="false">
+      <mat-list-item class="channel-list-item full-container">
+        <section class="flex-center-left full-container">
+          <div class="left-channel-list full-container">
+            <div class="plain-text-s-accent-light">Number</div>
+            <div class="plain-text-ss">Members</div>
+          </div>
+          <div class="channel-name plain-text-s"> Channel Name</div>
+          <div class="right-channel-list">
+            <button mat-stroked-button color="primary" class="join">Join Channel</button>
+          </div>
+        </section>
+      </mat-list-item>
+      <mat-list-item class="channel-list-item full-container">
+        <section class="flex-center-left full-container">
+          <div class="left-channel-list full-container">
+            <div class="plain-text-s-accent-light">Number</div>
+            <div class="plain-text-ss">Members</div>
+          </div>
+          <div class="channel-name plain-text-s"> Channel Name</div>
+          <div class="right-channel-list">
+            <button mat-stroked-button color="warn" class="leave">Exit Channel</button>
+          </div>
+        </section>
+      </mat-list-item>
+    </mat-selection-list>
+  </div>
+</mat-card>

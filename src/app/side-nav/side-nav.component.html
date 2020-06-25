@@ -24,21 +24,15 @@
             <span class="plain-text">My Debates</span>
           </a>
         </mat-list-option>
-        <mat-list-option>
-          <a class="text" matLine href="">
-            <span class="left-icon"><fa-icon [icon]="faTrophy" [fixedWidth]="true"></fa-icon></span>
-            <span class="plain-text">My Achievements</span>
-          </a>
-        </mat-list-option>
-        <mat-list-option>
-          <a class="text" matLine href="">
-            <span class="left-icon"><fa-icon [icon]="faBook" [fixedWidth]="true"></fa-icon></span>
-            <span class="plain-text">My Channels</span>
-          </a>
-        </mat-list-option>
+        <mat-list-item>
+          <div mat-line>
+            <span class="left-icon"><fa-icon [icon]="faBook" [fixedWidth]="true" class="text"></fa-icon></span>
+            <span class="plain-text">Channels</span>
+          </div>
+        </mat-list-item>
       </mat-selection-list>
       <mat-selection-list [multiple]="false">
-        <div  class="custom-channel-list" *ngFor="let channel of user.channels">
+        <div class="custom-channel-list" *ngFor="let channel of user.channels">
           <mat-list-option>
             <a class="text" matLine href="">
               <span class="plain-text">{{channel}}</span>

@@ -30,6 +30,10 @@ import { ChatBodyComponent } from './page-content/chat-page/chat-body/chat-body.
 import { MessageBoxComponent } from './page-content/chat-page/chat-body/message-box/message-box.component';
 import { UpdateProfileComponent } from './page-content/update-profile/update-profile.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatExpansionModule} from '@angular/material/expansion';
+import { ChannelsListPageComponent } from './page-content/channels-list-page/channels-list-page.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +51,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     ChatBodyComponent,
     MessageBoxComponent,
     UpdateProfileComponent,
-    NavbarComponent
+    NavbarComponent,
+    ChannelsListPageComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +69,10 @@ import { NavbarComponent } from './navbar/navbar.component';
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
-    MatTabsModule
+    MatTabsModule,
+    MatRadioModule,
+    MatMenuModule,
+    MatExpansionModule
   ],
   exports: [
     MatIconModule, MatToolbarModule, FontAwesomeModule

@@ -1,7 +1,7 @@
 @import "../../styles"
 
 .text
- color: $text-color
+  color: $text-color
 
 .column-container
   @include flex(column, flex-start)
@@ -10,6 +10,9 @@
 
 .test-container
   @include flex(column, flex-start)
+
+.mat-list-item-content
+  padding-right: 0
 
 .user-badge
   flex: 1
@@ -31,6 +34,11 @@ mat-list-option
   margin-top: 1px
   background-color: #fafafa
 
+mat-list-item
+  border-bottom: 0.5px solid #cacaca
+  margin-top: 1px
+  background-color: #fafafa
+
 mat-nav-list, mat-selection-list
   padding-top: 0
 
@@ -40,3 +48,23 @@ mat-nav-list, mat-selection-list
 .custom-channel-list
   padding-left: 10px
   font-size: $text-size-medium
+
+#add-button
+  color: $secondary-color
+  text-align: right
+  padding-left: 5px
+
+#add-channels
+  padding: 5px
+  background-color: #eee
+  text-align: center
+
+  &:hover
+    cursor: pointer
+
+.search-channel-box
+  position: absolute
+  top: 40%
+  width: 100%
+  min-height: 100px
+  background-color: white

@@ -60,6 +60,10 @@ body
   max-width: $card-width
   height: 240px
 
+.flex-space-between
+  @include flex(row, space-between)
+  align-items: center
+
 .flex-column-center
   @include flex(column, flex-start)
   align-items: center
@@ -122,6 +126,7 @@ $text-size-large: 1.33em
 $text-size-gigantic: 2.7em
 $text-size-gigantic2: 3.6em
 $text-size-small: 1em
+$text-size-tiny: 0.8em
 $text-color: #6C757D
 
 @font-face
@@ -181,6 +186,9 @@ $text-color: #6C757D
 .plain-text-s
   @include plain-text($text-size-small, $text-color)
 
+.plain-text-ss
+  @include plain-text($text-size-tiny, $text-color)
+
 .plain-text-accent
   @include plain-text($text-size-large, $primary-color)
 
@@ -192,6 +200,9 @@ $text-color: #6C757D
 
 .plain-text-white
   @include plain-text($text-size-regular, white)
+
+.plain-text-s-white
+  @include plain-text($text-size-small, white)
 
 .fav-icons
   @include fav-icon($text-size-regular)
