@@ -2,26 +2,37 @@
   <div class="create-channel-card flex-top-left">
     <div class="left-panel">
       <section class="flex-top-left">
-        <div class="create-form">
-          <form>
+        <div class="create-form form-group">
+          <form #channelForm="ngForm" (ngSubmit)="onSubmit()">
             <div class="form-group row">
               <label for="interesting-channel-title" class="col-md-3 col-form-label plain-text-x">
                 Interesting Title<span class="plain-text-s-accent">*</span>:
               </label>
               <div class="col-md-9">
                 <input type="text" class="form-control" id="interesting-channel-title"
-                       placeholder="The Comical Ranking of Politicians">
+                       placeholder="The Comical Ranking of Politicians" [(ngModel)]="newChannel.name"
+                       name="name"
+                       required #name="ngModel">
+                <div [hidden]="name.valid || name.pristine" class="alert-danger plain-text-s">
+                  A Title for the debate is required
+                </div>
               </div>
             </div>
             <div class="form-group row">
               <label for="channel-labels" class="col-form-label plain-text-x col-md-3">
-                Labels<span class="plain-text-s-accent">*</span>:
+                Labels:
               </label>
               <div class="col-md-9">
-                <input type="text" class="form-control" id="channel-labels" placeholder="Animals Dogs">
-                <small id="label-help-block" class="form-text text-muted plain-text-s">
-                  Keywords that help make searching for the channel easier.
-                </small>
+                <input type="text" class="form-control" id="channel-labels" placeholder="Animals Dogs"
+                       [(ngModel)]="newChannel.labels" name="channel-labels" #channelLabels="ngModel">
+                <div [hidden]="channelLabels.untouched">
+
+                </div>
+                <div [hidden]="channelLabels.touched">
+                  <small id="label-help-block" class="form-text text-muted plain-text-s">
+                    Keywords that help make searching for the channel easier.
+                  </small>
+                </div>
               </div>
             </div>
             <div class="form-group row ">
@@ -29,16 +40,21 @@
                 <label for="channel-description" class="plain-text-x col-form-label">
                   Say Something About this Channel:
                 </label>
-                <textarea class="form-control" id="channel-description" rows="6" placeholder="Animals Dogs"></textarea>
+                <textarea class="form-control" id="channel-description" rows="6" placeholder="Animals Dogs"
+                          [(ngModel)]="newChannel.description" name="description"></textarea>
               </div>
             </div>
+            <section>
+              <div class="submit-container flex-center button-text">
+                <button mat-raised-button class="mat-button cancel" color="warn" (click)="goBack()" type="button">Cancel
+                </button>
+                <button type="submit" mat-raised-button class="mat-button success" color="primary"
+                        [disabled]="!channelForm.form.valid">Create
+                </button>
+              </div>
+            </section>
           </form>
-          <section>
-            <div class="submit-container flex-center button-text">
-              <button mat-raised-button class="mat-button cancel" color="warn" (click)="goBack()">Cancel</button>
-              <button mat-raised-button class="mat-button success" color="primary">Create</button>
-            </div>
-          </section>
+
         </div>
         <div class="divider">
           <mat-divider vertical style="height: 420px"></mat-divider>
@@ -57,7 +73,8 @@
       </section>
       <section class="full-container">
         <div class="form-group row">
-          <label for="upload-file-button" class="col-md-4 col-form-label plain-text" id="upload-label">Upload file</label>
+          <label for="upload-file-button" class="col-md-4 col-form-label plain-text" id="upload-label">Upload
+            file</label>
           <div class="col-md-8">
             <input type="file" class="form-control-file" id="upload-file-button">
           </div>

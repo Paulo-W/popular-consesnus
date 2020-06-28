@@ -17,8 +17,8 @@ export class UserService {
     return of(USERS.find(user => user.id === 1));
   }
 
-  getCurrentUser(): Observable<number> {
-    return of(1);
+  getCurrentUser(): User {
+    return USERS.find(user => user.id === 1);
   }
 
   getUserChannels(user: User): Observable<string[]> {

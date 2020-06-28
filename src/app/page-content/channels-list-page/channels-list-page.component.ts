@@ -44,11 +44,7 @@ export class ChannelsListPageComponent implements OnInit {
   }
 
   getUserId() {
-    this.userService.getCurrentUser().subscribe(
-      userId => {
-        this.userId = userId;
-      }
-    );
+    this.userId = this.userService.getCurrentUser().id;
   }
 
   search(term: string): void {

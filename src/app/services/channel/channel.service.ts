@@ -54,5 +54,17 @@ export class ChannelService {
     channel.members.push(userId);
     this.userService.addChannel(userId, channel.name);
   }
+
+  createChannel(newChannel: Channel): Observable<boolean> {
+    const user = this.userService.getCurrentUser();
+
+    console.log(newChannel);
+
+    newChannel.members = [];
+    newChannel.createdBy = user;
+    this.addUser(newChannel, user.id);
+    CHANNELS.push(newChannel);
+    return of(true);
+  }
 }
 

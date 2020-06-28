@@ -2,18 +2,24 @@
 
 .create-channel-card
   height: 430px
+
   .left-panel
     flex: 6
+
     section
       .create-form
         flex: 14
+
       .divider
         flex: 1
+
   .right-panel
     flex: 3
+
     section
       width: 100%
       height: 70%
+
       .image-panel
         width: 80%
         height: 90%
@@ -23,7 +29,7 @@
         border-radius: 20px
 
 #upload-label
- padding: 0
+  padding: 0
 
 label
   text-align: right
@@ -34,6 +40,19 @@ label
 .col-md-12
   margin-top: 20px
   text-align: center
-  textarea
-    text-align: left
+
+textarea
+  text-align: left
+
+.ng-valid[required], .ng-valid.required
+  border-left: 5px solid #42A948
+/* green */
+
+.alert-danger
+  padding: 5px
+  color: darken($text-color, 40%)
+
+button:disabled, button[disabled]
+  border: 1px solid #999999
+  background-color: lighten($secondary-color, 20%) !important
 

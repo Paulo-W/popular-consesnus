@@ -15,26 +15,26 @@ import {SecondNavComponent} from './second-nav/second-nav.component';
 import {PageComponent} from './page/page.component';
 import {MatButtonModule} from '@angular/material/button';
 import {MatListModule} from '@angular/material/list';
-import { UserBadgeComponent } from './side-nav/user-badge/user-badge.component';
+import {UserBadgeComponent} from './side-nav/user-badge/user-badge.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
-import { DebateCardsComponent } from './page-content/debate-cards/debate-cards.component';
+import {DebateCardsComponent} from './page-content/debate-cards/debate-cards.component';
 import {CreateDebateComponent} from './page-content/create-debate/create-debate.component';
-import { CreateChannelComponent } from './page-content/create-channel/create-channel.component';
+import {CreateChannelComponent} from './page-content/create-channel/create-channel.component';
 import {FormsModule} from '@angular/forms';
-import { ChatPageComponent } from './page-content/chat-page/chat-page.component';
+import {ChatPageComponent} from './page-content/chat-page/chat-page.component';
 import {MatTabsModule} from '@angular/material/tabs';
-import { ChatFooterComponent } from './page-content/chat-page/chat-footer/chat-footer.component';
-import { ChatBodyComponent } from './page-content/chat-page/chat-body/chat-body.component';
-import { MessageBoxComponent } from './page-content/chat-page/chat-body/message-box/message-box.component';
-import { UpdateProfileComponent } from './page-content/update-profile/update-profile.component';
-import { NavbarComponent } from './navbar/navbar.component';
+import {ChatFooterComponent} from './page-content/chat-page/chat-footer/chat-footer.component';
+import {ChatBodyComponent} from './page-content/chat-page/chat-body/chat-body.component';
+import {MessageBoxComponent} from './page-content/chat-page/chat-body/message-box/message-box.component';
+import {UpdateProfileComponent} from './page-content/update-profile/update-profile.component';
+import {NavbarComponent} from './navbar/navbar.component';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatExpansionModule} from '@angular/material/expansion';
-import { ChannelsListPageComponent } from './page-content/channels-list-page/channels-list-page.component';
-import { ChannelListComponent } from './page-content/channels-list-page/channel-list/channel-list.component';
+import {ChannelsListPageComponent} from './page-content/channels-list-page/channels-list-page.component';
+import {ChannelListComponent} from './page-content/channels-list-page/channel-list/channel-list.component';
 
 @NgModule({
   declarations: [
