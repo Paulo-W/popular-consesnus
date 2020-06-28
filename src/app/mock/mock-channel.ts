@@ -17,7 +17,8 @@ export const CHANNELS: Channel[] = [
     members: [
       1,
     ],
-    description: 'A channels all about politics and all things politics related'
+    description: 'A channels all about politics and all things politics related',
+    isMember: true
   },
   {
     name: 'Religion',
@@ -25,7 +26,8 @@ export const CHANNELS: Channel[] = [
     members: [
       1, 3
     ],
-    description: 'A channels about religion'
+    description: 'A channels about religion',
+    isMember: true
   },
   {
     name: 'Food',
@@ -33,7 +35,8 @@ export const CHANNELS: Channel[] = [
     members: [
       2, 3
     ],
-    description: 'A channels about food'
+    description: 'A channels about food',
+    isMember: true
   },
   {
     name: 'Sports',
@@ -41,7 +44,8 @@ export const CHANNELS: Channel[] = [
     members: [
       3
     ],
-    description: 'A channels about sports'
+    description: 'A channels about sports',
+    isMember: true
   },
   {
     name: 'Science',
@@ -49,6 +53,7 @@ export const CHANNELS: Channel[] = [
     members: [
       2, 3
     ],
-    description: 'A channels about science'
+    description: 'A channels about science',
+    isMember: true
   }
 ];
