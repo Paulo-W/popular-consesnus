@@ -32,7 +32,7 @@
         </mat-list-item>
       </mat-selection-list>
       <mat-selection-list [multiple]="false">
-        <div class="custom-channel-list" *ngFor="let channel of user.channels">
+        <div class="custom-channel-list" *ngFor="let channel of userChannels | async">
           <mat-list-option>
             <a class="text" matLine href="">
               <span class="plain-text">{{channel}}</span>

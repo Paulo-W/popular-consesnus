@@ -14,5 +14,19 @@ export const USERS: User[] = [
       'Politics',
       'Religion'
     ]
+  },
+  {
+    id: 2,
+    name: 'Frank',
+    rank: 'beginner',
+    totalLikes: 360,
+    username: 'ItsMeFrank',
+    email: 'my.real.email.com',
+    password: '123123',
+    channels: [
+      'Animals',
+      'Food',
+      'Science'
+    ]
   }
 ];

@@ -3,7 +3,8 @@
     <section class="flex-center-left">
       <div class="filter-channel-list">
         <div class="input-group">
-          <input type="text" class="form-control" placeholder="filter channels">
+          <input #searchBox type="text" class="form-control" placeholder="filter channels"
+                 (input)="search(searchBox.value)">
           <div class="input-group-append">
             <button class="btn btn-outline-secondary" type="button"><span><fa-icon [icon]="faSearch"></fa-icon></span>
             </button>
@@ -27,30 +28,29 @@
   <mat-divider inset></mat-divider>
   <div class="list-body">
     <mat-selection-list [multiple]="false">
-      <mat-list-item class="channel-list-item full-container">
-        <section class="flex-center-left full-container">
-          <div class="left-channel-list full-container">
-            <div class="plain-text-s-accent-light">Number</div>
-            <div class="plain-text-ss">Members</div>
+      <!--      searched items block-->
+      <div *ngIf="searchInput.length > 0; else standardList">
+        <div *ngIf="searchedChannels$ | async; let list">
+          <div *ngIf="list.length > 0; else noItemsFound">
+            <app-channel-list [list]="list" [userId]="userId" (leaveEvent)="exitChannel($event)"
+                              (joinEvent)=joinChannel($event)></app-channel-list>
           </div>
-          <div class="channel-name plain-text-s"> Channel Name</div>
-          <div class="right-channel-list">
-            <button mat-stroked-button color="primary" class="join">Join Channel</button>
-          </div>
-        </section>
-      </mat-list-item>
-      <mat-list-item class="channel-list-item full-container">
-        <section class="flex-center-left full-container">
-          <div class="left-channel-list full-container">
-            <div class="plain-text-s-accent-light">Number</div>
-            <div class="plain-text-ss">Members</div>
-          </div>
-          <div class="channel-name plain-text-s"> Channel Name</div>
-          <div class="right-channel-list">
-            <button mat-stroked-button color="warn" class="leave">Exit Channel</button>
-          </div>
-        </section>
-      </mat-list-item>
+          <!--          No Items found in search Block -->
+          <ng-template #noItemsFound>
+            <div class="flex-center plain-text-xxx no-items">
+              No Channels Found With Name "{{searchInput}}"
+            </div>
+          </ng-template>
+        </div>
+      </div>
+
+      <ng-template #standardList>
+        <app-channel-list [list]="channels" [userId]="userId" (leaveEvent)="exitChannel($event)"
+                          (joinEvent)=joinChannel($event)></app-channel-list>
+      </ng-template>
     </mat-selection-list>
+  </div>
+  <div class="channel-list-footer">
+
   </div>
 </mat-card>
