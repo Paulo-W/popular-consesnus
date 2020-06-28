@@ -8,7 +8,8 @@ export const CHANNELS: Channel[] = [
     members: [
       1, 2, 3
     ],
-    description: 'A channels all about animals and all things animal related'
+    description: 'A channels all about animals and all things animal related',
+    isMember: true
   },
   {
     name: 'Politics',
@@ -30,7 +31,7 @@ export const CHANNELS: Channel[] = [
     name: 'Food',
     createdBy: USERS[1],
     members: [
-     2, 3
+      2, 3
     ],
     description: 'A channels about food'
   },

@@ -31,24 +31,47 @@
   <div class="list-body">
     <mat-selection-list [multiple]="false">
       <!--      searched items block-->
-      <div *ngIf="searchInput.length > 0; else standardList">
-        <div *ngIf="searchedChannels$ | async; let list">
-          <div *ngIf="list.length > 0; else noItemsFound">
-            <app-channel-list [list]="list" [userId]="userId" (leaveEvent)="exitChannel($event)"
-                              (joinEvent)=joinChannel($event)></app-channel-list>
+      <div *ngIf="searchedChannels$ | async; let list else loading">
+        <div *ngIf="list.length > 0; else noItemsFound">
+          <div *ngFor="let channel of list">
+            <mat-list-item class="channel-list-item full-container">
+              <section class="flex-center-left full-container">
+                <div class="left-channel-list full-container">
+                  <div class="flex-top-left">
+                    <section>
+                      <div class="plain-text-s-accent-light">{{channel.members.length}}</div>
+                      <div class="plain-text-ss">Members</div>
+                    </section>
+                  </div>
+                </div>
+                <div class="channel-name plain-text-s">{{channel.name}}</div>
+                <div class="right-channel-list">
+                  <div *ngIf="channel.isMember ; else joinBlock ">
+                    <button mat-stroked-button color="warn" class="leave" (click)="leaveChannel(channel)">Exit
+                      Channel
+                    </button>
+
+                  </div>
+                  <ng-template #joinBlock>
+                    <button mat-stroked-button color="primary" class="join" (click)="joinChannel(channel)">Join
+                      Channel
+                    </button>
+                  </ng-template>
+                </div>
+              </section>
+            </mat-list-item>
           </div>
-          <!--          No Items found in search Block -->
-          <ng-template #noItemsFound>
-            <div class="flex-center plain-text-xxx no-items">
-              No Channels Found With Name "{{searchInput}}"
-            </div>
-          </ng-template>
         </div>
+        <!--  No Items found in search Block -->
+        <ng-template #noItemsFound>
+          <div class="flex-center plain-text-xx no-items">
+            No Channels Found With Name "{{searchInput}}"
+          </div>
+        </ng-template>
       </div>
 
-      <ng-template #standardList>
-        <app-channel-list [list]="channels" [userId]="userId" (leaveEvent)="exitChannel($event)"
-                          (joinEvent)=joinChannel($event)></app-channel-list>
+      <ng-template #loading class="flex-center full-container">
+        loading
       </ng-template>
     </mat-selection-list>
   </div>

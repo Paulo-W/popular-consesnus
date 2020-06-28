@@ -3,7 +3,7 @@ import {faSearch} from '@fortawesome/free-solid-svg-icons';
 import {ChannelService} from '../../services/channel/channel.service';
 import {Channel} from '../../interfaces/Channel';
 import {UserService} from '../../services/user/user.service';
-import {Observable, of, Subject} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {debounceTime, distinctUntilChanged, shareReplay, switchMap} from 'rxjs/operators';
 
 @Component({
@@ -19,15 +19,13 @@ export class ChannelsListPageComponent implements OnInit {
   searchInput = '';
   userId: number;
 
-  private searchTerm = new Subject<string>();
-
+  private searchTerm = new BehaviorSubject<string>(``);
 
   constructor(private channelService: ChannelService, private userService: UserService) {
   }
 
   ngOnInit(): void {
     this.getUserId();
-    this.getChannels();
 
     this.searchedChannels$ = this.searchTerm.pipe(
       // wait 300ms after each keystroke before considering a term
@@ -52,20 +50,11 @@ export class ChannelsListPageComponent implements OnInit {
     this.searchInput = term;
   }
 
-  getChannels() {
-    this.channelService.getChannelInfo().subscribe(
-      channelArray => {
-        this.channels = channelArray;
-        this.searchedChannels$ = of(channelArray);
-      }
-    );
-  }
-
   joinChannel(channel: Channel) {
     this.channelService.addUser(channel, this.userId);
   }
 
-  exitChannel(channel: Channel) {
+  leaveChannel(channel: Channel) {
     this.channelService.removeUser(channel, this.userId);
   }
 }

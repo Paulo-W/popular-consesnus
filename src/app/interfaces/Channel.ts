@@ -5,5 +5,9 @@ export interface Channel {
   createdBy: User;
   members: number[];
   description: string;
+  isMember: boolean;
 }
 
+export interface ChannelInfo extends Channel {
+  isMember: boolean;
+}

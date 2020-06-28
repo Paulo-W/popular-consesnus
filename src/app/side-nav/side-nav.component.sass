@@ -3,7 +3,6 @@
 .text
   color: $text-color
 
-
 .test-container
   @include flex(column, flex-start)
 
@@ -20,11 +19,6 @@ mat-list-option
   margin-top: 1px
   background-color: #fafafa
 
-mat-list-item
-  border-bottom: 0.5px solid #cacaca
-  margin-top: 1px
-  background-color: #fafafa
-
 mat-nav-list, mat-selection-list
   padding-top: 0
 
@@ -32,8 +26,10 @@ mat-nav-list, mat-selection-list
   flex: 15
 
 .custom-channel-list
-  padding-left: 10px
   font-size: $text-size-medium
+
+  mat-list-option
+    padding-left: 20px
 
 #add-button
   color: $secondary-color

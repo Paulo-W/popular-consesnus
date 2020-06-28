@@ -13,27 +13,30 @@ export class ChannelService {
   constructor(private userService: UserService) {
   }
 
-  getChannelInfo(): Observable<Channel[]> {
-    return of(CHANNELS);
+  setChannelMember(channelArray: Channel[]): Channel[] {
+    const userId = this.userService.getCurrentUser().id;
+    channelArray.forEach(it => it.isMember = it.members.includes(userId));
+
+    return channelArray;
   }
 
   searchChannel(term: string): Observable<Channel[]> {
     if (!term.trim()) {
       // if not search term, return empty hero array
-      return of([]);
+      this.setChannelMember(CHANNELS);
+      return of(CHANNELS);
     }
 
     return of(this.containsStrings(term)).pipe(
       tap(x => x.length ?
-        console.log(`found heroes matching term "${term}"`) :
-        console.log(`no heroes found matching "${term}"`))
+        console.log(`found channel matching term "${term}"`) :
+        console.log(`no channel found matching "${term}"`))
     );
   }
 
   private containsStrings(term): Channel[] {
     const subList = CHANNELS.filter(it => it.name.toLowerCase().includes(term.toLowerCase()));
-
-    console.log(subList);
+    this.setChannelMember(subList);
     return subList;
   }
 
@@ -41,6 +44,7 @@ export class ChannelService {
     const index = channel.members.indexOf(userId);
     if (index > -1) {
       channel.members.splice(index, 1);
+      channel.isMember = false;
       this.userService.leaveChannel(userId, channel.name);
     } else {
       Error(`Could not leave Channel: ${channel.name} user is not a member`);
@@ -51,6 +55,7 @@ export class ChannelService {
     if (channel.members.find(it => it === userId)) {
       Error(`Could not add user to Channel: ${channel.name} user is already a member`);
     }
+    channel.isMember = true;
     channel.members.push(userId);
     this.userService.addChannel(userId, channel.name);
   }
