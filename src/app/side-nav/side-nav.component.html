@@ -1,46 +1,44 @@
-<div class="column-container">
-  <div class="profile-photo">
-    <div>
-      profile-photo
-    </div>
+<div class="profile-photo flex-center">
+  <div>
+    profile-photo
   </div>
-  <div class="user-badge" [class.mat-elevation-z4]="true">
-    <div *ngIf="user">
-      <app-user-badge [user]="user"></app-user-badge>
-    </div>
+</div>
+<div class="user-badge" [class.mat-elevation-z4]="true">
+  <div *ngIf="user">
+    <app-user-badge [user]="user"></app-user-badge>
   </div>
-  <div class="links">
-    <mat-nav-list>
-      <mat-selection-list [multiple]="false">
+</div>
+<div class="links">
+  <mat-nav-list>
+    <mat-selection-list [multiple]="false">
+      <mat-list-option>
+        <a class="text" matLine href="">
+          <span class="left-icon"><fa-icon [icon]="faBookOpen" [fixedWidth]="true"></fa-icon></span>
+          <span class="plain-text">Start Debate</span>
+        </a>
+      </mat-list-option>
+      <mat-list-option>
+        <a class="text" matLine href="">
+          <span class="left-icon"><fa-icon [icon]="faGraduationCap" [fixedWidth]="true"></fa-icon></span>
+          <span class="plain-text">My Debates</span>
+        </a>
+      </mat-list-option>
+      <mat-list-option (click)="goTo('/channels')">
+        <a mat-line routerLink="/channels" class="full-container">
+          <span class="left-icon"><fa-icon [icon]="faBook" [fixedWidth]="true" class="text"></fa-icon></span>
+          <span class="plain-text">Channels</span>
+        </a>
+      </mat-list-option>
+    </mat-selection-list>
+    <mat-selection-list [multiple]="false">
+      <div class="custom-channel-list" *ngFor="let channel of userChannels | async">
         <mat-list-option>
           <a class="text" matLine href="">
-            <span class="left-icon"><fa-icon [icon]="faBookOpen" [fixedWidth]="true"></fa-icon></span>
-            <span class="plain-text">Start Debate</span>
+            <span class="plain-text">{{channel}}</span>
           </a>
         </mat-list-option>
-        <mat-list-option>
-          <a class="text" matLine href="">
-            <span class="left-icon"><fa-icon [icon]="faGraduationCap" [fixedWidth]="true"></fa-icon></span>
-            <span class="plain-text">My Debates</span>
-          </a>
-        </mat-list-option>
-        <mat-list-item>
-          <div mat-line>
-            <span class="left-icon"><fa-icon [icon]="faBook" [fixedWidth]="true" class="text"></fa-icon></span>
-            <span class="plain-text">Channels</span>
-          </div>
-        </mat-list-item>
-      </mat-selection-list>
-      <mat-selection-list [multiple]="false">
-        <div class="custom-channel-list" *ngFor="let channel of userChannels | async">
-          <mat-list-option>
-            <a class="text" matLine href="">
-              <span class="plain-text">{{channel}}</span>
-            </a>
-          </mat-list-option>
-        </div>
-      </mat-selection-list>
-    </mat-nav-list>
-  </div>
+      </div>
+    </mat-selection-list>
+  </mat-nav-list>
 </div>
 

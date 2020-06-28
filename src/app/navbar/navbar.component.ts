@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {faBell, faHome, faSignOutAlt} from '@fortawesome/free-solid-svg-icons';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -14,9 +15,13 @@ export class NavbarComponent implements OnInit {
   title = 'Popular Consensus';
 
 
-  constructor() {
+  constructor(private router: Router) {
   }
 
   ngOnInit(): void {
+  }
+
+  goHome() {
+    this.router.navigate(['/home']);
   }
 }

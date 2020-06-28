@@ -1,11 +1,11 @@
 <nav>
   <mat-toolbar color="primary" [class.mat-elevation-z2]="true">
     <mat-toolbar-row id="top-nav">
-      <div class="left-nav">
-        <span class="left-icon">
+      <div class="left-nav" (click)="goHome()">
+        <span class="left-icon home-button">
           <fa-icon [icon]="faHome" [fixedWidth]="true"></fa-icon>
         </span>
-        <h1>{{title}}</h1>
+        <h1 class="home-button">{{title}}</h1>
       </div>
       <div class="center-nav">
       </div>

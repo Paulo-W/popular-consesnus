@@ -3,10 +3,6 @@
 .text
   color: $text-color
 
-.column-container
-  @include flex(column, flex-start)
-  min-height: 100%
-  background-color: white
 
 .test-container
   @include flex(column, flex-start)
@@ -14,20 +10,10 @@
 .mat-list-item-content
   padding-right: 0
 
-.user-badge
-  flex: 1
-  display: flex
-  justify-content: center
-  align-items: flex-end
-
 .profile-photo
-  flex: 3
-  @include flex(column, center)
-  align-items: center
-
-.profile-photo
-  div
-    display: flex
+  width: 100%
+  min-height: 140px
+  background-color: white
 
 mat-list-option
   border-bottom: 0.5px solid #cacaca

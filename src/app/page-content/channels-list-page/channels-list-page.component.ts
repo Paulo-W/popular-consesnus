@@ -4,7 +4,7 @@ import {ChannelService} from '../../services/channel/channel.service';
 import {Channel} from '../../interfaces/Channel';
 import {UserService} from '../../services/user/user.service';
 import {Observable, of, Subject} from 'rxjs';
-import {debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
+import {debounceTime, distinctUntilChanged, shareReplay, switchMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-channels-list-page',
@@ -37,7 +37,9 @@ export class ChannelsListPageComponent implements OnInit {
       distinctUntilChanged(),
 
       // switch to new search observable each time the term changes
-      switchMap((term: string) => this.channelService.searchChannel(term))
+      switchMap((term: string) => this.channelService.searchChannel(term)),
+
+      shareReplay(1)
     );
   }
 

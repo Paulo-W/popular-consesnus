@@ -3,6 +3,7 @@ import {faBook, faBookOpen, faGraduationCap} from '@fortawesome/free-solid-svg-i
 import {UserService} from '../services/user/user.service';
 import {User} from '../interfaces/user';
 import {Observable} from 'rxjs';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-side-nav',
@@ -19,7 +20,7 @@ export class SideNavComponent implements OnInit {
   faGraduationCap = faGraduationCap;
   faBook = faBook;
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -41,4 +42,7 @@ export class SideNavComponent implements OnInit {
   }
 
 
+  goTo(path: string) {
+    this.router.navigate([path]);
+  }
 }

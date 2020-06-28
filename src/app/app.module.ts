@@ -15,7 +15,7 @@ import {SecondNavComponent} from './second-nav/second-nav.component';
 import {PageComponent} from './page/page.component';
 import {MatButtonModule} from '@angular/material/button';
 import {MatListModule} from '@angular/material/list';
-import { UserBadgeComponent } from './user-badge/user-badge.component';
+import { UserBadgeComponent } from './side-nav/user-badge/user-badge.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
