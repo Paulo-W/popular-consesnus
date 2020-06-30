@@ -50,4 +50,5 @@ class ChannelForm implements Channel {
 
   createdBy: User;
   members: number[];
+  isMember: boolean;
 }

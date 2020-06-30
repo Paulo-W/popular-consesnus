@@ -3,12 +3,14 @@ import {RouterModule, Routes} from '@angular/router';
 import {DebateCardsComponent} from './page-content/debate-cards/debate-cards.component';
 import {ChannelsListPageComponent} from './page-content/channels-list-page/channels-list-page.component';
 import {CreateChannelComponent} from './page-content/create-channel/create-channel.component';
+import {CreateDebateComponent} from './page-content/create-debate/create-debate.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: 'home', component: DebateCardsComponent},
   {path: 'channels', component: ChannelsListPageComponent},
-  {path: 'create-channel', component: CreateChannelComponent}
+  {path: 'create-channel', component: CreateChannelComponent},
+  {path: 'create-debate', component: CreateDebateComponent}
 ];
 
 @NgModule({

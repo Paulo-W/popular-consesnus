@@ -15,9 +15,15 @@ export class ChannelService {
 
   setChannelMember(channelArray: Channel[]): Channel[] {
     const userId = this.userService.getCurrentUser().id;
-    channelArray.forEach(it => it.isMember = it.members.includes(userId));
+    channelArray.forEach(it =>
+      this.simpleFun(it, userId)
+    );
 
     return channelArray;
+  }
+
+  simpleFun(channel: Channel, userId: number) {
+    channel.isMember = channel.members.includes(userId);
   }
 
   searchChannel(term: string): Observable<Channel[]> {

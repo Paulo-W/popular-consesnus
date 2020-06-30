@@ -1,13 +1,17 @@
-<mat-card class="top-card" id="create-debate-card">
-  <section class="create-header">
-    <form>
+<form [formGroup]="createDebateForm" (ngSubmit)="onSubmit()">
+  <mat-card class="top-card" id="create-debate-card">
+    <section class="create-header">
       <div class="form-group row">
         <label for="interesting-title" class="col-md-2 col-form-label plain-text-x">
           Interesting Title<span class="plain-text-s-accent">*</span>:
         </label>
         <div class="col-md-10">
-          <input type="text" class="form-control" id="interesting-title"
-                 placeholder="Does the world really need a Queen figure?">
+          <input type="text" formControlName="title" class="form-control" id="interesting-title"
+                 placeholder="Does the world really need a Queen figure?" [ngClass]="{
+                 'has-danger': title.invalid && (title.dirty || title.touched),
+                 'has-success': title.valid && (title.dirty || title.touched)
+                 }">
+          <app-invalid-form [formControlInput]="title" [name]="'Debate Title'"></app-invalid-form>
         </div>
       </div>
       <div class="form-group row">
@@ -20,81 +24,105 @@
           </small>
         </div>
         <div class="col-md-10">
-          <textarea class="form-control" id="topic-description" rows="3" placeholder="Dogs bark and pee on the floor, Cats scratch you and find their own food. Team cats!">
+          <textarea formControlName="description" class="form-control" id="topic-description" rows="3"
+                    placeholder="Dogs bark and pee on the floor, Cats scratch you and find their own food. Team cats!"
+                    [ngClass]="{'has-danger': description.invalid && (description.dirty || description.touched),
+                    'has-success': description.valid && (description.dirty || description.touched)}">
           </textarea>
+          <app-invalid-form [formControlInput]="description" [name]="'Debate Description'"></app-invalid-form>
         </div>
       </div>
-    </form>
-  </section>
-  <section class="teams">
-    <mat-divider [inset]="true"></mat-divider>
-    <div class="form-group row">
-      <label for="team-1-name" class="col-md-2 col-form-label plain-text-x">
-        Team 1 Name<span class="plain-text-s-accent">*</span>:
-      </label>
-      <div class="col-md-4">
-        <input type="text" class="form-control" id="team-1-name" placeholder="Dogs">
+    </section>
+    <section class="teams">
+      <mat-divider [inset]="true"></mat-divider>
+      <div class="form-group row">
+        <label for="team-1-name" class="col-md-2 col-form-label plain-text-x">
+          Team 1 Name<span class="plain-text-s-accent">*</span>:
+        </label>
+        <div class="col-md-4">
+          <input formControlName="team1Name" type="text" class="form-control" id="team-1-name" placeholder="Dogs"
+                 [ngClass]="{
+                 'has-danger': team1Name.invalid && (team1Name.dirty || team1Name.touched),
+                 'has-success': team1Name.valid && (team1Name.dirty || team1Name.touched)
+                 }">
+          <app-invalid-form [formControlInput]="team1Name" [name]="'Team 1 Name'"></app-invalid-form>
+        </div>
+        <label for="team-2-name" class="col-md-2 col-form-label plain-text-x middle-labels">
+          Team 2 Name<span class="plain-text-s-accent">*</span>:
+        </label>
+        <div class="col-md-4">
+          <input formControlName="team2Name" type="text" class="form-control" id="team-2-name" placeholder="Cats"
+                 [ngClass]="{
+                 'has-danger': team2Name.invalid && (team2Name.dirty || team2Name.touched),
+                 'has-success': team2Name.valid && (team2Name.dirty || team2Name.touched)
+                 }">
+          <app-invalid-form [formControlInput]="team2Name" [name]="'Team 2 Name'"></app-invalid-form>
+        </div>
       </div>
-      <label for="team-2-name" class="col-md-2 col-form-label plain-text-x middle-labels">
-        Team 2 Name<span class="plain-text-s-accent">*</span>:
-      </label>
-      <div class="col-md-4">
-        <input type="text" class="form-control" id="team-2-name" placeholder="Cats">
+    </section>
+    <section class="mid-section">
+      <mat-divider [inset]="true"></mat-divider>
+      <div class="form-group row">
+        <label for="selected-channel" class="col-md-2 col-form-label plain-text-x">
+          Selected Channel<span class="plain-text-s-accent">*</span>:
+        </label>
+        <div class="col-md-5">
+          <input formControlName="channel" type="text" class="form-control" id="selected-channel" placeholder="General"
+                 [ngClass]="{
+                 'has-danger': channel.invalid && (channel.dirty || channel.touched),
+                 'has-success': channel.valid && (channel.dirty || channel.touched)
+                 }">
+          <app-invalid-form [formControlInput]="channel" [name]="'Channel'"></app-invalid-form>
+        </div>
+        <label for="debate-labels" class="col-md-1 col-form-label plain-text-x middle-labels">
+          Labels:
+        </label>
+        <div class="col-md-4">
+          <input formControlName="label" type="text" class="form-control" id="debate-labels"
+                 placeholder="Animals Dogs Cats" [ngClass]="{
+                 'has-success': label.valid && (label.dirty || label.touched)
+                 }">
+          <small id="label-help-block" class="form-text text-muted plain-text-s">
+            Keywords that help make searching for the debate easier.
+          </small>
+        </div>
       </div>
-    </div>
-  </section>
-  <section class="mid-section">
-    <mat-divider [inset]="true"></mat-divider>
-    <div class="form-group row">
-      <label for="selected-channel" class="col-md-2 col-form-label plain-text-x">
-        Selected Channel<span class="plain-text-s-accent">*</span>:
-      </label>
-      <div class="col-md-5">
-        <input type="text" class="form-control" id="selected-channel"
-               placeholder="General">
+      <div class="form-group row">
+        <label for="talk-duration" class="col-md-2 col-form-label plain-text-x">
+          Duration of talk<span class="plain-text-s-accent">*</span>:
+        </label>
+        <div class="col-md-2">
+          <select id="talk-duration" class="form-control" formControlName="days" [ngClass]="{
+                 'has-success': label.valid && (label.dirty || label.touched)
+                 }">
+            <option value="1" selected>1 Day</option>
+            <option value="2">2 Days</option>
+            <option value="3">3 Days</option>
+            <option value="4">4 Days</option>
+            <option value="5">5 Days</option>
+          </select>
+        </div>
+        <div class="col-md-1"></div>
+        <label for="just-for-fun-radio-input" class="col-md-1 col-form-label plain-text-x">
+          Tags<span class="plain-text-s-accent">*</span>:
+        </label>
+        <mat-radio-group aria-label="Select an option" class="flex-bottom-left" formControlName="tag">
+          <mat-radio-button value="just-for-fun" id="just-for-fun-radio"><span class="plain-text">Just For Fun</span>
+          </mat-radio-button>
+          <mat-radio-button value="serious"><span class="plain-text">Serious</span></mat-radio-button>
+          <mat-radio-button value="controversial"><span class="plain-text">Controversial</span></mat-radio-button>
+        </mat-radio-group>
       </div>
-      <label for="debate-labels" class="col-md-1 col-form-label plain-text-x middle-labels">
-        Labels:
-      </label>
-      <div class="col-md-4">
-        <input type="text" class="form-control" id="debate-labels"
-               placeholder="Animals Dogs Cats">
-        <small id="label-help-block" class="form-text text-muted plain-text-s">
-          Keywords that help make searching for the debate easier.
-        </small>
-      </div>
-    </div>
-    <div class="form-group row">
-      <label for="talk-duration" class="col-md-2 col-form-label plain-text-x">
-        Duration of talk<span class="plain-text-s-accent">*</span>:
-      </label>
-      <div class="col-md-2">
-        <select id="talk-duration" class="form-control">
-          <option selected>1 Day</option>
-          <option>2 Days</option>
-          <option>3 Days</option>
-          <option>4 Days</option>
-          <option>5 Days</option>
-        </select>
-      </div>
-      <div class="col-md-1"></div>
-      <label for="just-for-fun-radio-input" class="col-md-1 col-form-label plain-text-x">
-        Tags<span class="plain-text-s-accent">*</span>:
-      </label>
-      <mat-radio-group aria-label="Select an option" class="flex-bottom-left">
-        <mat-radio-button value="just-for-fun" id="just-for-fun-radio"> <span class="plain-text">Just For Fun</span></mat-radio-button>
-        <mat-radio-button value="serious"><span class="plain-text">Serious</span></mat-radio-button>
-        <mat-radio-button value="controversial"><span class="plain-text">Controversial</span></mat-radio-button>
-      </mat-radio-group>
-    </div>
-  </section>
-</mat-card>
+    </section>
+  </mat-card>
 
-<mat-card class="debate-container">
+  <mat-card class="debate-container">
+    value: {{createDebateForm.value | json}}
+  </mat-card>
 
-</mat-card>
-
-<div class="submit-container flex-center button-text">
-  <button mat-raised-button class="mat-button cancel" color="warn">Cancel</button>
-  <button mat-raised-button class="mat-button success" color="primary">Create</button>
-</div>
+  <div class="submit-container flex-center button-text">
+    <button mat-raised-button class="mat-button cancel" color="warn" (click)="goBack()">Cancel</button>
+    <button mat-raised-button class="mat-button success" color="primary" [disabled]="!createDebateForm.valid">Create
+    </button>
+  </div>
+</form>

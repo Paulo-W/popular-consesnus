@@ -233,3 +233,13 @@ input
     background: lighten($primary-color, 20%)
   .cancel:hover
     background: lighten($warning-color, 20%)
+
+input:focus
+  outline: none !important
+
+input
+  @include plain-text($text-size-medium, darken($text-color, 10%))
+
+button:disabled, button[disabled]
+  border: 1px solid #999999
+  background-color: lighten($secondary-color, 20%) !important

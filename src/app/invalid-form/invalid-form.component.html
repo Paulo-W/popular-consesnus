@@ -1,0 +1,11 @@
+<div *ngIf="formControlInput.invalid && formControlInput.touched" class="alert alert-danger plain-text-s">
+  <div *ngIf="formControlInput.errors.required">
+    A {{name}} is Required.
+  </div>
+  <div *ngIf="formControlInput.errors.minlength">
+    {{name}} must be at least {{formControlInput.errors.minlength.requiredLength}} characters long.
+  </div>
+  <div *ngIf="formControlInput.errors.maxlength">
+    {{name}} cannot exceed {{formControlInput.errors.maxlength.requiredLength}} characters
+  </div>
+</div>

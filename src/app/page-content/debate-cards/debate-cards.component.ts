@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {faPlusCircle} from '@fortawesome/free-solid-svg-icons';
 import {faBookmark} from '@fortawesome/free-solid-svg-icons';
 
+
 @Component({
   selector: 'app-debate-cards',
   templateUrl: './debate-cards.component.html',
