@@ -25,7 +25,7 @@ export class UserService {
   }
 
   leaveChannel(userId: number, channelName: Channel): void {
-    this.getUserById(userId).subscribe(
+    this.getUserById().subscribe(
       user => {
         const index = user.channels.indexOf(channelName.name, 0);
         if (index > -1) {
@@ -38,7 +38,7 @@ export class UserService {
   }
 
   addChannel(userId: number, channelName: Channel): void {
-    this.getUserById(userId).subscribe(
+    this.getUserById().subscribe(
       user => {
         if (user.channels.find(it => it === channelName.name)) {
           Error(`Could not add User ${user.username} to Channel ${channelName} as user is already a member`);

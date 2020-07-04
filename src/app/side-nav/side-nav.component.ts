@@ -12,7 +12,6 @@ import {Router} from '@angular/router';
 })
 export class SideNavComponent implements OnInit {
 
-  private userId: number;
   user: User;
   userChannels: Observable<string[]>;
 
@@ -28,7 +27,7 @@ export class SideNavComponent implements OnInit {
   }
 
   getUser() {
-    this.userService.getUserById(this.userId).subscribe(
+    this.userService.getUserById().subscribe(
       user => {
         this.user = user;
         this.getUserChannels();
