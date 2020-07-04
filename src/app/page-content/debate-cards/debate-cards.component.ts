@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {faPlusCircle} from '@fortawesome/free-solid-svg-icons';
-import {faBookmark} from '@fortawesome/free-solid-svg-icons';
+import {faBookmark, faPlusCircle} from '@fortawesome/free-solid-svg-icons';
+import {DebateService} from '../../services/debate/debate.service';
+import {DebateInfo} from '../../interfaces/Debate';
+import {Observable} from 'rxjs';
 
 
 @Component({
@@ -13,10 +15,16 @@ export class DebateCardsComponent implements OnInit {
   faPlusCircle = faPlusCircle;
   fabBookMark = faBookmark;
 
-  constructor() {
+  debates: Observable<DebateInfo[]>;
+
+  constructor(private debateService: DebateService) {
   }
 
   ngOnInit(): void {
+    this.getDebates();
   }
 
+  getDebates() {
+    this.debates = this.debateService.getDebates();
+  }
 }

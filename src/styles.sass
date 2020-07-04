@@ -40,7 +40,7 @@ body
 @mixin voting-bar($color)
   border: 1px solid $color
   width: 85%
-  height: 60%
+  min-height: 15px
 
 
 //################################### Positioning  ####################################################
@@ -56,9 +56,9 @@ body
   flex: auto
 
 .debate-container
-  margin: 2px auto
+  margin: 2px auto 15px
   max-width: $card-width
-  height: 240px
+  height: 260px
 
 .flex-space-between
   @include flex(row, space-between)
@@ -71,6 +71,7 @@ body
 .flex-column-left
   @include flex(column, flex-start)
   align-items: flex-start
+  justify-content: flex-end
 
 .flex-column-right
   @include flex(column, flex-start)
@@ -120,12 +121,12 @@ body
 
 //################################### Fonts Text and Icons ############################################
 
-$text-size-regular: 1.25em
-$text-size-medium: 1.12em
-$text-size-large: 1.33em
+$text-size-regular: 1.35em
+$text-size-medium: 1.2em
+$text-size-large: 1.55em
 $text-size-gigantic: 2.7em
 $text-size-gigantic2: 3.6em
-$text-size-small: 1em
+$text-size-small: 1.07em
 $text-size-tiny: 0.8em
 $text-color: #6C757D
 
@@ -193,9 +194,6 @@ $text-color: #6C757D
   @include plain-text($text-size-large, $primary-color)
 
 .plain-text-s-accent
-  @include plain-text($text-size-small, darken($primary-color, 20%))
-
-.plain-text-s-accent-light
   @include plain-text($text-size-small, darken($primary-color, 5%))
 
 .plain-text-white
@@ -237,7 +235,7 @@ input
 input:focus
   outline: none !important
 
-input
+input, select
   @include plain-text($text-size-medium, darken($text-color, 10%))
 
 button:disabled, button[disabled]

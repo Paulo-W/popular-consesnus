@@ -8,6 +8,3 @@ export interface Channel {
   isMember: boolean;
 }
 
-export interface ChannelInfo extends Channel {
-  isMember: boolean;
-}

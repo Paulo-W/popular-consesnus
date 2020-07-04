@@ -39,8 +39,8 @@
         <label for="team-1-name" class="col-md-2 col-form-label plain-text-x">
           Team 1 Name<span class="plain-text-s-accent">*</span>:
         </label>
-        <div class="col-md-4">
-          <input formControlName="team1Name" type="text" class="form-control" id="team-1-name" placeholder="Dogs"
+        <div class="col-md-4" formGroupName="team1">
+          <input formControlName="name" type="text" class="form-control" id="team-1-name" placeholder="Dogs"
                  [ngClass]="{
                  'has-danger': team1Name.invalid && (team1Name.dirty || team1Name.touched),
                  'has-success': team1Name.valid && (team1Name.dirty || team1Name.touched)
@@ -50,8 +50,8 @@
         <label for="team-2-name" class="col-md-2 col-form-label plain-text-x middle-labels">
           Team 2 Name<span class="plain-text-s-accent">*</span>:
         </label>
-        <div class="col-md-4">
-          <input formControlName="team2Name" type="text" class="form-control" id="team-2-name" placeholder="Cats"
+        <div class="col-md-4" formGroupName="team2">
+          <input formControlName="name" type="text" class="form-control" id="team-2-name" placeholder="Cats"
                  [ngClass]="{
                  'has-danger': team2Name.invalid && (team2Name.dirty || team2Name.touched),
                  'has-success': team2Name.valid && (team2Name.dirty || team2Name.touched)
@@ -67,11 +67,14 @@
           Selected Channel<span class="plain-text-s-accent">*</span>:
         </label>
         <div class="col-md-5">
-          <input formControlName="channel" type="text" class="form-control" id="selected-channel" placeholder="General"
-                 [ngClass]="{
+          <select formControlName="channel" class="form-control" id="selected-channel" [ngClass]="{
                  'has-danger': channel.invalid && (channel.dirty || channel.touched),
                  'has-success': channel.valid && (channel.dirty || channel.touched)
                  }">
+            <option class="plain-text-s" *ngFor="let channel of channels" [ngValue]="channel">
+              {{channel.name}}
+            </option>
+          </select>
           <app-invalid-form [formControlInput]="channel" [name]="'Channel'"></app-invalid-form>
         </div>
         <label for="debate-labels" class="col-md-1 col-form-label plain-text-x middle-labels">
@@ -93,7 +96,8 @@
         </label>
         <div class="col-md-2">
           <select id="talk-duration" class="form-control" formControlName="days" [ngClass]="{
-                 'has-success': label.valid && (label.dirty || label.touched)
+                  'has-danger': days.valid && (days.dirty || days.touched),
+                 'has-success': days.valid && (days.dirty || days.touched)
                  }">
             <option value="1" selected>1 Day</option>
             <option value="2">2 Days</option>
@@ -107,10 +111,10 @@
           Tags<span class="plain-text-s-accent">*</span>:
         </label>
         <mat-radio-group aria-label="Select an option" class="flex-bottom-left" formControlName="tag">
-          <mat-radio-button value="just-for-fun" id="just-for-fun-radio"><span class="plain-text">Just For Fun</span>
+          <mat-radio-button value="justForFun" id="just-for-fun-radio"><span class="plain-text">Just For Fun</span>
           </mat-radio-button>
-          <mat-radio-button value="serious"><span class="plain-text">Serious</span></mat-radio-button>
-          <mat-radio-button value="controversial"><span class="plain-text">Controversial</span></mat-radio-button>
+          <mat-radio-button value="Serious"><span class="plain-text">Serious</span></mat-radio-button>
+          <mat-radio-button value="Controversial"><span class="plain-text">Controversial</span></mat-radio-button>
         </mat-radio-group>
       </div>
     </section>

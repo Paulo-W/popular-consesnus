@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {AbstractControl, FormControl, ValidationErrors} from '@angular/forms';
+import {AbstractControl} from '@angular/forms';
 
 @Component({
   selector: 'app-invalid-form',
@@ -8,7 +8,7 @@ import {AbstractControl, FormControl, ValidationErrors} from '@angular/forms';
 })
 export class InvalidFormComponent implements OnInit {
 
-  @Input() formControlInput: FormControl;
+  @Input() formControlInput: AbstractControl;
   @Input() name: string;
 
   constructor() {

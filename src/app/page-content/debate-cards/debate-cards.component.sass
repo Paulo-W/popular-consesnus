@@ -1,5 +1,9 @@
 @import "src/styles"
 
+#create-container
+  mat-card
+    padding: 15px 15px 7px
+
 #create-container:hover
   cursor: pointer
   max-width: $card-width + 0.5
@@ -22,13 +26,13 @@ mat-divider
       text-align: right
       flex: 1
   .debate-card-content
-    flex: 3
+    flex: 4
     .debate-content-container
       flex: 7
       .debate-sub-header
-        flex: 1
+        flex: 3
       .debate-content
-        flex: 4
+        flex: 5
     .debate-card-votes-block
       flex: 1
   .debate-card-footer
@@ -55,13 +59,13 @@ mat-divider
 
 .debate-description
   text-align: center
-  width: 90%
+  width: 100%
 
 mat-card-content
   text-align: center
 
 mat-card
-  padding-bottom: 5px
+  padding: 5px 15px
 
 button:focus
   outline: 0
@@ -72,3 +76,7 @@ button:focus
 
 .red-bar
   @include voting-bar($red-team-color)
+
+.bars
+  width: 100%
+  min-height: 40px

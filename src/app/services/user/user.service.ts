@@ -2,18 +2,17 @@ import {Injectable} from '@angular/core';
 import {User} from '../../interfaces/user';
 import {USERS} from '../../mock/mock-user';
 import {Observable, of} from 'rxjs';
+import {Channel} from '../../interfaces/Channel';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  private userId: Observable<number>;
-
   constructor() {
   }
 
-  getUserById(id: number): Observable<User> | undefined {
+  getUserById(): Observable<User> | undefined {
     return of(USERS.find(user => user.id === 1));
   }
 
@@ -25,10 +24,10 @@ export class UserService {
     return of(user.channels);
   }
 
-  leaveChannel(userId: number, channelName: string): void {
+  leaveChannel(userId: number, channelName: Channel): void {
     this.getUserById(userId).subscribe(
       user => {
-        const index = user.channels.indexOf(channelName, 0);
+        const index = user.channels.indexOf(channelName.name, 0);
         if (index > -1) {
           user.channels.splice(index, 1);
         } else {
@@ -38,15 +37,16 @@ export class UserService {
     );
   }
 
-  addChannel(userId: number, channelName: string): void {
+  addChannel(userId: number, channelName: Channel): void {
     this.getUserById(userId).subscribe(
       user => {
-        if (user.channels.find(it => it === channelName)) {
+        if (user.channels.find(it => it === channelName.name)) {
           Error(`Could not add User ${user.username} to Channel ${channelName} as user is already a member`);
         } else {
-          user.channels.push(channelName);
+          user.channels.push(channelName.name);
         }
       }
     );
   }
+
 }

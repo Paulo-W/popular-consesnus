@@ -14,7 +14,7 @@ export class SideNavComponent implements OnInit {
 
   private userId: number;
   user: User;
-  userChannels: Observable<string[]> = new Observable<string[]>();
+  userChannels: Observable<string[]>;
 
   faBookOpen = faBookOpen;
   faGraduationCap = faGraduationCap;

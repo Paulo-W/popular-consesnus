@@ -26,6 +26,11 @@ export class ChannelService {
     channel.isMember = channel.members.includes(userId);
   }
 
+  getChannel(): Channel[] {
+    const user = this.userService.getCurrentUser();
+    return CHANNELS.filter(it => user.channels.includes(it.name));
+  }
+
   searchChannel(term: string): Observable<Channel[]> {
     if (!term.trim()) {
       // if not search term, return empty hero array
@@ -51,7 +56,7 @@ export class ChannelService {
     if (index > -1) {
       channel.members.splice(index, 1);
       channel.isMember = false;
-      this.userService.leaveChannel(userId, channel.name);
+      this.userService.leaveChannel(userId, channel);
     } else {
       Error(`Could not leave Channel: ${channel.name} user is not a member`);
     }
@@ -63,7 +68,7 @@ export class ChannelService {
     }
     channel.isMember = true;
     channel.members.push(userId);
-    this.userService.addChannel(userId, channel.name);
+    this.userService.addChannel(userId, channel);
   }
 
   createChannel(newChannel: Channel): Observable<boolean> {
@@ -76,6 +81,10 @@ export class ChannelService {
     this.addUser(newChannel, user.id);
     CHANNELS.push(newChannel);
     return of(true);
+  }
+
+  findByName(name: string): Channel {
+    return CHANNELS.find(it => it.name === name);
   }
 }
 

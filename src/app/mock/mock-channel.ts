@@ -55,5 +55,14 @@ export const CHANNELS: Channel[] = [
     ],
     description: 'A channels about science',
     isMember: true
+  },
+  {
+    name: 'General',
+    createdBy: USERS[1],
+    members: [
+      2, 3
+    ],
+    description: 'A channels about science',
+    isMember: true
   }
 ];

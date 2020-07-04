@@ -23,10 +23,34 @@ export const USERS: User[] = [
     username: 'ItsMeFrank',
     email: 'my.real.email.com',
     password: '123123',
-    channels: [
+    channels:  [
       'Animals',
-      'Food',
-      'Science'
+      'Politics',
+      'Religion'
     ]
+  },
+  {
+    id: 3,
+    name: 'Bob',
+    rank: 'beginner',
+    totalLikes: 40,
+    username: 'ItsMeBob',
+    email: 'my.real.email.com',
+    password: '123123',
+    channels:  [
+      'Animals',
+      'Politics',
+      'food'
+    ]
+  },
+  {
+    id: 4,
+    name: 'Sally',
+    rank: 'beginner',
+    totalLikes: 40,
+    username: 'ItsMeSally',
+    email: 'my.real.email.com',
+    password: '123123',
+    channels: []
   }
 ];

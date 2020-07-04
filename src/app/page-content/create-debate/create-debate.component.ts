@@ -4,6 +4,8 @@ import {DebateService} from '../../services/debate/debate.service';
 import {Debate} from '../../interfaces/Debate';
 import {Location} from '@angular/common';
 import {Router} from '@angular/router';
+import {Channel} from '../../interfaces/Channel';
+import {ChannelService} from '../../services/channel/channel.service';
 
 @Component({
   selector: 'app-create-debate',
@@ -11,6 +13,8 @@ import {Router} from '@angular/router';
   styleUrls: ['./create-debate.component.sass']
 })
 export class CreateDebateComponent implements OnInit {
+
+  channels: Channel[];
 
   createDebateForm = new FormGroup({
     title: new FormControl('', [
@@ -21,14 +25,18 @@ export class CreateDebateComponent implements OnInit {
       Validators.required, Validators.minLength(40),
       Validators.maxLength(300)
     ]),
-    team1Name: new FormControl('', [
-      Validators.required, Validators.minLength(3),
-      Validators.maxLength(40)
-    ]),
-    team2Name: new FormControl('', [
-      Validators.required, Validators.minLength(3),
-      Validators.maxLength(40)
-    ]),
+    team1: new FormGroup({
+      name: new FormControl('', [
+        Validators.required, Validators.minLength(3),
+        Validators.maxLength(40)
+      ])
+    }),
+    team2: new FormGroup({
+      name: new FormControl('', [
+        Validators.required, Validators.minLength(3),
+        Validators.maxLength(40)
+      ])
+    }),
     tag: new FormControl('', [
       Validators.required
     ]),
@@ -43,10 +51,17 @@ export class CreateDebateComponent implements OnInit {
 
   constructor(private debateService: DebateService,
               private location: Location,
+              private channelService: ChannelService,
               private router: Router) {
   }
 
   ngOnInit(): void {
+    this.getChannels();
+
+  }
+
+  getChannels() {
+    this.channels = this.channelService.getChannel();
   }
 
   goBack() {
@@ -54,6 +69,7 @@ export class CreateDebateComponent implements OnInit {
   }
 
   onSubmit() {
+
     this.debateService.saveDebate(this.createDebateForm.value as Debate).subscribe(
       saved => {
         if (saved) {
@@ -72,11 +88,11 @@ export class CreateDebateComponent implements OnInit {
   }
 
   get team1Name() {
-    return this.createDebateForm.get('team1Name');
+    return this.createDebateForm.get('team1.name');
   }
 
   get team2Name() {
-    return this.createDebateForm.get('team2Name');
+    return this.createDebateForm.get('team2.name');
   }
 
   get label() {
