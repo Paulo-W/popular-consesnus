@@ -19,6 +19,7 @@ export class DebateService {
 
   private saveDebateValue(debate: Debate): boolean {
     debate.createdBy = this.userService.getCurrentUser();
+    debate.id = DEBATE.length + 1;
     debate.team1.members = [debate.createdBy];
     debate.team2.members = [];
     DEBATE.push(debate);
@@ -39,4 +40,7 @@ export class DebateService {
   }
 
 
+  getDebateById(id: number): Observable<Debate> {
+    return of(DEBATE.find(debate => debate.id === id));
+  }
 }

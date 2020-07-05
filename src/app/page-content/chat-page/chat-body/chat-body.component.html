@@ -1,34 +1,54 @@
 <div class="join-container">
-  <div class="full-container flex-center-left">
-    <div class="join-left full-container flex-center-left">
-      <button type="button" class="btn plain-text-x">
-        <fa-icon [icon]="faPencil"></fa-icon>
-        Join Team <span></span>
+  <div class="not-member flex-center-left full-container">
+    <div class="left full-container flex-center-left">
+      <button type="button" class="btn plain-text heading-block" [ngClass]="{
+      'isNotMemberBlue': !isMember,
+      'isMemberBlue': isMember
+      }">
+        <span *ngIf="!isMember ; else team1">
+          <fa-icon [icon]="faPencil"></fa-icon> Join Team
+        </span>
+        <ng-template #team1>
+          <div *ngIf="isTeam1(); else opposingTeam">
+            <fa-icon [icon]="faUser"></fa-icon>
+            My Team
+          </div>
+        </ng-template>
       </button>
     </div>
-    <div class="join-switch full-container flex-center">
-      <button type="button" class="btn btn-outline-primary">Switch</button>
-    </div>
-    <div class="join-right full-container flex-center-right">
-      <button type="button" class="btn plain-text-red">
-        Join Team
-        <fa-icon [icon]="faPencil" class="right-icon"></fa-icon>
+    <div class="right full-container flex-center-right">
+      <button type="button" class="btn plain-text heading-block" [ngClass]="{
+      'isNotMemberRed': !isMember,
+      'isMemberRed': isMember
+      }">
+        <span *ngIf="!isMember; else team2">
+          <fa-icon [icon]="faPencil" class="right-icon"></fa-icon> Join Team
+        </span>
+        <ng-template #team2>
+          <div *ngIf="!isTeam1(); else opposingTeam">
+            <fa-icon [icon]="faUser"></fa-icon>
+            My Team
+          </div>
+        </ng-template>
       </button>
     </div>
   </div>
 </div>
 
-<mat-card>
+<mat-card class="tab-card">
   <mat-tab-group mat-align-tabs="center" animationDuration="1200ms" dynamicHeight>
-    <mat-tab label="First Team">
-      <ng-template matTabContent>
-        <app-message-box></app-message-box>
-      </ng-template>
+    <mat-tab [label]="debate.team1.name | titlecase">
+      <app-message-box [team]="debate.team1" [user]="user"></app-message-box>
     </mat-tab>
-    <mat-tab label="Second Team">
-      <ng-template matTabContent>
-        <app-message-box></app-message-box>
-      </ng-template>
+    <mat-tab [label]="debate.team2.name | titlecase">
+      <app-message-box [team]="debate.team2" [user]="user"></app-message-box>
     </mat-tab>
   </mat-tab-group>
 </mat-card>
+
+
+<ng-template #opposingTeam>
+           <span>
+            <fa-icon [icon]="faSyncAlt"></fa-icon> Switch Teams
+          </span>
+</ng-template>

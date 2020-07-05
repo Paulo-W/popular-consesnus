@@ -40,7 +40,6 @@ export class SideNavComponent implements OnInit {
     this.userChannels = this.userService.getUserChannels(this.user);
   }
 
-
   goTo(path: string) {
     this.router.navigate([path]);
   }

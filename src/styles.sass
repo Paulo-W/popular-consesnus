@@ -59,6 +59,9 @@ body
   margin: 2px auto 15px
   max-width: $card-width
   height: 260px
+  &:hover
+    cursor: pointer
+    left: 1px
 
 .flex-space-between
   @include flex(row, space-between)
@@ -172,8 +175,14 @@ $text-color: #6C757D
 .plain-text-blue
   @include plain-text($text-size-regular, darken($blue-team-color, 10%))
 
+.plain-text-blue-light
+  @include plain-text($text-size-regular, darken($blue-team-color, 5%))
+
 .plain-text-red
   @include plain-text($text-size-regular, darken($red-team-color, 10%))
+
+.plain-text-red-light
+  @include plain-text($text-size-regular, darken($red-team-color, 5%))
 
 .plain-text-xx
   @include plain-text($text-size-gigantic, $text-color)
@@ -217,6 +226,10 @@ textarea
 
 input
   @include plain-text($text-size-medium, darken($text-color, 30%))
+
+.center-text
+  text-align: center
+  width: 100%
 
 //########################################################################################
 .submit-container

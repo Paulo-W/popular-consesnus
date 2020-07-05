@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {DebateService} from '../../services/debate/debate.service';
+import {Debate} from '../../interfaces/Debate';
+import {DebateTags} from '../../enums/Tags';
 
 @Component({
   selector: 'app-chat-page',
@@ -7,9 +11,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChatPageComponent implements OnInit {
 
-  constructor() { }
+  debate: Debate;
 
-  ngOnInit(): void {
+  constructor(
+    private route: ActivatedRoute,
+    private debateService: DebateService
+  ) {
   }
 
+  ngOnInit(): void {
+    this.getDebate();
+  }
+
+  getDebate(): void {
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.debateService.getDebateById(id).subscribe(
+      debate => this.debate = debate
+    );
+  }
+
+  get tag() {
+    return DebateTags[this.debate.tag];
+  }
+
+  getCurrentMembers(): number {
+    return (this.debate.team1.members?.length || 0) + (this.debate.team2.members?.length || 0);
+  }
 }

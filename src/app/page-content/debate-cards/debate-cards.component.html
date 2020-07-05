@@ -8,7 +8,7 @@
 </div>
 
 <div *ngFor="let debate of debates | async">
-  <mat-card class="debate-container">
+  <mat-card class="debate-container" routerLink="/debate/{{debate.id}}">
     <div class="debate-card flex-column-center full-container">
       <div class="debate-card-header full-container">
         <!--      header-row    -->
@@ -47,11 +47,11 @@
           </div>
           <div class="debate-content-container full-container flex-center">
             <div>
-              <div class="text-header-cards full-container debate-description">
+              <div class="text-header-cards full-container center-text">
                 <span>{{debate.title | titlecase}}</span>
               </div>
               <div class="plain-text full-container">
-                <div class="debate-description">
+                <div class="center-text">
                   {{debate.description}}
                 </div>
               </div>
@@ -78,7 +78,7 @@
           </div>
           <div class="debate-card-center flex-center">
             <div class="time-block full-container">
-              <span class="text-header-x"> 2 </span><span class="text-header-cards">Days</span>
+              <span class="text-header-x"> {{debate.days}} </span><span class="text-header-cards">Days</span>
               <div class="text-header-cards">
                 Remaining
               </div>

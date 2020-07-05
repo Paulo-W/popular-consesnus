@@ -1,41 +1,52 @@
 <mat-card class="top-chat">
-  <div class="chat-container flex-column-center">
-    <div class="chat-card-title full-container">
-      <section class="flex-center-left">
-        <div class="chat-title-left-corner plain-text-s">
-          Created In Channel <span class="plain-text-s-accent">Channel Name</span>
-        </div>
-        <div class="chat-title-center plain-text-s">
-          Debate Started By: <span class="plain-text-s-accent">Username</span> on the Date
-        </div>
-        <div class="chat-title-right-corner plain-text-s">
-          Tagged As: <span class="plain-text-s-accent">Serious</span>
-        </div>
-      </section>
-    </div>
-    <div class="chat-card-content full-container">
-      <div class="plain-text full-container flex-center">
-        Debate Content:
+  <div *ngIf="debate">
+    <div class="chat-container flex-column-center">
+      <div class="chat-card-title full-container">
+        <section class="flex-center-left">
+          <div class="chat-title-left-corner plain-text-s">
+            Created In Channel <span class="plain-text-s-accent">{{debate.channel.name}}</span>
+          </div>
+          <div class="chat-title-center plain-text-s">
+            Debate Started By: <span class="plain-text-s-accent">{{debate.createdBy.username}}
+          </span> on the {{debate.date | date: 'dd/MM/yyyy'}}
+          </div>
+          <div class="chat-title-right-corner plain-text-s">
+            Tagged As: <span class="plain-text-s-accent">{{tag}}</span>
+          </div>
+        </section>
       </div>
-    </div>
-    <div class="chat-card-title full-container flex-center">
-      <section class="full-container flex-bottom-center">
-        <div class="chat-title-left-corner plain-text-s">
-          Seen by: <span class="plain-text-s-accent">Number</span>
+      <mat-divider [inset]="true" style="width: 98%"></mat-divider>
+      <div class="chat-card-content full-container">
+        <div class="plain-text full-container flex-center">
+          <div class="center-text">
+            <div class="text-header-cards debate-content">
+              {{debate.title}}
+            </div>
+            <div class="plain-text-s">
+              {{debate.description}}
+            </div>
+          </div>
         </div>
-        <div class="chat-title-center plain-text-s">
-          Time remaining
-        </div>
-        <div class="chat-title-right-corner plain-text-s">
-          Members In Current Debate: <span class="plain-text-s-accent"></span>
-        </div>
-      </section>
+      </div>
+      <div class="chat-card-title full-container flex-center">
+        <section class="full-container flex-bottom-center">
+          <div class="chat-title-left-corner plain-text-s">
+            Seen by: <span class="plain-text-s-accent">Number</span>
+          </div>
+          <div class="chat-title-center plain-text-s">
+            {{debate.days}} Days remaining
+          </div>
+          <div class="chat-title-right-corner plain-text-s">
+            Members In Current Debate: <span class="plain-text-s-accent">{{getCurrentMembers()}}</span>
+          </div>
+        </section>
+      </div>
     </div>
   </div>
 </mat-card>
 
 <div>
-  <app-chat-body></app-chat-body>
+  <app-chat-body [debate]="debate"></app-chat-body>
 </div>
 
 <div>

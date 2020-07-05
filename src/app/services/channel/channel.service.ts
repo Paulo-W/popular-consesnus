@@ -58,13 +58,13 @@ export class ChannelService {
       channel.isMember = false;
       this.userService.leaveChannel(userId, channel);
     } else {
-      Error(`Could not leave Channel: ${channel.name} user is not a member`);
+      console.log(`Could not leave Channel: ${channel.name} user is not a member`);
     }
   }
 
   addUser(channel: Channel, userId: number): void {
     if (channel.members.find(it => it === userId)) {
-      Error(`Could not add user to Channel: ${channel.name} user is already a member`);
+      console.log(`Could not add user to Channel: ${channel.name} user is already a member`);
     }
     channel.isMember = true;
     channel.members.push(userId);
