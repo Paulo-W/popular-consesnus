@@ -49,4 +49,13 @@ export class UserService {
     );
   }
 
+  removeUser(array: User[], currentUser: User) {
+    const index = array.indexOf(currentUser);
+
+    if (index > -1) {
+      array.splice(index, 1);
+      return array;
+    }
+  }
+
 }

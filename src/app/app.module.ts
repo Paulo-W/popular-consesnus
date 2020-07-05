@@ -35,7 +35,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {ChannelsListPageComponent} from './page-content/channels-list-page/channels-list-page.component';
 import {ChannelListComponent} from './page-content/channels-list-page/channel-list/channel-list.component';
-import { InvalidFormComponent } from './invalid-form/invalid-form.component';
+import {InvalidFormComponent} from './invalid-form/invalid-form.component';
 
 @NgModule({
   declarations: [

@@ -3,6 +3,8 @@ import {Debate, DebateInfo} from '../../interfaces/Debate';
 import {Observable, of} from 'rxjs';
 import {UserService} from '../user/user.service';
 import {DEBATE} from '../../mock/mock-debate';
+import {Team} from '../../interfaces/Team';
+import {User} from '../../interfaces/user';
 
 @Injectable({
   providedIn: 'root'
@@ -42,5 +44,32 @@ export class DebateService {
 
   getDebateById(id: number): Observable<Debate> {
     return of(DEBATE.find(debate => debate.id === id));
+  }
+
+  joinDebateTeam(team: Team, currentUser: User): void {
+    if (!team.members) {
+      team.members = [];
+      team.members.push(currentUser);
+
+      return;
+    }
+
+    if (team.members.includes(currentUser)) {
+      this.userService.removeUser(team.members, currentUser);
+    } else {
+      team.members.push(currentUser);
+    }
+  }
+
+  switchTeams(debate: Debate, user: User, isTeam1: boolean) {
+    if (isTeam1) {
+      this.userService.removeUser(debate.team1.members, user);
+      debate.team2.members.push(user);
+    } else if (debate.team2.members.includes(user)) {
+      this.userService.removeUser(debate.team2.members, user);
+      debate.team1.members.push(user);
+    } else {
+      console.log('could not switch teams user is not a member');
+    }
   }
 }

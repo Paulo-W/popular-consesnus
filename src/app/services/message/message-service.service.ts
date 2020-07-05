@@ -1,20 +1,21 @@
 import {Injectable} from '@angular/core';
 import {Message} from '../../interfaces/Message';
 import {User} from '../../interfaces/user';
+import {UserService} from '../user/user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MessageServiceService {
 
-  constructor() {
+  constructor(private userService: UserService) {
   }
 
   likeMessage(message: Message, currentUser: User): void {
     message.likeUsers = this.vote(message.likeUsers, currentUser);
 
     if (message.dislikeUsers?.includes(currentUser)) {
-      this.removeUser(message.dislikeUsers, currentUser);
+      this.userService.removeUser(message.dislikeUsers, currentUser);
     }
   }
 
@@ -22,7 +23,7 @@ export class MessageServiceService {
     message.dislikeUsers = this.vote(message.dislikeUsers, currentUser);
 
     if (message.likeUsers?.includes(currentUser)) {
-      this.removeUser(message.likeUsers, currentUser);
+      this.userService.removeUser(message.likeUsers, currentUser);
     }
   }
 
@@ -35,21 +36,11 @@ export class MessageServiceService {
     }
 
     if (array.includes(currentUser)) {
-      this.removeUser(array, currentUser);
+      this.userService.removeUser(array, currentUser);
     } else {
       array.push(currentUser);
     }
 
     return array;
   }
-
-  private removeUser(array: User[], currentUser: User) {
-    const index = array.indexOf(currentUser);
-
-    if (index > -1) {
-      array.splice(index, 1);
-      return array;
-    }
-  }
-
 }
