@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {User} from '../../interfaces/user';
+import {User} from '../../interfaces/User';
 import {USERS} from '../../mock/mock-user';
 import {Observable, of} from 'rxjs';
 import {Channel} from '../../interfaces/Channel';

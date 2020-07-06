@@ -2,8 +2,9 @@ import {Component, Input, OnInit} from '@angular/core';
 import {faPencilAlt, faSyncAlt, faUser} from '@fortawesome/free-solid-svg-icons';
 import {Debate} from '../../../interfaces/Debate';
 import {UserService} from '../../../services/user/user.service';
-import {User} from '../../../interfaces/user';
+import {User} from '../../../interfaces/User';
 import {DebateService} from '../../../services/debate/debate.service';
+import {TeamModel} from '../../../interfaces/TeamModel';
 
 
 @Component({
@@ -14,7 +15,8 @@ import {DebateService} from '../../../services/debate/debate.service';
 export class ChatBodyComponent implements OnInit {
 
   @Input() debate: Debate;
-  user: User;
+  @Input() user: User;
+  @Input() memberState: TeamModel;
 
   faPencil = faPencilAlt;
   faUser = faUser;
@@ -26,30 +28,17 @@ export class ChatBodyComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getUser();
-  }
-
-  getUser(): void {
-    this.user = this.userService.getCurrentUser();
-  }
-
-  isMember(): boolean {
-    return this.debate.team1.members.includes(this.user) || this.debate.team2.members.includes(this.user);
-  }
-
-  isTeam1() {
-    return this.debate.team1.members.includes(this.user);
   }
 
   joinTeam1() {
-    this.debateService.joinDebateTeam(this.debate.team1, this.user);
+    this.debateService.joinDebateTeam(this.debate, this.debate.team1, this.user);
   }
 
   joinTeam2() {
-    this.debateService.joinDebateTeam(this.debate.team2, this.user);
+    this.debateService.joinDebateTeam(this.debate, this.debate.team2, this.user);
   }
 
   switchTeams() {
-    this.debateService.switchTeams(this.debate, this.user, this.isTeam1());
+    this.debateService.switchTeams(this.debate, this.user, this.memberState.team);
   }
 }

@@ -1,11 +1,62 @@
+@import "src/styles"
+
 #chat-text-box
   padding: 10px
   position: fixed
   bottom: 0
-  left: 15%
-  width: 85%
   height: 8%
-  background-color: #f9f9f9
   z-index: 9999999
   .input-group
     margin-top: 20px
+
+.half-width
+  left: 15%
+  width: 85%
+
+.full-width
+  left: 0
+  width: 100%
+
+.input-group
+  margin-top: 10px !important
+  input
+    min-height: 45px
+  .input-group-prepend, .input-group-append
+    width: 5%
+    button
+      width: 100%
+      max-height: 45px
+      mat-icon
+        padding-top: 2px
+
+.blue-team-border
+  border-top: 4px solid $blue-team-color
+  ::placeholder
+    color: darken($blue-team-color, 8%)
+  .input-group
+    button
+      color: white
+      border: none
+      background-color: $blue-team-color
+      &:hover
+        background-color: lighten($blue-team-color, 5%)
+    input
+      border-top: solid 2px $blue-team-color
+      border-bottom: solid 2px $blue-team-color
+
+.red-team-border
+  border-top: 3px solid lighten($red-team-color, 2%)
+  ::placeholder
+    color: darken($red-team-color, 6%)
+  .input-group
+    button
+      color: white
+      border: none
+      background-color: $red-team-color
+      &:hover
+        background-color: lighten($red-team-color, 5%)
+    button, input
+      border-top: solid 2px $red-team-color
+      border-bottom: solid 2px $red-team-color
+
+

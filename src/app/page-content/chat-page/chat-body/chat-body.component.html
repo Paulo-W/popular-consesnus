@@ -2,14 +2,14 @@
   <div class="not-member flex-center-left full-container">
     <div class="left full-container flex-center-left">
       <button type="button" class="btn plain-text heading-block" [ngClass]="{
-      'isNotMemberBlue': !isMember(),
-      'isMemberBlue': isMember()
+      'isNotMemberBlue': !memberState.isMember,
+      'isMemberBlue': memberState.isMember
       }">
-        <div *ngIf="!isMember(); else team1" (click)="joinTeam1()" class="full-container flex-center">
+        <div *ngIf="!memberState.isMember; else team1" (click)="joinTeam1()" class="full-container flex-center">
           <fa-icon [icon]="faPencil" ></fa-icon> Join Team
         </div>
         <ng-template #team1>
-          <div *ngIf="isTeam1(); else opposingTeam" class="my-team">
+          <div *ngIf="memberState.team; else opposingTeam" class="my-team">
             <fa-icon [icon]="faUser"></fa-icon>
             My Team
           </div>
@@ -18,14 +18,14 @@
     </div>
     <div class="right full-container flex-center-right">
       <button type="button" class="btn plain-text heading-block" [ngClass]="{
-      'isNotMemberRed': !isMember(),
-      'isMemberRed': isMember()
+      'isNotMemberRed': !memberState.isMember,
+      'isMemberRed': memberState.isMember
       }">
-        <div *ngIf="!isMember(); else team2" (click)="joinTeam2()" class="full-container flex-center">
+        <div *ngIf="!memberState.isMember; else team2" (click)="joinTeam2()" class="full-container flex-center">
           <fa-icon [icon]="faPencil" class="right-icon"></fa-icon> Join Team
         </div>
         <ng-template #team2>
-          <div *ngIf="!isTeam1(); else opposingTeam" class="my-team">
+          <div *ngIf="!memberState.team; else opposingTeam" class="my-team">
             <fa-icon [icon]="faUser"></fa-icon>
             My Team
           </div>

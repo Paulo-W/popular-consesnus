@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Location} from '@angular/common';
 import {ChannelService} from '../../services/channel/channel.service';
 import {Channel} from '../../interfaces/Channel';
-import {User} from '../../interfaces/user';
+import {User} from '../../interfaces/User';
 import {Router} from '@angular/router';
 
 @Component({

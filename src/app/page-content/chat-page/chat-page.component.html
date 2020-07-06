@@ -45,10 +45,10 @@
   </div>
 </mat-card>
 
-<div>
-  <app-chat-body [debate]="debate"></app-chat-body>
+<div *ngIf="debate && user && memberState">
+  <app-chat-body [debate]="debate" [user]="user" [memberState]="memberState"></app-chat-body>
 </div>
 
-<div>
-  <app-chat-footer></app-chat-footer>
+<div *ngIf="user && memberState">
+  <app-chat-footer [debate]="debate" [user]="user" [memberState]="memberState"></app-chat-footer>
 </div>

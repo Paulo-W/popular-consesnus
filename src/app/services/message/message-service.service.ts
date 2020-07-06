@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Message} from '../../interfaces/Message';
-import {User} from '../../interfaces/user';
+import {User} from '../../interfaces/User';
 import {UserService} from '../user/user.service';
 
 @Injectable({

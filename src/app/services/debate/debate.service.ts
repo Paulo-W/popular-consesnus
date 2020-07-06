@@ -1,10 +1,11 @@
 import {Injectable} from '@angular/core';
 import {Debate, DebateInfo} from '../../interfaces/Debate';
-import {Observable, of} from 'rxjs';
+import {Observable, of, Subject} from 'rxjs';
 import {UserService} from '../user/user.service';
 import {DEBATE} from '../../mock/mock-debate';
 import {Team} from '../../interfaces/Team';
-import {User} from '../../interfaces/user';
+import {User} from '../../interfaces/User';
+import {TeamModel} from '../../interfaces/TeamModel';
 
 @Injectable({
   providedIn: 'root'
@@ -15,9 +16,25 @@ export class DebateService {
     private userService: UserService) {
   }
 
+  public userMember = new Subject<TeamModel>();
+
   saveDebate(debate: Debate): Observable<boolean> {
     return of(this.saveDebateValue(debate));
   }
+
+  updateUserState(debate: Debate, user: User) {
+    this.userMember.next(this.isMember(debate, user));
+  }
+
+  private isMember(debate: Debate, user: User): TeamModel {
+    if (debate.team1.members.includes(user)) {
+      return new TeamModel(true, true);
+    } else if (debate.team2.members.includes(user)) {
+      return new TeamModel(true, false);
+    }
+    return new TeamModel(false, false);
+  }
+
 
   private saveDebateValue(debate: Debate): boolean {
     debate.createdBy = this.userService.getCurrentUser();
@@ -46,7 +63,7 @@ export class DebateService {
     return of(DEBATE.find(debate => debate.id === id));
   }
 
-  joinDebateTeam(team: Team, currentUser: User): void {
+  joinDebateTeam(debate: Debate, team: Team, currentUser: User): void {
     if (!team.members) {
       team.members = [];
       team.members.push(currentUser);
@@ -59,6 +76,8 @@ export class DebateService {
     } else {
       team.members.push(currentUser);
     }
+
+    this.updateUserState(debate, currentUser);
   }
 
   switchTeams(debate: Debate, user: User, isTeam1: boolean) {
@@ -71,5 +90,7 @@ export class DebateService {
     } else {
       console.log('could not switch teams user is not a member');
     }
+
+    this.updateUserState(debate, user);
   }
 }

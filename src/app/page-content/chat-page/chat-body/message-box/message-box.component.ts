@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {faComment, faMinus, faPlus} from '@fortawesome/free-solid-svg-icons';
 import {Team} from '../../../../interfaces/Team';
 import {Message} from '../../../../interfaces/Message';
-import {User} from '../../../../interfaces/user';
+import {User} from '../../../../interfaces/User';
 import {Observable, of} from 'rxjs';
 import {MessageServiceService} from '../../../../services/message/message-service.service';
 

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {faBook, faBookOpen, faGraduationCap} from '@fortawesome/free-solid-svg-icons';
 import {UserService} from '../services/user/user.service';
-import {User} from '../interfaces/user';
+import {User} from '../interfaces/User';
 import {Observable} from 'rxjs';
 import {Router} from '@angular/router';
 
