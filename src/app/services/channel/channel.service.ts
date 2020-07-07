@@ -33,7 +33,7 @@ export class ChannelService {
 
   searchChannel(term: string): Observable<Channel[]> {
     if (!term.trim()) {
-      // if not search term, return empty hero array
+      // if not search term, return full array
       this.setChannelMember(CHANNELS);
       return of(CHANNELS);
     }

@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {faComment, faMinus, faPlus} from '@fortawesome/free-solid-svg-icons';
 import {Team} from '../../../../interfaces/Team';
-import {Message} from '../../../../interfaces/Message';
+import {MessageInfo} from '../../../../interfaces/MessageInfo';
 import {User} from '../../../../interfaces/User';
 import {Observable, of} from 'rxjs';
 import {MessageServiceService} from '../../../../services/message/message-service.service';
@@ -16,7 +16,7 @@ export class MessageBoxComponent implements OnInit {
   @Input() team: Team;
   @Input() user: User;
 
-  messages: Observable<Message[]>;
+  messages: Observable<MessageInfo[]>;
 
   faPlus = faPlus;
   faMinus = faMinus;
@@ -33,30 +33,30 @@ export class MessageBoxComponent implements OnInit {
     return false;
   }
 
-  getLikes(message: Message): number {
+  getLikes(message: MessageInfo): number {
     const likes = message.likeUsers?.length || 0;
     const dislikes = message.dislikeUsers?.length || 0;
 
     return likes - dislikes;
   }
 
-  observeMessages(): Observable<Message[]> {
+  observeMessages(): Observable<MessageInfo[]> {
     return of(this.team.messages);
   }
 
-  likeMessage(message: Message) {
+  likeMessage(message: MessageInfo) {
     this.messageService.likeMessage(message, this.user);
   }
 
-  dislikeMessage(message: Message) {
+  dislikeMessage(message: MessageInfo) {
     this.messageService.dislikeMessage(message, this.user);
   }
 
-  isLiked(message: Message): boolean {
+  isLiked(message: MessageInfo): boolean {
     return message.likeUsers?.includes(this.user) || false;
   }
 
-  isDisliked(message: Message): boolean {
+  isDisliked(message: MessageInfo): boolean {
     return message.dislikeUsers?.includes(this.user) || false;
   }
 }

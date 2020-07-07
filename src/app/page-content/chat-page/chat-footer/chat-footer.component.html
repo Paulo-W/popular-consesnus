@@ -1,20 +1,25 @@
-<div id="chat-text-box" [class.mat-elevation-z4]="true" [ngClass]="{
+<form (ngSubmit)="onSubmit()">
+  <div id="chat-text-box" [class.mat-elevation-z4]="true" [ngClass]="{
   'full-width': sideNavClosed,
   'half-width': !sideNavClosed,
   'blue-team-border': memberState.isMember && memberState.team,
    'red-team-border': memberState.isMember && !memberState.team
 }">
-  <div class="input-group">
-    <div class="input-group-prepend">
-      <button [disabled]="!memberState.isMember" class="btn btn-outline-secondary" type="button">
-        <span><fa-icon [icon]="faUpload"></fa-icon></span>
-      </button>
-    </div>
-    <input [disabled]="!memberState.isMember" type="text" class="form-control plain-text" [placeholder]="getPlaceHolder()">
-    <div class="input-group-append">
-      <button [disabled]="!memberState.isMember" class="btn btn-outline-secondary" type="button">
-        <mat-icon>send</mat-icon>
-      </button>
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <button [disabled]="!memberState.isMember" class="btn btn-outline-secondary" type="button">
+          <span><fa-icon [icon]="faUpload"></fa-icon></span>
+        </button>
+      </div>
+      <input [disabled]="!memberState.isMember" type="text" class="form-control plain-text"
+             [placeholder]="getPlaceHolder()"
+             [(ngModel)]="message" [name]="'Debate Title'">
+      <div class="input-group-append">
+        <button [disabled]="!memberState.isMember" type="submit" class="btn btn-outline-secondary">
+          <mat-icon>send</mat-icon>
+        </button>
+      </div>
     </div>
   </div>
-</div>
+</form>
+

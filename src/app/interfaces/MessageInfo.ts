@@ -1,8 +1,8 @@
 import {User} from './User';
 
 
-export interface Message {
-  id: number;
+export interface MessageInfo {
+  id?: number;
   user: User;
   date: Date;
   content: string;

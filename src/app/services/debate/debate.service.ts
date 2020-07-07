@@ -6,6 +6,7 @@ import {DEBATE} from '../../mock/mock-debate';
 import {Team} from '../../interfaces/Team';
 import {User} from '../../interfaces/User';
 import {TeamModel} from '../../interfaces/TeamModel';
+import {MessageInfo} from '../../interfaces/MessageInfo';
 
 @Injectable({
   providedIn: 'root'
@@ -92,5 +93,22 @@ export class DebateService {
     }
 
     this.updateUserState(debate, user);
+  }
+
+  postMessage(message: string, user: User, team: Team) {
+    const newMessage: MessageInfo = {
+      content: message,
+      date: new Date(),
+      dislikeUsers: [],
+      likeUsers: [],
+      likes: 0,
+      user
+    };
+
+    if (!team.messages) {
+      team.messages = [];
+    }
+
+    team.messages.push(newMessage);
   }
 }

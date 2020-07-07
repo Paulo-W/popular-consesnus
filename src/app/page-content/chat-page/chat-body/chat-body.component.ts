@@ -5,6 +5,7 @@ import {UserService} from '../../../services/user/user.service';
 import {User} from '../../../interfaces/User';
 import {DebateService} from '../../../services/debate/debate.service';
 import {TeamModel} from '../../../interfaces/TeamModel';
+import {Team} from '../../../interfaces/Team';
 
 
 @Component({
@@ -41,4 +42,9 @@ export class ChatBodyComponent implements OnInit {
   switchTeams() {
     this.debateService.switchTeams(this.debate, this.user, this.memberState.team);
   }
+
+  isOpposingMember(team: Team): boolean {
+    return this.memberState.isMember && !team.members.includes(this.user);
+  }
+
 }

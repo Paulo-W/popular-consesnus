@@ -1,9 +1,9 @@
 import {User} from './User';
-import {Message} from './Message';
+import {MessageInfo} from './MessageInfo';
 
 export interface Team {
   name: string;
   team: number;
   members: User[];
-  messages?: Message[];
+  messages?: MessageInfo[];
 }
