@@ -41,8 +41,8 @@
         <section class="flex-center-left full-container">
           <div class="debate-card-votes-block full-container flex-center-left">
             <div class="number-container">
-              <div class="plain-text-xxx percentage">45%</div>
-              <div class="plain-text-xx number-of-votes">12</div>
+              <div class="plain-text-xxx percentage">{{debate.team1Percentage}}%</div>
+              <div class="plain-text-xx number-of-votes">{{debate.team1Votes}}</div>
             </div>
           </div>
           <div class="debate-content-container full-container flex-center">
@@ -59,8 +59,8 @@
           </div>
           <div class="debate-card-votes-block full-container flex-center-right">
             <div class="number-container">
-              <div class="plain-text-xxx percentage">45%</div>
-              <div class="plain-text-xx number-of-votes">12</div>
+              <div class="plain-text-xxx percentage">{{debate.team2Percentage}}%</div>
+              <div class="plain-text-xx number-of-votes">{{debate.team2Votes}}</div>
             </div>
           </div>
         </section>
@@ -73,6 +73,8 @@
             </div>
             <div class="debate-bar full-container">
               <div class="blue-bar">
+                <div class="blue-bar-center" [ngStyle]="{width: debate.team1Percentage + '%'}">
+                </div>
               </div>
             </div>
           </div>
@@ -90,6 +92,8 @@
             </div>
             <div class="debate-bar full-container flex-top-right">
               <div class="red-bar">
+                <div class="red-bar-center" [ngStyle]="{width: debate.team2Percentage + '%'}">
+                </div>
               </div>
             </div>
           </div>
