@@ -17,6 +17,8 @@ export class ChatPageComponent implements OnInit {
   debate: Debate;
   memberState: TeamModel;
   user: User;
+  daysRemaining: number;
+  isNoLongerOpen = true;
 
   constructor(
     private route: ActivatedRoute,
@@ -29,6 +31,7 @@ export class ChatPageComponent implements OnInit {
     this.getUser();
     this.subscribeToTeamState();
     this.setTeamState();
+    this.daysRemaining = this.getDateLeft();
   }
 
   getDebate(): void {
@@ -60,5 +63,11 @@ export class ChatPageComponent implements OnInit {
 
   getCurrentMembers(): number {
     return (this.debate.team1.members?.length || 0) + (this.debate.team2.members?.length || 0);
+  }
+
+  getDateLeft(): number {
+    const daysLeft = this.debateService.getDaysLeft(this.debate);
+    daysLeft === 0 ? this.isNoLongerOpen = true : this.isNoLongerOpen = false;
+    return daysLeft;
   }
 }

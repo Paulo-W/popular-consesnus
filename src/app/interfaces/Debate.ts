@@ -23,8 +23,9 @@ export class DebateInfo {
   channel: string;
   title: string;
   description: string;
-  date: Date;
-  days: number;
+  startDate: Date;
+  endDate: Date;
+  daysLeft: number;
   team1Name: string;
   team2Name: string;
   isTeam1: boolean;
@@ -41,8 +42,9 @@ export class DebateInfo {
     this.channel = debate.channel.name;
     this.title = debate.title;
     this.description = debate.description;
-    this.date = debate.date;
-    this.days = new Date().getDate() - debate.days;
+    this.startDate = debate.date;
+    this.endDate = this.getEndDate(debate.days);
+    this.daysLeft = this.mapRemaining();
     this.team1Name = debate.team1.name;
     this.team2Name = debate.team2.name;
     this.isTeam1 = debate.team1.members.includes(currentUser);
@@ -71,5 +73,28 @@ export class DebateInfo {
     }
 
     return (teamNumber / base) * 100;
+  }
+
+  private getEndDate(days: number): Date {
+    const copy = new Date(Number(this.startDate));
+    copy.setDate(copy.getDate() + days);
+
+    return copy;
+  }
+
+  mapRemaining(): number {
+    const daysLeft = this.endDate.getDate() - this.startDate.getDate();
+    // console.log(daysLeft);
+
+    if (daysLeft > 0) {
+      return daysLeft;
+    } else {
+      this.triggerFunction();
+      return 0;
+    }
+  }
+
+  private triggerFunction() {
+    // remove debate
   }
 }

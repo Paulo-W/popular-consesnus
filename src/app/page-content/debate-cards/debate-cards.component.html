@@ -7,7 +7,8 @@
   </mat-card>
 </div>
 
-<div *ngFor="let debate of debates | async">
+
+<div *ngFor="let debate of debates">
   <mat-card class="debate-container" routerLink="/debate/{{debate.id}}">
     <div class="debate-card flex-column-center full-container">
       <div class="debate-card-header full-container">
@@ -23,7 +24,7 @@
             <span class="plain-text-s">
               created by: <span class="plain-text-s-accent">{{debate.createdBy}}</span>
               in channel: <span class="plain-text-s-accent">{{debate.channel}}</span>
-              on the: <span class="plain-text-s-accent">{{debate.date | date: 'dd/MM/yyyy'}}</span>
+              on the: <span class="plain-text-s-accent">{{debate.startDate | date: 'dd/MM/yyyy'}}</span>
             </span>
           </div>
           <div class="debate-card-top-right-corner plain-text-red">
@@ -80,10 +81,15 @@
           </div>
           <div class="debate-card-center flex-center">
             <div class="time-block full-container">
-              <span class="text-header-x"> {{debate.days}} </span><span class="text-header-cards">Days</span>
-              <div class="text-header-cards">
-                Remaining
+              <div *ngIf="debate.daysLeft !== 0; else debateOver">
+                <span class="text-header-x"> {{debate.daysLeft}} </span><span class="text-header-cards">Days</span>
+                <div class="text-header-cards">
+                  Remaining
+                </div>
               </div>
+              <ng-template #debateOver>
+                <div class="plain-text-red">This debate has been completed</div>
+              </ng-template>
             </div>
           </div>
           <div class="debate-card-bottom-right-corner full-container flex-column-right">

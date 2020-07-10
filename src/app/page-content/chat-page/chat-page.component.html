@@ -33,9 +33,14 @@
           <div class="chat-title-left-corner plain-text-s">
             Seen by: <span class="plain-text-s-accent">Number</span>
           </div>
-          <div class="chat-title-center plain-text-s">
-            {{debate.days}} Days remaining
+          <div *ngIf="!isNoLongerOpen; else closedDebate" class="chat-title-center plain-text">
+            {{daysRemaining}} Days remaining
           </div>
+          <ng-template #closedDebate class="plain-text-red">
+            <div class="plain-text-red">
+              This debate is complete
+            </div>
+          </ng-template>
           <div class="chat-title-right-corner plain-text-s">
             Members In Current Debate: <span class="plain-text-s-accent">{{getCurrentMembers()}}</span>
           </div>
@@ -46,9 +51,10 @@
 </mat-card>
 
 <div *ngIf="debate && user && memberState">
-  <app-chat-body [debate]="debate" [user]="user" [memberState]="memberState"></app-chat-body>
+  <app-chat-body [debate]="debate" [user]="user" [memberState]="memberState" [finished]="isNoLongerOpen"></app-chat-body>
 </div>
 
 <div *ngIf="user && memberState">
-  <app-chat-footer [debate]="debate" [user]="user" [memberState]="memberState"></app-chat-footer>
+  <app-chat-footer [debate]="debate" [user]="user" [memberState]="memberState"
+                   [open]="isNoLongerOpen"></app-chat-footer>
 </div>

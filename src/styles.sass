@@ -59,6 +59,7 @@ body
   margin: 2px auto 15px
   max-width: $card-width
   height: 260px
+
   &:hover
     cursor: pointer
     left: 1px
@@ -170,7 +171,7 @@ $text-color: #6C757D
   @include header-text($text-size-gigantic, white)
 
 .plain-text
- @include plain-text($text-size-regular, $text-color)
+  @include plain-text($text-size-regular, $text-color)
 
 .plain-text-blue
   @include plain-text($text-size-regular, darken($blue-team-color, 10%))
@@ -234,18 +235,23 @@ input
 //########################################################################################
 .submit-container
   .mat-button
-    width: 15%!important
-    font-family: centuary-gothic, sans-serif!important
-    font-size: $text-size-regular!important
+    width: 15% !important
+    font-family: centuary-gothic, sans-serif !important
+    font-size: $text-size-regular !important
     margin: 10px 10px
+
     &:hover
       left: 2px
+
   .success:hover
     background: lighten($primary-color, 20%)
+
   .cancel:hover
     background: lighten($warning-color, 20%)
 
-input:focus
+input:focus, button:focus,
+input:focus, select:focus,
+a:focus
   outline: none !important
 
 input, select

@@ -53,7 +53,7 @@ export const DEBATE: Debate[] = [
       ]
     },
     tag: DebateTags.JustForFun,
-    days: 2,
+    days: 1,
     date: new Date(),
     channel: CHANNELS[0]
   },
@@ -101,7 +101,7 @@ export const DEBATE: Debate[] = [
       ]
     },
     tag: DebateTags.JustForFun,
-    days: 2,
+    days: 3,
     date: new Date(),
     channel: CHANNELS.find(it => it.name === 'Politics')
   },
@@ -125,7 +125,7 @@ export const DEBATE: Debate[] = [
       ]
     },
     tag: DebateTags.JustForFun,
-    days: 2,
+    days: 0,
     date: new Date(),
     channel: CHANNELS.find(it => it.name === 'Science')
   }

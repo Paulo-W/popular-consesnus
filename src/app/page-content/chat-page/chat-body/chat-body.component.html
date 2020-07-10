@@ -1,7 +1,7 @@
 <div class="join-container">
   <div class="not-member flex-center-left full-container">
     <div class="left full-container flex-center-left">
-      <button type="button" class="btn plain-text heading-block" [ngClass]="{
+      <button [disabled]="finished" type="button" class="btn plain-text heading-block" [ngClass]="{
       'isNotMemberBlue': !memberState.isMember,
       'isMemberBlue': memberState.isMember
       }">
@@ -18,7 +18,7 @@
       </button>
     </div>
     <div class="right full-container flex-center-right">
-      <button type="button" class="btn plain-text heading-block" [ngClass]="{
+      <button [disabled]="finished" type="button" class="btn plain-text heading-block" [ngClass]="{
       'isNotMemberRed': !memberState.isMember,
       'isMemberRed': memberState.isMember
       }">

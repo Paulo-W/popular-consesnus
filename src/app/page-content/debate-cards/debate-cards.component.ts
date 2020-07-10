@@ -15,7 +15,7 @@ export class DebateCardsComponent implements OnInit {
   faPlusCircle = faPlusCircle;
   fabBookMark = faBookmark;
 
-  debates: Observable<DebateInfo[]>;
+  debates: DebateInfo[];
 
   constructor(private debateService: DebateService) {
   }
@@ -25,6 +25,6 @@ export class DebateCardsComponent implements OnInit {
   }
 
   getDebates() {
-    this.debates = this.debateService.getDebates();
+    this.debates = this.debateService.getUserDebates();
   }
 }

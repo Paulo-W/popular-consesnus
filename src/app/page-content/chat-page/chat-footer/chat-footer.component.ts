@@ -16,6 +16,7 @@ export class ChatFooterComponent implements OnInit {
   @Input() memberState: TeamModel;
   @Input() user: User;
   @Input() debate: Debate;
+  @Input() open: boolean;
 
   faUpload = faUpload;
   sideNavClosed: boolean;

@@ -42,23 +42,18 @@ export class DebateService {
     debate.id = DEBATE.length + 1;
     debate.team1.members = [debate.createdBy];
     debate.team2.members = [];
+    debate.date = new Date();
     DEBATE.push(debate);
 
     return true;
   }
 
-  getDebates(): Observable<DebateInfo[]> {
-    return of(this.getUserDebates());
-  }
-
-  private getUserDebates(): DebateInfo[] {
+  getUserDebates(): DebateInfo[] {
     const user = this.userService.getCurrentUser();
-    console.log();
     return DEBATE
       .filter(it => user.channels.includes(it.channel.name))
       .map(it => new DebateInfo(it, user));
   }
-
 
   getDebateById(id: number): Observable<Debate> {
     return of(DEBATE.find(debate => debate.id === id));
@@ -110,5 +105,13 @@ export class DebateService {
     }
 
     team.messages.push(newMessage);
+  }
+
+  getDaysLeft(debate: Debate): number {
+    const endDate = new Date(Number(debate.date));
+    endDate.setDate(endDate.getDate() + debate.days);
+
+    const remaining = endDate.getDate() - debate.date.getDate();
+    return remaining > 0 ? remaining : 0;
   }
 }

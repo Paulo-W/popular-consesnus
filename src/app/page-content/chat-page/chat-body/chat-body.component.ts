@@ -18,6 +18,7 @@ export class ChatBodyComponent implements OnInit {
   @Input() debate: Debate;
   @Input() user: User;
   @Input() memberState: TeamModel;
+  @Input() finished: boolean;
 
   faPencil = faPencilAlt;
   faUser = faUser;
@@ -32,11 +33,15 @@ export class ChatBodyComponent implements OnInit {
   }
 
   joinTeam1() {
-    this.debateService.joinDebateTeam(this.debate, this.debate.team1, this.user);
+    if (!this.finished) {
+      this.debateService.joinDebateTeam(this.debate, this.debate.team1, this.user);
+    }
   }
 
   joinTeam2() {
-    this.debateService.joinDebateTeam(this.debate, this.debate.team2, this.user);
+    if (!this.finished) {
+      this.debateService.joinDebateTeam(this.debate, this.debate.team2, this.user);
+    }
   }
 
   switchTeams() {
