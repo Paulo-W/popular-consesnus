@@ -6,6 +6,9 @@ import {Location} from '@angular/common';
 import {Router} from '@angular/router';
 import {Channel} from '../../interfaces/Channel';
 import {ChannelService} from '../../services/channel/channel.service';
+import {faBookmark} from '@fortawesome/free-solid-svg-icons';
+import {User} from '../../interfaces/User';
+import {UserService} from '../../services/user/user.service';
 
 @Component({
   selector: 'app-create-debate',
@@ -14,7 +17,9 @@ import {ChannelService} from '../../services/channel/channel.service';
 })
 export class CreateDebateComponent implements OnInit {
 
+  fabBookMark = faBookmark;
   channels: Channel[];
+  user: User;
 
   createDebateForm = new FormGroup({
     title: new FormControl('', [
@@ -50,6 +55,7 @@ export class CreateDebateComponent implements OnInit {
   });
 
   constructor(private debateService: DebateService,
+              private userService: UserService,
               private location: Location,
               private channelService: ChannelService,
               private router: Router) {
@@ -57,7 +63,11 @@ export class CreateDebateComponent implements OnInit {
 
   ngOnInit(): void {
     this.getChannels();
+    this.getUser();
+  }
 
+  getUser() {
+    this.user = this.userService.getCurrentUser();
   }
 
   getChannels() {
@@ -99,15 +109,15 @@ export class CreateDebateComponent implements OnInit {
     return this.createDebateForm.get('label');
   }
 
-  get tag() {
-    return this.createDebateForm.get('tag');
-  }
-
   get days() {
     return this.createDebateForm.get('days');
   }
 
   get channel() {
     return this.createDebateForm.get('channel');
+  }
+
+  getDate() {
+    return new Date();
   }
 }

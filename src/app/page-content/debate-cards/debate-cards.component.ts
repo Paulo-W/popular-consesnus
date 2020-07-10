@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {faBookmark, faPlusCircle} from '@fortawesome/free-solid-svg-icons';
 import {DebateService} from '../../services/debate/debate.service';
 import {DebateInfo} from '../../interfaces/Debate';
-import {Observable} from 'rxjs';
 
 
 @Component({

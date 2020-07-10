@@ -42,3 +42,15 @@ mat-radio-button
 
 option
   padding: 3px
+
+.placeholder-text-h
+  @include header-text($text-size-large, lighten($text-color, 10%))
+
+.placeholder-text
+  @include plain-text($text-size-small, lighten($text-color, 30%))
+
+.placeholder-text-hp
+  @include header-text($text-size-regular, lighten($text-color, 30%))
+
+.placeholder-text-plain
+  @include plain-text($text-size-regular, lighten($text-color, 30%))

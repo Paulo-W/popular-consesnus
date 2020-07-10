@@ -120,8 +120,115 @@
     </section>
   </mat-card>
 
+
   <mat-card class="debate-container">
-    value: {{createDebateForm.value | json}}
+    <div class="simple-debate-card-structure flex-column-center full-container">
+      <div class="debate-card-header full-container">
+        <!--      header-row    -->
+        <section class="flex-center-left full-container">
+          <div class="debate-card-top-left-corner plain-text-blue">
+            <fa-icon [icon]="fabBookMark"></fa-icon>
+            <span class="right-icon">Joined</span>
+          </div>
+          <div class="debate-card-top-center">
+            <span class="plain-text-s">
+              created by: <span class="plain-text-s-accent">{{user.username}}</span>
+              in channel:
+              <span class="plain-text-s-accent" *ngIf="channel.value; else noChannel">
+                {{channel.value.name}}
+              </span>
+              <ng-template #noChannel>
+                  <span class="placeholder-text">channel</span>
+              </ng-template>
+              on the: <span class="plain-text-s-accent">{{getDate() | date: 'dd/MM/yyyy'}}</span>
+            </span>
+          </div>
+          <div class="debate-card-top-right-corner plain-text-red">
+          </div>
+        </section>
+      </div>
+
+      <mat-divider [inset]="true" style="width: 98%"></mat-divider>
+
+      <div class="debate-card-content full-container">
+        <section class="flex-center-left full-container">
+          <div class="debate-card-votes-block full-container flex-center-left">
+            <div class="number-container">
+              <div class="plain-text-xxx percentage">0%</div>
+              <div class="plain-text-xx number-of-votes">0</div>
+            </div>
+          </div>
+          <div class="debate-content-container full-container flex-center">
+            <div>
+              <div class="full-container center-text">
+                      <span class="text-header-cards" *ngIf="title.value; else noTitle">
+                        {{title.value | titlecase}}
+                      </span>
+              </div>
+              <ng-template #noTitle>
+                <span class="placeholder-text-h">Preview Your Debate Here</span>
+              </ng-template>
+              <div class="full-container">
+                <div class="center-text plain-text" *ngIf="description.value; else noDescription">
+                  {{description.value}}
+                </div>
+                <ng-template #noDescription>
+                  <div class="placeholder-text-plain center-text">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua.
+                    Ut enim ad minim veniam...
+                  </div>
+                </ng-template>
+              </div>
+            </div>
+          </div>
+          <div class="debate-card-votes-block full-container flex-center-right">
+            <div class="number-container">
+              <div class="plain-text-xxx percentage">0%</div>
+              <div class="plain-text-xx number-of-votes">0</div>
+            </div>
+          </div>
+        </section>
+      </div>
+      <div class="debate-card-footer full-container">
+        <section class="flex-bottom-left full-container">
+          <div class="debate-card-bottom-left-corner full-container">
+            <div class="debate-team-name-left text-header-plain" *ngIf="team1Name.value; else noTeam1Name">
+              {{team1Name.value | titlecase}}
+            </div>
+            <ng-template #noTeam1Name>
+              <div class="debate-team-name-left placeholder-text-hp">Team 1 Name</div>
+            </ng-template>
+            <div class="debate-bar full-container">
+              <div class="blue-bar">
+              </div>
+            </div>
+          </div>
+          <div class="debate-card-center flex-center">
+            <div class="time-block full-container">
+              <div>
+                <span class="text-header-x"> {{days.value}} </span><span class="text-header-cards">Days</span>
+                <div class="text-header-cards">
+                  Remaining
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="debate-card-bottom-right-corner full-container flex-column-right">
+            <div class="debate-team-name-right text-header-plain" *ngIf="team2Name.value; else noTeam2Name">
+              {{team2Name.value | titlecase}}
+            </div>
+            <ng-template #noTeam2Name>
+              <div class="debate-team-name-left placeholder-text-hp">Team 2 Name</div>
+            </ng-template>
+            <div class="debate-bar full-container flex-top-right">
+              <div class="red-bar">
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
   </mat-card>
 
   <div class="submit-container flex-center button-text">

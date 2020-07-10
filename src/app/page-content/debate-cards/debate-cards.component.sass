@@ -11,51 +11,17 @@
 .create-card:hover
   background-color: $secondary-color-hover
 
+.debate-container:hover
+  cursor: pointer
+  left: 1px
+
 mat-divider
   width: 90%
-
-.debate-card
-  .debate-card-header
-    flex: 1
-    .debate-card-top-left-corner
-      flex: 1
-    .debate-card-top-center
-      text-align: center
-      flex: 4
-    .debate-card-top-right-corner
-      text-align: right
-      flex: 1
-  .debate-card-content
-    flex: 4
-    .debate-content-container
-      flex: 7
-      .debate-sub-header
-        flex: 3
-      .debate-content
-        flex: 5
-    .debate-card-votes-block
-      flex: 1
-  .debate-card-footer
-    flex: 1
-    .debate-card-bottom-left-corner
-      flex: 4
-    .debate-card-center
-      flex: 1
-      text-align: center
-    .debate-card-bottom-right-corner
-      flex: 4
-      text-align: right
 
 .time-block
   span
     span
       font-size: $text-size-small
-
-.percentage
-  margin-top: 20px
-.number-of-votes
-  text-align: center
-  margin-top: 20px
 
 mat-card-content
   text-align: center
@@ -63,19 +29,10 @@ mat-card-content
 mat-card
   padding: 5px 15px
 
-button:focus
-  outline: 0
-  border: none
-
-.blue-bar
-  @include voting-bar($blue-team-color)
 
 .blue-bar-center
   min-height: 100%
   background-color: $blue-team-color
-
-.red-bar
-  @include voting-bar($red-team-color)
 
 .red-bar-center
   min-height: 100%
