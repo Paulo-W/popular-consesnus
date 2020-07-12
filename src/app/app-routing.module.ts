@@ -5,6 +5,8 @@ import {ChannelsListPageComponent} from './page-content/channels-list-page/chann
 import {CreateChannelComponent} from './page-content/create-channel/create-channel.component';
 import {CreateDebateComponent} from './page-content/create-debate/create-debate.component';
 import {ChatPageComponent} from './page-content/chat-page/chat-page.component';
+import {ChannelDetailPageComponent} from './page-content/channel-detail-page/channel-detail-page.component';
+import {MyDebatesComponent} from './page-content/my-debates/my-debates.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -12,7 +14,9 @@ const routes: Routes = [
   {path: 'channels', component: ChannelsListPageComponent},
   {path: 'create-channel', component: CreateChannelComponent},
   {path: 'create-debate', component: CreateDebateComponent},
-  {path: 'debate/:id', component: ChatPageComponent}
+  {path: 'debate/:id', component: ChatPageComponent},
+  {path: 'channel/:name', component: ChannelDetailPageComponent},
+  {path: 'my-debates', component: MyDebatesComponent}
 ];
 
 @NgModule({

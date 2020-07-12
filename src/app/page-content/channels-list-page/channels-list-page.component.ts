@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {faSearch} from '@fortawesome/free-solid-svg-icons';
+import {faReplyAll, faSearch} from '@fortawesome/free-solid-svg-icons';
 import {ChannelService} from '../../services/channel/channel.service';
 import {Channel} from '../../interfaces/Channel';
 import {UserService} from '../../services/user/user.service';
@@ -14,6 +14,7 @@ import {debounceTime, distinctUntilChanged, shareReplay, switchMap} from 'rxjs/o
 export class ChannelsListPageComponent implements OnInit {
 
   faSearch = faSearch;
+  faReplyAll = faReplyAll;
   channels: Channel[];
   searchedChannels$: Observable<Channel[]>;
   searchInput = '';

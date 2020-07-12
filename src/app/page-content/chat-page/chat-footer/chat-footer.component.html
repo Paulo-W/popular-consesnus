@@ -7,15 +7,15 @@
 }">
     <div class="input-group">
       <div class="input-group-prepend">
-        <button [disabled]="!memberState.isMember || open" class="btn btn-outline-secondary" type="button">
+        <button [disabled]="!memberState.isMember || finished" class="btn btn-outline-secondary" type="button">
           <span><fa-icon [icon]="faUpload"></fa-icon></span>
         </button>
       </div>
-      <input [disabled]="!memberState.isMember || open" type="text" class="form-control plain-text"
+      <input [disabled]="!memberState.isMember || finished" type="text" class="form-control plain-text"
              [placeholder]="getPlaceHolder()"
              [(ngModel)]="message" [name]="'Debate Title'">
       <div class="input-group-append">
-        <button [disabled]="!memberState.isMember || open" type="submit" class="btn btn-outline-secondary">
+        <button [disabled]="!memberState.isMember || finished" type="submit" class="btn btn-outline-secondary">
           <mat-icon>send</mat-icon>
         </button>
       </div>

@@ -16,7 +16,7 @@ export class ChatFooterComponent implements OnInit {
   @Input() memberState: TeamModel;
   @Input() user: User;
   @Input() debate: Debate;
-  @Input() open: boolean;
+  @Input() finished: boolean;
 
   faUpload = faUpload;
   sideNavClosed: boolean;
@@ -40,7 +40,9 @@ export class ChatFooterComponent implements OnInit {
   }
 
   getPlaceHolder(): string {
-    if (this.memberState.isMember === false) {
+    if (this.finished) {
+      return 'You can not contribute to the debate it has finished';
+    } else if (this.memberState.isMember === false) {
       return 'You must join a team to write an argument';
     } else if (this.memberState.team === true) {
       return `Post Something in ${this.debate.team1.name}`;

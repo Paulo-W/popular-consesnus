@@ -12,7 +12,7 @@
         </div>
       </div>
 
-      <div class="text-header-cards">
+      <div class="header-text-cards">
         <div class="channels-list-title">
           Channels
         </div>
@@ -46,17 +46,25 @@
                 </div>
                 <div class="channel-name plain-text-s">{{channel.name}}</div>
                 <div class="right-channel-list">
-                  <div *ngIf="channel.isMember ; else joinBlock ">
-                    <button mat-stroked-button color="warn" class="leave" (click)="leaveChannel(channel)">Exit
-                      Channel
-                    </button>
+                  <div class="channel-button-block flex-center-right">
+                    <div class="info-block" routerLink="/channel/{{channel.name}}">
+                      <div class="plain-text"><fa-icon [icon]="faReplyAll"></fa-icon></div>
+                      <div class="plain-text-s">View more</div>
+                    </div>
+                    <div>
+                      <div *ngIf="channel.isMember ; else joinBlock ">
+                        <button mat-stroked-button color="warn" class="leave" (click)="leaveChannel(channel)">Exit
+                          Channel
+                        </button>
 
+                      </div>
+                      <ng-template #joinBlock>
+                        <button mat-stroked-button color="primary" class="join" (click)="joinChannel(channel)">Join
+                          Channel
+                        </button>
+                      </ng-template>
+                    </div>
                   </div>
-                  <ng-template #joinBlock>
-                    <button mat-stroked-button color="primary" class="join" (click)="joinChannel(channel)">Join
-                      Channel
-                    </button>
-                  </ng-template>
                 </div>
               </section>
             </mat-list-item>

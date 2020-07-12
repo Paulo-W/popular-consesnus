@@ -1,0 +1,100 @@
+<div *ngFor="let debate of debates">
+  <mat-card class="debate-container" routerLink="/debate/{{debate.id}}">
+    <div class="simple-debate-card-structure flex-column-center full-container">
+      <div class="debate-card-header full-container">
+        <!--      header-row    -->
+        <section class="flex-center-left full-container">
+          <div class="debate-card-top-left-corner plain-text-blue">
+            <div *ngIf="debate.isTeam1">
+              <fa-icon [icon]="fabBookMark"></fa-icon>
+              <span class="right-icon">Joined</span>
+            </div>
+          </div>
+          <div class="debate-card-top-center">
+            <span class="plain-text-s">
+              created by: <span class="plain-text-s-accent">{{debate.createdBy}}</span>
+              in channel: <span class="plain-text-s-accent">{{debate.channel}}</span>
+              on the: <span class="plain-text-s-accent">{{debate.startDate | date: 'dd/MM/yyyy'}}</span>
+            </span>
+          </div>
+          <div class="debate-card-top-right-corner plain-text-red">
+            <div *ngIf="debate.isTeam2">
+              <span class="left-icon">Joined</span>
+              <fa-icon [icon]="fabBookMark"></fa-icon>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <mat-divider [inset]="true" style="width: 98%"></mat-divider>
+
+      <div class="debate-card-content full-container">
+        <section class="flex-center-left full-container">
+          <div class="debate-card-votes-block full-container flex-center-left">
+            <div class="number-container">
+              <div class="plain-text-xxx percentage">{{debate.team1Percentage}}%</div>
+              <div class="plain-text-xx number-of-votes">{{debate.team1Votes}}</div>
+            </div>
+          </div>
+          <div class="debate-content-container full-container flex-center">
+            <div>
+              <div class="header-text-cards full-container center-text">
+                <span>{{debate.title | titlecase}}</span>
+              </div>
+              <div class="plain-text full-container">
+                <div class="center-text">
+                  {{debate.description}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="debate-card-votes-block full-container flex-center-right">
+            <div class="number-container">
+              <div class="plain-text-xxx percentage">{{debate.team2Percentage}}%</div>
+              <div class="plain-text-xx number-of-votes">{{debate.team2Votes}}</div>
+            </div>
+          </div>
+        </section>
+      </div>
+      <div class="debate-card-footer full-container">
+        <section class="flex-bottom-left full-container">
+          <div class="debate-card-bottom-left-corner full-container">
+            <div class="debate-team-name-left header-text-regular">
+              {{debate.team1Name | titlecase}}
+            </div>
+            <div class="debate-bar full-container">
+              <div class="blue-bar">
+                <div class="blue-bar-center" [ngStyle]="{width: debate.team1Percentage + '%'}">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="debate-card-center flex-center">
+            <div class="time-block full-container">
+              <div *ngIf="debate.daysLeft !== 0; else debateOver">
+                <span class="header-text-x"> {{debate.daysLeft}} </span><span class="header-text-cards">Days</span>
+                <div class="header-text-cards">
+                  Remaining
+                </div>
+              </div>
+              <ng-template #debateOver>
+                <div class="plain-text-red">This debate has been completed</div>
+              </ng-template>
+            </div>
+          </div>
+          <div class="debate-card-bottom-right-corner full-container flex-column-right">
+            <div class="debate-team-name-right header-text-regular">
+              {{debate.team2Name | titlecase}}
+            </div>
+            <div class="debate-bar full-container flex-top-right">
+              <div class="red-bar">
+                <div class="red-bar-center" [ngStyle]="{width: debate.team2Percentage + '%'}">
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </mat-card>
+</div>

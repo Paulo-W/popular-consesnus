@@ -161,7 +161,7 @@
           <div class="debate-content-container full-container flex-center">
             <div>
               <div class="full-container center-text">
-                      <span class="text-header-cards" *ngIf="title.value; else noTitle">
+                      <span class="header-text-cards" *ngIf="title.value; else noTitle">
                         {{title.value | titlecase}}
                       </span>
               </div>
@@ -193,7 +193,7 @@
       <div class="debate-card-footer full-container">
         <section class="flex-bottom-left full-container">
           <div class="debate-card-bottom-left-corner full-container">
-            <div class="debate-team-name-left text-header-plain" *ngIf="team1Name.value; else noTeam1Name">
+            <div class="debate-team-name-left header-text-regular" *ngIf="team1Name.value; else noTeam1Name">
               {{team1Name.value | titlecase}}
             </div>
             <ng-template #noTeam1Name>
@@ -207,15 +207,15 @@
           <div class="debate-card-center flex-center">
             <div class="time-block full-container">
               <div>
-                <span class="text-header-x"> {{days.value}} </span><span class="text-header-cards">Days</span>
-                <div class="text-header-cards">
+                <span class="header-text-x"> {{days.value}} </span><span class="header-text-cards">Days</span>
+                <div class="header-text-cards">
                   Remaining
                 </div>
               </div>
             </div>
           </div>
           <div class="debate-card-bottom-right-corner full-container flex-column-right">
-            <div class="debate-team-name-right text-header-plain" *ngIf="team2Name.value; else noTeam2Name">
+            <div class="debate-team-name-right header-text-regular" *ngIf="team2Name.value; else noTeam2Name">
               {{team2Name.value | titlecase}}
             </div>
             <ng-template #noTeam2Name>

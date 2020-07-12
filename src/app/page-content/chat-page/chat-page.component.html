@@ -19,7 +19,7 @@
       <div class="chat-card-content full-container">
         <div class="plain-text full-container flex-center">
           <div class="center-text">
-            <div class="text-header-cards debate-content">
+            <div class="header-text-cards debate-content">
               {{debate.title}}
             </div>
             <div class="plain-text-s">
@@ -31,18 +31,18 @@
       <div class="chat-card-title full-container flex-center">
         <section class="full-container flex-bottom-center">
           <div class="chat-title-left-corner plain-text-s">
-            Seen by: <span class="plain-text-s-accent">Number</span>
+            Members In Current Debate: <span class="plain-text-s-accent">{{getCurrentMembers()}}</span>
           </div>
           <div *ngIf="!isNoLongerOpen; else closedDebate" class="chat-title-center plain-text">
             {{daysRemaining}} Days remaining
           </div>
           <ng-template #closedDebate class="plain-text-red">
             <div class="plain-text-red">
-              This debate is complete
+              This Debate Is Complete
             </div>
           </ng-template>
           <div class="chat-title-right-corner plain-text-s">
-            Members In Current Debate: <span class="plain-text-s-accent">{{getCurrentMembers()}}</span>
+
           </div>
         </section>
       </div>
@@ -56,5 +56,5 @@
 
 <div *ngIf="user && memberState">
   <app-chat-footer [debate]="debate" [user]="user" [memberState]="memberState"
-                   [open]="isNoLongerOpen"></app-chat-footer>
+                   [finished]="isNoLongerOpen"></app-chat-footer>
 </div>

@@ -11,14 +11,14 @@
 <div class="links">
   <mat-nav-list>
     <mat-selection-list [multiple]="false">
-      <mat-list-option routerLink="/create-debate">
+      <mat-list-option routerLink="/home">
         <a matLine class="full-container">
           <span class="left-icon"><fa-icon [icon]="faBookOpen" [fixedWidth]="true" class="text"></fa-icon></span>
-          <span class="plain-text">Start Debate</span>
+          <span class="plain-text">Today's Stories</span>
         </a>
       </mat-list-option>
-      <mat-list-option>
-        <a class="text" matLine href="">
+      <mat-list-option routerLink="/my-debates">
+        <a class="text" matLine>
           <span class="left-icon"><fa-icon [icon]="faGraduationCap" [fixedWidth]="true"></fa-icon></span>
           <span class="plain-text">My Debates</span>
         </a>
@@ -32,8 +32,8 @@
     </mat-selection-list>
     <mat-selection-list [multiple]="false">
       <div class="custom-channel-list" *ngFor="let channel of userChannels | async">
-        <mat-list-option>
-          <a class="text" matLine href="">
+        <mat-list-option routerLink="/channel/{{channel}}">
+          <a class="text" matLine>
             <span class="plain-text">{{channel}}</span>
           </a>
         </mat-list-option>

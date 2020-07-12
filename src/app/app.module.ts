@@ -36,6 +36,9 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {ChannelsListPageComponent} from './page-content/channels-list-page/channels-list-page.component';
 import {ChannelListComponent} from './page-content/channels-list-page/channel-list/channel-list.component';
 import {InvalidFormComponent} from './invalid-form/invalid-form.component';
+import { MyDebatesComponent } from './page-content/my-debates/my-debates.component';
+import { ChannelDetailPageComponent } from './page-content/channel-detail-page/channel-detail-page.component';
+import { DebateCardComponent } from './page-content/debate-card/debate-card.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +59,10 @@ import {InvalidFormComponent} from './invalid-form/invalid-form.component';
     NavbarComponent,
     ChannelsListPageComponent,
     ChannelListComponent,
-    InvalidFormComponent
+    InvalidFormComponent,
+    MyDebatesComponent,
+    ChannelDetailPageComponent,
+    DebateCardComponent
   ],
     imports: [
         BrowserModule,

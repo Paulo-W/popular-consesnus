@@ -1,0 +1,44 @@
+<mat-card class="full-width-card">
+  <div class="channel-detail-row">
+    <section class="channel-details-header-row flex-center-left">
+      <div class="channel-member full-container">
+        <div *ngIf="isMember()" class="plain-text-accent">
+          <fa-icon [icon]="faUser"></fa-icon>
+          Joined
+        </div>
+      </div>
+      <div class="channel-title header-text-cards full-container">
+        {{channel.name}}
+      </div>
+      <div class="channel-join-buttons full-container">
+        <div *ngIf="isMember(); else joinBlock" class="channel-top-buttons">
+          <button mat-raised-button class="mat-button cancel" color="warn" (click)="leaveChannel()" type="button">Leave
+          </button>
+        </div>
+        <ng-template #joinBlock>
+          <div class="channel-top-buttons">
+            <button mat-raised-button class="mat-button success" color="primary" (click)="joinChannel()">Join
+            </button>
+          </div>
+        </ng-template>
+      </div>
+    </section>
+  </div>
+  <mat-divider [inset]="true"></mat-divider>
+  <div class="channel-description plain-text">
+    {{channel.description}}
+  </div>
+  <mat-divider [inset]="true"></mat-divider>
+  <div class="channel-detail-row">
+    <section class="flex-center-left channel-footer">
+      <div class="channel-members-count plain-text-s full-container">
+        Total members in channel <span class="plain-text-s-accent">{{channel.members.length}}</span>
+      </div>
+      <div class="channel-debate-count plain-text-s full-container">
+        Total debates in channel <span class="plain-text-s-accent">{{channelDebates.length}}</span>
+      </div>
+    </section>
+  </div>
+</mat-card>
+
+<app-debate-card [debates]="channelDebates"></app-debate-card>

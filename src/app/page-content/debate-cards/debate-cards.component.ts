@@ -12,8 +12,6 @@ import {DebateInfo} from '../../interfaces/Debate';
 export class DebateCardsComponent implements OnInit {
 
   faPlusCircle = faPlusCircle;
-  fabBookMark = faBookmark;
-
   debates: DebateInfo[];
 
   constructor(private debateService: DebateService) {

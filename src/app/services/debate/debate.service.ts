@@ -7,6 +7,7 @@ import {Team} from '../../interfaces/Team';
 import {User} from '../../interfaces/User';
 import {TeamModel} from '../../interfaces/TeamModel';
 import {MessageInfo} from '../../interfaces/MessageInfo';
+import {Channel} from '../../interfaces/Channel';
 
 @Injectable({
   providedIn: 'root'
@@ -53,6 +54,13 @@ export class DebateService {
     return DEBATE
       .filter(it => user.channels.includes(it.channel.name))
       .map(it => new DebateInfo(it, user));
+  }
+
+  getChannelDebates(channel: Channel): DebateInfo[] {
+    const user = this.userService.getCurrentUser();
+    return DEBATE
+      .filter(debate => debate.channel === channel)
+      .map(debate => new DebateInfo(debate, user));
   }
 
   getDebateById(id: number): Observable<Debate> {

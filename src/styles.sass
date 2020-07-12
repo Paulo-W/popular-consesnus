@@ -153,20 +153,17 @@ $text-color: #6C757D
 .button-text
   @include plain-text($text-size-large, white)
 
-.text-header-plain
+.header-text-regular
   @include header-text($text-size-regular, $text-color)
 
-.text-header-plain-accent
+.header-text-accent
   color: darken($primary-color, 5%)
 
-.text-header-cards
+.header-text-cards
   @include header-text($text-size-large, $text-color)
 
-.text-header-x
+.header-text-x
   @include header-text($text-size-gigantic, $text-color)
-
-.text-header-primary
-  @include header-text($text-size-gigantic, white)
 
 .plain-text
   @include plain-text($text-size-regular, $text-color)
@@ -199,7 +196,7 @@ $text-color: #6C757D
   @include plain-text($text-size-tiny, $text-color)
 
 .plain-text-accent
-  @include plain-text($text-size-large, $primary-color)
+  @include plain-text($text-size-regular, $primary-color)
 
 .plain-text-s-accent
   @include plain-text($text-size-small, darken($primary-color, 5%))

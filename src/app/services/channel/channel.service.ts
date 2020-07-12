@@ -86,5 +86,9 @@ export class ChannelService {
   findByName(name: string): Channel {
     return CHANNELS.find(it => it.name === name);
   }
+
+  getChannelByName(channelName: string): Channel {
+    return CHANNELS.find(channel => channel.name === channelName);
+  }
 }
 
