@@ -122,4 +122,13 @@ export class DebateService {
     const remaining = endDate.getDate() - debate.date.getDate();
     return remaining > 0 ? remaining : 0;
   }
+
+  getUserInvolvedDebates(): DebateInfo[] {
+    const user = this.userService.getCurrentUser();
+    return DEBATE.filter(
+      debate => debate.team1.members.includes(user) || debate.team2.members.includes(user)
+    ).map(
+      it => new DebateInfo(it, user)
+    );
+  }
 }

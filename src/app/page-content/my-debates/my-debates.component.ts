@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {DebateInfo} from '../../interfaces/Debate';
+import {DebateService} from '../../services/debate/debate.service';
 
 @Component({
   selector: 'app-my-debates',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MyDebatesComponent implements OnInit {
 
-  constructor() { }
+  userDebates: DebateInfo[];
 
-  ngOnInit(): void {
+  constructor(private debateService: DebateService) {
+    this
   }
 
+  ngOnInit(): void {
+    this.getUserDebates();
+  }
+
+  getUserDebates() {
+    this.userDebates = this.debateService.getUserInvolvedDebates();
+  }
 }

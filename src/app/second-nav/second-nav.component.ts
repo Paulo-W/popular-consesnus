@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {faSearch} from '@fortawesome/free-solid-svg-icons';
 import {SideNavService} from '../services/side-nav/side-nav.service';
 import {Subject} from 'rxjs';
-import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-second-nav',
@@ -15,8 +14,7 @@ export class SecondNavComponent implements OnInit {
   private searchTerms = new Subject<string>();
 
   constructor(
-    private sideNavService: SideNavService,
-    private location: Location
+    private sideNavService: SideNavService
   ) {
   }
 
@@ -25,7 +23,6 @@ export class SecondNavComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.location.back();
   }
 
   clickMenu() {
