@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {User} from '../../interfaces/User';
+import {CustomUser} from '../../interfaces/CustomUser';
 
 @Component({
   selector: 'app-user-badge',
@@ -8,7 +8,7 @@ import {User} from '../../interfaces/User';
 })
 export class UserBadgeComponent implements OnInit {
 
-  @Input() user: User;
+  @Input() user: CustomUser;
 
   constructor() {
   }

@@ -1,6 +1,6 @@
-import {User} from '../interfaces/User';
+import {CustomUser} from '../interfaces/CustomUser';
 
-export const USERS: User[] = [
+export const USERS: CustomUser[] = [
   {
     id: 1,
     name: 'Paul',

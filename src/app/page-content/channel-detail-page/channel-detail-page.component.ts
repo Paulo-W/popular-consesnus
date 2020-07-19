@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {ChannelService} from '../../services/channel/channel.service';
 import {Channel} from '../../interfaces/Channel';
-import {User} from '../../interfaces/User';
+import {CustomUser} from '../../interfaces/CustomUser';
 import {UserService} from '../../services/user/user.service';
 import {faUser} from '@fortawesome/free-solid-svg-icons';
 import {DebateService} from '../../services/debate/debate.service';
@@ -16,7 +16,7 @@ import {DebateInfo} from '../../interfaces/Debate';
 export class ChannelDetailPageComponent implements OnInit {
 
   channel: Channel;
-  user: User;
+  user: CustomUser;
   faUser = faUser;
   channelDebates: DebateInfo[];
 

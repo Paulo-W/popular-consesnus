@@ -7,7 +7,7 @@ import {Router} from '@angular/router';
 import {Channel} from '../../interfaces/Channel';
 import {ChannelService} from '../../services/channel/channel.service';
 import {faBookmark} from '@fortawesome/free-solid-svg-icons';
-import {User} from '../../interfaces/User';
+import {CustomUser} from '../../interfaces/CustomUser';
 import {UserService} from '../../services/user/user.service';
 
 @Component({
@@ -19,7 +19,7 @@ export class CreateDebateComponent implements OnInit {
 
   fabBookMark = faBookmark;
   channels: Channel[];
-  user: User;
+  user: CustomUser;
 
   createDebateForm = new FormGroup({
     title: new FormControl('', [
@@ -79,7 +79,6 @@ export class CreateDebateComponent implements OnInit {
   }
 
   onSubmit() {
-
     this.debateService.saveDebate(this.createDebateForm.value as Debate).subscribe(
       saved => {
         if (saved) {

@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {MessageInfo} from '../../interfaces/MessageInfo';
-import {User} from '../../interfaces/User';
+import {CustomUser} from '../../interfaces/CustomUser';
 import {UserService} from '../user/user.service';
 
 @Injectable({
@@ -11,7 +11,7 @@ export class MessageServiceService {
   constructor(private userService: UserService) {
   }
 
-  likeMessage(message: MessageInfo, currentUser: User): void {
+  likeMessage(message: MessageInfo, currentUser: CustomUser): void {
     message.likeUsers = this.vote(message.likeUsers, currentUser);
 
     if (message.dislikeUsers?.includes(currentUser)) {
@@ -19,7 +19,7 @@ export class MessageServiceService {
     }
   }
 
-  dislikeMessage(message: MessageInfo, currentUser: User): void {
+  dislikeMessage(message: MessageInfo, currentUser: CustomUser): void {
     message.dislikeUsers = this.vote(message.dislikeUsers, currentUser);
 
     if (message.likeUsers?.includes(currentUser)) {
@@ -27,7 +27,7 @@ export class MessageServiceService {
     }
   }
 
-  private vote(array: User[] | undefined, currentUser: User): User[] {
+  private vote(array: CustomUser[] | undefined, currentUser: CustomUser): CustomUser[] {
     if (array === undefined) {
       array = [];
 

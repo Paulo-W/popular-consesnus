@@ -39,6 +39,12 @@ import {InvalidFormComponent} from './invalid-form/invalid-form.component';
 import { MyDebatesComponent } from './page-content/my-debates/my-debates.component';
 import { ChannelDetailPageComponent } from './page-content/channel-detail-page/channel-detail-page.component';
 import { DebateCardComponent } from './page-content/debate-card/debate-card.component';
+import { AuthComponent } from './auth/auth.component';
+import {AmplifyUIAngularModule} from '@aws-amplify/ui-angular';
+import Amplify from 'aws-amplify';
+import awsconfig from '../aws-exports';
+
+Amplify.configure(awsconfig);
 
 @NgModule({
   declarations: [
@@ -62,11 +68,13 @@ import { DebateCardComponent } from './page-content/debate-card/debate-card.comp
     InvalidFormComponent,
     MyDebatesComponent,
     ChannelDetailPageComponent,
-    DebateCardComponent
+    DebateCardComponent,
+    AuthComponent
   ],
     imports: [
         BrowserModule,
         AppRoutingModule,
+        AmplifyUIAngularModule,
         BrowserAnimationsModule,
         MatToolbarModule,
         MatIconModule,

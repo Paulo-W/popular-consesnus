@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {faPencilAlt, faSyncAlt, faUser} from '@fortawesome/free-solid-svg-icons';
 import {Debate} from '../../../interfaces/Debate';
 import {UserService} from '../../../services/user/user.service';
-import {User} from '../../../interfaces/User';
+import {CustomUser} from '../../../interfaces/CustomUser';
 import {DebateService} from '../../../services/debate/debate.service';
 import {TeamModel} from '../../../interfaces/TeamModel';
 import {Team} from '../../../interfaces/Team';
@@ -16,7 +16,7 @@ import {Team} from '../../../interfaces/Team';
 export class ChatBodyComponent implements OnInit {
 
   @Input() debate: Debate;
-  @Input() user: User;
+  @Input() user: CustomUser;
   @Input() memberState: TeamModel;
   @Input() finished: boolean;
 

@@ -1,4 +1,4 @@
-import {User} from './User';
+import {CustomUser} from './CustomUser';
 import {DebateTags} from '../enums/Tags';
 import {Channel} from './Channel';
 import {Team} from './Team';
@@ -8,7 +8,7 @@ export interface Debate {
   id: number;
   title: string;
   description: string;
-  createdBy: User;
+  createdBy: CustomUser;
   team1: Team;
   team2: Team;
   tag: DebateTags;
@@ -36,7 +36,7 @@ export class DebateInfo {
   team1Percentage: number;
   team2Percentage: number;
 
-  constructor(private debate: Debate, private currentUser: User) {
+  constructor(private debate: Debate, private currentUser: CustomUser) {
     this.id = debate.id;
     this.createdBy = debate.createdBy.username;
     this.channel = debate.channel.name;

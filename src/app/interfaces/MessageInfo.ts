@@ -1,12 +1,12 @@
-import {User} from './User';
+import {CustomUser} from './CustomUser';
 
 
 export interface MessageInfo {
   id?: number;
-  user: User;
+  user: CustomUser;
   date: Date;
   content: string;
   likes: number;
-  likeUsers?: User[];
-  dislikeUsers?: User[];
+  likeUsers?: CustomUser[];
+  dislikeUsers?: CustomUser[];
 }

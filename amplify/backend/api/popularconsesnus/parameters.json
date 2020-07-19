@@ -1,0 +1,11 @@
+{
+    "AppSyncApiName": "popularconsesnus",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST",
+    "DynamoDBEnableServerSideEncryption": "false",
+    "AuthCognitoUserPoolId": {
+        "Fn::GetAtt": [
+            "authpopularconsesnus4105b6a6",
+            "Outputs.UserPoolId"
+        ]
+    }
+}

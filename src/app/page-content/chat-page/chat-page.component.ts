@@ -4,7 +4,7 @@ import {DebateService} from '../../services/debate/debate.service';
 import {Debate} from '../../interfaces/Debate';
 import {DebateTags} from '../../enums/Tags';
 import {TeamModel} from '../../interfaces/TeamModel';
-import {User} from '../../interfaces/User';
+import {CustomUser} from '../../interfaces/CustomUser';
 import {UserService} from '../../services/user/user.service';
 
 @Component({
@@ -16,7 +16,7 @@ export class ChatPageComponent implements OnInit {
 
   debate: Debate;
   memberState: TeamModel;
-  user: User;
+  user: CustomUser;
   daysRemaining: number;
   isNoLongerOpen = true;
 

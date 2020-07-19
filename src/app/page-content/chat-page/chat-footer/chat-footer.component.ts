@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {faUpload} from '@fortawesome/free-solid-svg-icons';
 import {SideNavService} from '../../../services/side-nav/side-nav.service';
 import {TeamModel} from '../../../interfaces/TeamModel';
-import {User} from '../../../interfaces/User';
+import {CustomUser} from '../../../interfaces/CustomUser';
 import {Debate} from '../../../interfaces/Debate';
 import {DebateService} from '../../../services/debate/debate.service';
 
@@ -14,7 +14,7 @@ import {DebateService} from '../../../services/debate/debate.service';
 export class ChatFooterComponent implements OnInit {
 
   @Input() memberState: TeamModel;
-  @Input() user: User;
+  @Input() user: CustomUser;
   @Input() debate: Debate;
   @Input() finished: boolean;
 

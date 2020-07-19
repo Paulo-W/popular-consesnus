@@ -7,9 +7,11 @@ import {CreateDebateComponent} from './page-content/create-debate/create-debate.
 import {ChatPageComponent} from './page-content/chat-page/chat-page.component';
 import {ChannelDetailPageComponent} from './page-content/channel-detail-page/channel-detail-page.component';
 import {MyDebatesComponent} from './page-content/my-debates/my-debates.component';
+import {AuthComponent} from './auth/auth.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: '/home', pathMatch: 'full'},
+  {path: '', redirectTo: 'login', pathMatch: 'full'},
+  {path: 'login', component: AuthComponent},
   {path: 'home', component: DebateCardsComponent},
   {path: 'channels', component: ChannelsListPageComponent},
   {path: 'create-channel', component: CreateChannelComponent},

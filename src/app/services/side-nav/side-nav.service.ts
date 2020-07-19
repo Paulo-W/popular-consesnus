@@ -8,7 +8,7 @@ import {Subject} from 'rxjs';
 export class SideNavService {
 
   private sidenav: MatSidenav;
-  public sideNavClosed = false;
+  public sideNavClosed = true;
 
   public configObservable = new Subject<boolean>();
 

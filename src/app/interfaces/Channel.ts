@@ -1,8 +1,8 @@
-import {User} from './User';
+import {CustomUser} from './CustomUser';
 
 export interface Channel {
   name: string;
-  createdBy: User;
+  createdBy: CustomUser;
   members: number[];
   description: string;
   isMember: boolean;

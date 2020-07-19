@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {faBook, faBookOpen, faGraduationCap} from '@fortawesome/free-solid-svg-icons';
 import {UserService} from '../services/user/user.service';
-import {User} from '../interfaces/User';
+import {CustomUser} from '../interfaces/CustomUser';
 import {Observable} from 'rxjs';
 import {Router} from '@angular/router';
 
@@ -12,7 +12,7 @@ import {Router} from '@angular/router';
 })
 export class SideNavComponent implements OnInit {
 
-  user: User;
+  user: CustomUser;
   userChannels: Observable<string[]>;
 
   faBookOpen = faBookOpen;

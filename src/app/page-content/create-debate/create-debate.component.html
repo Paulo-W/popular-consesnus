@@ -232,8 +232,8 @@
   </mat-card>
 
   <div class="submit-container flex-center button-text">
-    <button mat-raised-button class="mat-button cancel" color="warn" (click)="goBack()">Cancel</button>
-    <button mat-raised-button class="mat-button success" color="primary" [disabled]="!createDebateForm.valid">Create
+    <button type="button" mat-raised-button class="mat-button cancel" color="warn" (click)="goBack()">Cancel</button>
+    <button type="submit" mat-raised-button class="mat-button success" color="primary" [disabled]="!createDebateForm.valid">Create
     </button>
   </div>
 </form>

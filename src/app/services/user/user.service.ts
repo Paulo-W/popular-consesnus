@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {User} from '../../interfaces/User';
+import {CustomUser} from '../../interfaces/CustomUser';
 import {USERS} from '../../mock/mock-user';
 import {Observable, of} from 'rxjs';
 import {Channel} from '../../interfaces/Channel';
@@ -12,15 +12,15 @@ export class UserService {
   constructor() {
   }
 
-  getUserById(): Observable<User> | undefined {
+  getUserById(): Observable<CustomUser> | undefined {
     return of(USERS.find(user => user.id === 1));
   }
 
-  getCurrentUser(): User {
+  getCurrentUser(): CustomUser {
     return USERS.find(user => user.id === 1);
   }
 
-  getUserChannels(user: User): Observable<string[]> {
+  getUserChannels(user: CustomUser): Observable<string[]> {
     return of(user.channels);
   }
 
@@ -49,7 +49,7 @@ export class UserService {
     );
   }
 
-  removeUser(array: User[], currentUser: User) {
+  removeUser(array: CustomUser[], currentUser: CustomUser) {
     const index = array.indexOf(currentUser);
 
     if (index > -1) {

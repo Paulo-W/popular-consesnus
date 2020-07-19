@@ -4,7 +4,7 @@ import {Observable, of, Subject} from 'rxjs';
 import {UserService} from '../user/user.service';
 import {DEBATE} from '../../mock/mock-debate';
 import {Team} from '../../interfaces/Team';
-import {User} from '../../interfaces/User';
+import {CustomUser} from '../../interfaces/CustomUser';
 import {TeamModel} from '../../interfaces/TeamModel';
 import {MessageInfo} from '../../interfaces/MessageInfo';
 import {Channel} from '../../interfaces/Channel';
@@ -24,11 +24,11 @@ export class DebateService {
     return of(this.saveDebateValue(debate));
   }
 
-  updateUserState(debate: Debate, user: User) {
+  updateUserState(debate: Debate, user: CustomUser) {
     this.userMember.next(this.isMember(debate, user));
   }
 
-  private isMember(debate: Debate, user: User): TeamModel {
+  private isMember(debate: Debate, user: CustomUser): TeamModel {
     if (debate.team1.members.includes(user)) {
       return new TeamModel(true, true);
     } else if (debate.team2.members.includes(user)) {
@@ -67,7 +67,7 @@ export class DebateService {
     return of(DEBATE.find(debate => debate.id === id));
   }
 
-  joinDebateTeam(debate: Debate, team: Team, currentUser: User): void {
+  joinDebateTeam(debate: Debate, team: Team, currentUser: CustomUser): void {
     if (!team.members) {
       team.members = [];
       team.members.push(currentUser);
@@ -84,7 +84,7 @@ export class DebateService {
     this.updateUserState(debate, currentUser);
   }
 
-  switchTeams(debate: Debate, user: User, isTeam1: boolean) {
+  switchTeams(debate: Debate, user: CustomUser, isTeam1: boolean) {
     if (isTeam1) {
       this.userService.removeUser(debate.team1.members, user);
       debate.team2.members.push(user);
@@ -98,7 +98,7 @@ export class DebateService {
     this.updateUserState(debate, user);
   }
 
-  postMessage(message: string, user: User, team: Team) {
+  postMessage(message: string, user: CustomUser, team: Team) {
     const newMessage: MessageInfo = {
       content: message,
       date: new Date(),

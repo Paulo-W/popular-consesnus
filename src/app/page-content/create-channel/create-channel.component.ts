@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Location} from '@angular/common';
 import {ChannelService} from '../../services/channel/channel.service';
 import {Channel} from '../../interfaces/Channel';
-import {User} from '../../interfaces/User';
+import {CustomUser} from '../../interfaces/CustomUser';
 import {Router} from '@angular/router';
 
 @Component({
@@ -48,7 +48,7 @@ class ChannelForm implements Channel {
   ) {
   }
 
-  createdBy: User;
+  createdBy: CustomUser;
   members: number[];
   isMember: boolean;
 }

@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {faComment, faMinus, faPlus} from '@fortawesome/free-solid-svg-icons';
 import {Team} from '../../../../interfaces/Team';
 import {MessageInfo} from '../../../../interfaces/MessageInfo';
-import {User} from '../../../../interfaces/User';
+import {CustomUser} from '../../../../interfaces/CustomUser';
 import {Observable, of} from 'rxjs';
 import {MessageServiceService} from '../../../../services/message/message-service.service';
 
@@ -14,7 +14,7 @@ import {MessageServiceService} from '../../../../services/message/message-servic
 export class MessageBoxComponent implements OnInit {
 
   @Input() team: Team;
-  @Input() user: User;
+  @Input() user: CustomUser;
 
   messages: Observable<MessageInfo[]>;
 
