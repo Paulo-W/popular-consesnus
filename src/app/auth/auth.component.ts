@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {Auth} from 'aws-amplify';
+import {Hub} from 'aws-amplify';
 import {FormFieldTypes} from '@aws-amplify/ui-components';
+import {Router} from '@angular/router';
+import {UserService} from '../services/user/user.service';
+
 
 @Component({
   selector: 'app-auth',
@@ -10,44 +13,44 @@ import {FormFieldTypes} from '@aws-amplify/ui-components';
 export class AuthComponent implements OnInit {
   formFields: FormFieldTypes;
 
-  constructor() {
+  constructor(private router: Router, private userService: UserService) {
+
+    Hub.listen('auth', (data) => {
+      switch (data.payload.event) {
+        case 'signIn':
+          console.log('User signed in');
+          userService.setCurrentUser();
+          this.router.navigate(['/home']).then();
+          break;
+        case 'signUp':
+          console.log(JSON.stringify(data.payload));
+          userService.saveNewUser(data.payload.data.user.username);
+          break;
+      }
+    });
+
     this.formFields = [
       {
-        type: 'text',
+        type: 'username',
         label: 'Username',
-        placeholder: 'Please enter your email',
-        required: true,
-      },
-      {
-        type: 'text',
-        label: 'Full name',
-        placeholder: 'Please enter your full name',
-        required: true,
+        placeholder: 'Please enter a nickname',
+        required: true
       },
       {
         type: 'email',
-        label: 'Email',
+        label: 'email',
         placeholder: 'Please enter your email',
         required: true,
       },
       {
         type: 'password',
-        label: 'Password',
+        label: 'password',
         placeholder: '*************',
         required: true,
       }
     ];
   }
 
-  ngOnInit(): void {
-    this.getUser();
-  }
-
-  getUser() {
-    Auth.currentAuthenticatedUser().then(
-      user => {
-        console.log(user);
-      }
-    );
+  ngOnInit() {
   }
 }

@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {faBell, faHome, faSignOutAlt} from '@fortawesome/free-solid-svg-icons';
 import {Router} from '@angular/router';
 import {Auth} from 'aws-amplify';
+import {UserService} from '../services/user/user.service';
 
 @Component({
   selector: 'app-navbar',
@@ -15,7 +16,10 @@ export class NavbarComponent implements OnInit {
   faBell = faBell;
   title = 'Popular Consensus';
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private userService: UserService
+  ) {
   }
 
   ngOnInit(): void {

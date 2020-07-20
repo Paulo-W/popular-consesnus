@@ -1,8 +1,8 @@
 {
-    "identityPoolName": "popularconsesnus4105b6a6_identitypool_4105b6a6",
+    "identityPoolName": "popularconsesnus600304ef_identitypool_600304ef",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "popula4105b6a6",
-    "userPoolName": "popularconsesnus4105b6a6_userpool_4105b6a6",
+    "resourceNameTruncated": "popula600304ef",
+    "userPoolName": "popularconsesnus600304ef_userpool_600304ef",
     "autoVerifiedAttributes": [
         "email"
     ],
@@ -18,7 +18,7 @@
     "passwordPolicyMinLength": 8,
     "passwordPolicyCharacters": [],
     "requiredAttributes": [
-        "email, username"
+        "email"
     ],
     "userpoolClientGenerateSecret": true,
     "userpoolClientRefreshTokenValidity": 30,
@@ -28,10 +28,10 @@
     "userpoolClientReadAttributes": [
         "email"
     ],
-    "userpoolClientLambdaRole": "popula4105b6a6_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "popula600304ef_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "4105b6a6",
-    "resourceName": "popularconsesnus4105b6a6",
+    "sharedId": "600304ef",
+    "resourceName": "popularconsesnus600304ef",
     "authSelections": "identityPoolAndUserPool",
     "authRoleArn": {
         "Fn::GetAtt": [

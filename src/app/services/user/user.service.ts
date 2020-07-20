@@ -1,13 +1,16 @@
 import {Injectable} from '@angular/core';
 import {CustomUser} from '../../interfaces/CustomUser';
 import {USERS} from '../../mock/mock-user';
-import {Observable, of} from 'rxjs';
+import {BehaviorSubject, Observable, of} from 'rxjs';
 import {Channel} from '../../interfaces/Channel';
+import {Auth} from 'aws-amplify';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+
+  private currentUser = new BehaviorSubject<string>('');
 
   constructor() {
   }
@@ -58,4 +61,15 @@ export class UserService {
     }
   }
 
+  saveNewUser(user: string) {
+    console.log(user);
+  }
+
+  setCurrentUser() {
+    Auth.currentAuthenticatedUser().then(
+      user => {
+        this.currentUser.next(user.username);
+      }
+    );
+  }
 }
