@@ -16,5 +16,23 @@
                 "popularconsesnus600304ef": {}
             }
         }
+    },
+    "qa": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-popularconsesnus-qa-184647-authRole",
+            "UnauthRoleArn": "arn:aws:iam::011633820637:role/amplify-popularconsesnus-qa-184647-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::011633820637:role/amplify-popularconsesnus-qa-184647-authRole",
+            "Region": "eu-west-2",
+            "DeploymentBucketName": "amplify-popularconsesnus-qa-184647-deployment",
+            "UnauthRoleName": "amplify-popularconsesnus-qa-184647-unauthRole",
+            "StackName": "amplify-popularconsesnus-qa-184647",
+            "StackId": "arn:aws:cloudformation:eu-west-2:011633820637:stack/amplify-popularconsesnus-qa-184647/c7419b50-cb71-11ea-adfd-069b836e2b40",
+            "AmplifyAppId": "d32rsilj3dex9c"
+        },
+        "categories": {
+            "auth": {
+                "popularconsesnus600304ef": {}
+            }
+        }
     }
 }
