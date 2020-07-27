@@ -23,7 +23,6 @@ export class AuthComponent implements OnInit {
           this.router.navigate(['/home']).then();
           break;
         case 'signUp':
-          console.log(JSON.stringify(data.payload));
           userService.saveNewUser(data.payload.data.user.username);
           break;
       }

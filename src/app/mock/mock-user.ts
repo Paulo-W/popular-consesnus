@@ -3,12 +3,7 @@ import {CustomUser} from '../interfaces/CustomUser';
 export const USERS: CustomUser[] = [
   {
     id: 1,
-    name: 'Paul',
-    rank: 'beginner',
-    totalLikes: 60,
     username: 'ItsMePaulo',
-    email: 'my.real.email.com',
-    password: '123123',
     channels: [
       'Animals',
       'Politics',
@@ -17,12 +12,7 @@ export const USERS: CustomUser[] = [
   },
   {
     id: 2,
-    name: 'Frank',
-    rank: 'beginner',
-    totalLikes: 360,
     username: 'ItsMeFrank',
-    email: 'my.real.email.com',
-    password: '123123',
     channels:  [
       'Animals',
       'Politics',
@@ -31,12 +21,7 @@ export const USERS: CustomUser[] = [
   },
   {
     id: 3,
-    name: 'Bob',
-    rank: 'beginner',
-    totalLikes: 40,
     username: 'ItsMeBob',
-    email: 'my.real.email.com',
-    password: '123123',
     channels:  [
       'Animals',
       'Politics',
@@ -45,12 +30,7 @@ export const USERS: CustomUser[] = [
   },
   {
     id: 4,
-    name: 'Sally',
-    rank: 'beginner',
-    totalLikes: 40,
     username: 'ItsMeSally',
-    email: 'my.real.email.com',
-    password: '123123',
     channels: []
   }
 ];

@@ -4,6 +4,7 @@ import {USERS} from '../../mock/mock-user';
 import {BehaviorSubject, Observable, of} from 'rxjs';
 import {Channel} from '../../interfaces/Channel';
 import {Auth} from 'aws-amplify';
+import {APIService} from '../../API.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class UserService {
 
   private currentUser = new BehaviorSubject<string>('');
 
-  constructor() {
+  constructor(private apiService: APIService) {
   }
 
   getUserById(): Observable<CustomUser> | undefined {
@@ -61,8 +62,17 @@ export class UserService {
     }
   }
 
-  saveNewUser(user: string) {
-    console.log(user);
+  async saveNewUser(newUser: string) {
+      console.log(newUser);
+      await this.apiService.CreateUser({
+        username: newUser
+      }).then(
+        user => console.log(user)
+    );
+
+    // await this.apiService.GetUser('2').then(
+    //   user => console.log(user)
+    // );
   }
 
   setCurrentUser() {

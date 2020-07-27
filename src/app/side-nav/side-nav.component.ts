@@ -23,17 +23,6 @@ export class SideNavComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getUser();
-  }
-
-  getUser() {
-    this.userService.getUserById().subscribe(
-      user => {
-        this.user = user;
-        this.getUserChannels();
-        console.log(`Successfully retrieved user name=${user.name}`);
-      }
-    );
   }
 
   getUserChannels() {

@@ -1,0 +1,217 @@
+# this is an auto generated file. This will be overwritten
+subscription OnCreateUser {
+  onCreateUser {
+    id
+    username
+    channels {
+      items {
+        id
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateUser {
+  onUpdateUser {
+    id
+    username
+    channels {
+      items {
+        id
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteUser {
+  onDeleteUser {
+    id
+    username
+    channels {
+      items {
+        id
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateChannel {
+  onCreateChannel {
+    id
+    name
+    members {
+      items {
+        id
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdBy {
+      id
+      username
+      channels {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateChannel {
+  onUpdateChannel {
+    id
+    name
+    members {
+      items {
+        id
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdBy {
+      id
+      username
+      channels {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteChannel {
+  onDeleteChannel {
+    id
+    name
+    members {
+      items {
+        id
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdBy {
+      id
+      username
+      channels {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateUserChannel {
+  onCreateUserChannel {
+    id
+    user {
+      id
+      username
+      channels {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    channel {
+      id
+      name
+      members {
+        nextToken
+      }
+      createdBy {
+        id
+        username
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateUserChannel {
+  onUpdateUserChannel {
+    id
+    user {
+      id
+      username
+      channels {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    channel {
+      id
+      name
+      members {
+        nextToken
+      }
+      createdBy {
+        id
+        username
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteUserChannel {
+  onDeleteUserChannel {
+    id
+    user {
+      id
+      username
+      channels {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    channel {
+      id
+      name
+      members {
+        nextToken
+      }
+      createdBy {
+        id
+        username
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
