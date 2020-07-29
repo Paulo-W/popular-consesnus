@@ -16,6 +16,8 @@ export class NavbarComponent implements OnInit {
   faBell = faBell;
   title = 'Popular Consensus';
 
+  user: string;
+
   constructor(
     private router: Router,
     private userService: UserService
@@ -23,6 +25,21 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.setUser();
+  }
+
+  setUser() {
+    this.userService.currentUser.subscribe(
+      user => {
+        if (this.user !== user) {
+          this.user = user;
+        }
+      });
+
+    const token = localStorage.getItem('userId');
+    if (token) {
+      this.userService.currentUser.next(token);
+    }
   }
 
   goHome() {
@@ -30,7 +47,6 @@ export class NavbarComponent implements OnInit {
   }
 
   async signOut() {
-    console.log('Calling sign out');
     try {
       await Auth.signOut();
     } catch (error) {

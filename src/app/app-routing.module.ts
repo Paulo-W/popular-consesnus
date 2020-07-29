@@ -15,7 +15,7 @@ const routes: Routes = [
   {path: 'create-channel', component: CreateChannelComponent},
   {path: 'create-debate', component: CreateDebateComponent},
   {path: 'debate/:id', component: ChatPageComponent},
-  {path: 'channel/:name', component: ChannelDetailPageComponent},
+  {path: 'channel/:id', component: ChannelDetailPageComponent},
   {path: 'my-debates', component: MyDebatesComponent},
   // map any unknown URL's in prod system should map   to 404 page
   {path: '**', redirectTo: 'home', pathMatch: 'full'}

@@ -41,8 +41,10 @@ import { ChannelDetailPageComponent } from './page-content/channel-detail-page/c
 import { DebateCardComponent } from './page-content/debate-card/debate-card.component';
 import { AuthComponent } from './auth/auth.component';
 import {AmplifyUIAngularModule} from '@aws-amplify/ui-angular';
-import Amplify from 'aws-amplify';
+import Amplify, { API, graphqlOperation } from 'aws-amplify';
 import awsconfig from '../aws-exports';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { SpinnerComponent } from './spinner/spinner.component';
 
 Amplify.configure(awsconfig);
 
@@ -69,7 +71,8 @@ Amplify.configure(awsconfig);
     MyDebatesComponent,
     ChannelDetailPageComponent,
     DebateCardComponent,
-    AuthComponent
+    AuthComponent,
+    SpinnerComponent
   ],
     imports: [
         BrowserModule,
@@ -92,6 +95,7 @@ Amplify.configure(awsconfig);
         MatMenuModule,
         ReactiveFormsModule,
         MatExpansionModule,
+        MatProgressSpinnerModule,
     ],
   exports: [
     MatIconModule, MatToolbarModule, FontAwesomeModule

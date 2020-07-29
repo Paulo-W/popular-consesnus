@@ -1,9 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Location} from '@angular/common';
 import {ChannelService} from '../../services/channel/channel.service';
-import {Channel} from '../../interfaces/Channel';
-import {CustomUser} from '../../interfaces/CustomUser';
 import {Router} from '@angular/router';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-create-channel',
@@ -12,7 +11,18 @@ import {Router} from '@angular/router';
 })
 export class CreateChannelComponent implements OnInit {
 
-  newChannel = new ChannelForm(null, null, null);
+  clicked = false;
+
+  createChannelForm = new FormGroup({
+    title: new FormControl('', [
+      Validators.required, Validators.minLength(5),
+      Validators.maxLength(80)
+    ]),
+    description: new FormControl('', [
+      Validators.required, Validators.minLength(10),
+      Validators.maxLength(300)
+    ])
+  });
 
   constructor(
     private location: Location,
@@ -29,26 +39,21 @@ export class CreateChannelComponent implements OnInit {
 
   onSubmit() {
     // do something here
-    this.channelService.createChannel(this.newChannel as Channel).subscribe(
-      submitted => {
-        if (submitted) {
-          this.router.navigate(['/channels']);
-        }
+    this.clicked = true;
+    this.channelService.createChannel(this.createChannelForm.value).then(
+      value => {
+        this.clicked = false;
+        this.router.navigate(['/home']);
+        this.channelService.joinChannel(value.id);
       }
     );
   }
-}
 
-class ChannelForm implements Channel {
-
-  constructor(
-    public name: string,
-    public description: string,
-    public labels: string
-  ) {
+  get title() {
+    return this.createChannelForm.get('title');
   }
 
-  createdBy: CustomUser;
-  members: number[];
-  isMember: boolean;
+  get description() {
+    return this.createChannelForm.get('description');
+  }
 }

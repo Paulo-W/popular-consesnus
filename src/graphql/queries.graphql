@@ -4,11 +4,9 @@ query GetUser($id: ID!) {
     id
     username
     channels {
-      items {
-        id
-        createdAt
-        updatedAt
-      }
+      nextToken
+    }
+    debates {
       nextToken
     }
     createdAt
@@ -24,9 +22,6 @@ query ListUsers(
     items {
       id
       username
-      channels {
-        nextToken
-      }
       createdAt
       updatedAt
     }
@@ -37,22 +32,18 @@ query GetChannel($id: ID!) {
   getChannel(id: $id) {
     id
     name
-    members {
-      items {
-        id
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
+    description
     createdBy {
       id
       username
-      channels {
-        nextToken
-      }
       createdAt
       updatedAt
+    }
+    members {
+      nextToken
+    }
+    debates {
+      nextToken
     }
     createdAt
     updatedAt
@@ -67,15 +58,7 @@ query ListChannels(
     items {
       id
       name
-      members {
-        nextToken
-      }
-      createdBy {
-        id
-        username
-        createdAt
-        updatedAt
-      }
+      description
       createdAt
       updatedAt
     }
@@ -88,24 +71,13 @@ query GetUserChannel($id: ID!) {
     user {
       id
       username
-      channels {
-        nextToken
-      }
       createdAt
       updatedAt
     }
     channel {
       id
       name
-      members {
-        nextToken
-      }
-      createdBy {
-        id
-        username
-        createdAt
-        updatedAt
-      }
+      description
       createdAt
       updatedAt
     }
@@ -121,18 +93,177 @@ query ListUserChannels(
   listUserChannels(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
-      user {
-        id
-        username
-        createdAt
-        updatedAt
-      }
-      channel {
-        id
-        name
-        createdAt
-        updatedAt
-      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query GetDebate($id: ID!) {
+  getDebate(id: $id) {
+    id
+    title
+    description
+    team1 {
+      id
+      name
+      team
+      createdAt
+      updatedAt
+    }
+    team2 {
+      id
+      name
+      team
+      createdAt
+      updatedAt
+    }
+    tag
+    days
+    date
+    createdBy {
+      id
+      username
+      createdAt
+      updatedAt
+    }
+    channel {
+      id
+      name
+      description
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+query ListDebates(
+  $filter: ModelDebateFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listDebates(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      title
+      description
+      tag
+      days
+      date
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query GetTeam($id: ID!) {
+  getTeam(id: $id) {
+    id
+    name
+    debate {
+      id
+      title
+      description
+      tag
+      days
+      date
+      createdAt
+      updatedAt
+    }
+    team
+    members {
+      id
+      username
+      createdAt
+      updatedAt
+    }
+    messages {
+      id
+      content
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+query ListTeams(
+  $filter: ModelTeamFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listTeams(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      name
+      team
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query GetMessage($id: ID!) {
+  getMessage(id: $id) {
+    id
+    user {
+      id
+      username
+      createdAt
+      updatedAt
+    }
+    content
+    likeUsers {
+      id
+      username
+      createdAt
+      updatedAt
+    }
+    dislikeUsers {
+      id
+      username
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+query ListMessages(
+  $filter: ModelMessageFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listMessages(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      content
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query UserByName(
+  $username: String
+  $id: ModelIDKeyConditionInput
+  $sortDirection: ModelSortDirection
+  $filter: ModelUserFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  userByName(
+    username: $username
+    id: $id
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      username
       createdAt
       updatedAt
     }

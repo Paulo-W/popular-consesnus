@@ -69,11 +69,13 @@ export type DeleteUserInput = {
 export type CreateChannelInput = {
   id?: string | null;
   name: string;
+  description?: string | null;
   channelCreatedById?: string | null;
 };
 
 export type ModelChannelConditionInput = {
   name?: ModelStringInput | null;
+  description?: ModelStringInput | null;
   and?: Array<ModelChannelConditionInput | null> | null;
   or?: Array<ModelChannelConditionInput | null> | null;
   not?: ModelChannelConditionInput | null;
@@ -82,6 +84,7 @@ export type ModelChannelConditionInput = {
 export type UpdateChannelInput = {
   id: string;
   name?: string | null;
+  description?: string | null;
   channelCreatedById?: string | null;
 };
 
@@ -108,6 +111,106 @@ export type UpdateUserChannelInput = {
 };
 
 export type DeleteUserChannelInput = {
+  id?: string | null;
+};
+
+export type CreateDebateInput = {
+  id?: string | null;
+  title: string;
+  description?: string | null;
+  tag?: string | null;
+  days?: number | null;
+  date?: string | null;
+  debateTeam1Id?: string | null;
+  debateTeam2Id?: string | null;
+  debateCreatedById?: string | null;
+  debateChannelId?: string | null;
+};
+
+export type ModelDebateConditionInput = {
+  title?: ModelStringInput | null;
+  description?: ModelStringInput | null;
+  tag?: ModelStringInput | null;
+  days?: ModelIntInput | null;
+  date?: ModelStringInput | null;
+  and?: Array<ModelDebateConditionInput | null> | null;
+  or?: Array<ModelDebateConditionInput | null> | null;
+  not?: ModelDebateConditionInput | null;
+};
+
+export type ModelIntInput = {
+  ne?: number | null;
+  eq?: number | null;
+  le?: number | null;
+  lt?: number | null;
+  ge?: number | null;
+  gt?: number | null;
+  between?: Array<number | null> | null;
+  attributeExists?: boolean | null;
+  attributeType?: ModelAttributeTypes | null;
+};
+
+export type UpdateDebateInput = {
+  id: string;
+  title?: string | null;
+  description?: string | null;
+  tag?: string | null;
+  days?: number | null;
+  date?: string | null;
+  debateTeam1Id?: string | null;
+  debateTeam2Id?: string | null;
+  debateCreatedById?: string | null;
+  debateChannelId?: string | null;
+};
+
+export type DeleteDebateInput = {
+  id?: string | null;
+};
+
+export type CreateTeamInput = {
+  id?: string | null;
+  name: string;
+  team?: number | null;
+  teamDebateId?: string | null;
+};
+
+export type ModelTeamConditionInput = {
+  name?: ModelStringInput | null;
+  team?: ModelIntInput | null;
+  and?: Array<ModelTeamConditionInput | null> | null;
+  or?: Array<ModelTeamConditionInput | null> | null;
+  not?: ModelTeamConditionInput | null;
+};
+
+export type UpdateTeamInput = {
+  id: string;
+  name?: string | null;
+  team?: number | null;
+  teamDebateId?: string | null;
+};
+
+export type DeleteTeamInput = {
+  id?: string | null;
+};
+
+export type CreateMessageInput = {
+  id?: string | null;
+  content?: string | null;
+};
+
+export type ModelMessageConditionInput = {
+  content?: ModelStringInput | null;
+  and?: Array<ModelMessageConditionInput | null> | null;
+  or?: Array<ModelMessageConditionInput | null> | null;
+  not?: ModelMessageConditionInput | null;
+};
+
+export type UpdateMessageInput = {
+  id: string;
+  content?: string | null;
+};
+
+export type DeleteMessageInput = {
   id?: string | null;
 };
 
@@ -138,6 +241,7 @@ export type ModelIDInput = {
 export type ModelChannelFilterInput = {
   id?: ModelIDInput | null;
   name?: ModelStringInput | null;
+  description?: ModelStringInput | null;
   and?: Array<ModelChannelFilterInput | null> | null;
   or?: Array<ModelChannelFilterInput | null> | null;
   not?: ModelChannelFilterInput | null;
@@ -150,18 +254,60 @@ export type ModelUserChannelFilterInput = {
   not?: ModelUserChannelFilterInput | null;
 };
 
+export type ModelDebateFilterInput = {
+  id?: ModelIDInput | null;
+  title?: ModelStringInput | null;
+  description?: ModelStringInput | null;
+  tag?: ModelStringInput | null;
+  days?: ModelIntInput | null;
+  date?: ModelStringInput | null;
+  and?: Array<ModelDebateFilterInput | null> | null;
+  or?: Array<ModelDebateFilterInput | null> | null;
+  not?: ModelDebateFilterInput | null;
+};
+
+export type ModelTeamFilterInput = {
+  id?: ModelIDInput | null;
+  name?: ModelStringInput | null;
+  team?: ModelIntInput | null;
+  and?: Array<ModelTeamFilterInput | null> | null;
+  or?: Array<ModelTeamFilterInput | null> | null;
+  not?: ModelTeamFilterInput | null;
+};
+
+export type ModelMessageFilterInput = {
+  id?: ModelIDInput | null;
+  content?: ModelStringInput | null;
+  and?: Array<ModelMessageFilterInput | null> | null;
+  or?: Array<ModelMessageFilterInput | null> | null;
+  not?: ModelMessageFilterInput | null;
+};
+
+export type ModelIDKeyConditionInput = {
+  eq?: string | null;
+  le?: string | null;
+  lt?: string | null;
+  ge?: string | null;
+  gt?: string | null;
+  between?: Array<string | null> | null;
+  beginsWith?: string | null;
+};
+
+export enum ModelSortDirection {
+  ASC = "ASC",
+  DESC = "DESC"
+}
+
 export type CreateUserMutation = {
   __typename: "User";
   id: string;
   username: string;
   channels: {
     __typename: "ModelUserChannelConnection";
-    items: Array<{
-      __typename: "UserChannel";
-      id: string;
-      createdAt: string;
-      updatedAt: string;
-    } | null> | null;
+    nextToken: string | null;
+  } | null;
+  debates: {
+    __typename: "ModelDebateConnection";
     nextToken: string | null;
   } | null;
   createdAt: string;
@@ -174,12 +320,10 @@ export type UpdateUserMutation = {
   username: string;
   channels: {
     __typename: "ModelUserChannelConnection";
-    items: Array<{
-      __typename: "UserChannel";
-      id: string;
-      createdAt: string;
-      updatedAt: string;
-    } | null> | null;
+    nextToken: string | null;
+  } | null;
+  debates: {
+    __typename: "ModelDebateConnection";
     nextToken: string | null;
   } | null;
   createdAt: string;
@@ -192,12 +336,10 @@ export type DeleteUserMutation = {
   username: string;
   channels: {
     __typename: "ModelUserChannelConnection";
-    items: Array<{
-      __typename: "UserChannel";
-      id: string;
-      createdAt: string;
-      updatedAt: string;
-    } | null> | null;
+    nextToken: string | null;
+  } | null;
+  debates: {
+    __typename: "ModelDebateConnection";
     nextToken: string | null;
   } | null;
   createdAt: string;
@@ -208,26 +350,21 @@ export type CreateChannelMutation = {
   __typename: "Channel";
   id: string;
   name: string;
-  members: {
-    __typename: "ModelUserChannelConnection";
-    items: Array<{
-      __typename: "UserChannel";
-      id: string;
-      createdAt: string;
-      updatedAt: string;
-    } | null> | null;
-    nextToken: string | null;
-  } | null;
+  description: string | null;
   createdBy: {
     __typename: "User";
     id: string;
     username: string;
-    channels: {
-      __typename: "ModelUserChannelConnection";
-      nextToken: string | null;
-    } | null;
     createdAt: string;
     updatedAt: string;
+  } | null;
+  members: {
+    __typename: "ModelUserChannelConnection";
+    nextToken: string | null;
+  } | null;
+  debates: {
+    __typename: "ModelDebateConnection";
+    nextToken: string | null;
   } | null;
   createdAt: string;
   updatedAt: string;
@@ -237,26 +374,21 @@ export type UpdateChannelMutation = {
   __typename: "Channel";
   id: string;
   name: string;
-  members: {
-    __typename: "ModelUserChannelConnection";
-    items: Array<{
-      __typename: "UserChannel";
-      id: string;
-      createdAt: string;
-      updatedAt: string;
-    } | null> | null;
-    nextToken: string | null;
-  } | null;
+  description: string | null;
   createdBy: {
     __typename: "User";
     id: string;
     username: string;
-    channels: {
-      __typename: "ModelUserChannelConnection";
-      nextToken: string | null;
-    } | null;
     createdAt: string;
     updatedAt: string;
+  } | null;
+  members: {
+    __typename: "ModelUserChannelConnection";
+    nextToken: string | null;
+  } | null;
+  debates: {
+    __typename: "ModelDebateConnection";
+    nextToken: string | null;
   } | null;
   createdAt: string;
   updatedAt: string;
@@ -266,26 +398,21 @@ export type DeleteChannelMutation = {
   __typename: "Channel";
   id: string;
   name: string;
-  members: {
-    __typename: "ModelUserChannelConnection";
-    items: Array<{
-      __typename: "UserChannel";
-      id: string;
-      createdAt: string;
-      updatedAt: string;
-    } | null> | null;
-    nextToken: string | null;
-  } | null;
+  description: string | null;
   createdBy: {
     __typename: "User";
     id: string;
     username: string;
-    channels: {
-      __typename: "ModelUserChannelConnection";
-      nextToken: string | null;
-    } | null;
     createdAt: string;
     updatedAt: string;
+  } | null;
+  members: {
+    __typename: "ModelUserChannelConnection";
+    nextToken: string | null;
+  } | null;
+  debates: {
+    __typename: "ModelDebateConnection";
+    nextToken: string | null;
   } | null;
   createdAt: string;
   updatedAt: string;
@@ -298,10 +425,6 @@ export type CreateUserChannelMutation = {
     __typename: "User";
     id: string;
     username: string;
-    channels: {
-      __typename: "ModelUserChannelConnection";
-      nextToken: string | null;
-    } | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -309,17 +432,7 @@ export type CreateUserChannelMutation = {
     __typename: "Channel";
     id: string;
     name: string;
-    members: {
-      __typename: "ModelUserChannelConnection";
-      nextToken: string | null;
-    } | null;
-    createdBy: {
-      __typename: "User";
-      id: string;
-      username: string;
-      createdAt: string;
-      updatedAt: string;
-    } | null;
+    description: string | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -334,10 +447,6 @@ export type UpdateUserChannelMutation = {
     __typename: "User";
     id: string;
     username: string;
-    channels: {
-      __typename: "ModelUserChannelConnection";
-      nextToken: string | null;
-    } | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -345,17 +454,7 @@ export type UpdateUserChannelMutation = {
     __typename: "Channel";
     id: string;
     name: string;
-    members: {
-      __typename: "ModelUserChannelConnection";
-      nextToken: string | null;
-    } | null;
-    createdBy: {
-      __typename: "User";
-      id: string;
-      username: string;
-      createdAt: string;
-      updatedAt: string;
-    } | null;
+    description: string | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -370,10 +469,6 @@ export type DeleteUserChannelMutation = {
     __typename: "User";
     id: string;
     username: string;
-    channels: {
-      __typename: "ModelUserChannelConnection";
-      nextToken: string | null;
-    } | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -381,20 +476,328 @@ export type DeleteUserChannelMutation = {
     __typename: "Channel";
     id: string;
     name: string;
-    members: {
-      __typename: "ModelUserChannelConnection";
-      nextToken: string | null;
-    } | null;
-    createdBy: {
-      __typename: "User";
-      id: string;
-      username: string;
-      createdAt: string;
-      updatedAt: string;
-    } | null;
+    description: string | null;
     createdAt: string;
     updatedAt: string;
   } | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type CreateDebateMutation = {
+  __typename: "Debate";
+  id: string;
+  title: string;
+  description: string | null;
+  team1: {
+    __typename: "Team";
+    id: string;
+    name: string;
+    team: number | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  team2: {
+    __typename: "Team";
+    id: string;
+    name: string;
+    team: number | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  tag: string | null;
+  days: number | null;
+  date: string | null;
+  createdBy: {
+    __typename: "User";
+    id: string;
+    username: string;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  channel: {
+    __typename: "Channel";
+    id: string;
+    name: string;
+    description: string | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type UpdateDebateMutation = {
+  __typename: "Debate";
+  id: string;
+  title: string;
+  description: string | null;
+  team1: {
+    __typename: "Team";
+    id: string;
+    name: string;
+    team: number | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  team2: {
+    __typename: "Team";
+    id: string;
+    name: string;
+    team: number | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  tag: string | null;
+  days: number | null;
+  date: string | null;
+  createdBy: {
+    __typename: "User";
+    id: string;
+    username: string;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  channel: {
+    __typename: "Channel";
+    id: string;
+    name: string;
+    description: string | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type DeleteDebateMutation = {
+  __typename: "Debate";
+  id: string;
+  title: string;
+  description: string | null;
+  team1: {
+    __typename: "Team";
+    id: string;
+    name: string;
+    team: number | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  team2: {
+    __typename: "Team";
+    id: string;
+    name: string;
+    team: number | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  tag: string | null;
+  days: number | null;
+  date: string | null;
+  createdBy: {
+    __typename: "User";
+    id: string;
+    username: string;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  channel: {
+    __typename: "Channel";
+    id: string;
+    name: string;
+    description: string | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type CreateTeamMutation = {
+  __typename: "Team";
+  id: string;
+  name: string;
+  debate: {
+    __typename: "Debate";
+    id: string;
+    title: string;
+    description: string | null;
+    tag: string | null;
+    days: number | null;
+    date: string | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  team: number | null;
+  members: Array<{
+    __typename: "User";
+    id: string;
+    username: string;
+    createdAt: string;
+    updatedAt: string;
+  } | null> | null;
+  messages: Array<{
+    __typename: "Message";
+    id: string;
+    content: string | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null> | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type UpdateTeamMutation = {
+  __typename: "Team";
+  id: string;
+  name: string;
+  debate: {
+    __typename: "Debate";
+    id: string;
+    title: string;
+    description: string | null;
+    tag: string | null;
+    days: number | null;
+    date: string | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  team: number | null;
+  members: Array<{
+    __typename: "User";
+    id: string;
+    username: string;
+    createdAt: string;
+    updatedAt: string;
+  } | null> | null;
+  messages: Array<{
+    __typename: "Message";
+    id: string;
+    content: string | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null> | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type DeleteTeamMutation = {
+  __typename: "Team";
+  id: string;
+  name: string;
+  debate: {
+    __typename: "Debate";
+    id: string;
+    title: string;
+    description: string | null;
+    tag: string | null;
+    days: number | null;
+    date: string | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  team: number | null;
+  members: Array<{
+    __typename: "User";
+    id: string;
+    username: string;
+    createdAt: string;
+    updatedAt: string;
+  } | null> | null;
+  messages: Array<{
+    __typename: "Message";
+    id: string;
+    content: string | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null> | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type CreateMessageMutation = {
+  __typename: "Message";
+  id: string;
+  user: {
+    __typename: "User";
+    id: string;
+    username: string;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  content: string | null;
+  likeUsers: Array<{
+    __typename: "User";
+    id: string;
+    username: string;
+    createdAt: string;
+    updatedAt: string;
+  } | null> | null;
+  dislikeUsers: Array<{
+    __typename: "User";
+    id: string;
+    username: string;
+    createdAt: string;
+    updatedAt: string;
+  } | null> | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type UpdateMessageMutation = {
+  __typename: "Message";
+  id: string;
+  user: {
+    __typename: "User";
+    id: string;
+    username: string;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  content: string | null;
+  likeUsers: Array<{
+    __typename: "User";
+    id: string;
+    username: string;
+    createdAt: string;
+    updatedAt: string;
+  } | null> | null;
+  dislikeUsers: Array<{
+    __typename: "User";
+    id: string;
+    username: string;
+    createdAt: string;
+    updatedAt: string;
+  } | null> | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type DeleteMessageMutation = {
+  __typename: "Message";
+  id: string;
+  user: {
+    __typename: "User";
+    id: string;
+    username: string;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  content: string | null;
+  likeUsers: Array<{
+    __typename: "User";
+    id: string;
+    username: string;
+    createdAt: string;
+    updatedAt: string;
+  } | null> | null;
+  dislikeUsers: Array<{
+    __typename: "User";
+    id: string;
+    username: string;
+    createdAt: string;
+    updatedAt: string;
+  } | null> | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -405,12 +808,10 @@ export type GetUserQuery = {
   username: string;
   channels: {
     __typename: "ModelUserChannelConnection";
-    items: Array<{
-      __typename: "UserChannel";
-      id: string;
-      createdAt: string;
-      updatedAt: string;
-    } | null> | null;
+    nextToken: string | null;
+  } | null;
+  debates: {
+    __typename: "ModelDebateConnection";
     nextToken: string | null;
   } | null;
   createdAt: string;
@@ -423,10 +824,6 @@ export type ListUsersQuery = {
     __typename: "User";
     id: string;
     username: string;
-    channels: {
-      __typename: "ModelUserChannelConnection";
-      nextToken: string | null;
-    } | null;
     createdAt: string;
     updatedAt: string;
   } | null> | null;
@@ -437,26 +834,21 @@ export type GetChannelQuery = {
   __typename: "Channel";
   id: string;
   name: string;
-  members: {
-    __typename: "ModelUserChannelConnection";
-    items: Array<{
-      __typename: "UserChannel";
-      id: string;
-      createdAt: string;
-      updatedAt: string;
-    } | null> | null;
-    nextToken: string | null;
-  } | null;
+  description: string | null;
   createdBy: {
     __typename: "User";
     id: string;
     username: string;
-    channels: {
-      __typename: "ModelUserChannelConnection";
-      nextToken: string | null;
-    } | null;
     createdAt: string;
     updatedAt: string;
+  } | null;
+  members: {
+    __typename: "ModelUserChannelConnection";
+    nextToken: string | null;
+  } | null;
+  debates: {
+    __typename: "ModelDebateConnection";
+    nextToken: string | null;
   } | null;
   createdAt: string;
   updatedAt: string;
@@ -468,17 +860,7 @@ export type ListChannelsQuery = {
     __typename: "Channel";
     id: string;
     name: string;
-    members: {
-      __typename: "ModelUserChannelConnection";
-      nextToken: string | null;
-    } | null;
-    createdBy: {
-      __typename: "User";
-      id: string;
-      username: string;
-      createdAt: string;
-      updatedAt: string;
-    } | null;
+    description: string | null;
     createdAt: string;
     updatedAt: string;
   } | null> | null;
@@ -492,10 +874,6 @@ export type GetUserChannelQuery = {
     __typename: "User";
     id: string;
     username: string;
-    channels: {
-      __typename: "ModelUserChannelConnection";
-      nextToken: string | null;
-    } | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -503,17 +881,7 @@ export type GetUserChannelQuery = {
     __typename: "Channel";
     id: string;
     name: string;
-    members: {
-      __typename: "ModelUserChannelConnection";
-      nextToken: string | null;
-    } | null;
-    createdBy: {
-      __typename: "User";
-      id: string;
-      username: string;
-      createdAt: string;
-      updatedAt: string;
-    } | null;
+    description: string | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -526,20 +894,165 @@ export type ListUserChannelsQuery = {
   items: Array<{
     __typename: "UserChannel";
     id: string;
-    user: {
-      __typename: "User";
-      id: string;
-      username: string;
-      createdAt: string;
-      updatedAt: string;
-    } | null;
-    channel: {
-      __typename: "Channel";
-      id: string;
-      name: string;
-      createdAt: string;
-      updatedAt: string;
-    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null> | null;
+  nextToken: string | null;
+};
+
+export type GetDebateQuery = {
+  __typename: "Debate";
+  id: string;
+  title: string;
+  description: string | null;
+  team1: {
+    __typename: "Team";
+    id: string;
+    name: string;
+    team: number | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  team2: {
+    __typename: "Team";
+    id: string;
+    name: string;
+    team: number | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  tag: string | null;
+  days: number | null;
+  date: string | null;
+  createdBy: {
+    __typename: "User";
+    id: string;
+    username: string;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  channel: {
+    __typename: "Channel";
+    id: string;
+    name: string;
+    description: string | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type ListDebatesQuery = {
+  __typename: "ModelDebateConnection";
+  items: Array<{
+    __typename: "Debate";
+    id: string;
+    title: string;
+    description: string | null;
+    tag: string | null;
+    days: number | null;
+    date: string | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null> | null;
+  nextToken: string | null;
+};
+
+export type GetTeamQuery = {
+  __typename: "Team";
+  id: string;
+  name: string;
+  debate: {
+    __typename: "Debate";
+    id: string;
+    title: string;
+    description: string | null;
+    tag: string | null;
+    days: number | null;
+    date: string | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  team: number | null;
+  members: Array<{
+    __typename: "User";
+    id: string;
+    username: string;
+    createdAt: string;
+    updatedAt: string;
+  } | null> | null;
+  messages: Array<{
+    __typename: "Message";
+    id: string;
+    content: string | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null> | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type ListTeamsQuery = {
+  __typename: "ModelTeamConnection";
+  items: Array<{
+    __typename: "Team";
+    id: string;
+    name: string;
+    team: number | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null> | null;
+  nextToken: string | null;
+};
+
+export type GetMessageQuery = {
+  __typename: "Message";
+  id: string;
+  user: {
+    __typename: "User";
+    id: string;
+    username: string;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  content: string | null;
+  likeUsers: Array<{
+    __typename: "User";
+    id: string;
+    username: string;
+    createdAt: string;
+    updatedAt: string;
+  } | null> | null;
+  dislikeUsers: Array<{
+    __typename: "User";
+    id: string;
+    username: string;
+    createdAt: string;
+    updatedAt: string;
+  } | null> | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type ListMessagesQuery = {
+  __typename: "ModelMessageConnection";
+  items: Array<{
+    __typename: "Message";
+    id: string;
+    content: string | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null> | null;
+  nextToken: string | null;
+};
+
+export type UserByNameQuery = {
+  __typename: "ModelUserConnection";
+  items: Array<{
+    __typename: "User";
+    id: string;
+    username: string;
     createdAt: string;
     updatedAt: string;
   } | null> | null;
@@ -552,12 +1065,10 @@ export type OnCreateUserSubscription = {
   username: string;
   channels: {
     __typename: "ModelUserChannelConnection";
-    items: Array<{
-      __typename: "UserChannel";
-      id: string;
-      createdAt: string;
-      updatedAt: string;
-    } | null> | null;
+    nextToken: string | null;
+  } | null;
+  debates: {
+    __typename: "ModelDebateConnection";
     nextToken: string | null;
   } | null;
   createdAt: string;
@@ -570,12 +1081,10 @@ export type OnUpdateUserSubscription = {
   username: string;
   channels: {
     __typename: "ModelUserChannelConnection";
-    items: Array<{
-      __typename: "UserChannel";
-      id: string;
-      createdAt: string;
-      updatedAt: string;
-    } | null> | null;
+    nextToken: string | null;
+  } | null;
+  debates: {
+    __typename: "ModelDebateConnection";
     nextToken: string | null;
   } | null;
   createdAt: string;
@@ -588,12 +1097,10 @@ export type OnDeleteUserSubscription = {
   username: string;
   channels: {
     __typename: "ModelUserChannelConnection";
-    items: Array<{
-      __typename: "UserChannel";
-      id: string;
-      createdAt: string;
-      updatedAt: string;
-    } | null> | null;
+    nextToken: string | null;
+  } | null;
+  debates: {
+    __typename: "ModelDebateConnection";
     nextToken: string | null;
   } | null;
   createdAt: string;
@@ -604,26 +1111,21 @@ export type OnCreateChannelSubscription = {
   __typename: "Channel";
   id: string;
   name: string;
-  members: {
-    __typename: "ModelUserChannelConnection";
-    items: Array<{
-      __typename: "UserChannel";
-      id: string;
-      createdAt: string;
-      updatedAt: string;
-    } | null> | null;
-    nextToken: string | null;
-  } | null;
+  description: string | null;
   createdBy: {
     __typename: "User";
     id: string;
     username: string;
-    channels: {
-      __typename: "ModelUserChannelConnection";
-      nextToken: string | null;
-    } | null;
     createdAt: string;
     updatedAt: string;
+  } | null;
+  members: {
+    __typename: "ModelUserChannelConnection";
+    nextToken: string | null;
+  } | null;
+  debates: {
+    __typename: "ModelDebateConnection";
+    nextToken: string | null;
   } | null;
   createdAt: string;
   updatedAt: string;
@@ -633,26 +1135,21 @@ export type OnUpdateChannelSubscription = {
   __typename: "Channel";
   id: string;
   name: string;
-  members: {
-    __typename: "ModelUserChannelConnection";
-    items: Array<{
-      __typename: "UserChannel";
-      id: string;
-      createdAt: string;
-      updatedAt: string;
-    } | null> | null;
-    nextToken: string | null;
-  } | null;
+  description: string | null;
   createdBy: {
     __typename: "User";
     id: string;
     username: string;
-    channels: {
-      __typename: "ModelUserChannelConnection";
-      nextToken: string | null;
-    } | null;
     createdAt: string;
     updatedAt: string;
+  } | null;
+  members: {
+    __typename: "ModelUserChannelConnection";
+    nextToken: string | null;
+  } | null;
+  debates: {
+    __typename: "ModelDebateConnection";
+    nextToken: string | null;
   } | null;
   createdAt: string;
   updatedAt: string;
@@ -662,26 +1159,21 @@ export type OnDeleteChannelSubscription = {
   __typename: "Channel";
   id: string;
   name: string;
-  members: {
-    __typename: "ModelUserChannelConnection";
-    items: Array<{
-      __typename: "UserChannel";
-      id: string;
-      createdAt: string;
-      updatedAt: string;
-    } | null> | null;
-    nextToken: string | null;
-  } | null;
+  description: string | null;
   createdBy: {
     __typename: "User";
     id: string;
     username: string;
-    channels: {
-      __typename: "ModelUserChannelConnection";
-      nextToken: string | null;
-    } | null;
     createdAt: string;
     updatedAt: string;
+  } | null;
+  members: {
+    __typename: "ModelUserChannelConnection";
+    nextToken: string | null;
+  } | null;
+  debates: {
+    __typename: "ModelDebateConnection";
+    nextToken: string | null;
   } | null;
   createdAt: string;
   updatedAt: string;
@@ -694,10 +1186,6 @@ export type OnCreateUserChannelSubscription = {
     __typename: "User";
     id: string;
     username: string;
-    channels: {
-      __typename: "ModelUserChannelConnection";
-      nextToken: string | null;
-    } | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -705,17 +1193,7 @@ export type OnCreateUserChannelSubscription = {
     __typename: "Channel";
     id: string;
     name: string;
-    members: {
-      __typename: "ModelUserChannelConnection";
-      nextToken: string | null;
-    } | null;
-    createdBy: {
-      __typename: "User";
-      id: string;
-      username: string;
-      createdAt: string;
-      updatedAt: string;
-    } | null;
+    description: string | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -730,10 +1208,6 @@ export type OnUpdateUserChannelSubscription = {
     __typename: "User";
     id: string;
     username: string;
-    channels: {
-      __typename: "ModelUserChannelConnection";
-      nextToken: string | null;
-    } | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -741,17 +1215,7 @@ export type OnUpdateUserChannelSubscription = {
     __typename: "Channel";
     id: string;
     name: string;
-    members: {
-      __typename: "ModelUserChannelConnection";
-      nextToken: string | null;
-    } | null;
-    createdBy: {
-      __typename: "User";
-      id: string;
-      username: string;
-      createdAt: string;
-      updatedAt: string;
-    } | null;
+    description: string | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -766,10 +1230,6 @@ export type OnDeleteUserChannelSubscription = {
     __typename: "User";
     id: string;
     username: string;
-    channels: {
-      __typename: "ModelUserChannelConnection";
-      nextToken: string | null;
-    } | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -777,20 +1237,328 @@ export type OnDeleteUserChannelSubscription = {
     __typename: "Channel";
     id: string;
     name: string;
-    members: {
-      __typename: "ModelUserChannelConnection";
-      nextToken: string | null;
-    } | null;
-    createdBy: {
-      __typename: "User";
-      id: string;
-      username: string;
-      createdAt: string;
-      updatedAt: string;
-    } | null;
+    description: string | null;
     createdAt: string;
     updatedAt: string;
   } | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnCreateDebateSubscription = {
+  __typename: "Debate";
+  id: string;
+  title: string;
+  description: string | null;
+  team1: {
+    __typename: "Team";
+    id: string;
+    name: string;
+    team: number | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  team2: {
+    __typename: "Team";
+    id: string;
+    name: string;
+    team: number | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  tag: string | null;
+  days: number | null;
+  date: string | null;
+  createdBy: {
+    __typename: "User";
+    id: string;
+    username: string;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  channel: {
+    __typename: "Channel";
+    id: string;
+    name: string;
+    description: string | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnUpdateDebateSubscription = {
+  __typename: "Debate";
+  id: string;
+  title: string;
+  description: string | null;
+  team1: {
+    __typename: "Team";
+    id: string;
+    name: string;
+    team: number | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  team2: {
+    __typename: "Team";
+    id: string;
+    name: string;
+    team: number | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  tag: string | null;
+  days: number | null;
+  date: string | null;
+  createdBy: {
+    __typename: "User";
+    id: string;
+    username: string;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  channel: {
+    __typename: "Channel";
+    id: string;
+    name: string;
+    description: string | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnDeleteDebateSubscription = {
+  __typename: "Debate";
+  id: string;
+  title: string;
+  description: string | null;
+  team1: {
+    __typename: "Team";
+    id: string;
+    name: string;
+    team: number | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  team2: {
+    __typename: "Team";
+    id: string;
+    name: string;
+    team: number | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  tag: string | null;
+  days: number | null;
+  date: string | null;
+  createdBy: {
+    __typename: "User";
+    id: string;
+    username: string;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  channel: {
+    __typename: "Channel";
+    id: string;
+    name: string;
+    description: string | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnCreateTeamSubscription = {
+  __typename: "Team";
+  id: string;
+  name: string;
+  debate: {
+    __typename: "Debate";
+    id: string;
+    title: string;
+    description: string | null;
+    tag: string | null;
+    days: number | null;
+    date: string | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  team: number | null;
+  members: Array<{
+    __typename: "User";
+    id: string;
+    username: string;
+    createdAt: string;
+    updatedAt: string;
+  } | null> | null;
+  messages: Array<{
+    __typename: "Message";
+    id: string;
+    content: string | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null> | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnUpdateTeamSubscription = {
+  __typename: "Team";
+  id: string;
+  name: string;
+  debate: {
+    __typename: "Debate";
+    id: string;
+    title: string;
+    description: string | null;
+    tag: string | null;
+    days: number | null;
+    date: string | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  team: number | null;
+  members: Array<{
+    __typename: "User";
+    id: string;
+    username: string;
+    createdAt: string;
+    updatedAt: string;
+  } | null> | null;
+  messages: Array<{
+    __typename: "Message";
+    id: string;
+    content: string | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null> | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnDeleteTeamSubscription = {
+  __typename: "Team";
+  id: string;
+  name: string;
+  debate: {
+    __typename: "Debate";
+    id: string;
+    title: string;
+    description: string | null;
+    tag: string | null;
+    days: number | null;
+    date: string | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  team: number | null;
+  members: Array<{
+    __typename: "User";
+    id: string;
+    username: string;
+    createdAt: string;
+    updatedAt: string;
+  } | null> | null;
+  messages: Array<{
+    __typename: "Message";
+    id: string;
+    content: string | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null> | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnCreateMessageSubscription = {
+  __typename: "Message";
+  id: string;
+  user: {
+    __typename: "User";
+    id: string;
+    username: string;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  content: string | null;
+  likeUsers: Array<{
+    __typename: "User";
+    id: string;
+    username: string;
+    createdAt: string;
+    updatedAt: string;
+  } | null> | null;
+  dislikeUsers: Array<{
+    __typename: "User";
+    id: string;
+    username: string;
+    createdAt: string;
+    updatedAt: string;
+  } | null> | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnUpdateMessageSubscription = {
+  __typename: "Message";
+  id: string;
+  user: {
+    __typename: "User";
+    id: string;
+    username: string;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  content: string | null;
+  likeUsers: Array<{
+    __typename: "User";
+    id: string;
+    username: string;
+    createdAt: string;
+    updatedAt: string;
+  } | null> | null;
+  dislikeUsers: Array<{
+    __typename: "User";
+    id: string;
+    username: string;
+    createdAt: string;
+    updatedAt: string;
+  } | null> | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnDeleteMessageSubscription = {
+  __typename: "Message";
+  id: string;
+  user: {
+    __typename: "User";
+    id: string;
+    username: string;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  content: string | null;
+  likeUsers: Array<{
+    __typename: "User";
+    id: string;
+    username: string;
+    createdAt: string;
+    updatedAt: string;
+  } | null> | null;
+  dislikeUsers: Array<{
+    __typename: "User";
+    id: string;
+    username: string;
+    createdAt: string;
+    updatedAt: string;
+  } | null> | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -810,12 +1578,10 @@ export class APIService {
           username
           channels {
             __typename
-            items {
-              __typename
-              id
-              createdAt
-              updatedAt
-            }
+            nextToken
+          }
+          debates {
+            __typename
             nextToken
           }
           createdAt
@@ -844,12 +1610,10 @@ export class APIService {
           username
           channels {
             __typename
-            items {
-              __typename
-              id
-              createdAt
-              updatedAt
-            }
+            nextToken
+          }
+          debates {
+            __typename
             nextToken
           }
           createdAt
@@ -878,12 +1642,10 @@ export class APIService {
           username
           channels {
             __typename
-            items {
-              __typename
-              id
-              createdAt
-              updatedAt
-            }
+            nextToken
+          }
+          debates {
+            __typename
             nextToken
           }
           createdAt
@@ -910,26 +1672,21 @@ export class APIService {
           __typename
           id
           name
-          members {
-            __typename
-            items {
-              __typename
-              id
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
+          description
           createdBy {
             __typename
             id
             username
-            channels {
-              __typename
-              nextToken
-            }
             createdAt
             updatedAt
+          }
+          members {
+            __typename
+            nextToken
+          }
+          debates {
+            __typename
+            nextToken
           }
           createdAt
           updatedAt
@@ -955,26 +1712,21 @@ export class APIService {
           __typename
           id
           name
-          members {
-            __typename
-            items {
-              __typename
-              id
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
+          description
           createdBy {
             __typename
             id
             username
-            channels {
-              __typename
-              nextToken
-            }
             createdAt
             updatedAt
+          }
+          members {
+            __typename
+            nextToken
+          }
+          debates {
+            __typename
+            nextToken
           }
           createdAt
           updatedAt
@@ -1000,26 +1752,21 @@ export class APIService {
           __typename
           id
           name
-          members {
-            __typename
-            items {
-              __typename
-              id
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
+          description
           createdBy {
             __typename
             id
             username
-            channels {
-              __typename
-              nextToken
-            }
             createdAt
             updatedAt
+          }
+          members {
+            __typename
+            nextToken
+          }
+          debates {
+            __typename
+            nextToken
           }
           createdAt
           updatedAt
@@ -1048,10 +1795,6 @@ export class APIService {
             __typename
             id
             username
-            channels {
-              __typename
-              nextToken
-            }
             createdAt
             updatedAt
           }
@@ -1059,17 +1802,7 @@ export class APIService {
             __typename
             id
             name
-            members {
-              __typename
-              nextToken
-            }
-            createdBy {
-              __typename
-              id
-              username
-              createdAt
-              updatedAt
-            }
+            description
             createdAt
             updatedAt
           }
@@ -1100,10 +1833,6 @@ export class APIService {
             __typename
             id
             username
-            channels {
-              __typename
-              nextToken
-            }
             createdAt
             updatedAt
           }
@@ -1111,17 +1840,7 @@ export class APIService {
             __typename
             id
             name
-            members {
-              __typename
-              nextToken
-            }
-            createdBy {
-              __typename
-              id
-              username
-              createdAt
-              updatedAt
-            }
+            description
             createdAt
             updatedAt
           }
@@ -1152,10 +1871,6 @@ export class APIService {
             __typename
             id
             username
-            channels {
-              __typename
-              nextToken
-            }
             createdAt
             updatedAt
           }
@@ -1163,17 +1878,7 @@ export class APIService {
             __typename
             id
             name
-            members {
-              __typename
-              nextToken
-            }
-            createdBy {
-              __typename
-              id
-              username
-              createdAt
-              updatedAt
-            }
+            description
             createdAt
             updatedAt
           }
@@ -1192,6 +1897,468 @@ export class APIService {
     )) as any;
     return <DeleteUserChannelMutation>response.data.deleteUserChannel;
   }
+  async CreateDebate(
+    input: CreateDebateInput,
+    condition?: ModelDebateConditionInput
+  ): Promise<CreateDebateMutation> {
+    const statement = `mutation CreateDebate($input: CreateDebateInput!, $condition: ModelDebateConditionInput) {
+        createDebate(input: $input, condition: $condition) {
+          __typename
+          id
+          title
+          description
+          team1 {
+            __typename
+            id
+            name
+            team
+            createdAt
+            updatedAt
+          }
+          team2 {
+            __typename
+            id
+            name
+            team
+            createdAt
+            updatedAt
+          }
+          tag
+          days
+          date
+          createdBy {
+            __typename
+            id
+            username
+            createdAt
+            updatedAt
+          }
+          channel {
+            __typename
+            id
+            name
+            description
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <CreateDebateMutation>response.data.createDebate;
+  }
+  async UpdateDebate(
+    input: UpdateDebateInput,
+    condition?: ModelDebateConditionInput
+  ): Promise<UpdateDebateMutation> {
+    const statement = `mutation UpdateDebate($input: UpdateDebateInput!, $condition: ModelDebateConditionInput) {
+        updateDebate(input: $input, condition: $condition) {
+          __typename
+          id
+          title
+          description
+          team1 {
+            __typename
+            id
+            name
+            team
+            createdAt
+            updatedAt
+          }
+          team2 {
+            __typename
+            id
+            name
+            team
+            createdAt
+            updatedAt
+          }
+          tag
+          days
+          date
+          createdBy {
+            __typename
+            id
+            username
+            createdAt
+            updatedAt
+          }
+          channel {
+            __typename
+            id
+            name
+            description
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <UpdateDebateMutation>response.data.updateDebate;
+  }
+  async DeleteDebate(
+    input: DeleteDebateInput,
+    condition?: ModelDebateConditionInput
+  ): Promise<DeleteDebateMutation> {
+    const statement = `mutation DeleteDebate($input: DeleteDebateInput!, $condition: ModelDebateConditionInput) {
+        deleteDebate(input: $input, condition: $condition) {
+          __typename
+          id
+          title
+          description
+          team1 {
+            __typename
+            id
+            name
+            team
+            createdAt
+            updatedAt
+          }
+          team2 {
+            __typename
+            id
+            name
+            team
+            createdAt
+            updatedAt
+          }
+          tag
+          days
+          date
+          createdBy {
+            __typename
+            id
+            username
+            createdAt
+            updatedAt
+          }
+          channel {
+            __typename
+            id
+            name
+            description
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <DeleteDebateMutation>response.data.deleteDebate;
+  }
+  async CreateTeam(
+    input: CreateTeamInput,
+    condition?: ModelTeamConditionInput
+  ): Promise<CreateTeamMutation> {
+    const statement = `mutation CreateTeam($input: CreateTeamInput!, $condition: ModelTeamConditionInput) {
+        createTeam(input: $input, condition: $condition) {
+          __typename
+          id
+          name
+          debate {
+            __typename
+            id
+            title
+            description
+            tag
+            days
+            date
+            createdAt
+            updatedAt
+          }
+          team
+          members {
+            __typename
+            id
+            username
+            createdAt
+            updatedAt
+          }
+          messages {
+            __typename
+            id
+            content
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <CreateTeamMutation>response.data.createTeam;
+  }
+  async UpdateTeam(
+    input: UpdateTeamInput,
+    condition?: ModelTeamConditionInput
+  ): Promise<UpdateTeamMutation> {
+    const statement = `mutation UpdateTeam($input: UpdateTeamInput!, $condition: ModelTeamConditionInput) {
+        updateTeam(input: $input, condition: $condition) {
+          __typename
+          id
+          name
+          debate {
+            __typename
+            id
+            title
+            description
+            tag
+            days
+            date
+            createdAt
+            updatedAt
+          }
+          team
+          members {
+            __typename
+            id
+            username
+            createdAt
+            updatedAt
+          }
+          messages {
+            __typename
+            id
+            content
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <UpdateTeamMutation>response.data.updateTeam;
+  }
+  async DeleteTeam(
+    input: DeleteTeamInput,
+    condition?: ModelTeamConditionInput
+  ): Promise<DeleteTeamMutation> {
+    const statement = `mutation DeleteTeam($input: DeleteTeamInput!, $condition: ModelTeamConditionInput) {
+        deleteTeam(input: $input, condition: $condition) {
+          __typename
+          id
+          name
+          debate {
+            __typename
+            id
+            title
+            description
+            tag
+            days
+            date
+            createdAt
+            updatedAt
+          }
+          team
+          members {
+            __typename
+            id
+            username
+            createdAt
+            updatedAt
+          }
+          messages {
+            __typename
+            id
+            content
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <DeleteTeamMutation>response.data.deleteTeam;
+  }
+  async CreateMessage(
+    input: CreateMessageInput,
+    condition?: ModelMessageConditionInput
+  ): Promise<CreateMessageMutation> {
+    const statement = `mutation CreateMessage($input: CreateMessageInput!, $condition: ModelMessageConditionInput) {
+        createMessage(input: $input, condition: $condition) {
+          __typename
+          id
+          user {
+            __typename
+            id
+            username
+            createdAt
+            updatedAt
+          }
+          content
+          likeUsers {
+            __typename
+            id
+            username
+            createdAt
+            updatedAt
+          }
+          dislikeUsers {
+            __typename
+            id
+            username
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <CreateMessageMutation>response.data.createMessage;
+  }
+  async UpdateMessage(
+    input: UpdateMessageInput,
+    condition?: ModelMessageConditionInput
+  ): Promise<UpdateMessageMutation> {
+    const statement = `mutation UpdateMessage($input: UpdateMessageInput!, $condition: ModelMessageConditionInput) {
+        updateMessage(input: $input, condition: $condition) {
+          __typename
+          id
+          user {
+            __typename
+            id
+            username
+            createdAt
+            updatedAt
+          }
+          content
+          likeUsers {
+            __typename
+            id
+            username
+            createdAt
+            updatedAt
+          }
+          dislikeUsers {
+            __typename
+            id
+            username
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <UpdateMessageMutation>response.data.updateMessage;
+  }
+  async DeleteMessage(
+    input: DeleteMessageInput,
+    condition?: ModelMessageConditionInput
+  ): Promise<DeleteMessageMutation> {
+    const statement = `mutation DeleteMessage($input: DeleteMessageInput!, $condition: ModelMessageConditionInput) {
+        deleteMessage(input: $input, condition: $condition) {
+          __typename
+          id
+          user {
+            __typename
+            id
+            username
+            createdAt
+            updatedAt
+          }
+          content
+          likeUsers {
+            __typename
+            id
+            username
+            createdAt
+            updatedAt
+          }
+          dislikeUsers {
+            __typename
+            id
+            username
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <DeleteMessageMutation>response.data.deleteMessage;
+  }
   async GetUser(id: string): Promise<GetUserQuery> {
     const statement = `query GetUser($id: ID!) {
         getUser(id: $id) {
@@ -1200,12 +2367,10 @@ export class APIService {
           username
           channels {
             __typename
-            items {
-              __typename
-              id
-              createdAt
-              updatedAt
-            }
+            nextToken
+          }
+          debates {
+            __typename
             nextToken
           }
           createdAt
@@ -1232,10 +2397,6 @@ export class APIService {
             __typename
             id
             username
-            channels {
-              __typename
-              nextToken
-            }
             createdAt
             updatedAt
           }
@@ -1263,26 +2424,21 @@ export class APIService {
           __typename
           id
           name
-          members {
-            __typename
-            items {
-              __typename
-              id
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
+          description
           createdBy {
             __typename
             id
             username
-            channels {
-              __typename
-              nextToken
-            }
             createdAt
             updatedAt
+          }
+          members {
+            __typename
+            nextToken
+          }
+          debates {
+            __typename
+            nextToken
           }
           createdAt
           updatedAt
@@ -1308,17 +2464,7 @@ export class APIService {
             __typename
             id
             name
-            members {
-              __typename
-              nextToken
-            }
-            createdBy {
-              __typename
-              id
-              username
-              createdAt
-              updatedAt
-            }
+            description
             createdAt
             updatedAt
           }
@@ -1349,10 +2495,6 @@ export class APIService {
             __typename
             id
             username
-            channels {
-              __typename
-              nextToken
-            }
             createdAt
             updatedAt
           }
@@ -1360,17 +2502,7 @@ export class APIService {
             __typename
             id
             name
-            members {
-              __typename
-              nextToken
-            }
-            createdBy {
-              __typename
-              id
-              username
-              createdAt
-              updatedAt
-            }
+            description
             createdAt
             updatedAt
           }
@@ -1397,20 +2529,6 @@ export class APIService {
           items {
             __typename
             id
-            user {
-              __typename
-              id
-              username
-              createdAt
-              updatedAt
-            }
-            channel {
-              __typename
-              id
-              name
-              createdAt
-              updatedAt
-            }
             createdAt
             updatedAt
           }
@@ -1432,6 +2550,291 @@ export class APIService {
     )) as any;
     return <ListUserChannelsQuery>response.data.listUserChannels;
   }
+  async GetDebate(id: string): Promise<GetDebateQuery> {
+    const statement = `query GetDebate($id: ID!) {
+        getDebate(id: $id) {
+          __typename
+          id
+          title
+          description
+          team1 {
+            __typename
+            id
+            name
+            team
+            createdAt
+            updatedAt
+          }
+          team2 {
+            __typename
+            id
+            name
+            team
+            createdAt
+            updatedAt
+          }
+          tag
+          days
+          date
+          createdBy {
+            __typename
+            id
+            username
+            createdAt
+            updatedAt
+          }
+          channel {
+            __typename
+            id
+            name
+            description
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      id
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <GetDebateQuery>response.data.getDebate;
+  }
+  async ListDebates(
+    filter?: ModelDebateFilterInput,
+    limit?: number,
+    nextToken?: string
+  ): Promise<ListDebatesQuery> {
+    const statement = `query ListDebates($filter: ModelDebateFilterInput, $limit: Int, $nextToken: String) {
+        listDebates(filter: $filter, limit: $limit, nextToken: $nextToken) {
+          __typename
+          items {
+            __typename
+            id
+            title
+            description
+            tag
+            days
+            date
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <ListDebatesQuery>response.data.listDebates;
+  }
+  async GetTeam(id: string): Promise<GetTeamQuery> {
+    const statement = `query GetTeam($id: ID!) {
+        getTeam(id: $id) {
+          __typename
+          id
+          name
+          debate {
+            __typename
+            id
+            title
+            description
+            tag
+            days
+            date
+            createdAt
+            updatedAt
+          }
+          team
+          members {
+            __typename
+            id
+            username
+            createdAt
+            updatedAt
+          }
+          messages {
+            __typename
+            id
+            content
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      id
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <GetTeamQuery>response.data.getTeam;
+  }
+  async ListTeams(
+    filter?: ModelTeamFilterInput,
+    limit?: number,
+    nextToken?: string
+  ): Promise<ListTeamsQuery> {
+    const statement = `query ListTeams($filter: ModelTeamFilterInput, $limit: Int, $nextToken: String) {
+        listTeams(filter: $filter, limit: $limit, nextToken: $nextToken) {
+          __typename
+          items {
+            __typename
+            id
+            name
+            team
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <ListTeamsQuery>response.data.listTeams;
+  }
+  async GetMessage(id: string): Promise<GetMessageQuery> {
+    const statement = `query GetMessage($id: ID!) {
+        getMessage(id: $id) {
+          __typename
+          id
+          user {
+            __typename
+            id
+            username
+            createdAt
+            updatedAt
+          }
+          content
+          likeUsers {
+            __typename
+            id
+            username
+            createdAt
+            updatedAt
+          }
+          dislikeUsers {
+            __typename
+            id
+            username
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      id
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <GetMessageQuery>response.data.getMessage;
+  }
+  async ListMessages(
+    filter?: ModelMessageFilterInput,
+    limit?: number,
+    nextToken?: string
+  ): Promise<ListMessagesQuery> {
+    const statement = `query ListMessages($filter: ModelMessageFilterInput, $limit: Int, $nextToken: String) {
+        listMessages(filter: $filter, limit: $limit, nextToken: $nextToken) {
+          __typename
+          items {
+            __typename
+            id
+            content
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <ListMessagesQuery>response.data.listMessages;
+  }
+  async UserByName(
+    username?: string,
+    id?: ModelIDKeyConditionInput,
+    sortDirection?: ModelSortDirection,
+    filter?: ModelUserFilterInput,
+    limit?: number,
+    nextToken?: string
+  ): Promise<UserByNameQuery> {
+    const statement = `query UserByName($username: String, $id: ModelIDKeyConditionInput, $sortDirection: ModelSortDirection, $filter: ModelUserFilterInput, $limit: Int, $nextToken: String) {
+        userByName(username: $username, id: $id, sortDirection: $sortDirection, filter: $filter, limit: $limit, nextToken: $nextToken) {
+          __typename
+          items {
+            __typename
+            id
+            username
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (username) {
+      gqlAPIServiceArguments.username = username;
+    }
+    if (id) {
+      gqlAPIServiceArguments.id = id;
+    }
+    if (sortDirection) {
+      gqlAPIServiceArguments.sortDirection = sortDirection;
+    }
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <UserByNameQuery>response.data.userByName;
+  }
   OnCreateUserListener: Observable<OnCreateUserSubscription> = API.graphql(
     graphqlOperation(
       `subscription OnCreateUser {
@@ -1441,12 +2844,10 @@ export class APIService {
           username
           channels {
             __typename
-            items {
-              __typename
-              id
-              createdAt
-              updatedAt
-            }
+            nextToken
+          }
+          debates {
+            __typename
             nextToken
           }
           createdAt
@@ -1465,12 +2866,10 @@ export class APIService {
           username
           channels {
             __typename
-            items {
-              __typename
-              id
-              createdAt
-              updatedAt
-            }
+            nextToken
+          }
+          debates {
+            __typename
             nextToken
           }
           createdAt
@@ -1489,12 +2888,10 @@ export class APIService {
           username
           channels {
             __typename
-            items {
-              __typename
-              id
-              createdAt
-              updatedAt
-            }
+            nextToken
+          }
+          debates {
+            __typename
             nextToken
           }
           createdAt
@@ -1513,26 +2910,21 @@ export class APIService {
           __typename
           id
           name
-          members {
-            __typename
-            items {
-              __typename
-              id
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
+          description
           createdBy {
             __typename
             id
             username
-            channels {
-              __typename
-              nextToken
-            }
             createdAt
             updatedAt
+          }
+          members {
+            __typename
+            nextToken
+          }
+          debates {
+            __typename
+            nextToken
           }
           createdAt
           updatedAt
@@ -1550,26 +2942,21 @@ export class APIService {
           __typename
           id
           name
-          members {
-            __typename
-            items {
-              __typename
-              id
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
+          description
           createdBy {
             __typename
             id
             username
-            channels {
-              __typename
-              nextToken
-            }
             createdAt
             updatedAt
+          }
+          members {
+            __typename
+            nextToken
+          }
+          debates {
+            __typename
+            nextToken
           }
           createdAt
           updatedAt
@@ -1587,26 +2974,21 @@ export class APIService {
           __typename
           id
           name
-          members {
-            __typename
-            items {
-              __typename
-              id
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
+          description
           createdBy {
             __typename
             id
             username
-            channels {
-              __typename
-              nextToken
-            }
             createdAt
             updatedAt
+          }
+          members {
+            __typename
+            nextToken
+          }
+          debates {
+            __typename
+            nextToken
           }
           createdAt
           updatedAt
@@ -1627,10 +3009,6 @@ export class APIService {
             __typename
             id
             username
-            channels {
-              __typename
-              nextToken
-            }
             createdAt
             updatedAt
           }
@@ -1638,17 +3016,7 @@ export class APIService {
             __typename
             id
             name
-            members {
-              __typename
-              nextToken
-            }
-            createdBy {
-              __typename
-              id
-              username
-              createdAt
-              updatedAt
-            }
+            description
             createdAt
             updatedAt
           }
@@ -1671,10 +3039,6 @@ export class APIService {
             __typename
             id
             username
-            channels {
-              __typename
-              nextToken
-            }
             createdAt
             updatedAt
           }
@@ -1682,17 +3046,7 @@ export class APIService {
             __typename
             id
             name
-            members {
-              __typename
-              nextToken
-            }
-            createdBy {
-              __typename
-              id
-              username
-              createdAt
-              updatedAt
-            }
+            description
             createdAt
             updatedAt
           }
@@ -1715,10 +3069,6 @@ export class APIService {
             __typename
             id
             username
-            channels {
-              __typename
-              nextToken
-            }
             createdAt
             updatedAt
           }
@@ -1726,17 +3076,7 @@ export class APIService {
             __typename
             id
             name
-            members {
-              __typename
-              nextToken
-            }
-            createdBy {
-              __typename
-              id
-              username
-              createdAt
-              updatedAt
-            }
+            description
             createdAt
             updatedAt
           }
@@ -1746,4 +3086,382 @@ export class APIService {
       }`
     )
   ) as Observable<OnDeleteUserChannelSubscription>;
+
+  OnCreateDebateListener: Observable<OnCreateDebateSubscription> = API.graphql(
+    graphqlOperation(
+      `subscription OnCreateDebate {
+        onCreateDebate {
+          __typename
+          id
+          title
+          description
+          team1 {
+            __typename
+            id
+            name
+            team
+            createdAt
+            updatedAt
+          }
+          team2 {
+            __typename
+            id
+            name
+            team
+            createdAt
+            updatedAt
+          }
+          tag
+          days
+          date
+          createdBy {
+            __typename
+            id
+            username
+            createdAt
+            updatedAt
+          }
+          channel {
+            __typename
+            id
+            name
+            description
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`
+    )
+  ) as Observable<OnCreateDebateSubscription>;
+
+  OnUpdateDebateListener: Observable<OnUpdateDebateSubscription> = API.graphql(
+    graphqlOperation(
+      `subscription OnUpdateDebate {
+        onUpdateDebate {
+          __typename
+          id
+          title
+          description
+          team1 {
+            __typename
+            id
+            name
+            team
+            createdAt
+            updatedAt
+          }
+          team2 {
+            __typename
+            id
+            name
+            team
+            createdAt
+            updatedAt
+          }
+          tag
+          days
+          date
+          createdBy {
+            __typename
+            id
+            username
+            createdAt
+            updatedAt
+          }
+          channel {
+            __typename
+            id
+            name
+            description
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`
+    )
+  ) as Observable<OnUpdateDebateSubscription>;
+
+  OnDeleteDebateListener: Observable<OnDeleteDebateSubscription> = API.graphql(
+    graphqlOperation(
+      `subscription OnDeleteDebate {
+        onDeleteDebate {
+          __typename
+          id
+          title
+          description
+          team1 {
+            __typename
+            id
+            name
+            team
+            createdAt
+            updatedAt
+          }
+          team2 {
+            __typename
+            id
+            name
+            team
+            createdAt
+            updatedAt
+          }
+          tag
+          days
+          date
+          createdBy {
+            __typename
+            id
+            username
+            createdAt
+            updatedAt
+          }
+          channel {
+            __typename
+            id
+            name
+            description
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`
+    )
+  ) as Observable<OnDeleteDebateSubscription>;
+
+  OnCreateTeamListener: Observable<OnCreateTeamSubscription> = API.graphql(
+    graphqlOperation(
+      `subscription OnCreateTeam {
+        onCreateTeam {
+          __typename
+          id
+          name
+          debate {
+            __typename
+            id
+            title
+            description
+            tag
+            days
+            date
+            createdAt
+            updatedAt
+          }
+          team
+          members {
+            __typename
+            id
+            username
+            createdAt
+            updatedAt
+          }
+          messages {
+            __typename
+            id
+            content
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`
+    )
+  ) as Observable<OnCreateTeamSubscription>;
+
+  OnUpdateTeamListener: Observable<OnUpdateTeamSubscription> = API.graphql(
+    graphqlOperation(
+      `subscription OnUpdateTeam {
+        onUpdateTeam {
+          __typename
+          id
+          name
+          debate {
+            __typename
+            id
+            title
+            description
+            tag
+            days
+            date
+            createdAt
+            updatedAt
+          }
+          team
+          members {
+            __typename
+            id
+            username
+            createdAt
+            updatedAt
+          }
+          messages {
+            __typename
+            id
+            content
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`
+    )
+  ) as Observable<OnUpdateTeamSubscription>;
+
+  OnDeleteTeamListener: Observable<OnDeleteTeamSubscription> = API.graphql(
+    graphqlOperation(
+      `subscription OnDeleteTeam {
+        onDeleteTeam {
+          __typename
+          id
+          name
+          debate {
+            __typename
+            id
+            title
+            description
+            tag
+            days
+            date
+            createdAt
+            updatedAt
+          }
+          team
+          members {
+            __typename
+            id
+            username
+            createdAt
+            updatedAt
+          }
+          messages {
+            __typename
+            id
+            content
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`
+    )
+  ) as Observable<OnDeleteTeamSubscription>;
+
+  OnCreateMessageListener: Observable<
+    OnCreateMessageSubscription
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnCreateMessage {
+        onCreateMessage {
+          __typename
+          id
+          user {
+            __typename
+            id
+            username
+            createdAt
+            updatedAt
+          }
+          content
+          likeUsers {
+            __typename
+            id
+            username
+            createdAt
+            updatedAt
+          }
+          dislikeUsers {
+            __typename
+            id
+            username
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`
+    )
+  ) as Observable<OnCreateMessageSubscription>;
+
+  OnUpdateMessageListener: Observable<
+    OnUpdateMessageSubscription
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnUpdateMessage {
+        onUpdateMessage {
+          __typename
+          id
+          user {
+            __typename
+            id
+            username
+            createdAt
+            updatedAt
+          }
+          content
+          likeUsers {
+            __typename
+            id
+            username
+            createdAt
+            updatedAt
+          }
+          dislikeUsers {
+            __typename
+            id
+            username
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`
+    )
+  ) as Observable<OnUpdateMessageSubscription>;
+
+  OnDeleteMessageListener: Observable<
+    OnDeleteMessageSubscription
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnDeleteMessage {
+        onDeleteMessage {
+          __typename
+          id
+          user {
+            __typename
+            id
+            username
+            createdAt
+            updatedAt
+          }
+          content
+          likeUsers {
+            __typename
+            id
+            username
+            createdAt
+            updatedAt
+          }
+          dislikeUsers {
+            __typename
+            id
+            username
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`
+    )
+  ) as Observable<OnDeleteMessageSubscription>;
 }

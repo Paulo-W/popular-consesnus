@@ -4,8 +4,8 @@
   </div>
 </div>
 <div class="user-badge" [class.mat-elevation-z4]="true">
-  <div *ngIf="user">
-    <app-user-badge [user]="user"></app-user-badge>
+  <div>
+    <app-user-badge></app-user-badge>
   </div>
 </div>
 <div class="links">
@@ -31,10 +31,10 @@
       </mat-list-option>
     </mat-selection-list>
     <mat-selection-list [multiple]="false">
-      <div class="custom-channel-list" *ngFor="let channel of userChannels | async">
-        <mat-list-option routerLink="/channel/{{channel}}">
+      <div class="custom-channel-list" *ngFor="let channel of userChannels">
+        <mat-list-option routerLink="/channel/{{channel.id}}">
           <a class="text" matLine>
-            <span class="plain-text">{{channel}}</span>
+            <span class="plain-text">{{channel.name}}</span>
           </a>
         </mat-list-option>
       </div>

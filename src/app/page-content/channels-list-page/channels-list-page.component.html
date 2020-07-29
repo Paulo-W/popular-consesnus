@@ -31,15 +31,15 @@
   <div class="list-body">
     <mat-selection-list [multiple]="false">
       <!--      searched items block-->
-      <div *ngIf="searchedChannels$ | async; let list else loading">
+      <div *ngIf="channelsList; let list else loading">
         <div *ngIf="list.length > 0; else noItemsFound">
-          <div *ngFor="let channel of list">
+          <div *ngFor="let channel of list; let index = index">
             <mat-list-item class="channel-list-item full-container">
               <section class="flex-center-left full-container">
                 <div class="left-channel-list full-container">
                   <div class="flex-top-left">
                     <section>
-                      <div class="plain-text-s-accent">{{channel.members.length}}</div>
+                      <div class="plain-text-s-accent">{{channel?.members.length}}</div>
                       <div class="plain-text-ss">Members</div>
                     </section>
                   </div>
@@ -47,20 +47,37 @@
                 <div class="channel-name plain-text-s">{{channel.name}}</div>
                 <div class="right-channel-list">
                   <div class="channel-button-block flex-center-right">
-                    <div class="info-block" routerLink="/channel/{{channel.name}}">
-                      <div class="plain-text"><fa-icon [icon]="faReplyAll"></fa-icon></div>
+                    <div class="info-block" routerLink="/channel/{{channel.id}}">
+                      <div class="plain-text">
+                        <fa-icon [icon]="faReplyAll"></fa-icon>
+                      </div>
                       <div class="plain-text-s">View more</div>
                     </div>
                     <div>
-                      <div *ngIf="channel.isMember ; else joinBlock ">
-                        <button mat-stroked-button color="warn" class="leave" (click)="leaveChannel(channel)">Exit
-                          Channel
+                      <div *ngIf="isMember(channel.members) ; else joinBlock ">
+                        <button mat-stroked-button color="warn" class="leave" [disabled]="clickedArray[index].clicked"
+                                (click)="leaveChannel(channel.id)">
+                          <span *ngIf="!clickedArray[index].clicked; else loadAction">
+                            Exit Channel
+                          </span>
+                          <ng-template #loadAction class="spinner">
+                            <div class="flex-center">
+                              <mat-spinner diameter="20"></mat-spinner>
+                            </div>
+                          </ng-template>
                         </button>
-
                       </div>
                       <ng-template #joinBlock>
-                        <button mat-stroked-button color="primary" class="join" (click)="joinChannel(channel)">Join
-                          Channel
+                        <button mat-stroked-button color="primary" class="join" [disabled]="clickedArray[index].clicked"
+                                (click)="joinChannel(channel.id)">
+                           <span *ngIf="!clickedArray[index].clicked; else loadAction">
+                            Join Channel
+                          </span>
+                          <ng-template #loadAction class="spinner">
+                            <div class="flex-center">
+                              <mat-spinner diameter="20"></mat-spinner>
+                            </div>
+                          </ng-template>
                         </button>
                       </ng-template>
                     </div>
@@ -79,7 +96,16 @@
       </div>
 
       <ng-template #loading class="flex-center full-container">
-        loading
+        <div class="full-container flex-center">
+          <div class="loading-text">
+            <div>
+              <mat-spinner></mat-spinner>
+            </div>
+            <div class="plain-text-accent">
+              Loading
+            </div>
+          </div>
+        </div>
       </ng-template>
     </mat-selection-list>
   </div>

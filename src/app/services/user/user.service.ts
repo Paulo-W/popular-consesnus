@@ -4,6 +4,7 @@ import {USERS} from '../../mock/mock-user';
 import {BehaviorSubject, Observable, of} from 'rxjs';
 import {Channel} from '../../interfaces/Channel';
 import {Auth} from 'aws-amplify';
+import {CustomApiService, CustomGetUserChannelQuery} from '../../custom-api.service';
 import {APIService} from '../../API.service';
 
 @Injectable({
@@ -11,9 +12,12 @@ import {APIService} from '../../API.service';
 })
 export class UserService {
 
-  private currentUser = new BehaviorSubject<string>('');
+  currentUser = new BehaviorSubject<string>(null);
 
-  constructor(private apiService: APIService) {
+  constructor(
+    private customApiService: CustomApiService,
+    private apiService: APIService
+  ) {
   }
 
   getUserById(): Observable<CustomUser> | undefined {
@@ -24,8 +28,8 @@ export class UserService {
     return USERS.find(user => user.id === 1);
   }
 
-  getUserChannels(user: CustomUser): Observable<string[]> {
-    return of(user.channels);
+  async getUserChannels(): Promise<CustomGetUserChannelQuery> {
+    return this.customApiService.GetUserChannels(this.currentUser.value);
   }
 
   leaveChannel(userId: number, channelName: Channel): void {
@@ -37,8 +41,7 @@ export class UserService {
         } else {
           Error('Could not remove channel from user list not a member of that Channel');
         }
-      }
-    );
+      });
   }
 
   addChannel(userId: number, channelName: Channel): void {
@@ -62,24 +65,47 @@ export class UserService {
     }
   }
 
-  async saveNewUser(newUser: string) {
-      console.log(newUser);
-      await this.apiService.CreateUser({
-        username: newUser
-      }).then(
-        user => console.log(user)
-    );
-
-    // await this.apiService.GetUser('2').then(
-    //   user => console.log(user)
-    // );
-  }
-
-  setCurrentUser() {
-    Auth.currentAuthenticatedUser().then(
+  private async saveNewUser(newUser: string) {
+    await this.apiService.CreateUser({
+      username: newUser
+    }).then(
       user => {
-        this.currentUser.next(user.username);
+        this.setUserToken(this.currentUser.value);
       }
     );
+  }
+
+  async setCurrentUser() {
+    Auth.currentAuthenticatedUser().then(
+      user => {
+        // console.log(user.username);
+        this.apiService.UserByName(user.username)
+          .then(it => {
+            if (it.items.length > 0) {
+              console.log('found a full array' + JSON.stringify(it.items[0]));
+              this.setUserToken(it.items[0].id);
+            } else {
+              console.log('no user found must go and create one');
+              this.saveNewUser(user.username);
+            }
+          })
+          .catch(
+            (error) => {
+              console.log(`Exception in saving new user promise: ${error}`);
+            });
+      }
+    );
+  }
+
+  private setUserToken(userId: string) {
+    console.log('Creating new user token');
+    this.currentUser.next(userId);
+    localStorage.setItem('userId', userId);
+  }
+
+  removeUserToken() {
+    console.log('Removing token');
+    localStorage.removeItem('userId');
+    this.currentUser.next(null);
   }
 }

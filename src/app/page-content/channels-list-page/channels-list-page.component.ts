@@ -1,10 +1,16 @@
 import {Component, OnInit} from '@angular/core';
 import {faReplyAll, faSearch} from '@fortawesome/free-solid-svg-icons';
 import {ChannelService} from '../../services/channel/channel.service';
-import {Channel} from '../../interfaces/Channel';
 import {UserService} from '../../services/user/user.service';
-import {BehaviorSubject, Observable} from 'rxjs';
-import {debounceTime, distinctUntilChanged, shareReplay, switchMap} from 'rxjs/operators';
+import {BehaviorSubject} from 'rxjs';
+import {CustomChannelsList, CustomCreateChannel} from '../../custom-api.service';
+import {OnCreateUserChannelSubscription} from '../../API.service';
+import {ChannelList, ChannelMembers} from '../../interfaces/Channel';
+
+type ChannelClickInfo = {
+  id: string;
+  clicked: boolean;
+};
 
 @Component({
   selector: 'app-channels-list-page',
@@ -13,37 +19,69 @@ import {debounceTime, distinctUntilChanged, shareReplay, switchMap} from 'rxjs/o
 })
 export class ChannelsListPageComponent implements OnInit {
 
+  clickedArray: ChannelClickInfo[] = [];
+
   faSearch = faSearch;
   faReplyAll = faReplyAll;
-  channels: Channel[];
-  searchedChannels$: Observable<Channel[]>;
+  channelsList: ChannelList[];
   searchInput = '';
-  userId: number;
 
   private searchTerm = new BehaviorSubject<string>(``);
 
-  constructor(private channelService: ChannelService, private userService: UserService) {
+  constructor(
+    private channelService: ChannelService,
+    private userService: UserService) {
   }
 
   ngOnInit(): void {
-    this.getUserId();
-
-    this.searchedChannels$ = this.searchTerm.pipe(
-      // wait 300ms after each keystroke before considering a term
-      debounceTime(100),
-
-      // ignore new term if same as previous term
-      distinctUntilChanged(),
-
-      // switch to new search observable each time the term changes
-      switchMap((term: string) => this.channelService.searchChannel(term)),
-
-      shareReplay(1)
-    );
+    this.getChannels();
+    this.subscribeToChannelCreation();
+    this.subscribeToUserChanelEvents();
   }
 
-  getUserId() {
-    this.userId = this.userService.getCurrentUser().id;
+  getChannels() {
+    this.channelService.getChannels().then(
+      channel => {
+        this.channelsList = this.mapChannelList(channel);
+      });
+  }
+
+  subscribeToChannelCreation() {
+    this.channelService.listenForNewChannels().subscribe((evt) => {
+      const data = (evt as any).value.data.onCreateChannel;
+      console.log(data);
+
+      this.channelsList.push({
+        id: data.id,
+        name: data.name,
+        members: data.members.items?.map(item => this.mapMembers(item))
+      });
+    });
+  }
+
+  private subscribeToUserChanelEvents() {
+    this.channelService.listenForNewUserGroupChannels().subscribe((evt) => {
+      const data = (evt as any).value.data.onCreateUserChannel as OnCreateUserChannelSubscription;
+      this.channelsList.find(listedChannel => listedChannel.id === data.channel.id).members?.push({
+        relationshipId: data.id,
+        userId: data.user.id
+      });
+
+      this.clickedArray.find(clickInfo => clickInfo.id === data.channel.id).clicked = false;
+    });
+
+    this.channelService.listenForRemovedUserGroupChannels().subscribe((evt) => {
+      const data = (evt as any).value.data.onDeleteUserChannel as OnCreateUserChannelSubscription;
+
+      const item = this.channelsList.find(listedChannel => listedChannel.id === data.channel.id);
+      const oldRelationship = item.members.find(it => it.relationshipId === data.id);
+      const index = item.members.indexOf(oldRelationship);
+
+      if (index > -1) {
+        item.members.splice(index, 1);
+      }
+      this.clickedArray.find(clickInfo => clickInfo.id === data.channel.id).clicked = false;
+    });
   }
 
   search(term: string): void {
@@ -51,11 +89,53 @@ export class ChannelsListPageComponent implements OnInit {
     this.searchInput = term;
   }
 
-  joinChannel(channel: Channel) {
-    this.channelService.addUser(channel, this.userId);
+  joinChannel(channelId: string) {
+    this.clickedArray.find(clickInfo => clickInfo.id === channelId).clicked = true;
+    this.channelService.joinChannel(channelId);
   }
 
-  leaveChannel(channel: Channel) {
-    this.channelService.removeUser(channel, this.userId);
+  leaveChannel(channelId: string) {
+    this.clickedArray.find(clickInfo => clickInfo.id === channelId).clicked = true;
+    this.channelService.leaveChannel(channelId);
+  }
+
+  isMember(items: [{ userId: string; relationshipId: string }]): boolean {
+    if (items.length > 0) {
+      const userId = this.userService.currentUser.value;
+      let isMember = false;
+      items.forEach(member => {
+        if (member.userId === userId) {
+          isMember = true;
+          return;
+        }
+      });
+      return isMember;
+    }
+    return false;
+  }
+
+  private mapChannelList(channel: CustomChannelsList): ChannelList[] {
+    return channel.items.map(it => {
+      this.clickedArray.push({
+        id: it.id,
+        clicked: false
+      });
+      return this.mapChannel(it);
+    });
+  }
+
+  private mapChannel(queryChannel: CustomCreateChannel): ChannelList {
+    return {
+      id: queryChannel.id,
+      name: queryChannel.name,
+      members: queryChannel.members.items.map(it => this.mapMembers(it))
+    } as ChannelList;
+  }
+
+  private mapMembers(queryMember: { id: string; user: { id: string } }): ChannelMembers {
+    return {
+      userId: queryMember.user.id,
+      relationshipId: queryMember.id
+    };
   }
 }

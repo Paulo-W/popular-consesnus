@@ -56,7 +56,7 @@ export class DebateService {
       .map(it => new DebateInfo(it, user));
   }
 
-  getChannelDebates(channel: Channel): DebateInfo[] {
+    getChannelDebates(channel: string): DebateInfo[] {
     const user = this.userService.getCurrentUser();
     return DEBATE
       .filter(debate => debate.channel === channel)

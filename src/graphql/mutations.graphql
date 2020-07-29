@@ -7,11 +7,9 @@ mutation CreateUser(
     id
     username
     channels {
-      items {
-        id
-        createdAt
-        updatedAt
-      }
+      nextToken
+    }
+    debates {
       nextToken
     }
     createdAt
@@ -26,11 +24,9 @@ mutation UpdateUser(
     id
     username
     channels {
-      items {
-        id
-        createdAt
-        updatedAt
-      }
+      nextToken
+    }
+    debates {
       nextToken
     }
     createdAt
@@ -45,11 +41,9 @@ mutation DeleteUser(
     id
     username
     channels {
-      items {
-        id
-        createdAt
-        updatedAt
-      }
+      nextToken
+    }
+    debates {
       nextToken
     }
     createdAt
@@ -63,22 +57,18 @@ mutation CreateChannel(
   createChannel(input: $input, condition: $condition) {
     id
     name
-    members {
-      items {
-        id
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
+    description
     createdBy {
       id
       username
-      channels {
-        nextToken
-      }
       createdAt
       updatedAt
+    }
+    members {
+      nextToken
+    }
+    debates {
+      nextToken
     }
     createdAt
     updatedAt
@@ -91,22 +81,18 @@ mutation UpdateChannel(
   updateChannel(input: $input, condition: $condition) {
     id
     name
-    members {
-      items {
-        id
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
+    description
     createdBy {
       id
       username
-      channels {
-        nextToken
-      }
       createdAt
       updatedAt
+    }
+    members {
+      nextToken
+    }
+    debates {
+      nextToken
     }
     createdAt
     updatedAt
@@ -119,22 +105,18 @@ mutation DeleteChannel(
   deleteChannel(input: $input, condition: $condition) {
     id
     name
-    members {
-      items {
-        id
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
+    description
     createdBy {
       id
       username
-      channels {
-        nextToken
-      }
       createdAt
       updatedAt
+    }
+    members {
+      nextToken
+    }
+    debates {
+      nextToken
     }
     createdAt
     updatedAt
@@ -149,24 +131,13 @@ mutation CreateUserChannel(
     user {
       id
       username
-      channels {
-        nextToken
-      }
       createdAt
       updatedAt
     }
     channel {
       id
       name
-      members {
-        nextToken
-      }
-      createdBy {
-        id
-        username
-        createdAt
-        updatedAt
-      }
+      description
       createdAt
       updatedAt
     }
@@ -183,24 +154,13 @@ mutation UpdateUserChannel(
     user {
       id
       username
-      channels {
-        nextToken
-      }
       createdAt
       updatedAt
     }
     channel {
       id
       name
-      members {
-        nextToken
-      }
-      createdBy {
-        id
-        username
-        createdAt
-        updatedAt
-      }
+      description
       createdAt
       updatedAt
     }
@@ -217,24 +177,328 @@ mutation DeleteUserChannel(
     user {
       id
       username
-      channels {
-        nextToken
-      }
       createdAt
       updatedAt
     }
     channel {
       id
       name
-      members {
-        nextToken
-      }
-      createdBy {
-        id
-        username
-        createdAt
-        updatedAt
-      }
+      description
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation CreateDebate(
+  $input: CreateDebateInput!
+  $condition: ModelDebateConditionInput
+) {
+  createDebate(input: $input, condition: $condition) {
+    id
+    title
+    description
+    team1 {
+      id
+      name
+      team
+      createdAt
+      updatedAt
+    }
+    team2 {
+      id
+      name
+      team
+      createdAt
+      updatedAt
+    }
+    tag
+    days
+    date
+    createdBy {
+      id
+      username
+      createdAt
+      updatedAt
+    }
+    channel {
+      id
+      name
+      description
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateDebate(
+  $input: UpdateDebateInput!
+  $condition: ModelDebateConditionInput
+) {
+  updateDebate(input: $input, condition: $condition) {
+    id
+    title
+    description
+    team1 {
+      id
+      name
+      team
+      createdAt
+      updatedAt
+    }
+    team2 {
+      id
+      name
+      team
+      createdAt
+      updatedAt
+    }
+    tag
+    days
+    date
+    createdBy {
+      id
+      username
+      createdAt
+      updatedAt
+    }
+    channel {
+      id
+      name
+      description
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteDebate(
+  $input: DeleteDebateInput!
+  $condition: ModelDebateConditionInput
+) {
+  deleteDebate(input: $input, condition: $condition) {
+    id
+    title
+    description
+    team1 {
+      id
+      name
+      team
+      createdAt
+      updatedAt
+    }
+    team2 {
+      id
+      name
+      team
+      createdAt
+      updatedAt
+    }
+    tag
+    days
+    date
+    createdBy {
+      id
+      username
+      createdAt
+      updatedAt
+    }
+    channel {
+      id
+      name
+      description
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation CreateTeam(
+  $input: CreateTeamInput!
+  $condition: ModelTeamConditionInput
+) {
+  createTeam(input: $input, condition: $condition) {
+    id
+    name
+    debate {
+      id
+      title
+      description
+      tag
+      days
+      date
+      createdAt
+      updatedAt
+    }
+    team
+    members {
+      id
+      username
+      createdAt
+      updatedAt
+    }
+    messages {
+      id
+      content
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateTeam(
+  $input: UpdateTeamInput!
+  $condition: ModelTeamConditionInput
+) {
+  updateTeam(input: $input, condition: $condition) {
+    id
+    name
+    debate {
+      id
+      title
+      description
+      tag
+      days
+      date
+      createdAt
+      updatedAt
+    }
+    team
+    members {
+      id
+      username
+      createdAt
+      updatedAt
+    }
+    messages {
+      id
+      content
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteTeam(
+  $input: DeleteTeamInput!
+  $condition: ModelTeamConditionInput
+) {
+  deleteTeam(input: $input, condition: $condition) {
+    id
+    name
+    debate {
+      id
+      title
+      description
+      tag
+      days
+      date
+      createdAt
+      updatedAt
+    }
+    team
+    members {
+      id
+      username
+      createdAt
+      updatedAt
+    }
+    messages {
+      id
+      content
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation CreateMessage(
+  $input: CreateMessageInput!
+  $condition: ModelMessageConditionInput
+) {
+  createMessage(input: $input, condition: $condition) {
+    id
+    user {
+      id
+      username
+      createdAt
+      updatedAt
+    }
+    content
+    likeUsers {
+      id
+      username
+      createdAt
+      updatedAt
+    }
+    dislikeUsers {
+      id
+      username
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateMessage(
+  $input: UpdateMessageInput!
+  $condition: ModelMessageConditionInput
+) {
+  updateMessage(input: $input, condition: $condition) {
+    id
+    user {
+      id
+      username
+      createdAt
+      updatedAt
+    }
+    content
+    likeUsers {
+      id
+      username
+      createdAt
+      updatedAt
+    }
+    dislikeUsers {
+      id
+      username
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteMessage(
+  $input: DeleteMessageInput!
+  $condition: ModelMessageConditionInput
+) {
+  deleteMessage(input: $input, condition: $condition) {
+    id
+    user {
+      id
+      username
+      createdAt
+      updatedAt
+    }
+    content
+    likeUsers {
+      id
+      username
+      createdAt
+      updatedAt
+    }
+    dislikeUsers {
+      id
+      username
       createdAt
       updatedAt
     }

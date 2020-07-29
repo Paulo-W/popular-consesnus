@@ -1,4 +1,6 @@
-type User @model {
+type User @model
+@key(name: "byUserName", fields: ["username", "id"], queryField: "userByName")
+{
   id: ID!
   username: String!
   channels: [UserChannel] @connection(name: "UserChannel")
@@ -8,12 +10,13 @@ type User @model {
 type Channel @model {
   id: ID!
   name: String!
+  description: String
   createdBy: User @connection
   members: [UserChannel] @connection(name: "ChannelUser")
   debates: [Debate] @connection(name: "ChannelDebate")
 }
 
-type UserChannel @model {
+type UserChannel @model{
   id: ID!
   user: User @connection(name: "UserChannel")
   channel: Channel @connection(name: "ChannelUser")
@@ -23,11 +26,27 @@ type Debate @model {
   id: ID!
   title: String!
   description: String
-#  team1: Team;
-#  team2: Team;
+  team1: Team @connection(name: "DebateTeam")
+  team2: Team @connection(name: "DebateTeam")
   tag: String
   days: Int
-  date: String
   createdBy: User @connection(name: "UserDebate")
   channel: Channel @connection(name: "ChannelDebate")
+}
+
+type Team @model {
+  id: ID!
+  name: String!
+  debate: Debate @connection(name: "DebateTeam")
+  team: Int
+  members: [User]
+  messages: [Message]
+}
+
+type Message @model {
+  id: ID!
+  user: User
+  content: String
+  likeUsers: [User]
+  dislikeUsers: [User]
 }

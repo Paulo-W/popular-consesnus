@@ -16,15 +16,11 @@ export class AuthComponent implements OnInit {
   constructor(private router: Router, private userService: UserService) {
 
     Hub.listen('auth', (data) => {
-      switch (data.payload.event) {
-        case 'signIn':
-          console.log('User signed in');
-          userService.setCurrentUser();
-          this.router.navigate(['/home']).then();
-          break;
-        case 'signUp':
-          userService.saveNewUser(data.payload.data.user.username);
-          break;
+      if (data.payload.event === 'signIn') {
+        userService.setCurrentUser();
+        this.router.navigate(['/home']).then();
+      } else if (data.payload.event === 'signOut') {
+        userService.removeUserToken();
       }
     });
 

@@ -1,21 +1,20 @@
 <mat-card class="top-card">
-  <div class="create-channel-card flex-top-left">
-    <div class="left-panel">
-      <section class="flex-top-left">
-        <div class="create-form form-group">
-          <form #channelForm="ngForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="createChannelForm" (ngSubmit)="onSubmit()">
+    <div class="create-channel-card flex-top-left">
+      <div class="left-panel">
+        <section class="flex-top-left">
+          <div class="create-form form-group">
             <div class="form-group row">
               <label for="interesting-channel-title" class="col-md-2 col-form-label plain-text-x">
                 Interesting Title<span class="plain-text-s-accent">*</span>:
               </label>
               <div class="col-md-10">
-                <input type="text" class="form-control" id="interesting-channel-title"
-                       placeholder="The Comical Ranking of Politicians" [(ngModel)]="newChannel.name"
-                       name="name"
-                       required #name="ngModel">
-                <div [hidden]="name.valid || name.pristine" class="alert-danger plain-text-s">
-                  A Title for the debate is required
-                </div>
+                <input type="text" formControlName="title" class="form-control" id="interesting-channel-title"
+                       placeholder="Animals" [ngClass]="{
+                 'has-danger': title.invalid && (title.dirty || title.touched),
+                 'has-success': title.valid && (title.dirty || title.touched)
+                 }">
+                <app-invalid-form [formControlInput]="title" [name]="'Channel Title'"></app-invalid-form>
               </div>
             </div>
             <div class="form-group row">
@@ -23,12 +22,8 @@
                 Labels:
               </label>
               <div class="col-md-10">
-                <input type="text" class="form-control" id="channel-labels" placeholder="Animals Dogs"
-                       [(ngModel)]="newChannel.labels" name="channel-labels" #channelLabels="ngModel">
-                <div [hidden]="channelLabels.untouched">
-
-                </div>
-                <div [hidden]="channelLabels.touched">
+                <input type="text" class="form-control" id="channel-labels" placeholder="Animals Dogs">
+                <div>
                   <small id="label-help-block" class="form-text text-muted plain-text-s">
                     Keywords that help make searching for the channel easier.
                   </small>
@@ -38,25 +33,38 @@
             <div class="form-group row ">
               <div class="col-md-12">
                 <label for="channel-description" class="plain-text-x col-form-label">
-                  Say Something About this Channel:
+                  Say Something About this Channel<span class="plain-text-s-accent">*</span>:
                 </label>
-                <textarea class="form-control" id="channel-description" rows="6" placeholder="Animals Dogs"
-                          [(ngModel)]="newChannel.description" name="description"></textarea>
+                <textarea formControlName="description" class="form-control" id="channel-description" rows="3"
+                          placeholder="Are Animals not meant to be cool, which is your favorite, tell us?"
+                          [ngClass]="{'has-danger': description.invalid && (description.dirty || description.touched),
+                    'has-success': description.valid && (description.dirty || description.touched)}">
+                </textarea>
+                <app-invalid-form [formControlInput]="description" [name]="'Debate Description'"></app-invalid-form>
               </div>
             </div>
             <section>
               <div class="submit-container flex-center button-text">
-                <button mat-raised-button class="mat-button cancel" color="warn" (click)="goBack()" type="button">Cancel
+                <button type="button" mat-raised-button class="mat-button cancel" color="warn" (click)="goBack()">Cancel
                 </button>
                 <button type="submit" mat-raised-button class="mat-button success" color="primary"
-                        [disabled]="!channelForm.form.valid">Create
+                        [disabled]="!createChannelForm.valid || clicked">
+                  <span *ngIf="!clicked; else spinner">
+                    Create
+                  </span>
+                  <ng-template #spinner class="spinner">
+                    <div class="flex-center">
+                      <mat-spinner diameter="30"></mat-spinner>
+                    </div>
+                  </ng-template>
                 </button>
               </div>
             </section>
-          </form>
 
-        </div>
-      </section>
+          </div>
+        </section>
+      </div>
     </div>
-  </div>
+  </form>
 </mat-card>
+

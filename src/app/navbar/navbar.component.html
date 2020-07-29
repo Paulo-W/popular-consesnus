@@ -21,6 +21,10 @@
     </mat-toolbar-row>
   </mat-toolbar>
 </nav>
-<div class="page">
+<div *ngIf="user; else spinner" class="page">
   <app-page></app-page>
 </div>
+<ng-template #spinner>
+  {{user}}
+  <mat-spinner></mat-spinner>
+</ng-template>

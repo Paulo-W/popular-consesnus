@@ -8,3 +8,13 @@ export interface Channel {
   isMember: boolean;
 }
 
+export type ChannelList = {
+  id: string;
+  name: string;
+  members: [ChannelMembers];
+};
+
+export type ChannelMembers = {
+  userId: string
+  relationshipId: string
+};
