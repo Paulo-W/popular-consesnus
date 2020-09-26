@@ -1,5 +1,5 @@
-<mat-card class="top-chat">
-  <div *ngIf="debate">
+<div *ngIf="debate; else spinner">
+  <mat-card class="top-chat">
     <div class="chat-container flex-column-center">
       <div class="chat-card-title full-container">
         <section class="flex-center-left">
@@ -8,10 +8,10 @@
           </div>
           <div class="chat-title-center plain-text-s">
             Debate Started By: <span class="plain-text-s-accent">{{debate.createdBy.username}}
-          </span> on the {{debate.date | date: 'dd/MM/yyyy'}}
+          </span> on the {{debate.createdAt | date: 'dd/MM/yyyy'}}
           </div>
           <div class="chat-title-right-corner plain-text-s">
-            Tagged As: <span class="plain-text-s-accent">{{tag}}</span>
+            Tagged As: <span class="plain-text-s-accent">{{debate.tag}}</span>
           </div>
         </section>
       </div>
@@ -31,10 +31,16 @@
       <div class="chat-card-title full-container flex-center">
         <section class="full-container flex-bottom-center">
           <div class="chat-title-left-corner plain-text-s">
-            Members In Current Debate: <span class="plain-text-s-accent">{{getCurrentMembers()}}</span>
+            Members In Current Debate:
+            <span class="plain-text-s-accent" *ngIf="members !== null; else fetchingMembers">
+              {{members}}
+            </span>
+            <ng-template #fetchingMembers class="plain-text-s-accent">
+              fetching members
+            </ng-template>
           </div>
-          <div *ngIf="!isNoLongerOpen; else closedDebate" class="chat-title-center plain-text">
-            {{daysRemaining}} Days remaining
+          <div *ngIf="debateOngoing; else closedDebate" class="chat-title-center plain-text">
+            5 Days remaining
           </div>
           <ng-template #closedDebate class="plain-text-red">
             <div class="plain-text-red">
@@ -47,14 +53,19 @@
         </section>
       </div>
     </div>
+  </mat-card>
+
+  <div *ngIf="teams">
+    <app-chat-body [teams]="teams" [team1Name]="debate.team1.name" [team2Name]="debate.team2.name"></app-chat-body>
   </div>
-</mat-card>
 
-<div *ngIf="debate && user && memberState">
-  <app-chat-body [debate]="debate" [user]="user" [memberState]="memberState" [finished]="isNoLongerOpen"></app-chat-body>
-</div>
+  <div *ngIf="debate">
+    <app-chat-footer [teams]="teams" [team1Name]="debate.team1.name" [team2Name]="debate.team2.name"></app-chat-footer>
+  </div>
 
-<div *ngIf="user && memberState">
-  <app-chat-footer [debate]="debate" [user]="user" [memberState]="memberState"
-                   [finished]="isNoLongerOpen"></app-chat-footer>
 </div>
+<ng-template #spinner>
+  <app-spinner [text]="'Fetching Debate'"></app-spinner>
+</ng-template>
+
+

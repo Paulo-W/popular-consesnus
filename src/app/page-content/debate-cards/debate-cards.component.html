@@ -7,6 +7,13 @@
   </mat-card>
 </div>
 
-<app-debate-card [debates]="debates"></app-debate-card>
+<div *ngIf="debates; else spinner">
+  <div *ngFor="let debate of debates">
+    <app-debate-card [debate]="debate"></app-debate-card>
+  </div>
+</div>
+<ng-template #spinner>
+  <app-spinner [text]="'Fetching Debates...'"></app-spinner>
+</ng-template>
 
 

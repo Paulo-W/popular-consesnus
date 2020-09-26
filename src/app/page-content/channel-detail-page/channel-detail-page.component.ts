@@ -3,8 +3,8 @@ import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {ChannelService} from '../../services/channel/channel.service';
 import {UserService} from '../../services/user/user.service';
 import {faUser} from '@fortawesome/free-solid-svg-icons';
-import {CustomListDebates, CustomSpecificChannel} from '../../custom-api.service';
-import {ChannelMembers} from '../../interfaces/Channel';
+import {DebateService} from '../../services/debate/debate.service';
+import {CustomSpecificChannel, MappedDebate} from '../../custom-types';
 
 @Component({
   selector: 'app-channel-detail-page',
@@ -16,13 +16,16 @@ export class ChannelDetailPageComponent implements OnInit {
   channelId: string;
   channel: CustomSpecificChannel;
   faUser = faUser;
-  channelDebates: CustomListDebates;
+  channelDebates: MappedDebate[];
+  memberAction = false;
+  isMember = false;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private channelService: ChannelService,
     private userService: UserService,
+    private debateService: DebateService
   ) {
     // override the route reuse strategy
     this.router.routeReuseStrategy.shouldReuseRoute = (): boolean => {
@@ -42,6 +45,7 @@ export class ChannelDetailPageComponent implements OnInit {
   ngOnInit(): void {
     this.getChannel();
     this.getChannelDebates();
+    this.checkJoined();
   }
 
   getChannel(): void {
@@ -51,23 +55,35 @@ export class ChannelDetailPageComponent implements OnInit {
     );
   }
 
-  isMember(): boolean {
-    const array = this.channel.members.items.map(item => item.user.id);
-    return array.includes(this.userService.currentUser.value);
+  checkJoined(): boolean {
+    const array = this.channel?.members?.items.map(item => item.user.id);
+    if (array) {
+      return array.includes(this.userService.currentUser.value);
+    }
+    return false;
   }
 
-  joinChannel(channelId: string) {
-    this.channelService.joinChannel(channelId);
+  joinChannel() {
+    this.memberAction = true;
+    this.channelService.joinChannel(this.channelId).then(() => {
+      this.isMember = true;
+      this.memberAction = false;
+    });
   }
 
-  leaveChannel(chanelId: string) {
-    this.channelService.leaveChannel(this.channelId);
+  leaveChannel() {
+    this.memberAction = true;
+    this.channelService.leaveChannel(this.channelId).then(() => {
+      console.log('very quickly');
+      this.isMember = false;
+      this.memberAction = false;
+    });
   }
 
   private getChannelDebates() {
     this.channelService.getChannelDebates(this.channelId).then(
-      channelDebates => this.channelDebates = channelDebates
-    );
-    console.log(this.channelDebates);
+      channelDebates => {
+        this.channelDebates = channelDebates;
+      });
   }
 }

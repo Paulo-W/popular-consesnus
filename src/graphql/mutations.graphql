@@ -12,6 +12,10 @@ mutation CreateUser(
     debates {
       nextToken
     }
+    teams {
+      nextToken
+    }
+    profile_image
     createdAt
     updatedAt
   }
@@ -29,6 +33,10 @@ mutation UpdateUser(
     debates {
       nextToken
     }
+    teams {
+      nextToken
+    }
+    profile_image
     createdAt
     updatedAt
   }
@@ -46,6 +54,10 @@ mutation DeleteUser(
     debates {
       nextToken
     }
+    teams {
+      nextToken
+    }
+    profile_image
     createdAt
     updatedAt
   }
@@ -61,6 +73,7 @@ mutation CreateChannel(
     createdBy {
       id
       username
+      profile_image
       createdAt
       updatedAt
     }
@@ -85,6 +98,7 @@ mutation UpdateChannel(
     createdBy {
       id
       username
+      profile_image
       createdAt
       updatedAt
     }
@@ -109,6 +123,7 @@ mutation DeleteChannel(
     createdBy {
       id
       username
+      profile_image
       createdAt
       updatedAt
     }
@@ -117,75 +132,6 @@ mutation DeleteChannel(
     }
     debates {
       nextToken
-    }
-    createdAt
-    updatedAt
-  }
-}
-mutation CreateUserChannel(
-  $input: CreateUserChannelInput!
-  $condition: ModelUserChannelConditionInput
-) {
-  createUserChannel(input: $input, condition: $condition) {
-    id
-    user {
-      id
-      username
-      createdAt
-      updatedAt
-    }
-    channel {
-      id
-      name
-      description
-      createdAt
-      updatedAt
-    }
-    createdAt
-    updatedAt
-  }
-}
-mutation UpdateUserChannel(
-  $input: UpdateUserChannelInput!
-  $condition: ModelUserChannelConditionInput
-) {
-  updateUserChannel(input: $input, condition: $condition) {
-    id
-    user {
-      id
-      username
-      createdAt
-      updatedAt
-    }
-    channel {
-      id
-      name
-      description
-      createdAt
-      updatedAt
-    }
-    createdAt
-    updatedAt
-  }
-}
-mutation DeleteUserChannel(
-  $input: DeleteUserChannelInput!
-  $condition: ModelUserChannelConditionInput
-) {
-  deleteUserChannel(input: $input, condition: $condition) {
-    id
-    user {
-      id
-      username
-      createdAt
-      updatedAt
-    }
-    channel {
-      id
-      name
-      description
-      createdAt
-      updatedAt
     }
     createdAt
     updatedAt
@@ -215,10 +161,10 @@ mutation CreateDebate(
     }
     tag
     days
-    date
     createdBy {
       id
       username
+      profile_image
       createdAt
       updatedAt
     }
@@ -257,10 +203,10 @@ mutation UpdateDebate(
     }
     tag
     days
-    date
     createdBy {
       id
       username
+      profile_image
       createdAt
       updatedAt
     }
@@ -299,10 +245,10 @@ mutation DeleteDebate(
     }
     tag
     days
-    date
     createdBy {
       id
       username
+      profile_image
       createdAt
       updatedAt
     }
@@ -330,22 +276,15 @@ mutation CreateTeam(
       description
       tag
       days
-      date
       createdAt
       updatedAt
     }
     team
     members {
-      id
-      username
-      createdAt
-      updatedAt
+      nextToken
     }
     messages {
-      id
-      content
-      createdAt
-      updatedAt
+      nextToken
     }
     createdAt
     updatedAt
@@ -364,22 +303,15 @@ mutation UpdateTeam(
       description
       tag
       days
-      date
       createdAt
       updatedAt
     }
     team
     members {
-      id
-      username
-      createdAt
-      updatedAt
+      nextToken
     }
     messages {
-      id
-      content
-      createdAt
-      updatedAt
+      nextToken
     }
     createdAt
     updatedAt
@@ -398,22 +330,15 @@ mutation DeleteTeam(
       description
       tag
       days
-      date
       createdAt
       updatedAt
     }
     team
     members {
-      id
-      username
-      createdAt
-      updatedAt
+      nextToken
     }
     messages {
-      id
-      content
-      createdAt
-      updatedAt
+      nextToken
     }
     createdAt
     updatedAt
@@ -425,26 +350,25 @@ mutation CreateMessage(
 ) {
   createMessage(input: $input, condition: $condition) {
     id
-    user {
+    createdBy {
       id
       username
+      profile_image
       createdAt
       updatedAt
     }
     content
-    likeUsers {
-      id
-      username
-      createdAt
-      updatedAt
-    }
-    dislikeUsers {
-      id
-      username
-      createdAt
-      updatedAt
-    }
+    likeUsers
+    dislikeUsers
+    image
     createdAt
+    teamId {
+      id
+      name
+      team
+      createdAt
+      updatedAt
+    }
     updatedAt
   }
 }
@@ -454,26 +378,25 @@ mutation UpdateMessage(
 ) {
   updateMessage(input: $input, condition: $condition) {
     id
-    user {
+    createdBy {
       id
       username
+      profile_image
       createdAt
       updatedAt
     }
     content
-    likeUsers {
-      id
-      username
-      createdAt
-      updatedAt
-    }
-    dislikeUsers {
-      id
-      username
-      createdAt
-      updatedAt
-    }
+    likeUsers
+    dislikeUsers
+    image
     createdAt
+    teamId {
+      id
+      name
+      team
+      createdAt
+      updatedAt
+    }
     updatedAt
   }
 }
@@ -483,22 +406,165 @@ mutation DeleteMessage(
 ) {
   deleteMessage(input: $input, condition: $condition) {
     id
-    user {
+    createdBy {
       id
       username
+      profile_image
       createdAt
       updatedAt
     }
     content
-    likeUsers {
+    likeUsers
+    dislikeUsers
+    image
+    createdAt
+    teamId {
       id
-      username
+      name
+      team
       createdAt
       updatedAt
     }
-    dislikeUsers {
+    updatedAt
+  }
+}
+mutation CreateUserChannel(
+  $input: CreateUserChannelInput!
+  $condition: ModelUserChannelConditionInput
+) {
+  createUserChannel(input: $input, condition: $condition) {
+    id
+    user {
       id
       username
+      profile_image
+      createdAt
+      updatedAt
+    }
+    channel {
+      id
+      name
+      description
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateUserChannel(
+  $input: UpdateUserChannelInput!
+  $condition: ModelUserChannelConditionInput
+) {
+  updateUserChannel(input: $input, condition: $condition) {
+    id
+    user {
+      id
+      username
+      profile_image
+      createdAt
+      updatedAt
+    }
+    channel {
+      id
+      name
+      description
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteUserChannel(
+  $input: DeleteUserChannelInput!
+  $condition: ModelUserChannelConditionInput
+) {
+  deleteUserChannel(input: $input, condition: $condition) {
+    id
+    user {
+      id
+      username
+      profile_image
+      createdAt
+      updatedAt
+    }
+    channel {
+      id
+      name
+      description
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation CreateUserTeam(
+  $input: CreateUserTeamInput!
+  $condition: ModelUserTeamConditionInput
+) {
+  createUserTeam(input: $input, condition: $condition) {
+    id
+    user {
+      id
+      username
+      profile_image
+      createdAt
+      updatedAt
+    }
+    team {
+      id
+      name
+      team
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateUserTeam(
+  $input: UpdateUserTeamInput!
+  $condition: ModelUserTeamConditionInput
+) {
+  updateUserTeam(input: $input, condition: $condition) {
+    id
+    user {
+      id
+      username
+      profile_image
+      createdAt
+      updatedAt
+    }
+    team {
+      id
+      name
+      team
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteUserTeam(
+  $input: DeleteUserTeamInput!
+  $condition: ModelUserTeamConditionInput
+) {
+  deleteUserTeam(input: $input, condition: $condition) {
+    id
+    user {
+      id
+      username
+      profile_image
+      createdAt
+      updatedAt
+    }
+    team {
+      id
+      name
+      team
       createdAt
       updatedAt
     }

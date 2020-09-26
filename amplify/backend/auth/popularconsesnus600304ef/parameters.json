@@ -1,6 +1,6 @@
 {
     "identityPoolName": "popularconsesnus600304ef_identitypool_600304ef",
-    "allowUnauthenticatedIdentities": false,
+    "allowUnauthenticatedIdentities": true,
     "resourceNameTruncated": "popula600304ef",
     "userPoolName": "popularconsesnus600304ef_userpool_600304ef",
     "autoVerifiedAttributes": [

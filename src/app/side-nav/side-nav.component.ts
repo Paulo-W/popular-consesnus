@@ -4,6 +4,7 @@ import {UserService} from '../services/user/user.service';
 import {Router} from '@angular/router';
 import {ChannelService} from '../services/channel/channel.service';
 import {OnCreateUserChannelSubscription} from '../API.service';
+import {Storage} from 'aws-amplify';
 
 type Channel = {
   id: string;
@@ -17,6 +18,7 @@ type Channel = {
 })
 export class SideNavComponent implements OnInit {
 
+  imageUrl = null;
   userChannels: Channel[] = [];
 
   faBookOpen = faBookOpen;
@@ -32,6 +34,8 @@ export class SideNavComponent implements OnInit {
   ngOnInit(): void {
     this.getUserChannels();
     this.subscribeToUserChannelEvents();
+    this.getProfileImage();
+    this.subscribeToUpdatingUser();
   }
 
   getUserChannels() {
@@ -39,6 +43,12 @@ export class SideNavComponent implements OnInit {
       it.channels.items.map(channel => {
         this.userChannels.push(channel.channel as Channel);
       });
+    });
+  }
+
+  getProfileImage() {
+    this.userService.getProfilePic(this.userService.currentUser.value).then(image => {
+      this.imageUrl = image;
     });
   }
 
@@ -69,6 +79,13 @@ export class SideNavComponent implements OnInit {
           this.userChannels.splice(index, 1);
         }
       }
+    });
+  }
+
+  private subscribeToUpdatingUser() {
+    this.userService.listenForUpdatingUser().subscribe(() => {
+      this.imageUrl = null;
+      this.getProfileImage();
     });
   }
 }

@@ -4,4 +4,6 @@
   </div>
 </mat-card>
 
-<app-debate-card [debates]="userDebates"></app-debate-card>
+<div *ngFor="let debate of userDebates">
+  <app-debate-card [debate]="debate"></app-debate-card>
+</div>

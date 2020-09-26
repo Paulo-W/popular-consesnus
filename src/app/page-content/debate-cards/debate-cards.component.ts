@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {faBookmark, faPlusCircle} from '@fortawesome/free-solid-svg-icons';
+import {faPlusCircle} from '@fortawesome/free-solid-svg-icons';
 import {DebateService} from '../../services/debate/debate.service';
-import {DebateInfo} from '../../interfaces/Debate';
+import {MappedDebate} from '../../custom-types';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -12,9 +13,15 @@ import {DebateInfo} from '../../interfaces/Debate';
 export class DebateCardsComponent implements OnInit {
 
   faPlusCircle = faPlusCircle;
-  debates: DebateInfo[];
+  debates: MappedDebate[];
 
-  constructor(private debateService: DebateService) {
+  constructor(
+    private debateService: DebateService,
+    private router: Router
+  ) {
+    this.router.routeReuseStrategy.shouldReuseRoute = (): boolean => {
+      return false;
+    };
   }
 
   ngOnInit(): void {
@@ -22,6 +29,10 @@ export class DebateCardsComponent implements OnInit {
   }
 
   getDebates() {
-    this.debates = this.debateService.getUserDebates();
+    this.debateService.getDebates().then(debates => {
+      this.debates = debates.sort((a, b) => {
+        return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+      });
+    });
   }
 }

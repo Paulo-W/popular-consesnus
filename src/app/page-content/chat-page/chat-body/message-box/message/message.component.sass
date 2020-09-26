@@ -1,0 +1,102 @@
+@import "../../../../../../styles"
+
+.chat-box
+  padding: 10px 10px 0
+  border-top: 1px #CACACA66 solid
+  border-bottom: 1px #CACACA66 solid
+  width: 100%
+  background-color: #f9f9f9
+  .chat-box-image
+    flex: 1
+    padding: 5px 0 5px 5px
+    .chat-username
+      text-align: center
+      padding-top: 5px
+    .image-icon
+      width: 60px
+      height: 60px
+      border-radius: 50%
+      margin: auto
+  .chat-box-content
+    flex: 16
+    min-height: 110px
+    .message-content-container
+      flex: 7
+      padding: 10px 10px 10px 0
+      background-color: white
+      .message-image
+        flex: 3
+        padding: 10px 10px 10px 20px
+        .image-container
+          color: white
+          min-height: 200px
+          min-width: 200px
+          background-color: black
+      .message-content
+        background-color: white
+        padding: 10px 10px 0
+        flex: 10
+    .message-footer
+      flex: 3
+      min-height: 35px
+      padding-left: 10px
+      .challenge-message
+        flex: 4
+      .message-footer-date
+        flex: 3
+        text-align: center
+      .message-footer-votes
+        flex: 5
+        text-align: right
+
+.current-votes
+  padding-right: 20px
+
+.border-icon
+  padding: 3px
+  border: 2px solid $text-color
+  border-radius: 5px
+  &:hover
+    font-size: $text-size-small + 0.005
+
+.short-line
+  height: 100px
+
+.long-line
+  height: 250px
+
+.vote
+  border: none !important
+  margin-right: 7px
+  padding: 0
+  background-color: transparent !important
+  &:focus
+    outline: none !important
+    border: none !important
+
+span
+  b
+    color: $primary-color
+    padding-left: 2px
+    font-size: $text-size-small + 0.05
+
+button:disabled, button[disabled]
+  background-color: transparent !important
+  fa-icon:hover
+    font-size: $text-size-small - 0.05
+
+
+.vote-clicked
+  border: 3px solid $primary-color
+  color: $primary-color
+
+.fetching-image
+  mat-spinner
+    margin: 10px
+  span
+    margin-top: 10px
+
+
+.profile-pic-message
+  border-radius: 50%
+  border: 4px $secondary-color double

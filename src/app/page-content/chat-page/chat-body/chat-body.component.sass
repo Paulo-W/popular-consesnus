@@ -34,7 +34,7 @@ mat-card
   &:hover
     background-color: lighten($blue-team-color, 5%)
 
-.isMemberBlue
+.isFirstTeam
   border: 2px solid lighten($blue-team-color, 5%)
   color: darken($blue-team-color, 5%)
   border-left: none
@@ -49,7 +49,7 @@ mat-card
   &:hover
     background-color: lighten($red-team-color, 5%)
 
-.isMemberRed
+.isSecondTeam
   border: 2px solid lighten($red-team-color, 5%)
   color: darken($red-team-color, 5%)
   border-right: none
@@ -77,3 +77,42 @@ mat-card
 button:disabled
   background: #F3f3f3 !important
   color: $text-color
+
+.switchBlue
+  border: 1px solid $text-color
+
+  &:hover
+    background-color: lighten($blue-team-color, 5%)
+    color: white
+
+.switchRed
+  border: 1px solid $text-color
+
+  &:hover
+    background-color: lighten($red-team-color, 5%)
+    color: white
+
+
+.switchBlue, .switchRed
+  &:hover
+    cursor: pointer
+    border: 1px solid white
+
+.modal-header
+  h3
+    text-align: center
+    padding: 20px
+    font-size: $text-size-large
+
+.modal-body
+  span
+    text-align: center
+    padding: 20px
+
+.modal-footer
+  button
+    min-width: 120px
+    margin: 10px
+
+    &:hover
+      left: 1px

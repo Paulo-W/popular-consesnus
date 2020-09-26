@@ -5,6 +5,8 @@ type User @model
   username: String!
   channels: [UserChannel] @connection(name: "UserChannel")
   debates: [Debate] @connection(name: "UserDebate")
+  teams: [UserTeam] @connection(name: "UserTeam")
+  profile_image: String
 }
 
 type Channel @model {
@@ -14,12 +16,6 @@ type Channel @model {
   createdBy: User @connection
   members: [UserChannel] @connection(name: "ChannelUser")
   debates: [Debate] @connection(name: "ChannelDebate")
-}
-
-type UserChannel @model{
-  id: ID!
-  user: User @connection(name: "UserChannel")
-  channel: Channel @connection(name: "ChannelUser")
 }
 
 type Debate @model {
@@ -39,14 +35,29 @@ type Team @model {
   name: String!
   debate: Debate @connection(name: "DebateTeam")
   team: Int
-  members: [User]
-  messages: [Message]
+  members: [UserTeam] @connection(name: "TeamUser")
+  messages: [Message] @connection
 }
 
 type Message @model {
   id: ID!
-  user: User
+  createdBy: User @connection
   content: String
-  likeUsers: [User]
-  dislikeUsers: [User]
+  likeUsers: [String]
+  dislikeUsers: [String]
+  image: String
+  createdAt: String!
+  teamId: Team @connection
+}
+
+type UserChannel @model {
+  id: ID!
+  user: User @connection(name: "UserChannel")
+  channel: Channel @connection(name: "ChannelUser")
+}
+
+type UserTeam @model {
+  id: ID!
+  user: User @connection(name: "UserTeam")
+  team: Team @connection(name: "TeamUser")
 }

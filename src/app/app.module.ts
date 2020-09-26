@@ -34,17 +34,18 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {ChannelsListPageComponent} from './page-content/channels-list-page/channels-list-page.component';
-import {ChannelListComponent} from './page-content/channels-list-page/channel-list/channel-list.component';
 import {InvalidFormComponent} from './invalid-form/invalid-form.component';
-import { MyDebatesComponent } from './page-content/my-debates/my-debates.component';
-import { ChannelDetailPageComponent } from './page-content/channel-detail-page/channel-detail-page.component';
-import { DebateCardComponent } from './page-content/debate-card/debate-card.component';
-import { AuthComponent } from './auth/auth.component';
+import {MyDebatesComponent} from './page-content/my-debates/my-debates.component';
+import {ChannelDetailPageComponent} from './page-content/channel-detail-page/channel-detail-page.component';
+import {DebateCardComponent} from './page-content/debate-card/debate-card.component';
+import {AuthComponent} from './auth/auth.component';
 import {AmplifyUIAngularModule} from '@aws-amplify/ui-angular';
-import Amplify, { API, graphqlOperation } from 'aws-amplify';
+import Amplify from 'aws-amplify';
 import awsconfig from '../aws-exports';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import { SpinnerComponent } from './spinner/spinner.component';
+import {SpinnerComponent} from './spinner/spinner.component';
+import {MessageComponent} from './page-content/chat-page/chat-body/message-box/message/message.component';
+import { ChangePasswordComponent } from './page-content/update-profile/change-password/change-password.component';
 
 Amplify.configure(awsconfig);
 
@@ -66,37 +67,38 @@ Amplify.configure(awsconfig);
     UpdateProfileComponent,
     NavbarComponent,
     ChannelsListPageComponent,
-    ChannelListComponent,
     InvalidFormComponent,
     MyDebatesComponent,
     ChannelDetailPageComponent,
     DebateCardComponent,
     AuthComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    MessageComponent,
+    ChangePasswordComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        AmplifyUIAngularModule,
-        BrowserAnimationsModule,
-        MatToolbarModule,
-        MatIconModule,
-        MatBadgeModule,
-        FontAwesomeModule,
-        MatSidenavModule,
-        MatButtonModule,
-        MatListModule,
-        MatCardModule,
-        MatFormFieldModule,
-        MatInputModule,
-        FormsModule,
-        MatTabsModule,
-        MatRadioModule,
-        MatMenuModule,
-        ReactiveFormsModule,
-        MatExpansionModule,
-        MatProgressSpinnerModule,
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    AmplifyUIAngularModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatBadgeModule,
+    FontAwesomeModule,
+    MatSidenavModule,
+    MatButtonModule,
+    MatListModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    MatTabsModule,
+    MatRadioModule,
+    MatMenuModule,
+    ReactiveFormsModule,
+    MatExpansionModule,
+    MatProgressSpinnerModule,
+  ],
   exports: [
     MatIconModule, MatToolbarModule, FontAwesomeModule
   ],

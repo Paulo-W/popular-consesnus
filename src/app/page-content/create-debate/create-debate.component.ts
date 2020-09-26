@@ -1,14 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {DebateService} from '../../services/debate/debate.service';
-import {Debate} from '../../interfaces/Debate';
 import {Location} from '@angular/common';
 import {Router} from '@angular/router';
-import {Channel} from '../../interfaces/Channel';
 import {ChannelService} from '../../services/channel/channel.service';
 import {faBookmark} from '@fortawesome/free-solid-svg-icons';
 import {CustomUser} from '../../interfaces/CustomUser';
 import {UserService} from '../../services/user/user.service';
+import {CustomCreateChannel} from '../../custom-types';
 
 @Component({
   selector: 'app-create-debate',
@@ -18,7 +17,7 @@ import {UserService} from '../../services/user/user.service';
 export class CreateDebateComponent implements OnInit {
 
   fabBookMark = faBookmark;
-  channels: Channel[];
+  channels: CustomCreateChannel[];
   user: CustomUser;
 
   createDebateForm = new FormGroup({
@@ -54,11 +53,12 @@ export class CreateDebateComponent implements OnInit {
     label: new FormControl('')
   });
 
-  constructor(private debateService: DebateService,
-              private userService: UserService,
-              private location: Location,
-              private channelService: ChannelService,
-              private router: Router) {
+  constructor(
+    private debateService: DebateService,
+    private userService: UserService,
+    private location: Location,
+    private channelService: ChannelService,
+    private router: Router) {
   }
 
   ngOnInit(): void {
@@ -71,7 +71,9 @@ export class CreateDebateComponent implements OnInit {
   }
 
   getChannels() {
-    this.channels = this.channelService.getChannel();
+    this.channelService.getUserChannels().then(channels =>
+      this.channels = channels
+    );
   }
 
   goBack() {
@@ -79,13 +81,7 @@ export class CreateDebateComponent implements OnInit {
   }
 
   onSubmit() {
-    this.debateService.saveDebate(this.createDebateForm.value as Debate).subscribe(
-      saved => {
-        if (saved) {
-          this.router.navigate(['/home']);
-        }
-      }
-    );
+    this.debateService.saveDebate(this.userService.currentUser.value, this.createDebateForm.value);
   }
 
   get title() {

@@ -1,36 +1,50 @@
 <div class="join-container">
   <div class="not-member flex-center-left full-container">
     <div class="left full-container flex-center-left">
-      <button [disabled]="finished" type="button" class="btn plain-text heading-block" [ngClass]="{
-      'isNotMemberBlue': !memberState.isMember,
-      'isMemberBlue': memberState.isMember
+      <!--      [disabled]="finished" -->
+      <button [disabled]="clicked" type="button" class="btn plain-text heading-block" [ngClass]="{
+      'isNotMemberBlue': !isFirstTeam && !isSecondTeam,
+      'isFirstTeam': isFirstTeam
       }">
-        <span *ngIf="!memberState.isMember; else team1" (click)="joinTeam1()" class="full-container flex-center">
-          <fa-icon [icon]="faPencil"></fa-icon>
-          Join Team
+        <span *ngIf="clicked; else team1Box" class="flex-center">
+          <mat-spinner diameter="20"></mat-spinner>
         </span>
-        <ng-template #team1>
-          <div *ngIf="memberState.team; else opposingTeam" class="my-team">
-            <fa-icon [icon]="faUser"></fa-icon>
-            My Team
-          </div>
+        <ng-template #team1Box>
+          <span *ngIf="!isFirstTeam && !isSecondTeam; else member1" (click)="joinTeam1()"
+                class="full-container flex-center">
+          <fa-icon [icon]="faPencil"></fa-icon>
+            Join Team
+          </span>
+          <ng-template #member1>
+            <div *ngIf="isFirstTeam; else opposingTeam" class="my-team" (click)="open(content)">
+              <fa-icon [icon]="faUser"></fa-icon>
+              My Team
+            </div>
+          </ng-template>
         </ng-template>
       </button>
     </div>
     <div class="right full-container flex-center-right">
-      <button [disabled]="finished" type="button" class="btn plain-text heading-block" [ngClass]="{
-      'isNotMemberRed': !memberState.isMember,
-      'isMemberRed': memberState.isMember
+      <!--      [disabled]="debateOngoing"-->
+      <button [disabled]="clicked" type="button" class="btn plain-text heading-block" [ngClass]="{
+      'isNotMemberRed': !isFirstTeam && !isSecondTeam,
+      'isSecondTeam': isSecondTeam
       }">
-        <span *ngIf="!memberState.isMember; else team2" (click)="joinTeam2()" class="full-container flex-center">
-          <fa-icon [icon]="faPencil" class="right-icon"></fa-icon>
-          Join Team
+        <span *ngIf="clicked; else team2Box" class="flex-center">
+          <mat-spinner diameter="20"></mat-spinner>
         </span>
-        <ng-template #team2>
-          <div *ngIf="!memberState.team; else opposingTeam" class="my-team">
-            <fa-icon [icon]="faUser"></fa-icon>
-            My Team
-          </div>
+        <ng-template #team2Box>
+          <span *ngIf="!isFirstTeam && !isSecondTeam; else member2" (click)="joinTeam2()"
+                class="full-container flex-center">
+            <fa-icon [icon]="faPencil" class="right-icon"></fa-icon>
+            Join Team
+          </span>
+          <ng-template #member2>
+            <div *ngIf="isSecondTeam; else opposingTeam" class="my-team" (click)="open(content)">
+              <fa-icon [icon]="faUser"></fa-icon>
+              My Team
+            </div>
+          </ng-template>
         </ng-template>
       </button>
     </div>
@@ -39,18 +53,41 @@
 
 <mat-card class="tab-card message-body">
   <mat-tab-group mat-align-tabs="center" animationDuration="1200ms" dynamicHeight>
-    <mat-tab label="{{debate.team1.name | titlecase}} ({{debate.team1.members.length}})">
-      <app-message-box [team]="debate.team1" [user]="user"></app-message-box>
+    <mat-tab label="{{team1Name | titlecase}} ({{teams.team1.members.items.length}})">
+      <app-message-box [team]="teams.team1"></app-message-box>
     </mat-tab>
-    <mat-tab label="{{debate.team2.name | titlecase}} ({{debate.team2.members.length}})">
-      <app-message-box [team]="debate.team2" [user]="user"></app-message-box>
+    <mat-tab label="{{team2Name | titlecase}} ({{teams.team2.members.items.length}})">
+      <app-message-box [team]="teams.team2"></app-message-box>
     </mat-tab>
   </mat-tab-group>
 </mat-card>
 
 <ng-template #opposingTeam>
-  <div class="full-container flex-center" (click)="switchTeams()">
+  <div class="full-container flex-center" (click)="switchTeams()" [ngClass]="{
+  'switchBlue': isSecondTeam,
+  'switchRed': isFirstTeam
+  }">
     <fa-icon class="left-icon" [icon]="faSyncAlt"></fa-icon>
     Switch Teams
+  </div>
+</ng-template>
+
+
+<ng-template #content let-modal>
+  <div class="modal-header flex-center">
+    <h3 class="header-text-cards">
+      Are you sure you want to leave <span class="header-text-accent">{{getTeamName()}} </span>
+    </h3>
+  </div>
+  <div class="modal-body flex-center">
+      <span class="plain-text">All your messages in this debate will be erased if you chose to leave</span>
+  </div>
+  <div class="modal-footer flex-center">
+    <button type="button" mat-raised-button class="mat-button cancel" color="primary" (click)="modal.dismiss()">
+      Cancel
+    </button>
+    <button type="button" mat-raised-button class="mat-button success" color="warn" (click)="modal.dismiss(); leaveTeam()">
+      Leave Team
+    </button>
   </div>
 </ng-template>

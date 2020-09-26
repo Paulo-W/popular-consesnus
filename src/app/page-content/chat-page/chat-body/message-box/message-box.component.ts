@@ -1,10 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {faComment, faMinus, faPlus} from '@fortawesome/free-solid-svg-icons';
-import {Team} from '../../../../interfaces/Team';
-import {MessageInfo} from '../../../../interfaces/MessageInfo';
-import {CustomUser} from '../../../../interfaces/CustomUser';
-import {Observable, of} from 'rxjs';
-import {MessageServiceService} from '../../../../services/message/message-service.service';
+import {faComment} from '@fortawesome/free-solid-svg-icons';
+import {MessageService} from '../../../../services/message/message.service';
+import {MessageInfo, Team} from '../../../../custom-types';
 
 @Component({
   selector: 'app-message-box',
@@ -14,49 +11,39 @@ import {MessageServiceService} from '../../../../services/message/message-servic
 export class MessageBoxComponent implements OnInit {
 
   @Input() team: Team;
-  @Input() user: CustomUser;
 
-  messages: Observable<MessageInfo[]>;
+  messages: MessageInfo[];
 
-  faPlus = faPlus;
-  faMinus = faMinus;
   faComment = faComment;
 
-  constructor(private messageService: MessageServiceService) {
+  constructor(
+    private messageService: MessageService,
+  ) {
   }
 
   ngOnInit(): void {
-    this.messages = this.observeMessages();
+    this.getMessages();
+    this.subscribeMessage();
   }
 
-  hasImage() {
-    return false;
+  private subscribeMessage() {
+    this.messageService.listenForNewMessages().subscribe((ev) => {
+      const data = (ev as any).value.data.onCreateMessage;
+
+      if (data.teamId.id === this.team.id) {
+        this.messages.push(data);
+      }
+    });
   }
 
-  getLikes(message: MessageInfo): number {
-    const likes = message.likeUsers?.length || 0;
-    const dislikes = message.dislikeUsers?.length || 0;
-
-    return likes - dislikes;
-  }
-
-  observeMessages(): Observable<MessageInfo[]> {
-    return of(this.team.messages);
-  }
-
-  likeMessage(message: MessageInfo) {
-    this.messageService.likeMessage(message, this.user);
-  }
-
-  dislikeMessage(message: MessageInfo) {
-    this.messageService.dislikeMessage(message, this.user);
-  }
-
-  isLiked(message: MessageInfo): boolean {
-    return message.likeUsers?.includes(this.user) || false;
-  }
-
-  isDisliked(message: MessageInfo): boolean {
-    return message.dislikeUsers?.includes(this.user) || false;
+  private getMessages() {
+    this.messageService.getMessages(this.team.id).then(
+      messages => {
+        this.messages = messages.sort((a, b) => {
+            return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
+          }
+        );
+      }
+    );
   }
 }

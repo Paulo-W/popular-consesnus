@@ -1,11 +1,14 @@
 import {Injectable} from '@angular/core';
 import {CustomUser} from '../../interfaces/CustomUser';
 import {USERS} from '../../mock/mock-user';
-import {BehaviorSubject, Observable, of} from 'rxjs';
-import {Channel} from '../../interfaces/Channel';
-import {Auth} from 'aws-amplify';
-import {CustomApiService, CustomGetUserChannelQuery} from '../../custom-api.service';
-import {APIService} from '../../API.service';
+import {BehaviorSubject} from 'rxjs';
+import {Auth, Storage} from 'aws-amplify';
+import {APIService, OnUpdateUserSubscription, UpdateUserMutation} from '../../API.service';
+import {CustomApiService} from '../../custom-api.service';
+import {CustomGetUserChannelQuery} from '../../custom-types';
+import {UUID} from 'angular2-uuid';
+import {Observable} from 'zen-observable-ts';
+
 
 @Injectable({
   providedIn: 'root'
@@ -20,8 +23,8 @@ export class UserService {
   ) {
   }
 
-  getUserById(): Observable<CustomUser> | undefined {
-    return of(USERS.find(user => user.id === 1));
+  listenForUpdatingUser(): Observable<OnUpdateUserSubscription> {
+    return this.apiService.OnUpdateUserListener;
   }
 
   getCurrentUser(): CustomUser {
@@ -32,44 +35,12 @@ export class UserService {
     return this.customApiService.GetUserChannels(this.currentUser.value);
   }
 
-  leaveChannel(userId: number, channelName: Channel): void {
-    this.getUserById().subscribe(
-      user => {
-        const index = user.channels.indexOf(channelName.name, 0);
-        if (index > -1) {
-          user.channels.splice(index, 1);
-        } else {
-          Error('Could not remove channel from user list not a member of that Channel');
-        }
-      });
-  }
-
-  addChannel(userId: number, channelName: Channel): void {
-    this.getUserById().subscribe(
-      user => {
-        if (user.channels.find(it => it === channelName.name)) {
-          Error(`Could not add User ${user.username} to Channel ${channelName} as user is already a member`);
-        } else {
-          user.channels.push(channelName.name);
-        }
-      }
-    );
-  }
-
-  removeUser(array: CustomUser[], currentUser: CustomUser) {
-    const index = array.indexOf(currentUser);
-
-    if (index > -1) {
-      array.splice(index, 1);
-      return array;
-    }
-  }
-
   private async saveNewUser(newUser: string) {
     await this.apiService.CreateUser({
+      profile_image: 'user.png',
       username: newUser
     }).then(
-      user => {
+      () => {
         this.setUserToken(this.currentUser.value);
       }
     );
@@ -98,14 +69,40 @@ export class UserService {
   }
 
   private setUserToken(userId: string) {
-    console.log('Creating new user token');
     this.currentUser.next(userId);
     localStorage.setItem('userId', userId);
   }
 
   removeUserToken() {
-    console.log('Removing token');
     localStorage.removeItem('userId');
     this.currentUser.next(null);
+  }
+
+  getProfilePic(id: string) {
+    return this.apiService.GetUser(id).then(user => Storage.get(user.profile_image));
+  }
+
+  getUsername(): Promise<string> {
+    return this.apiService.GetUser(this.currentUser.value).then(user => user.username);
+  }
+
+  async updateUser(username: string, file: File, fileType: string): Promise<UpdateUserMutation> {
+    if (file) {
+      return Storage.put(`${UUID.UUID()}.${fileType}`, file, {contentType: 'image/*'}).then(
+        key => this.saveUserWithImage(username, key));
+    } else {
+      return this.apiService.UpdateUser({
+        id: this.currentUser.value,
+        username
+      });
+    }
+  }
+
+  private saveUserWithImage(username: string, fileKey): Promise<UpdateUserMutation> {
+    return this.apiService.UpdateUser({
+      id: this.currentUser.value,
+      profile_image: fileKey.key,
+      username
+    });
   }
 }

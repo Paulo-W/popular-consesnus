@@ -3,7 +3,7 @@
     <div class="channel-detail-row">
       <section class="channel-details-header-row flex-center-left">
         <div class="channel-member full-container">
-          <div *ngIf="isMember()" class="plain-text-accent">
+          <div *ngIf="isMember" class="plain-text-accent">
             <fa-icon [icon]="faUser"></fa-icon>
             Joined
           </div>
@@ -12,13 +12,21 @@
           {{channel.name}}
         </div>
         <div class="channel-join-buttons full-container">
-          <div *ngIf="isMember(); else joinBlock" class="channel-top-buttons">
-            <button mat-raised-button class="mat-button cancel" color="warn" (click)="leaveChannel()" type="button">Leave
+          <div *ngIf="isMember; else joinBlock" class="channel-top-buttons">
+            <button [disabled]="memberAction" mat-raised-button class="mat-button cancel" color="warn"
+                    (click)="leaveChannel()" type="button">
+              <span *ngIf="!memberAction; else buttonSpinner">
+                Leave
+              </span>
             </button>
           </div>
           <ng-template #joinBlock>
             <div class="channel-top-buttons">
-              <button mat-raised-button class="mat-button success" color="primary" (click)="joinChannel()">Join
+              <button [disabled]="memberAction" mat-raised-button class="mat-button success" color="primary"
+                      (click)="joinChannel()" type="button">
+                <span *ngIf="!memberAction; else buttonSpinner">
+                  Join
+                </span>
               </button>
             </div>
           </ng-template>
@@ -36,14 +44,25 @@
           Total members in channel <span class="plain-text-s-accent">{{channel.members.items.length}}</span>
         </div>
         <div class="channel-debate-count plain-text-s full-container">
-          Total debates in channel <span class="plain-text-s-accent">{{channelDebates?.debates.items.length}}</span>
+          Total debates in channel <span class="plain-text-s-accent">{{channelDebates?.length}}</span>
         </div>
       </section>
     </div>
   </mat-card>
 
-<!--  <app-debate-card [debates]="channelDebates"></app-debate-card>-->
+  <div *ngIf="channelDebates">
+    <div *ngFor="let debate of channelDebates">
+      <app-debate-card [debate]="debate"></app-debate-card>
+    </div>
+  </div>
 </div>
-<ng-template #spinner class="flex-center full-container">
-<app-spinner></app-spinner>
+<ng-template #spinner>
+  <app-spinner [text]="'Fetching Channel Info'"></app-spinner>
+</ng-template>
+
+
+<ng-template #buttonSpinner>
+  <div class="flex-center">
+    <mat-spinner diameter="20"></mat-spinner>
+  </div>
 </ng-template>

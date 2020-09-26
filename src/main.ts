@@ -7,9 +7,12 @@ import { environment } from './environments/environment';
 import PubSub from '@aws-amplify/pubsub';
 import API from '@aws-amplify/api';
 import awsconfig from './aws-exports';
+import Amplify from 'aws-amplify';
+import { AmazonAIPredictionsProvider } from '@aws-amplify/predictions';
 
 API.configure(awsconfig);
 PubSub.configure(awsconfig);
+Amplify.addPluggable(new AmazonAIPredictionsProvider());
 
 if (environment.production) {
   enableProdMode();

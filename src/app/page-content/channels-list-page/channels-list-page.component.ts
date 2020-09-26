@@ -3,9 +3,9 @@ import {faReplyAll, faSearch} from '@fortawesome/free-solid-svg-icons';
 import {ChannelService} from '../../services/channel/channel.service';
 import {UserService} from '../../services/user/user.service';
 import {BehaviorSubject} from 'rxjs';
-import {CustomChannelsList, CustomCreateChannel} from '../../custom-api.service';
 import {OnCreateUserChannelSubscription} from '../../API.service';
 import {ChannelList, ChannelMembers} from '../../interfaces/Channel';
+import {CustomChannelsList, CustomCreateChannel} from '../../custom-types';
 
 type ChannelClickInfo = {
   id: string;
@@ -49,7 +49,6 @@ export class ChannelsListPageComponent implements OnInit {
   subscribeToChannelCreation() {
     this.channelService.listenForNewChannels().subscribe((evt) => {
       const data = (evt as any).value.data.onCreateChannel;
-      console.log(data);
 
       this.channelsList.push({
         id: data.id,

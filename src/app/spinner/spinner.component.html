@@ -1,10 +1,13 @@
-<div class="full-container flex-center">
+<div class="full-container flex-center spinner">
   <div class="loading-text">
     <div class="flex-center">
       <mat-spinner></mat-spinner>
     </div>
-    <div class="plain-text-accent">
-      Loading
+    <div class="plain-text-accent" *ngIf="text else default">
+      {{text}}
     </div>
+    <ng-template #default>
+      Loading
+    </ng-template>
   </div>
 </div>

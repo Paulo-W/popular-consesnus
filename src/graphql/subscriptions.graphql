@@ -9,6 +9,10 @@ subscription OnCreateUser {
     debates {
       nextToken
     }
+    teams {
+      nextToken
+    }
+    profile_image
     createdAt
     updatedAt
   }
@@ -23,6 +27,10 @@ subscription OnUpdateUser {
     debates {
       nextToken
     }
+    teams {
+      nextToken
+    }
+    profile_image
     createdAt
     updatedAt
   }
@@ -37,6 +45,10 @@ subscription OnDeleteUser {
     debates {
       nextToken
     }
+    teams {
+      nextToken
+    }
+    profile_image
     createdAt
     updatedAt
   }
@@ -49,6 +61,7 @@ subscription OnCreateChannel {
     createdBy {
       id
       username
+      profile_image
       createdAt
       updatedAt
     }
@@ -70,6 +83,7 @@ subscription OnUpdateChannel {
     createdBy {
       id
       username
+      profile_image
       createdAt
       updatedAt
     }
@@ -91,6 +105,7 @@ subscription OnDeleteChannel {
     createdBy {
       id
       username
+      profile_image
       createdAt
       updatedAt
     }
@@ -99,66 +114,6 @@ subscription OnDeleteChannel {
     }
     debates {
       nextToken
-    }
-    createdAt
-    updatedAt
-  }
-}
-subscription OnCreateUserChannel {
-  onCreateUserChannel {
-    id
-    user {
-      id
-      username
-      createdAt
-      updatedAt
-    }
-    channel {
-      id
-      name
-      description
-      createdAt
-      updatedAt
-    }
-    createdAt
-    updatedAt
-  }
-}
-subscription OnUpdateUserChannel {
-  onUpdateUserChannel {
-    id
-    user {
-      id
-      username
-      createdAt
-      updatedAt
-    }
-    channel {
-      id
-      name
-      description
-      createdAt
-      updatedAt
-    }
-    createdAt
-    updatedAt
-  }
-}
-subscription OnDeleteUserChannel {
-  onDeleteUserChannel {
-    id
-    user {
-      id
-      username
-      createdAt
-      updatedAt
-    }
-    channel {
-      id
-      name
-      description
-      createdAt
-      updatedAt
     }
     createdAt
     updatedAt
@@ -185,10 +140,10 @@ subscription OnCreateDebate {
     }
     tag
     days
-    date
     createdBy {
       id
       username
+      profile_image
       createdAt
       updatedAt
     }
@@ -224,10 +179,10 @@ subscription OnUpdateDebate {
     }
     tag
     days
-    date
     createdBy {
       id
       username
+      profile_image
       createdAt
       updatedAt
     }
@@ -263,10 +218,10 @@ subscription OnDeleteDebate {
     }
     tag
     days
-    date
     createdBy {
       id
       username
+      profile_image
       createdAt
       updatedAt
     }
@@ -291,22 +246,15 @@ subscription OnCreateTeam {
       description
       tag
       days
-      date
       createdAt
       updatedAt
     }
     team
     members {
-      id
-      username
-      createdAt
-      updatedAt
+      nextToken
     }
     messages {
-      id
-      content
-      createdAt
-      updatedAt
+      nextToken
     }
     createdAt
     updatedAt
@@ -322,22 +270,15 @@ subscription OnUpdateTeam {
       description
       tag
       days
-      date
       createdAt
       updatedAt
     }
     team
     members {
-      id
-      username
-      createdAt
-      updatedAt
+      nextToken
     }
     messages {
-      id
-      content
-      createdAt
-      updatedAt
+      nextToken
     }
     createdAt
     updatedAt
@@ -353,22 +294,15 @@ subscription OnDeleteTeam {
       description
       tag
       days
-      date
       createdAt
       updatedAt
     }
     team
     members {
-      id
-      username
-      createdAt
-      updatedAt
+      nextToken
     }
     messages {
-      id
-      content
-      createdAt
-      updatedAt
+      nextToken
     }
     createdAt
     updatedAt
@@ -377,48 +311,92 @@ subscription OnDeleteTeam {
 subscription OnCreateMessage {
   onCreateMessage {
     id
-    user {
+    createdBy {
       id
       username
+      profile_image
       createdAt
       updatedAt
     }
     content
-    likeUsers {
-      id
-      username
-      createdAt
-      updatedAt
-    }
-    dislikeUsers {
-      id
-      username
-      createdAt
-      updatedAt
-    }
+    likeUsers
+    dislikeUsers
+    image
     createdAt
+    teamId {
+      id
+      name
+      team
+      createdAt
+      updatedAt
+    }
     updatedAt
   }
 }
 subscription OnUpdateMessage {
   onUpdateMessage {
     id
-    user {
+    createdBy {
       id
       username
+      profile_image
       createdAt
       updatedAt
     }
     content
-    likeUsers {
+    likeUsers
+    dislikeUsers
+    image
+    createdAt
+    teamId {
       id
-      username
+      name
+      team
       createdAt
       updatedAt
     }
-    dislikeUsers {
+    updatedAt
+  }
+}
+subscription OnDeleteMessage {
+  onDeleteMessage {
+    id
+    createdBy {
       id
       username
+      profile_image
+      createdAt
+      updatedAt
+    }
+    content
+    likeUsers
+    dislikeUsers
+    image
+    createdAt
+    teamId {
+      id
+      name
+      team
+      createdAt
+      updatedAt
+    }
+    updatedAt
+  }
+}
+subscription OnCreateUserChannel {
+  onCreateUserChannel {
+    id
+    user {
+      id
+      username
+      profile_image
+      createdAt
+      updatedAt
+    }
+    channel {
+      id
+      name
+      description
       createdAt
       updatedAt
     }
@@ -426,25 +404,104 @@ subscription OnUpdateMessage {
     updatedAt
   }
 }
-subscription OnDeleteMessage {
-  onDeleteMessage {
+subscription OnUpdateUserChannel {
+  onUpdateUserChannel {
     id
     user {
       id
       username
+      profile_image
       createdAt
       updatedAt
     }
-    content
-    likeUsers {
+    channel {
       id
-      username
+      name
+      description
       createdAt
       updatedAt
     }
-    dislikeUsers {
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteUserChannel {
+  onDeleteUserChannel {
+    id
+    user {
       id
       username
+      profile_image
+      createdAt
+      updatedAt
+    }
+    channel {
+      id
+      name
+      description
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateUserTeam {
+  onCreateUserTeam {
+    id
+    user {
+      id
+      username
+      profile_image
+      createdAt
+      updatedAt
+    }
+    team {
+      id
+      name
+      team
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateUserTeam {
+  onUpdateUserTeam {
+    id
+    user {
+      id
+      username
+      profile_image
+      createdAt
+      updatedAt
+    }
+    team {
+      id
+      name
+      team
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteUserTeam {
+  onDeleteUserTeam {
+    id
+    user {
+      id
+      username
+      profile_image
+      createdAt
+      updatedAt
+    }
+    team {
+      id
+      name
+      team
       createdAt
       updatedAt
     }

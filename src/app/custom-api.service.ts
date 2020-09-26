@@ -1,82 +1,19 @@
 import {Injectable} from '@angular/core';
 import API, {graphqlOperation} from '@aws-amplify/api';
 import {Observable} from 'zen-observable-ts';
+import {
+  CustomChannelDebate,
+  CustomChannelMembers,
+  CustomChannelsList,
+  CustomCreateChannel,
+  CustomDebateList,
+  CustomGetUserChannelQuery,
+  CustomSpecificChannel,
+  DebateTeams,
+  MappedDebate,
+  MessageInfo
+} from './custom-types';
 
-export type CustomGetUserChannelQuery = {
-  channels: {
-    items: [{
-      channel: {
-        id
-        name
-      }
-    }]
-  }
-};
-
-export type CustomChannelsList = {
-  items: [CustomCreateChannel]
-};
-
-export type CustomCreateChannel = {
-  id: string
-  name: string
-  members: {
-    items?: [{
-      id
-      user: {
-        id: string
-      }
-    }]
-  }
-};
-
-export type CustomSpecificChannel = {
-  id: string
-  name: string
-  description: string
-  createdBy: SimpleUser
-  members: {
-    items: [{
-      user: {
-        id
-      }
-    }]
-  }
-};
-
-export type CustomChannelMembers = {
-  members: {
-    items: [{
-      id: string
-      user: {
-        id: string
-      }
-      channel: {
-        id: string
-      }
-    }]
-  }
-};
-
-export type CustomListDebates = {
-  debates: {
-    items: [CustomDebate]
-  }
-};
-
-export type CustomDebate = {
-  id: string
-  title: string
-  description: string
-  days: number
-  createdAt: Date
-  createdBy: SimpleUser
-};
-
-export type SimpleUser = {
-  id: string
-  username: string
-};
 
 @Injectable({
   providedIn: 'root'
@@ -100,6 +37,29 @@ export class CustomApiService {
       }`
     )
   ) as Observable<CustomCreateChannel>;
+
+  OnCreateMessageListener: Observable<MessageInfo> = API.graphql(
+    graphqlOperation(
+      `subscription OnCreateMessage {
+        onCreateMessage {
+          id
+          teamId {
+            id
+          }
+          createdBy {
+            id
+            username
+          }
+          likeUsers
+          dislikeUsers
+          content
+          createdAt
+          image
+        }
+      }`
+    )
+  ) as Observable<MessageInfo>;
+
 
   async GetChannelMembers(id: string): Promise<CustomChannelMembers> {
     const statement = `query GetChannelDebates($id: ID!) {
@@ -128,21 +88,28 @@ export class CustomApiService {
     return response.data.getChannel as CustomChannelMembers;
   }
 
-  async GetChannelDebates(id: string): Promise<CustomListDebates> {
-    const statement = `query GetChannelDebates($id: ID!) {
-        getChannel(id: $id) {
-          debates {
-            items {
-              id
-              title
-              description
-              days
-              createdAt
-              createdBy {
-                id
-                username
-              }
-            }
+  async FindDebateById(id: string): Promise<MappedDebate> {
+    const statement = `query GetFullDebates($id: ID!) {
+        getDebate(id: $id) {
+          id
+          title
+          description
+          tag
+          days
+          createdAt
+          team1 {
+            name
+          }
+          team2 {
+            name
+          }
+          createdBy {
+            id
+            username
+          }
+          channel {
+            id
+            name
           }
         }
       }`;
@@ -153,7 +120,89 @@ export class CustomApiService {
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
-    return response.data.getChannel as CustomListDebates;
+
+    return response.data.getDebate as MappedDebate;
+  }
+
+  async GetDetailedDebates(id: string): Promise<CustomDebateList> {
+    const statement = `query GetDebates($id: ID!) {
+        getUser(id: $id) {
+          channels {
+            items {
+              channel {
+                id
+                name
+                debates {
+                items {
+                    id
+                    title
+                    description
+                    days
+                    createdAt
+                    createdBy {
+                      id
+                      username
+                    }
+                    team1 {
+                      name
+                    }
+                    team2 {
+                      name
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }`;
+
+    const gqlAPIServiceArguments: any = {
+      id
+    };
+
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+
+    return response.data.getUser as CustomDebateList;
+  }
+
+  async GetDetailedChannelDebates(id: string): Promise<CustomChannelDebate> {
+    const statement = `query GetDetailChannelDebates($id: ID!) {
+        getChannel(id: $id) {
+          id
+          name
+          debates {
+            items {
+              id
+              title
+              description
+              days
+              createdAt
+              createdBy {
+                username
+              }
+              team1 {
+                name
+              }
+              team2 {
+                name
+              }
+            }
+          }
+        }
+      }`;
+
+    const gqlAPIServiceArguments: any = {
+      id
+    };
+
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+
+    return response.data.getChannel as CustomChannelDebate;
   }
 
   async GetSpecificChannel(id: string): Promise<CustomSpecificChannel> {
@@ -234,5 +283,93 @@ export class CustomApiService {
     )) as any;
 
     return response.data.listChannels as CustomChannelsList;
+  }
+
+
+  async GetDebateTeams(id: string): Promise<DebateTeams> {
+    const statement = `query GetDebateTeams($id: ID!) {
+        getDebate(id: $id) {
+          team1 {
+            id
+            members {
+              items {
+                id
+                user {
+                  id
+                }
+                team {
+                  id
+                }
+              }
+            }
+            messages {
+              items {
+                likeUsers
+                dislikeUsers
+              }
+            }
+          }
+          team2 {
+            id
+            members {
+              items {
+                id
+                user {
+                  id
+                }
+                team {
+                  id
+                }
+              }
+            }
+            messages {
+              items {
+                likeUsers
+                dislikeUsers
+              }
+            }
+          }
+        }
+      }`;
+
+    const gqlAPIServiceArguments: any = {
+      id
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+
+    return response.data.getDebate as DebateTeams;
+  }
+
+
+  async GetTeamMessages(id: string): Promise<MessageInfo[]> {
+    const statement = `query GetMessages($id: ID!) {
+        getTeam(id: $id) {
+          messages {
+            items {
+              id
+              createdBy {
+                id
+                username
+              }
+              likeUsers
+              dislikeUsers
+              content
+              createdAt
+              image
+            }
+          }
+        }
+      }`;
+
+    const gqlAPIServiceArguments: any = {
+      id
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+
+    return response.data.getTeam.messages.items as MessageInfo[];
   }
 }

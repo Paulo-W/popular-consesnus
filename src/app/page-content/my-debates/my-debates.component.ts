@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {DebateInfo} from '../../interfaces/Debate';
 import {DebateService} from '../../services/debate/debate.service';
+import {MappedDebate} from '../../custom-types';
 
 @Component({
   selector: 'app-my-debates',
@@ -9,10 +9,11 @@ import {DebateService} from '../../services/debate/debate.service';
 })
 export class MyDebatesComponent implements OnInit {
 
-  userDebates: DebateInfo[];
+  userDebates: MappedDebate[];
 
-  constructor(private debateService: DebateService) {
-    this
+  constructor(
+    private debateService: DebateService
+  ) {
   }
 
   ngOnInit(): void {
@@ -20,6 +21,8 @@ export class MyDebatesComponent implements OnInit {
   }
 
   getUserDebates() {
-    this.userDebates = this.debateService.getUserInvolvedDebates();
+    this.debateService.getUserInvolvedDebates().then(debates => {
+      this.userDebates = debates;
+    });
   }
 }

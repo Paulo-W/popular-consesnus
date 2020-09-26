@@ -9,6 +9,10 @@ query GetUser($id: ID!) {
     debates {
       nextToken
     }
+    teams {
+      nextToken
+    }
+    profile_image
     createdAt
     updatedAt
   }
@@ -22,6 +26,7 @@ query ListUsers(
     items {
       id
       username
+      profile_image
       createdAt
       updatedAt
     }
@@ -36,6 +41,7 @@ query GetChannel($id: ID!) {
     createdBy {
       id
       username
+      profile_image
       createdAt
       updatedAt
     }
@@ -65,12 +71,153 @@ query ListChannels(
     nextToken
   }
 }
+query GetDebate($id: ID!) {
+  getDebate(id: $id) {
+    id
+    title
+    description
+    team1 {
+      id
+      name
+      team
+      createdAt
+      updatedAt
+    }
+    team2 {
+      id
+      name
+      team
+      createdAt
+      updatedAt
+    }
+    tag
+    days
+    createdBy {
+      id
+      username
+      profile_image
+      createdAt
+      updatedAt
+    }
+    channel {
+      id
+      name
+      description
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+query ListDebates(
+  $filter: ModelDebateFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listDebates(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      title
+      description
+      tag
+      days
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query GetTeam($id: ID!) {
+  getTeam(id: $id) {
+    id
+    name
+    debate {
+      id
+      title
+      description
+      tag
+      days
+      createdAt
+      updatedAt
+    }
+    team
+    members {
+      nextToken
+    }
+    messages {
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+query ListTeams(
+  $filter: ModelTeamFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listTeams(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      name
+      team
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query GetMessage($id: ID!) {
+  getMessage(id: $id) {
+    id
+    createdBy {
+      id
+      username
+      profile_image
+      createdAt
+      updatedAt
+    }
+    content
+    likeUsers
+    dislikeUsers
+    image
+    createdAt
+    teamId {
+      id
+      name
+      team
+      createdAt
+      updatedAt
+    }
+    updatedAt
+  }
+}
+query ListMessages(
+  $filter: ModelMessageFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listMessages(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      content
+      likeUsers
+      dislikeUsers
+      image
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
 query GetUserChannel($id: ID!) {
   getUserChannel(id: $id) {
     id
     user {
       id
       username
+      profile_image
       createdAt
       updatedAt
     }
@@ -99,130 +246,20 @@ query ListUserChannels(
     nextToken
   }
 }
-query GetDebate($id: ID!) {
-  getDebate(id: $id) {
-    id
-    title
-    description
-    team1 {
-      id
-      name
-      team
-      createdAt
-      updatedAt
-    }
-    team2 {
-      id
-      name
-      team
-      createdAt
-      updatedAt
-    }
-    tag
-    days
-    date
-    createdBy {
-      id
-      username
-      createdAt
-      updatedAt
-    }
-    channel {
-      id
-      name
-      description
-      createdAt
-      updatedAt
-    }
-    createdAt
-    updatedAt
-  }
-}
-query ListDebates(
-  $filter: ModelDebateFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listDebates(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
-      id
-      title
-      description
-      tag
-      days
-      date
-      createdAt
-      updatedAt
-    }
-    nextToken
-  }
-}
-query GetTeam($id: ID!) {
-  getTeam(id: $id) {
-    id
-    name
-    debate {
-      id
-      title
-      description
-      tag
-      days
-      date
-      createdAt
-      updatedAt
-    }
-    team
-    members {
-      id
-      username
-      createdAt
-      updatedAt
-    }
-    messages {
-      id
-      content
-      createdAt
-      updatedAt
-    }
-    createdAt
-    updatedAt
-  }
-}
-query ListTeams(
-  $filter: ModelTeamFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listTeams(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
-      id
-      name
-      team
-      createdAt
-      updatedAt
-    }
-    nextToken
-  }
-}
-query GetMessage($id: ID!) {
-  getMessage(id: $id) {
+query GetUserTeam($id: ID!) {
+  getUserTeam(id: $id) {
     id
     user {
       id
       username
+      profile_image
       createdAt
       updatedAt
     }
-    content
-    likeUsers {
+    team {
       id
-      username
-      createdAt
-      updatedAt
-    }
-    dislikeUsers {
-      id
-      username
+      name
+      team
       createdAt
       updatedAt
     }
@@ -230,15 +267,14 @@ query GetMessage($id: ID!) {
     updatedAt
   }
 }
-query ListMessages(
-  $filter: ModelMessageFilterInput
+query ListUserTeams(
+  $filter: ModelUserTeamFilterInput
   $limit: Int
   $nextToken: String
 ) {
-  listMessages(filter: $filter, limit: $limit, nextToken: $nextToken) {
+  listUserTeams(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
-      content
       createdAt
       updatedAt
     }
@@ -264,6 +300,7 @@ query UserByName(
     items {
       id
       username
+      profile_image
       createdAt
       updatedAt
     }

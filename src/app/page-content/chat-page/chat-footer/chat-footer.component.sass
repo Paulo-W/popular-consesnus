@@ -4,11 +4,8 @@
   padding: 10px
   position: fixed
   bottom: 0
-  height: 8%
   background-color: #FCFCFC
   z-index: 9999999
-  .input-group
-    margin-top: 20px
 
 .half-width
   left: 15%
@@ -18,46 +15,129 @@
   left: 0
   width: 100%
 
-.input-group
-  margin-top: 10px !important
-  input
-    min-height: 45px
-  .input-group-prepend, .input-group-append
-    width: 5%
-    button
-      width: 100%
-      max-height: 45px
-      mat-icon
-        padding-top: 2px
+.image-height
+  min-height: 14%
+
+.regular-height
+  height: 6%
+
+.text-box
+  display: flex
+  align-items: flex-end
+  flex-direction: row
+
+.footer-row
+  display: flex
+  flex-direction: row
+  justify-content: space-between
+  align-items: flex-end
+  .add-file
+    flex: 1
+    label
+      margin-top: 2px
+      width: 70%
+  .input-area
+    flex: 17
+    .input-section
+      display: flex
+      flex-direction: row
+      justify-content: flex-start
+      border-bottom: #6C757D 2px solid
+      align-items: flex-end
+      .footer-image
+        position: relative
+        padding: 15px
+        flex: 1
+        .footer-image-spinner
+          position: absolute
+          top: 38%
+          left: 28%
+          z-index: 99
+      .form-group
+        padding: 2px
+        flex: 6
+        margin-bottom: 0
+      input
+        width: 100%
+        background-color: transparent
+        border: none
+        &:active
+          border: none !important
+      .invisible-button
+        background-color: transparent
+        border: none
+        color: lighten($primary-color, 5%)
+        &:hover
+          cursor: pointer
 
 .blue-team-border
   border-top: 4px solid $blue-team-color
   ::placeholder
     color: darken($blue-team-color, 8%)
-  .input-group
-    button
-      color: white
-      border: none
-      background-color: $blue-team-color
-      &:hover
-        background-color: lighten($blue-team-color, 5%)
-    input
-      border-top: solid 2px $blue-team-color
-      border-bottom: solid 2px $blue-team-color
 
 .red-team-border
   border-top: 3px solid lighten($red-team-color, 2%)
   ::placeholder
     color: darken($red-team-color, 6%)
-  .input-group
-    button
-      color: white
-      border: none
-      background-color: $red-team-color
+
+input[type="file"]
+  display: none
+
+button[disabled]
+  color: $text-color !important
+  background-color: white !important
+  &:hover
+    cursor: default !important
+
+.custom-file-upload
+  text-align: center
+  padding: 10px 0
+  background-color: $secondary-color
+  border: solid 2px $primary-color
+  span
+    color: white
+  &:hover
+    background-color: $primary-color
+    cursor: pointer
+
+.modal-header
+  div
+    text-align: center
+    position: relative
+    font-size: 100%
+    h3
+      font-size: 200%
+      color: darken($red-team-color, 10%)
+    span
+      color: red
+      position: absolute
+      right: 2px
+      top: 2px
       &:hover
-        background-color: lighten($red-team-color, 5%)
-    button, input
-      border-top: solid 2px $red-team-color
-      border-bottom: solid 2px $red-team-color
+        cursor: pointer
+        right: 1px
 
+.modal-body
+  div
+    padding: 10px
+    text-align: center
+    h5
+      font-size: 145%
+      //color: darken($red-team-color, 4%)
 
+.modal-footer
+  text-align: center
+
+.blur-image
+  -webkit-filter: blur(5px) /* Safari 6.0 - 9.0 */
+  filter: blur(5px)
+
+.row
+  ul
+    text-align: left
+    color: darken($red-team-color, 4%)
+
+.modal-footer
+  padding: 15px
+  div
+    //color: darken($red-team-color, 4%)
