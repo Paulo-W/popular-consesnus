@@ -1,6 +1,5 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {faUpload} from '@fortawesome/free-solid-svg-icons';
-import {SideNavService} from '../../../services/side-nav/side-nav.service';
 import {DebateTeams} from '../../../custom-types';
 import {TeamService} from '../../../services/team/team.service';
 import {MessageService} from '../../../services/message/message.service';
@@ -37,21 +36,12 @@ export class ChatFooterComponent implements OnInit {
 
   constructor(
     private modalService: NgbModal,
-    private sideNavService: SideNavService,
     private teamService: TeamService,
     private messageService: MessageService) {
   }
 
   ngOnInit(): void {
-    this.subscribeToSideNav();
     this.subscribeToTeams();
-    this.sideNavService.triggerSideNaveState();
-  }
-
-  subscribeToSideNav() {
-    this.sideNavService.configObservable.subscribe(
-      closed => this.sideNavClosed = closed
-    );
   }
 
   private subscribeToTeams() {

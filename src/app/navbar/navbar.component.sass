@@ -55,3 +55,19 @@ span
 
 .right-nav
   text-align: right
+
+@media only screen and (min-width: 481px) and (max-width: 770px) and (orientation: portrait)
+  h1
+    font-size: 40px
+
+// for phones landscape
+@media only screen and (max-height: 360px) and (max-width: 640px) and (orientation: landscape)
+  h1
+    font-size: 30px
+
+// for mobile phones
+@media only screen and (max-width: 481px)
+  h1
+    font-size: 25px
+  .home-button, #bell
+    display: none

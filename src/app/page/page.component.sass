@@ -18,6 +18,30 @@
   width: 15%
   background: #eee
 
+.mobile-side-nave
+  display: none
+
 .page-content
   height: 100%
   background: #f3f3f3
+
+// for tablets portrait
+@media only screen and (max-height: 1024px) and (max-width: 770px) and (orientation: portrait)
+  .example-sidenav
+    width: 25%
+
+// for tablets landscape
+@media only screen and (max-height: 770px) and (max-width: 1024px) and (orientation: landscape)
+  .example-sidenav
+    width: 23%
+
+// for mobile phones
+@media only screen and (max-width: 481px) and (max-width: 640px) and (orientation: portrait)
+  .example-sidenav
+    display: none
+  .mobile-side-nave
+    display: inline
+
+@media only screen and (max-height: 360px) and (max-width: 640px) and (orientation: landscape)
+  .example-sidenav
+    width: 30%

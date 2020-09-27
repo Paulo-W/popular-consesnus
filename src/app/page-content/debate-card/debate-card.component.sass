@@ -29,3 +29,39 @@ mat-card
 .bars
   width: 100%
   min-height: 40px
+
+// for tablets portrait
+@media only screen and (max-height: 1024px) and (max-width: 770px) and (orientation: portrait)
+  .plain-text-xxx
+    font-size: 2.5em
+  .debate-description, .debate-team-name-left, .debate-team-name-right
+    font-size: 0.8em
+  .right-icon, .left-icon
+    display: none
+
+
+// for tablets landscape
+@media only screen and (max-height: 770px) and (max-width: 1024px) and (orientation: landscape)
+  .plain-text-xxx
+    font-size: 3em
+  .debate-description
+    font-size: 1em
+  .debate-team-name-left, .debate-team-name-right
+    font-size: 1em
+
+// for mobile phones portrait
+@media only screen and (max-width: 481px) and (max-width: 640px) and (orientation: portrait)
+  .debate-card-votes-block, .debate-description, .non-mobile-info, .right-icon, .left-icon, .debate-team-name-left, .debate-team-name-right
+    display: none
+  .debate-card-content
+    flex: 3
+  .debate-container
+    max-height: 170px
+  .debate-title
+    font-size: 1.2em
+
+@media only screen and (max-height: 360px) and (max-width: 640px) and (orientation: landscape)
+  .debate-card-votes-block, .right-icon, .left-icon
+    display: none
+  .debate-description, .debate-team-name-left, .debate-team-name-right
+    font-size: 0.8em

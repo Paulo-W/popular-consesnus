@@ -11,6 +11,7 @@ import {MessageInfo, Team} from '../../../../custom-types';
 export class MessageBoxComponent implements OnInit {
 
   @Input() team: Team;
+  @Input() teamNumber: number;
 
   messages: MessageInfo[];
 

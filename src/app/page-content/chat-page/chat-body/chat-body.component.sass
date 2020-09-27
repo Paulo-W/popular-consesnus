@@ -12,7 +12,7 @@ mat-card
 
 .join-container
   position: absolute
-  top: 301px
+  top: 247px
   left: 0
   width: 100%
   height: 58px
@@ -35,8 +35,9 @@ mat-card
     background-color: lighten($blue-team-color, 5%)
 
 .isFirstTeam
+  background-color: darken($blue-team-color, 5%)
   border: 2px solid lighten($blue-team-color, 5%)
-  color: darken($blue-team-color, 5%)
+  color: white
   border-left: none
 
   &:hover
@@ -50,13 +51,13 @@ mat-card
     background-color: lighten($red-team-color, 5%)
 
 .isSecondTeam
-  border: 2px solid lighten($red-team-color, 5%)
-  color: darken($red-team-color, 5%)
+  background-color: darken($red-team-color, 5%)
+  border: 2px solid white
+  color: white
   border-right: none
 
   &:hover
     background-color: lighten($red-team-color, 5%)
-    color: white
 
 .isNotMemberBlue, .isNotMemberRed
   color: white
@@ -79,14 +80,16 @@ button:disabled
   color: $text-color
 
 .switchBlue
-  border: 1px solid $text-color
+  border: 2px solid $blue-team-color
+  color: darken($blue-team-color, 10%)
 
   &:hover
     background-color: lighten($blue-team-color, 5%)
     color: white
 
 .switchRed
-  border: 1px solid $text-color
+  border: 2px solid $red-team-color
+  color: darken($red-team-color, 10%)
 
   &:hover
     background-color: lighten($red-team-color, 5%)

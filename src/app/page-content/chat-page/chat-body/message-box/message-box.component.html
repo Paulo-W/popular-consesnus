@@ -1,6 +1,6 @@
 <div *ngIf="messages ; else loadingMessages">
   <div *ngFor="let message of messages">
-    <app-message [message]="message"></app-message>
+    <app-message [message]="message" [teamNumber]="teamNumber"></app-message>
   </div>
 </div>
 <ng-template #loadingMessages>

@@ -54,10 +54,10 @@
 <mat-card class="tab-card message-body">
   <mat-tab-group mat-align-tabs="center" animationDuration="1200ms" dynamicHeight>
     <mat-tab label="{{team1Name | titlecase}} ({{teams.team1.members.items.length}})">
-      <app-message-box [team]="teams.team1"></app-message-box>
+      <app-message-box [team]="teams.team1" [teamNumber]=1></app-message-box>
     </mat-tab>
     <mat-tab label="{{team2Name | titlecase}} ({{teams.team2.members.items.length}})">
-      <app-message-box [team]="teams.team2"></app-message-box>
+      <app-message-box [team]="teams.team2" [teamNumber]=2></app-message-box>
     </mat-tab>
   </mat-tab-group>
 </mat-card>

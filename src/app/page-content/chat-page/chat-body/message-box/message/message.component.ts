@@ -13,6 +13,7 @@ import {MessageService} from '../../../../../services/message/message.service';
 export class MessageComponent implements OnInit {
 
   @Input() message: MessageInfo;
+  @Input() teamNumber: number;
   image = false;
   imageUrl = null;
   profileImageUrl = null;

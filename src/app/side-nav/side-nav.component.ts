@@ -4,7 +4,6 @@ import {UserService} from '../services/user/user.service';
 import {Router} from '@angular/router';
 import {ChannelService} from '../services/channel/channel.service';
 import {OnCreateUserChannelSubscription} from '../API.service';
-import {Storage} from 'aws-amplify';
 
 type Channel = {
   id: string;

@@ -1,11 +1,10 @@
 @import "../../../../../../styles"
 
 .chat-box
-  padding: 10px 10px 0
+  padding: 0 10px 0
   border-top: 1px #CACACA66 solid
   border-bottom: 1px #CACACA66 solid
   width: 100%
-  background-color: #f9f9f9
   .chat-box-image
     flex: 1
     padding: 5px 0 5px 5px
@@ -31,7 +30,6 @@
           color: white
           min-height: 200px
           min-width: 200px
-          background-color: black
       .message-content
         background-color: white
         padding: 10px 10px 0
@@ -100,3 +98,9 @@ button:disabled, button[disabled]
 .profile-pic-message
   border-radius: 50%
   border: 4px $secondary-color double
+
+.blue-background
+  background-color: lighten($blue-team-color, 11%)
+
+.red-background
+  background-color: lighten($red-team-color, 15%)

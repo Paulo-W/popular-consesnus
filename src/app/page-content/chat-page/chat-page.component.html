@@ -1,4 +1,4 @@
-<div *ngIf="debate; else spinner">
+<div *ngIf="debate; else spinner" class="chat-page">
   <mat-card class="top-chat">
     <div class="chat-container flex-column-center">
       <div class="chat-card-title full-container">
@@ -59,10 +59,9 @@
     <app-chat-body [teams]="teams" [team1Name]="debate.team1.name" [team2Name]="debate.team2.name"></app-chat-body>
   </div>
 
-  <div *ngIf="debate">
+  <div *ngIf="debate" class="chat-message-box">
     <app-chat-footer [teams]="teams" [team1Name]="debate.team1.name" [team2Name]="debate.team2.name"></app-chat-footer>
   </div>
-
 </div>
 <ng-template #spinner>
   <app-spinner [text]="'Fetching Debate'"></app-spinner>

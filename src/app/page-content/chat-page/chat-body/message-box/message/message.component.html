@@ -1,4 +1,7 @@
-<div class="chat-box">
+<div class="chat-box" [ngClass]="{
+  'blue-background': teamNumber === 1,
+  'red-background': teamNumber === 2
+}">
   <section class="flex-top-left">
     <div class="chat-box-image flex-center">
       <div>

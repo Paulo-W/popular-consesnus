@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {faSearch} from '@fortawesome/free-solid-svg-icons';
-import {SideNavService} from '../services/side-nav/side-nav.service';
 import {Subject} from 'rxjs';
+import {SideNavService} from '../services/side-nav/side-nav.service';
 
 @Component({
   selector: 'app-second-nav',

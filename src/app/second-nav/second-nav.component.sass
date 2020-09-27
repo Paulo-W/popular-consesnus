@@ -42,3 +42,27 @@ button
 
     &:hover
       background-color: $primary-color
+
+// for tablets
+@media only screen and (min-width: 481px) and (max-width: 770px) and (orientation: portrait)
+  .current-position
+    display: none
+  .search-block
+    .input-group
+      width: 100%
+
+// for phones
+@media only screen and (max-height: 360px) and (max-width: 640px) and (orientation: landscape)
+  .current-position
+    display: none
+  .search-block
+    .input-group
+      width: 100%
+
+// for phones portrait
+@media only screen and (max-height: 640px) and (max-width: 360px) and (orientation: portrait)
+  .menu-button, .current-position
+    display: none
+  .search-block
+    .input-group
+      width: 100%

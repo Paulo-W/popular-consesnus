@@ -12,8 +12,8 @@
         <div class="debate-card-top-center">
             <span class="plain-text-s">
               created by: <span class="plain-text-s-accent">{{debate.createdBy.username}}</span>
-              in channel: <span class="plain-text-s-accent">{{debate.channel.name}}</span>
-              on the: <span class="plain-text-s-accent">{{debate.createdAt | date: 'dd/MM/yyyy'}}</span>
+              <span class="non-mobile-info"> in channel: <span class="plain-text-s-accent">{{debate.channel.name}}</span></span>
+              <span class="non-mobile-info"> on the: <span class="plain-text-s-accent">{{debate.createdAt | date: 'dd/MM/yyyy'}}</span></span>
             </span>
         </div>
         <div class="debate-card-top-right-corner plain-text-red">
@@ -42,10 +42,10 @@
         </div>
         <div class="debate-content-container full-container flex-center">
           <div>
-            <div class="header-text-cards full-container center-text">
+            <div class="header-text-cards full-container center-text debate-title">
               <span>{{debate.title | titlecase}}</span>
             </div>
-            <div class="plain-text full-container">
+            <div class="plain-text full-container debate-description">
               <div class="center-text">
                 {{debate.description}}
               </div>
