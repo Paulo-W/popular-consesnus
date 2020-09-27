@@ -45,22 +45,25 @@ export class ChannelDetailPageComponent implements OnInit {
   ngOnInit(): void {
     this.getChannel();
     this.getChannelDebates();
-    this.checkJoined();
   }
 
   getChannel(): void {
     this.channelId = this.route.snapshot.paramMap.get('id');
     this.channelService.getChannelById(this.channelId).then(
-      channel => this.channel = channel
+      channel => {
+        this.channel = channel;
+        this.checkJoined();
+      }
     );
   }
 
-  checkJoined(): boolean {
+  checkJoined() {
     const array = this.channel?.members?.items.map(item => item.user.id);
     if (array) {
-      return array.includes(this.userService.currentUser.value);
+      this.isMember = array.includes(this.userService.currentUser.value);
+    } else {
+      this.isMember = false;
     }
-    return false;
   }
 
   joinChannel() {
