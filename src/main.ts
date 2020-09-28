@@ -9,9 +9,11 @@ import API from '@aws-amplify/api';
 import awsconfig from './aws-exports';
 import Amplify from 'aws-amplify';
 import { AmazonAIPredictionsProvider } from '@aws-amplify/predictions';
+import { Auth } from '@aws-amplify/auth';
 
 API.configure(awsconfig);
 PubSub.configure(awsconfig);
+Auth.configure(awsconfig);
 Amplify.addPluggable(new AmazonAIPredictionsProvider());
 
 if (environment.production) {

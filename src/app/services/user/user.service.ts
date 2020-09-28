@@ -53,10 +53,10 @@ export class UserService {
         this.apiService.UserByName(user.username)
           .then(it => {
             if (it.items.length > 0) {
-              console.log('found a full array' + JSON.stringify(it.items[0]));
+              // console.log('found a full array' + JSON.stringify(it.items[0]));
               this.setUserToken(it.items[0].id);
             } else {
-              console.log('no user found must go and create one');
+              // console.log('no user found must go and create one');
               this.saveNewUser(user.username);
             }
           })

@@ -4,7 +4,6 @@ import {FormFieldTypes} from '@aws-amplify/ui-components';
 import {Router} from '@angular/router';
 import {UserService} from '../services/user/user.service';
 
-
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
