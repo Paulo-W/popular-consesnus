@@ -4,12 +4,12 @@
       <section class="channel-details-header-row flex-center-left">
         <div class="channel-member full-container">
           <div *ngIf="isMember" class="plain-text-accent">
-            <fa-icon [icon]="faUser"></fa-icon>
-            Joined
+            <fa-icon [icon]="faUser" class="left-icon"></fa-icon>
+            <span class="droppable">Joined</span>
           </div>
         </div>
         <div class="channel-title header-text-cards full-container">
-          {{channel.name}}
+          {{channel.name | titlecase}}
         </div>
         <div class="channel-join-buttons full-container">
           <div *ngIf="isMember; else joinBlock" class="channel-top-buttons">
@@ -41,14 +41,35 @@
     <div class="channel-detail-row">
       <section class="flex-center-left channel-footer">
         <div class="channel-members-count plain-text-s full-container">
-          Total members in channel <span class="plain-text-s-accent">{{channel.members.items.length}}</span>
+          Members <span class="plain-text-s-accent">{{channel.members.items.length}}</span>
         </div>
         <div class="channel-debate-count plain-text-s full-container">
-          Total debates in channel <span class="plain-text-s-accent">{{channelDebates?.length}}</span>
+          Debates <span class="plain-text-s-accent">{{channelDebates?.length}}</span>
         </div>
       </section>
     </div>
   </mat-card>
+
+  <div class="mobile-join-button">
+    <div *ngIf="isMember; else joinBlock" class="channel-top-buttons flex-center">
+      <button [disabled]="memberAction" mat-raised-button class="mat-button cancel" color="warn"
+              (click)="leaveChannel()" type="button">
+              <span *ngIf="!memberAction; else buttonSpinner">
+                Leave
+              </span>
+      </button>
+    </div>
+    <ng-template #joinBlock>
+      <div class="channel-top-buttons flex-center">
+        <button [disabled]="memberAction" mat-raised-button class="mat-button success" color="primary"
+                (click)="joinChannel()" type="button">
+                <span *ngIf="!memberAction; else buttonSpinner">
+                  Join
+                </span>
+        </button>
+      </div>
+    </ng-template>
+  </div>
 
   <div *ngIf="channelDebates">
     <div *ngFor="let debate of channelDebates">

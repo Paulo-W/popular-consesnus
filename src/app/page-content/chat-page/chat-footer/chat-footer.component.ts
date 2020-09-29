@@ -141,4 +141,9 @@ export class ChatFooterComponent implements OnInit {
   }
 
 
+  removeImage() {
+    this.url = null;
+    this.fileType = null;
+    this.file = null;
+  }
 }

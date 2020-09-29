@@ -22,6 +22,9 @@
           <div class="input-area">
             <div class="input-section">
               <div *ngIf="url" class="footer-image">
+                <div class="close-image">
+                  <mat-icon (click)="removeImage()">close</mat-icon>
+                </div>
                 <div *ngIf="callingBackend" class="footer-image-spinner">
                   <div class="flex-column-center  plain-text-accent">
                     <mat-spinner diameter="40"></mat-spinner>

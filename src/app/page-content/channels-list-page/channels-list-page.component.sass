@@ -59,9 +59,7 @@ mat-list-item
     .left-channel-list
       flex: 1
       div
-        margin-right: 10px
         div
-          padding-right: 40px
           text-align: center
     .channel-name
       flex: 4
@@ -94,3 +92,52 @@ mat-list-item
 
 button:disabled
   background-color: #f3f3f3 !important
+
+.create-new-channel-mobile
+  display: none
+  margin-top: 10px
+  button
+    width: 97%
+
+// for tablets portrait
+@media only screen and (max-height: 1024px) and (max-width: 770px) and (orientation: portrait)
+  .channels-list-title
+    display: none
+  .channels-list-header
+    .filter-channel-list
+      .input-group
+        width: 100%
+
+// for tablets landscape
+@media only screen and (max-height: 770px) and (max-width: 1024px) and (orientation: landscape)
+  .channels-list-header
+    .filter-channel-list
+      .input-group
+        width: 80%
+
+// for mobile phones portrait
+@media only screen and (max-width: 500px) and (max-height: 770px) and (orientation: portrait)
+  .create-new-channel, .member-buttons
+    display: none
+  .create-new-channel-mobile
+    display: flex
+  .info-block
+    .plain-text-s
+      font-size: 0.7em
+      line-height: 0.9em
+
+
+// for mobile phones landscape
+@media only screen and (max-width: 770px) and (max-height: 500px) and (orientation: landscape)
+  .create-new-channel, .member-buttons, .channels-list-title
+    display: none
+  .create-new-channel-mobile
+    display: flex
+  .channels-list-header
+    .filter-channel-list
+      .input-group
+        width: 100%
+  .info-block
+    .plain-text-s
+      font-size: 0.7em
+      line-height: 0.9em

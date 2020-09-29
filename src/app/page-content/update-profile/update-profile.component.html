@@ -39,10 +39,10 @@
               </div>
             </div>
             <div class="form-group row">
-              <label for="user-username" class="col-form-label plain-text-x col-md-2">
+              <label for="user-username" class="col-form-label plain-text-x col-lg-3 col-xl-2">
                 Username<span class="plain-text-s-accent">*</span>:
               </label>
-              <div class="col-md-10">
+              <div class="col-lg-9 col-xl-10">
                 <input type="text" class="form-control plain-text" id="user-username" formControlName="username"
                        placeholder="Please enter a valid username" [ngClass]="{
                  'has-danger': username.invalid && (username.dirty || username.touched),
@@ -51,10 +51,10 @@
               </div>
             </div>
             <div class="form-group row">
-              <label for="user-email" class="col-form-label plain-text-x col-md-2">
+              <label for="user-email" class="col-form-label plain-text-x col-lg-3 col-xl-2">
                 Email<span class="plain-text-s-accent">*</span>:
               </label>
-              <div class="col-md-10">
+              <div class="col-lg-9 col-xl-10">
                 <input type="email" class="form-control" id="user-email" placeholder="Please enter a valid email"
                        formControlName="email" [ngClass]="{
                  'has-danger': email.invalid && (email.dirty || email.touched),
@@ -63,10 +63,10 @@
               </div>
             </div>
             <div class="row">
-              <label for="user-password" class="col-form-label plain-text-x col-md-2">
+              <label for="user-password" class="col-form-label plain-text-x col-lg-3 col-xl-2">
                 Password:
               </label>
-              <div class="col-md-10">
+              <div class="col-lg-9 col-xl-10">
                 <button class="btn btn-light btn-lg btn-block" (click)="open(content)"><span class="plain-text">Change Password</span>
                 </button>
               </div>

@@ -28,3 +28,64 @@
 button
   min-width: 80px
   min-height: 40px
+
+.mobile-join-button
+  display: none
+
+// for tablets portrait
+@media only screen and (max-height: 1024px) and (max-width: 770px) and (orientation: portrait)
+  .droppable
+    display: none
+  .channel-details-header-row
+    .channel-member
+      flex: 1
+    .channel-title
+      font-size: 1.8em
+      line-height: 1.1em
+      flex: 10
+    .channel-join-buttons
+      flex: 2
+  .channel-description
+    font-size: 1.2em
+
+// for tablets landscape
+@media only screen and (max-height: 770px) and (max-width: 1024px) and (orientation: landscape)
+  .channel-details-header-row
+    .channel-title
+      font-size: 1.8em
+      line-height: 1.1em
+  .channel-description
+    font-size: 1.2em
+
+// for mobile phones portrait
+@media only screen and (max-width: 500px) and (max-height: 770px) and (orientation: portrait)
+  .channel-join-buttons
+    display: none
+  .mobile-join-button
+    display: block
+    margin-bottom: 15px
+    .mat-button
+      margin: auto
+      width: 95%
+
+// for mobile phones landscape
+@media only screen and (max-width: 770px) and (max-height: 500px) and (orientation: landscape)
+  .channel-join-buttons
+    display: none
+  .mobile-join-button
+    display: block
+    margin-bottom: 15px
+    .mat-button
+      margin: auto
+      width: 95%
+  .droppable
+    display: none
+  .channel-details-header-row
+    .channel-member
+      flex: 1
+    .channel-title
+      font-size: 1.8em
+      line-height: 1.1em
+      flex: 10
+    .channel-description
+      font-size: 1em

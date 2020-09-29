@@ -71,15 +71,16 @@ export class ChannelDetailPageComponent implements OnInit {
     this.channelService.joinChannel(this.channelId).then(() => {
       this.isMember = true;
       this.memberAction = false;
+      this.channel.members.items.push({user: {id: this.userService.currentUser.value}});
     });
   }
 
   leaveChannel() {
     this.memberAction = true;
     this.channelService.leaveChannel(this.channelId).then(() => {
-      console.log('very quickly');
       this.isMember = false;
       this.memberAction = false;
+      this.removeUser();
     });
   }
 
@@ -88,5 +89,13 @@ export class ChannelDetailPageComponent implements OnInit {
       channelDebates => {
         this.channelDebates = channelDebates;
       });
+  }
+
+  private removeUser() {
+    const index = this.channel.members.items.map(user => user.user.id).indexOf(this.userService.currentUser.value);
+
+    if (index !== -1) {
+      this.channel.members.items.splice(index, 1);
+    }
   }
 }

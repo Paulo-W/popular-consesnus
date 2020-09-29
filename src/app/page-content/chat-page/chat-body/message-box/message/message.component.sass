@@ -25,7 +25,7 @@
       background-color: white
       .message-image
         flex: 3
-        padding: 10px 10px 10px 20px
+        padding: 10px
         .image-container
           color: white
           min-height: 200px
@@ -109,7 +109,7 @@ button:disabled, button[disabled]
   display: none
 
 // for mobile phones portrait & landscape
-@media only screen and (max-width: 481px) and (max-height: 700px) and (orientation: portrait)
+@media only screen and (max-width: 500px) and (max-height: 700px) and (orientation: portrait)
   .droppable, .message-footer-date
     display: none
   .message-footer
@@ -133,7 +133,7 @@ button:disabled, button[disabled]
           padding-bottom: 0
 
 // just for mobile phones landscape
-@media only screen and (max-width: 700px) and (max-height: 481px) and (orientation: landscape)
+@media only screen and (max-width: 700px) and (max-height: 500px) and (orientation: landscape)
   .droppable, .message-footer-date
     display: none
   .message-footer
@@ -149,7 +149,7 @@ button:disabled, button[disabled]
         flex-direction: column
         align-items: flex-start
         .message-content
-          padding-left: 20px
+          padding-left: 10px
           display: flex
           align-items: flex-end
         .message-image
