@@ -21,7 +21,7 @@
     min-height: 110px
     .message-content-container
       flex: 7
-      padding: 10px 10px 10px 0
+      padding: 0 10px
       background-color: white
       .message-image
         flex: 3
@@ -32,7 +32,7 @@
           min-width: 200px
       .message-content
         background-color: white
-        padding: 10px 10px 0
+        padding: 10px
         flex: 10
     .message-footer
       flex: 3
@@ -104,3 +104,56 @@ button:disabled, button[disabled]
 
 .red-background
   background-color: lighten($red-team-color, 15%)
+
+.message-footer-date-mobile
+  display: none
+
+// for mobile phones portrait & landscape
+@media only screen and (max-width: 481px) and (max-height: 700px) and (orientation: portrait)
+  .droppable, .message-footer-date
+    display: none
+  .message-footer
+    font-size: 0.8em
+  .message-footer-date-mobile
+    display: flex
+  .border-icon
+    padding: 2px
+  .chat-box
+    .chat-box-content
+      .message-content-container
+        display: flex
+        flex-direction: column
+        align-items: flex-start
+        .message-content
+          padding-left: 20px
+          display: flex
+          align-items: flex-end
+        .message-image
+          width: 80%
+          padding-bottom: 0
+
+// just for mobile phones landscape
+@media only screen and (max-width: 700px) and (max-height: 481px) and (orientation: landscape)
+  .droppable, .message-footer-date
+    display: none
+  .message-footer
+    font-size: 0.8em
+  .message-footer-date-mobile
+    display: flex
+  .border-icon
+    padding: 2px
+  .chat-box
+    .chat-box-content
+      .message-content-container
+        display: flex
+        flex-direction: column
+        align-items: flex-start
+        .message-content
+          padding-left: 20px
+          display: flex
+          align-items: flex-end
+        .message-image
+          width: 60%
+          padding-bottom: 0
+
+

@@ -21,7 +21,6 @@ export class ChatFooterComponent implements OnInit {
   @ViewChild('content') myModal;
 
   faUpload = faUpload;
-  sideNavClosed: boolean;
 
   message: string = null;
   file: File;
@@ -32,12 +31,13 @@ export class ChatFooterComponent implements OnInit {
   isSecondTeam: boolean;
 
   url: string | ArrayBuffer = null;
-  checkingFileSafety = false;
+  callingBackend = false;
 
   constructor(
     private modalService: NgbModal,
     private teamService: TeamService,
-    private messageService: MessageService) {
+    private messageService: MessageService,
+  ) {
   }
 
   ngOnInit(): void {
@@ -48,7 +48,6 @@ export class ChatFooterComponent implements OnInit {
     this.teamService.isFirstTeam.subscribe(item => this.isFirstTeam = item);
     this.teamService.isSecondTeam.subscribe(item => this.isSecondTeam = item);
   }
-
 
   getPlaceHolder(): string {
     if (this.finished) {
@@ -78,24 +77,23 @@ export class ChatFooterComponent implements OnInit {
     } else {
       this.saveMessage(this.teams.team2.id);
     }
-    this.message = null;
   }
 
   saveMessage(id: string) {
-    this.messageService.createMessage(id, this.message, this.file, this.fileType).then(message => {
-
+    this.callingBackend = true;
+    this.messageService.createMessage(id, this.message, this.file, this.fileType).then(() => {
+        this.callingBackend = false;
+        this.url = null;
+        this.message = null;
       }
     );
-
-    this.url = null;
-    this.message = null;
   }
 
   onFileSelected(event) {
     if (event.target.files) {
       this.file = event.target.files[0];
       this.predictSafeContent();
-      this.checkingFileSafety = true;
+      this.callingBackend = true;
 
       this.fileType = this.getFileType(event.target.files[0].name);
 
@@ -114,7 +112,7 @@ export class ChatFooterComponent implements OnInit {
   private predictSafeContent() {
     console.log('Making predictions');
     Predictions.identify(this.getLabelsInput()).then(response => {
-      this.checkingFileSafety = false;
+      this.callingBackend = false;
       if (response.unsafe === 'YES' || response.unsafe === 'UNKNOWN') {
         this.unsafeImage();
       }
@@ -141,4 +139,6 @@ export class ChatFooterComponent implements OnInit {
   open(content) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title', size: 'xl'}).result.then();
   }
+
+
 }

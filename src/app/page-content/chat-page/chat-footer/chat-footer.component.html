@@ -13,7 +13,7 @@
             <label for="file-upload" class="custom-file-upload flex-center">
               <span class="plain-text"><fa-icon [icon]="faUpload"></fa-icon></span>
             </label>
-            <input [disabled]="checkingFileSafety || (!isFirstTeam && !isSecondTeam)" id="file-upload" type="file"
+            <input [disabled]="callingBackend || (!isFirstTeam && !isSecondTeam)" id="file-upload" type="file"
                    (change)="onFileSelected($event)" class="btn btn-outline-secondary"
                    accept="image/*"
             />
@@ -22,14 +22,14 @@
           <div class="input-area">
             <div class="input-section">
               <div *ngIf="url" class="footer-image">
-                <div *ngIf="checkingFileSafety" class="footer-image-spinner">
+                <div *ngIf="callingBackend" class="footer-image-spinner">
                   <div class="flex-column-center  plain-text-accent">
                     <mat-spinner diameter="40"></mat-spinner>
-                      Checking Image
+                    <span class="spinner-text">Checking Image</span>
                   </div>
                 </div>
                 <img [src]="url" width="100%" height="100%" [ngClass]="{
-                  'blur-image': checkingFileSafety
+                  'blur-image': callingBackend
                   }"/>
               </div>
               <div class="form-group">
@@ -39,7 +39,7 @@
                        [(ngModel)]="message" [name]="'Debate Title'">
               </div>
               <div>
-                <button [disabled]="checkingFileSafety || (!isFirstTeam && !isSecondTeam)" type="submit"
+                <button [disabled]="callingBackend || (!isFirstTeam && !isSecondTeam)" type="submit"
                         class="invisible-button">
                   <mat-icon>send</mat-icon>
                 </button>

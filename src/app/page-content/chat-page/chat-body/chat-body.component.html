@@ -1,24 +1,24 @@
 <div class="join-container">
   <div class="not-member flex-center-left full-container">
     <div class="left full-container flex-center-left">
-      <!--      [disabled]="finished" -->
       <button [disabled]="clicked" type="button" class="btn plain-text heading-block" [ngClass]="{
       'isNotMemberBlue': !isFirstTeam && !isSecondTeam,
-      'isFirstTeam': isFirstTeam
-      }">
+      'isFirstTeam': isFirstTeam,
+      'switchBlue': isSecondTeam
+      }" (click)="isSecondTeam ? open(content) : ''">
         <span *ngIf="clicked; else team1Box" class="flex-center">
           <mat-spinner diameter="20"></mat-spinner>
         </span>
         <ng-template #team1Box>
           <span *ngIf="!isFirstTeam && !isSecondTeam; else member1" (click)="joinTeam1()"
                 class="full-container flex-center">
-          <fa-icon [icon]="faPencil"></fa-icon>
-            Join Team
+          <fa-icon [icon]="faPencil" class="left-icon droppable"></fa-icon>
+            Join <span class="droppable">Team</span>
           </span>
           <ng-template #member1>
             <div *ngIf="isFirstTeam; else opposingTeam" class="my-team" (click)="open(content)">
-              <fa-icon [icon]="faUser"></fa-icon>
-              My Team
+              <fa-icon [icon]="faUser" class="left-icon"></fa-icon>
+              <span class="droppable">My Team</span>
             </div>
           </ng-template>
         </ng-template>
@@ -28,26 +28,78 @@
       <!--      [disabled]="debateOngoing"-->
       <button [disabled]="clicked" type="button" class="btn plain-text heading-block" [ngClass]="{
       'isNotMemberRed': !isFirstTeam && !isSecondTeam,
-      'isSecondTeam': isSecondTeam
-      }">
+      'isSecondTeam': isSecondTeam,
+      'switchRed': isFirstTeam
+      }" (click)="isSecondTeam ? open(content) : ''">
         <span *ngIf="clicked; else team2Box" class="flex-center">
           <mat-spinner diameter="20"></mat-spinner>
         </span>
         <ng-template #team2Box>
           <span *ngIf="!isFirstTeam && !isSecondTeam; else member2" (click)="joinTeam2()"
                 class="full-container flex-center">
-            <fa-icon [icon]="faPencil" class="right-icon"></fa-icon>
-            Join Team
+            <fa-icon [icon]="faPencil" class="left-icon droppable"></fa-icon>
+            Join <span class="droppable">Team</span>
           </span>
           <ng-template #member2>
-            <div *ngIf="isSecondTeam; else opposingTeam" class="my-team" (click)="open(content)">
-              <fa-icon [icon]="faUser"></fa-icon>
-              My Team
+            <div *ngIf="isSecondTeam; else opposingTeam" class="my-team">
+              <fa-icon [icon]="faUser" class="left-icon"></fa-icon>
+              <span class="droppable">My Team</span>
             </div>
           </ng-template>
         </ng-template>
       </button>
     </div>
+  </div>
+</div>
+
+<div class="mobile-join-container row">
+  <div class="col-md-6">
+    <button [disabled]="clicked" type="button" class="btn btn-lg btn-block plain-text heading-block" [ngClass]="{
+      'isNotMemberBlue': !isFirstTeam && !isSecondTeam,
+      'isFirstTeam': isFirstTeam,
+      'switchBlue': isSecondTeam
+      }">
+        <span *ngIf="clicked; else team1Box" class="flex-center">
+          <mat-spinner diameter="20"></mat-spinner>
+        </span>
+      <ng-template #team1Box>
+          <span *ngIf="!isFirstTeam && !isSecondTeam; else member1" (click)="joinTeam1()"
+                class="full-container flex-center">
+          <fa-icon [icon]="faPencil"></fa-icon>
+            Join Team
+          </span>
+        <ng-template #member1>
+          <div *ngIf="isFirstTeam; else opposingTeam" class="my-team" (click)="open(content)">
+            <fa-icon [icon]="faUser"></fa-icon>
+            My Team
+          </div>
+        </ng-template>
+      </ng-template>
+    </button>
+  </div>
+  <div class="col-md-6">
+    <button [disabled]="clicked" type="button" class="btn btn-lg btn-block plain-text heading-block" [ngClass]="{
+      'isNotMemberRed': !isFirstTeam && !isSecondTeam,
+      'isSecondTeam': isSecondTeam,
+      'switchRed': isFirstTeam
+      }">
+        <span *ngIf="clicked; else team2Box" class="flex-center">
+          <mat-spinner diameter="20"></mat-spinner>
+        </span>
+      <ng-template #team2Box>
+          <span *ngIf="!isFirstTeam && !isSecondTeam; else member2" (click)="joinTeam2()"
+                class="full-container flex-center">
+            <fa-icon [icon]="faPencil" class="right-icon"></fa-icon>
+            Join Team
+          </span>
+        <ng-template #member2>
+          <div *ngIf="isSecondTeam; else opposingTeam" class="my-team" (click)="open(content)">
+            <fa-icon [icon]="faUser"></fa-icon>
+            My Team
+          </div>
+        </ng-template>
+      </ng-template>
+    </button>
   </div>
 </div>
 
@@ -63,12 +115,9 @@
 </mat-card>
 
 <ng-template #opposingTeam>
-  <div class="full-container flex-center" (click)="switchTeams()" [ngClass]="{
-  'switchBlue': isSecondTeam,
-  'switchRed': isFirstTeam
-  }">
+  <div class="full-container flex-center opposing-team" (click)="switchTeams()">
     <fa-icon class="left-icon" [icon]="faSyncAlt"></fa-icon>
-    Switch Teams
+    <span class="droppable">Switch Teams</span>
   </div>
 </ng-template>
 
@@ -80,13 +129,14 @@
     </h3>
   </div>
   <div class="modal-body flex-center">
-      <span class="plain-text">All your messages in this debate will be erased if you chose to leave</span>
+    <span class="plain-text">All your messages in this debate will be erased if you chose to leave</span>
   </div>
   <div class="modal-footer flex-center">
     <button type="button" mat-raised-button class="mat-button cancel" color="primary" (click)="modal.dismiss()">
       Cancel
     </button>
-    <button type="button" mat-raised-button class="mat-button success" color="warn" (click)="modal.dismiss(); leaveTeam()">
+    <button type="button" mat-raised-button class="mat-button success" color="warn"
+            (click)="modal.dismiss(); leaveTeam()">
       Leave Team
     </button>
   </div>

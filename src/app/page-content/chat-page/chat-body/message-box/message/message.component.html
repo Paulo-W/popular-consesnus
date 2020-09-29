@@ -44,8 +44,11 @@
             <div class="message-footer-date plain-text-s">
               {{message.createdAt | date: 'dd/MM/yyyy, h:mm a' }}
             </div>
+            <div class="message-footer-date-mobile plain-text-s">
+              {{message.createdAt | date: 'dd/MM/yy, H:mm' }}
+            </div>
             <div class="message-footer-votes plain-text-s">
-              <span class="current-votes">Current Votes: <b>{{getLikes(message)}}</b></span>
+              <span class="current-votes"><span class="droppable">Current Votes: </span><b>{{getLikes(message)}}</b></span>
               <button (click)="likeMessage(message)" class="vote">
                 <fa-icon [fixedWidth]="true" [icon]="faPlus" class="border-icon" [ngClass]="{
                   'vote-clicked': isLiked(message)

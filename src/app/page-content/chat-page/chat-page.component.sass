@@ -2,7 +2,7 @@
 
 .chat-container
   min-height: 200px
-  .chat-card-title
+  .chat-card-title, .chat-card-footer
     flex: 1
     .chat-title-left-corner
       flex: 2
@@ -14,6 +14,8 @@
       flex: 2
   .chat-card-content
     flex: 4
+    .debate-title-block
+      padding: 10px
 
 .debate-content
   padding: 10px
@@ -23,6 +25,122 @@
   height: 100%
   .chat-message-box
     position: fixed
-    width: 85%
     bottom: 0
     z-index: 9999
+
+.mobile-title
+  display: none
+
+.accent
+  color: $primary-color
+
+.full-width
+  animation: grow 0.12s linear 0s 1 forwards
+.half-width
+  animation: shrink 0.15s linear 0s 1 forwards
+
+.chat-body
+  overflow-x: hidden
+
+@keyframes grow
+  from
+    width: 85%
+  to
+    width: 100%
+
+@keyframes shrink
+  from
+    width: 100%
+  to
+    width: 85%
+
+@keyframes growTabP
+  from
+    width: 75%
+  to
+    width: 100%
+
+@keyframes shrinkTabP
+  from
+    width: 100%
+  to
+    width: 75%
+
+@keyframes growTabL
+  from
+    width: 77%
+  to
+    width: 100%
+
+@keyframes shrinkTabL
+  from
+    width: 100%
+  to
+    width: 77%
+
+@keyframes mobile
+  from
+    width: 100%
+  to
+    width: 100%
+
+// for tablets portrait
+@media only screen and (max-height: 1024px) and (max-width: 770px) and (orientation: portrait)
+  .full-width
+    animation: growTabP 0.15s linear 0s 1 forwards
+  .half-width
+    animation: shrinkTabP 0.15s linear 0s 1 forwards
+  .default-title, .chat-card-footer
+    display: none
+  .chat-container
+    min-height: 150px
+  .debate-title-block
+    padding: 20px
+  .mobile-title
+    display: block
+  .header-text-cards
+    font-size: 1.65em
+    line-height: 1.35em
+  .plain-text
+    font-size: 1.1em
+
+
+// for tablets landscape
+@media only screen and (max-height: 770px) and (max-width: 1024px) and (orientation: landscape)
+  .full-width
+    animation: growTabL 0.15s linear 0s 1 forwards
+  .half-width
+    animation: shrinkTabL 0.15s linear 0s 1 forwards
+
+
+// for mobile phones portrait
+@media only screen and (max-width: 481px) and (max-height: 7000px) and (orientation: portrait)
+  .full-width, .half-width
+    animation: mobile 0.15s linear 0s 1 forwards
+  .top-chat
+    margin-top: 5px
+
+// for mobile phones portrait
+@media only screen and (max-width: 481px) and (max-height: 7000px) and (orientation: portrait)
+  .full-width, .half-width
+    animation: mobile 0.15s linear 0s 1 forwards
+  .top-chat
+    margin-top: 5px
+
+// for mobile phones landscape
+@media only screen and (max-width: 700px) and (max-height: 481px) and (orientation: landscape)
+  .mobile-join-container
+    display: flex
+  .join-container
+    display: none
+  .heading-block
+    width: 100% !important
+  .my-team, .opposing-team
+    .droppable
+      display: inline-table
+  .chat-card-footer, .default-title
+    display: none
+  .mobile-title
+    display: block
+  .chat-container
+    min-height: 100px

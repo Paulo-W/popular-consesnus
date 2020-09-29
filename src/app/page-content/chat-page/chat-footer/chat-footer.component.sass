@@ -129,5 +129,33 @@ button[disabled]
 
 .modal-footer
   padding: 15px
-  div
-    //color: darken($red-team-color, 4%)
+
+// for tablets portrait
+@media only screen and (max-height: 1024px) and (max-width: 770px) and (orientation: portrait)
+  .footer-row
+    .add-file
+      flex: 3
+    .input-area
+      flex: 15
+  .spinner-text
+    display: none
+
+// for tablets landscape
+@media only screen and (max-height: 770px) and (max-width: 1024px) and (orientation: landscape)
+  .footer-row
+    .add-file
+      flex: 2
+    .input-area
+      flex: 15
+  .spinner-text
+    display: none
+
+// for mobile phones portrait
+@media only screen and (max-width: 481px) and (max-height: 640px) and (orientation: portrait)
+  .footer-row
+    .input-area
+      .input-section
+        .footer-image
+          flex: 4
+        .form-group
+          flex: 1

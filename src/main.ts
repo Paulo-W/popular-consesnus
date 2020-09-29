@@ -16,6 +16,7 @@ API.configure(awsconfig);
 PubSub.configure(awsconfig);
 Auth.configure(awsconfig);
 Storage.configure(awsconfig);
+Amplify.configure(awsconfig);
 Amplify.addPluggable(new AmazonAIPredictionsProvider());
 
 if (environment.production) {

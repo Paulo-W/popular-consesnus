@@ -3,6 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {DebateService} from '../../services/debate/debate.service';
 import {DebateTeams, MappedDebate, Team} from '../../custom-types';
 import {TeamService} from '../../services/team/team.service';
+import {SideNavService} from '../../services/side-nav/side-nav.service';
 
 @Component({
   selector: 'app-chat-page',
@@ -15,15 +16,19 @@ export class ChatPageComponent implements OnInit {
   teams: DebateTeams;
   members: number;
   debateOngoing = true;
+  sideNavClosed: boolean;
 
   constructor(
     private route: ActivatedRoute,
     private debateService: DebateService,
-    private teamService: TeamService) {
+    private teamService: TeamService,
+    private sideNavService: SideNavService
+  ) {
   }
 
   ngOnInit(): void {
     this.getDebate();
+    this.subscribeToSideNav();
   }
 
   getDebate(): void {
@@ -32,6 +37,13 @@ export class ChatPageComponent implements OnInit {
       this.debate = response;
     });
     this.getTeams(id);
+  }
+
+  private subscribeToSideNav() {
+    this.sideNavService.sideOpenState.subscribe(closed => {
+        this.sideNavClosed = closed;
+      }
+    );
   }
 
   getTeams(id: string) {

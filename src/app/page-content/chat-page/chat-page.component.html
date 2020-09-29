@@ -2,9 +2,15 @@
   <mat-card class="top-chat">
     <div class="chat-container flex-column-center">
       <div class="chat-card-title full-container">
-        <section class="flex-center-left">
+        <div class="mobile-title plain-text-s center-text">
+          <span class="accent">{{debate.createdBy.username}}</span> started a
+          <span class="accent">{{debate.tag}}</span> debate on
+          <span class="accent">{{debate.createdAt | date: 'dd/MM/yyyy'}} </span>
+        </div>
+
+        <section class="flex-center-left default-title">
           <div class="chat-title-left-corner plain-text-s">
-            Created In Channel <span class="plain-text-s-accent">{{debate.channel.name}}</span>
+            Channel <span class="plain-text-s-accent">{{debate.channel.name}}</span>
           </div>
           <div class="chat-title-center plain-text-s">
             Debate Started By: <span class="plain-text-s-accent">{{debate.createdBy.username}}
@@ -17,21 +23,21 @@
       </div>
       <mat-divider [inset]="true" style="width: 98%"></mat-divider>
       <div class="chat-card-content full-container">
-        <div class="plain-text full-container flex-center">
-          <div class="center-text">
+        <div class="full-container flex-center">
+          <div class="center-text debate-title-block">
             <div class="header-text-cards debate-content">
               {{debate.title}}
             </div>
-            <div class="plain-text-s">
+            <div class="plain-text">
               {{debate.description}}
             </div>
           </div>
         </div>
       </div>
-      <div class="chat-card-title full-container flex-center">
+      <div class="chat-card-footer full-container flex-center">
         <section class="full-container flex-bottom-center">
           <div class="chat-title-left-corner plain-text-s">
-            Members In Current Debate:
+            Members:
             <span class="plain-text-s-accent" *ngIf="members !== null; else fetchingMembers">
               {{members}}
             </span>
@@ -55,11 +61,14 @@
     </div>
   </mat-card>
 
-  <div *ngIf="teams">
+  <div *ngIf="teams" class="chat-body">
     <app-chat-body [teams]="teams" [team1Name]="debate.team1.name" [team2Name]="debate.team2.name"></app-chat-body>
   </div>
 
-  <div *ngIf="debate" class="chat-message-box">
+  <div *ngIf="debate" class="chat-message-box" id="chat-message-box" [ngClass]="{
+    'full-width': sideNavClosed,
+    'half-width': !sideNavClosed
+    }">
     <app-chat-footer [teams]="teams" [team1Name]="debate.team1.name" [team2Name]="debate.team2.name"></app-chat-footer>
   </div>
 </div>
