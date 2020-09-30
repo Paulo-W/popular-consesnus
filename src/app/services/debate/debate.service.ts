@@ -69,7 +69,6 @@ export class DebateService {
   }
 
   private async creatDebate(team1Id: string, team2Id: string, debate: DebateForm) {
-    console.log('I Should get here to return the string');
     return this.apiService.CreateDebate({
       title: debate.title,
       description: debate.description,

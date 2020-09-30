@@ -35,17 +35,6 @@ export class UserService {
     return this.customApiService.GetUserChannels(this.currentUser.value);
   }
 
-  private async saveNewUser(newUser: string) {
-    await this.apiService.CreateUser({
-      profile_image: 'user.png',
-      username: newUser
-    }).then(
-      () => {
-        this.setUserToken(this.currentUser.value);
-      }
-    );
-  }
-
   async setCurrentUser() {
     Auth.currentAuthenticatedUser().then(
       user => {
@@ -68,7 +57,19 @@ export class UserService {
     );
   }
 
+  private async saveNewUser(newUser: string) {
+    await this.apiService.CreateUser({
+      profile_image: 'user.png',
+      username: newUser
+    }).then(
+      user => {
+        this.setUserToken(user.id);
+      }
+    );
+  }
+
   private setUserToken(userId: string) {
+    console.log(` Reached setting the user ${userId}`);
     this.currentUser.next(userId);
     localStorage.setItem('userId', userId);
   }

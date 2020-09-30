@@ -127,10 +127,10 @@ export type DebateTeams = {
 
 export type Team = {
   id: string
-  members: {
+  members?: {
     items: [MemberReference]
   }
-  messages: {
+  messages?: {
     items: [
       MessageUserList
     ]
@@ -146,7 +146,7 @@ export type MemberReference = {
 export type TeamInfo = {
   team1: TeamValues
   team2: TeamValues
-  percentage: number
+  percentage?: number
 };
 
 export type TeamValues = {
@@ -168,8 +168,8 @@ export type MessageInfo = {
 };
 
 export type MessageUserList = {
-  likeUsers: string[]
-  dislikeUsers: string[]
+  likeUsers?: string[]
+  dislikeUsers?: string[]
 };
 
 export type SimpleUser = {

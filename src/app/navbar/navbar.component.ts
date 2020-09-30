@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {faBell, faHome, faSignOutAlt} from '@fortawesome/free-solid-svg-icons';
 import {Router} from '@angular/router';
 import {Auth} from 'aws-amplify';
@@ -16,11 +16,12 @@ export class NavbarComponent implements OnInit {
   faBell = faBell;
   title = 'Popular Consensus';
 
-  user: string;
+  user: string = null;
 
   constructor(
     private router: Router,
-    private userService: UserService
+    private userService: UserService,
+    private cd: ChangeDetectorRef
   ) {
   }
 
@@ -33,6 +34,7 @@ export class NavbarComponent implements OnInit {
       user => {
         if (this.user !== user) {
           this.user = user;
+          this.cd.detectChanges();
         }
       });
 

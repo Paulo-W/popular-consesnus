@@ -66,7 +66,9 @@ export class ChannelsListPageComponent implements OnInit {
         userId: data.user.id
       });
 
-      this.clickedArray.find(clickInfo => clickInfo.id === data.channel.id).clicked = false;
+      if (this.clickedArray.find(clickInfo => clickInfo.id === data.channel.id)) {
+        this.clickedArray.find(clickInfo => clickInfo.id === data.channel.id).clicked = false;
+      }
     });
 
     this.channelService.listenForRemovedUserGroupChannels().subscribe((evt) => {

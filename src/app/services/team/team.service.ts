@@ -63,36 +63,40 @@ export class TeamService {
     );
   }
 
-  private mapTeamInfo(response: DebateTeams): TeamInfo {
+  mapTeamInfo(response: DebateTeams): TeamInfo {
     return {
       team1: {
-        isMember: this.includesUser(response.team1.members.items),
-        score: this.mapTeamScore(response.team1.messages.items)
+        isMember: this.includesUser(response.team1.members?.items),
+        score: this.mapTeamScore(response.team1.messages?.items)
       },
       team2: {
         isMember: this.includesUser(response.team2.members?.items),
-        score: this.mapTeamScore(response.team2.messages.items)
+        score: this.mapTeamScore(response.team2.messages?.items)
       }
     } as TeamInfo;
   }
 
   includesUser(items: [MemberReference]): boolean {
-    return items.map(member => member.user.id).includes(this.userService.currentUser.value);
+    return items ? items.map(member => member.user.id).includes(this.userService.currentUser.value) : false;
   }
 
   private mapTeamScore(messages: [MessageUserList]): number {
-    const likeScore = Math.max(0, messages?.reduce((sum: number, message: MessageUserList) => sum + message.likeUsers?.length, 0));
-    const dislikeScore = Math.max(0, messages?.reduce((sum: number, message: MessageUserList) => sum + message.dislikeUsers?.length, 0));
+    if (messages) {
+      const likeScore = Math.max(0, messages?.reduce((sum: number, message: MessageUserList) => sum + message.likeUsers?.length, 0));
+      const dislikeScore = Math.max(0, messages?.reduce((sum: number, message: MessageUserList) => sum + message.dislikeUsers?.length, 0));
 
-    if (!likeScore) {
+      if (!likeScore) {
+        return 0;
+      }
+
+      if (!dislikeScore) {
+        return Math.max(0, likeScore);
+      }
+
+      return Math.max(0, (likeScore - dislikeScore));
+    } else {
       return 0;
     }
-
-    if (!dislikeScore) {
-      return Math.max(0, likeScore);
-    }
-
-    return Math.max(0, (likeScore - dislikeScore));
   }
 
 
