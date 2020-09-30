@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {faBell, faHome, faSignOutAlt} from '@fortawesome/free-solid-svg-icons';
 import {Router} from '@angular/router';
 import {Auth} from 'aws-amplify';
@@ -20,8 +20,7 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private userService: UserService,
-    private cd: ChangeDetectorRef
+    private userService: UserService
   ) {
   }
 
@@ -34,7 +33,6 @@ export class NavbarComponent implements OnInit {
       user => {
         if (this.user !== user) {
           this.user = user;
-          this.cd.detectChanges();
         }
       });
 
@@ -54,5 +52,9 @@ export class NavbarComponent implements OnInit {
     } catch (error) {
       console.log('error could not sign user out', error);
     }
+  }
+
+  getUser(): boolean {
+    return !!this.user;
   }
 }
