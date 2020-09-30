@@ -11,6 +11,7 @@ import Amplify from 'aws-amplify';
 import {AmazonAIPredictionsProvider} from '@aws-amplify/predictions';
 import Auth from '@aws-amplify/auth';
 import Storage from '@aws-amplify/storage';
+import Predictions from '@aws-amplify/predictions';
 
 Amplify.configure(awsconfig);
 
@@ -18,8 +19,7 @@ Amplify.register(Auth);
 Amplify.register(PubSub);
 Amplify.register(API);
 Amplify.register(Storage);
-Amplify.register(new AmazonAIPredictionsProvider());
-Amplify.addPluggable(new AmazonAIPredictionsProvider());
+Predictions.addPluggable(new AmazonAIPredictionsProvider());
 
 if (environment.production) {
   enableProdMode();
