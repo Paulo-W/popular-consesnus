@@ -19,6 +19,7 @@ Amplify.register(Auth);
 Amplify.register(PubSub);
 Amplify.register(API);
 Amplify.register(Storage);
+Amplify.register(Predictions);
 Predictions.addPluggable(new AmazonAIPredictionsProvider());
 
 if (environment.production) {
