@@ -46,6 +46,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {SpinnerComponent} from './spinner/spinner.component';
 import {MessageComponent} from './page-content/chat-page/chat-body/message-box/message/message.component';
 import { ChangePasswordComponent } from './page-content/update-profile/change-password/change-password.component';
+import { SearchResultComponent } from './page-content/search-result/search-result.component';
 
 Amplify.configure(awsconfig);
 
@@ -74,7 +75,8 @@ Amplify.configure(awsconfig);
     AuthComponent,
     SpinnerComponent,
     MessageComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    SearchResultComponent
   ],
   imports: [
     BrowserModule,

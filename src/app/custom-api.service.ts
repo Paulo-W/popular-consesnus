@@ -88,6 +88,40 @@ export class CustomApiService {
     return response.data.getChannel as CustomChannelMembers;
   }
 
+  async ListDebates(): Promise<MappedDebate[]> {
+    const statement = `query GetAllDebates {
+        listDebates {
+          items {
+            id
+            title
+            description
+            days
+            createdAt
+            createdBy {
+              id
+              username
+            }
+            team1 {
+              name
+            }
+            team2 {
+              name
+            }
+            channel {
+              id
+              name
+            }
+          }
+        }
+      }`;
+
+    const response = (await API.graphql(
+      graphqlOperation(statement)
+    )) as any;
+
+    return response.data.listDebates.items as MappedDebate[];
+  }
+
   async FindDebateById(id: string): Promise<MappedDebate> {
     const statement = `query GetFullDebates($id: ID!) {
         getDebate(id: $id) {

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {faSearch} from '@fortawesome/free-solid-svg-icons';
-import {Subject} from 'rxjs';
 import {SideNavService} from '../services/side-nav/side-nav.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-second-nav',
@@ -11,15 +11,18 @@ import {SideNavService} from '../services/side-nav/side-nav.service';
 export class SecondNavComponent implements OnInit {
   faSearch = faSearch;
 
-  private searchTerms = new Subject<string>();
 
   constructor(
-    private sideNavService: SideNavService
+    private sideNavService: SideNavService,
+    private router: Router
   ) {
   }
 
-  search(term: string): void {
-    this.searchTerms.next(term);
+  search(value: string): void {
+    console.log('hello world');
+    if (value && value.trim()) {
+      this.router.navigate([`/search/${value}`]);
+    }
   }
 
   ngOnInit(): void {

@@ -8,6 +8,7 @@ import {ChatPageComponent} from './page-content/chat-page/chat-page.component';
 import {ChannelDetailPageComponent} from './page-content/channel-detail-page/channel-detail-page.component';
 import {MyDebatesComponent} from './page-content/my-debates/my-debates.component';
 import {UpdateProfileComponent} from './page-content/update-profile/update-profile.component';
+import {SearchResultComponent} from './page-content/search-result/search-result.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -19,6 +20,7 @@ const routes: Routes = [
   {path: 'debate/:id', component: ChatPageComponent},
   {path: 'channel/:id', component: ChannelDetailPageComponent},
   {path: 'my-debates', component: MyDebatesComponent},
+  {path: 'search/:string', component: SearchResultComponent},
   // map any unknown URL's in prod system should map   to 404 page
   {path: '**', redirectTo: 'home', pathMatch: 'full'}
 ];

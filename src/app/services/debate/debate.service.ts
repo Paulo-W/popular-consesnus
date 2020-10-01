@@ -87,6 +87,10 @@ export class DebateService {
     return this.apiService.DeleteDebate({id});
   }
 
+  getAllDebates(): Promise<MappedDebate[]> {
+    return this.customAPIService.ListDebates();
+  }
+
   getDebateById(id: string): Promise<MappedDebate> {
     return this.customAPIService.FindDebateById(id);
   }

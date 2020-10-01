@@ -1,0 +1,25 @@
+<div *ngIf="searchString">
+  <mat-card class="full-width-card header-text-x">
+    <div class="my-debates-header center-text">
+      Search results for "{{searchString}}"
+    </div>
+  </mat-card>
+
+  <div *ngIf="filteredDebates; else spinner">
+    <div *ngIf="filteredDebates.length === 0; else debates" class="full-container">
+      <div class="flex-center full-container">
+        <h1 class="header-text-x center-text">Could not find any debate with key "{{searchString}}"</h1>
+      </div>
+    </div>
+    <ng-template #debates>
+      <div *ngFor="let debate of filteredDebates">
+        <app-debate-card [debate]="debate"></app-debate-card>
+      </div>
+    </ng-template>
+  </div>
+  <ng-template #spinner>
+    <app-spinner [text]="'Searching for Debates'"></app-spinner>
+  </ng-template>
+</div>
+
+

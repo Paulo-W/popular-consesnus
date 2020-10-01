@@ -11,8 +11,8 @@
   </div>
   <div class="search-block flex-center-right">
     <div class="input-group">
-      <input type="text" class="form-control" placeholder="search">
-      <div class="input-group-append">
+      <input #value type="text" class="form-control" placeholder="search">
+      <div class="input-group-append" (click)="search(value.value)">
         <button class="btn btn-outline-secondary" type="button"> <span><fa-icon [icon]="faSearch"></fa-icon></span></button>
       </div>
     </div>
